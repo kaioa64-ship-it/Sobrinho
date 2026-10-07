@@ -1,0 +1,6 @@
+{
+  "name": "Coagro Agro Studio",
+  "description": "Motor de geração visual, textual e renderizador automático para a divisão AGRO do Grupo Coagro com integração Google Drive.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

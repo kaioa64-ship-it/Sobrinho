@@ -1,0 +1,37 @@
+{
+  "tenantId": "coagro",
+  "appName": "Gerador Coagro",
+  "companyName": "Grupo Coagro",
+  "scopes": [
+    {
+      "id": "agro",
+      "name": "Coagro Agro",
+      "colors": {
+        "primary": "#004d40",
+        "primaryLight": "rgba(0,77,64,0.1)",
+        "secondary": "#ffab00",
+        "background": "#F8FAFC",
+        "text": "#1F2937"
+      },
+      "assets": {
+        "logoLight": "/tenant-assets/coagro/agro/logo-light.svg",
+        "logoDark": "/tenant-assets/coagro/agro/logo-dark.svg"
+      }
+    },
+    {
+      "id": "pet",
+      "name": "Coagro Pet",
+      "colors": {
+        "primary": "#001C71",
+        "primaryLight": "rgba(0,28,113,0.1)",
+        "secondary": "#4897D0",
+        "background": "#F8FAFC",
+        "text": "#1F2937"
+      },
+      "assets": {
+        "logoLight": "/tenant-assets/coagro/pet/logo-light.svg",
+        "logoDark": "/tenant-assets/coagro/pet/logo-dark.svg"
+      }
+    }
+  ]
+}

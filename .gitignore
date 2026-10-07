@@ -1,0 +1,25 @@
+# Dependencias e builds
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+dist_electron/
+**/dist_electron/
+scratch/
+**/scratch/
+
+# Logs e arquivos de sistema
+*.log
+.DS_Store
+Thumbs.db
+
+# Variaveis de ambiente com chaves
+.env
+.env.local
+**/ .env
+**/.env.local
+!.env.example
+**\!.env.example
+
+# Arquivos temporarios / compactados pesados
+*.zip
