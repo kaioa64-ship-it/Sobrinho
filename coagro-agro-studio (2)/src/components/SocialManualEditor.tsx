@@ -268,91 +268,7 @@ export const SocialManualEditor: React.FC<SocialManualEditorProps> = ({
           </div>
         </div>
 
-        {/* Cores e Selo da Campanha */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {/* Cor do Template (Geral) */}
-          <div>
-            <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1.5">
-              Cor do Template
-            </label>
-            <select
-              value={data.theme || (appMode === 'PET' ? 'clean-branco' : 'campo-agro')}
-              onChange={(e) => onChange({ ...data, theme: e.target.value })}
-              className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm font-bold text-gray-800 focus:ring-2 focus:border-[#004d40] transition-all"
-            >
-              <option value="campo-agro">Verde Coagro (Institucional)</option>
-              <option value="azul-coagro">Azul Coagro (Publicitário)</option>
-              <option value="clean-branco">Branco / Clean (Invertido)</option>
-            </select>
-          </div>
-
-          {/* Cor de Fundo (Apenas para Promo Simples) */}
-          {templateLayout === 'promo-simples' && (
-            <div>
-              <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1.5">
-                Fundo Promo Simples
-              </label>
-              <select
-                value={data.backgroundColorHex || 'branco'}
-                onChange={(e) => onChange({ ...data, backgroundColorHex: e.target.value })}
-                className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm font-bold text-gray-800 focus:ring-2 focus:border-[#004d40] transition-all"
-              >
-                <option value="branco">Branco (Padrão)</option>
-                <option value="verde">Verde Institucional</option>
-                <option value="azul">Azul Publicitário</option>
-                <option value="laranja">Laranja (Alerta)</option>
-              </select>
-            </div>
-          )}
-
-          {/* Selo Promocional (Badge) */}
-          <div>
-            <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1.5">
-              Selo da Campanha
-            </label>
-            <select
-              value={data.badge || 'Sem Selo'}
-              onChange={(e) => onChange({ ...data, badge: e.target.value })}
-              className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm font-bold text-gray-800 focus:ring-2 focus:border-[#004d40] transition-all"
-            >
-              <option value="Sem Selo">Sem Selo</option>
-              <option value="OFERTA">Oferta</option>
-              <option value="LANÇAMENTO">Lançamento</option>
-              <option value="SABADÃO">Sabadão</option>
-              <option value="FECHA MÊS">Fecha Mês</option>
-            </select>
-          </div>
-        </div>
-        
-        {/* Seleção do Template */}
-        <div>
-          <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1.5">
-            Layout da Arte
-          </label>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-            {[
-              { id: 'unified-central', label: 'Central', icon: Store },
-              { id: 'unified-split', label: 'Split (Lado)', icon: LayoutTemplate },
-              { id: 'promo-simples', label: 'Promo Simples', icon: Tag },
-              { id: 'informative-central', label: 'Info Central', icon: List },
-              { id: 'informative-split', label: 'Info Split', icon: LayoutTemplate },
-            ].map(tpl => (
-              <button
-                key={tpl.id}
-                onClick={() => onTemplateChange(tpl.id as TemplateLayout)}
-                className={`py-2 px-1 text-xs font-bold rounded-xl border flex flex-col items-center justify-center gap-1 transition-all ${
-                  templateLayout === tpl.id 
-                    ? 'bg-[#004d40] text-white border-[#004d40]' 
-                    : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
-                }`}
-              >
-                <tpl.icon className="w-4 h-4" />
-                <span className="text-[10px] text-center">{tpl.label}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-
+        {/* Subtítulo / Descrição Curta */}
         <div>
           <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1.5">
             Subtítulo / Descrição Curta
@@ -455,6 +371,106 @@ export const SocialManualEditor: React.FC<SocialManualEditorProps> = ({
             </div>
           </div>
         )}
+
+        {/* Design e Layout (Sanfona) */}
+        <details className="group border border-gray-200 bg-gray-50 rounded-xl overflow-hidden" open>
+          <summary className="flex cursor-pointer list-none items-center justify-between p-4 font-bold text-gray-800 focus:outline-none">
+            <div className="flex items-center gap-2">
+              <Palette className="w-5 h-5 text-gray-500" />
+              Opções de Design e Layout
+            </div>
+            <span className="transition group-open:rotate-180">
+              <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+            </span>
+          </summary>
+          <div className="p-4 bg-white border-t border-gray-200 space-y-6">
+            
+            {/* Seleção do Template */}
+            <div>
+              <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-2">
+                Layout da Arte
+              </label>
+              <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-2">
+                {[
+                  { id: 'unified-central', label: 'Central', icon: Store },
+                  { id: 'unified-split', label: 'Split (Lado)', icon: LayoutTemplate },
+                  { id: 'promo-simples', label: 'Promo Simples', icon: Tag },
+                  { id: 'informative-central', label: 'Info Central', icon: List },
+                  { id: 'informative-split', label: 'Info Split', icon: LayoutTemplate },
+                ].map(tpl => (
+                  <button
+                    key={tpl.id}
+                    onClick={(e) => { e.preventDefault(); onTemplateChange(tpl.id as TemplateLayout); }}
+                    className={`py-3 px-1 text-xs font-bold rounded-xl border flex flex-col items-center justify-center gap-2 transition-all ${
+                      templateLayout === tpl.id 
+                        ? 'bg-[#004d40] text-white border-[#004d40] shadow-md' 
+                        : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50 hover:border-gray-300'
+                    }`}
+                  >
+                    <tpl.icon className="w-5 h-5" />
+                    <span className="text-[10px] sm:text-xs text-center">{tpl.label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Cores e Selo da Campanha */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-gray-100">
+              {/* Cor do Template (Geral) */}
+              <div>
+                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1.5">
+                  Cor do Template
+                </label>
+                <select
+                  value={data.theme || (appMode === 'PET' ? 'clean-branco' : 'campo-agro')}
+                  onChange={(e) => onChange({ ...data, theme: e.target.value })}
+                  className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm font-bold text-gray-800 focus:ring-2 focus:border-[#004d40] transition-all"
+                >
+                  <option value="campo-agro">Verde Coagro (Institucional)</option>
+                  <option value="azul-coagro">Azul Coagro (Publicitário)</option>
+                  <option value="clean-branco">Branco / Clean (Invertido)</option>
+                </select>
+              </div>
+
+              {/* Cor de Fundo (Apenas para Promo Simples) */}
+              {templateLayout === 'promo-simples' && (
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1.5">
+                    Fundo Promo Simples
+                  </label>
+                  <select
+                    value={data.backgroundColorHex || 'branco'}
+                    onChange={(e) => onChange({ ...data, backgroundColorHex: e.target.value })}
+                    className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm font-bold text-gray-800 focus:ring-2 focus:border-[#004d40] transition-all"
+                  >
+                    <option value="branco">Branco (Padrão)</option>
+                    <option value="verde">Verde Institucional</option>
+                    <option value="azul">Azul Publicitário</option>
+                    <option value="laranja">Laranja (Alerta)</option>
+                  </select>
+                </div>
+              )}
+
+              {/* Selo Promocional (Badge) */}
+              <div>
+                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1.5">
+                  Selo da Campanha
+                </label>
+                <select
+                  value={data.badge || 'Sem Selo'}
+                  onChange={(e) => onChange({ ...data, badge: e.target.value })}
+                  className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm font-bold text-gray-800 focus:ring-2 focus:border-[#004d40] transition-all"
+                >
+                  <option value="Sem Selo">Sem Selo</option>
+                  <option value="OFERTA">Oferta</option>
+                  <option value="LANÇAMENTO">Lançamento</option>
+                  <option value="SABADÃO">Sabadão</option>
+                  <option value="FECHA MÊS">Fecha Mês</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </details>
 
       </div>
     </div>
