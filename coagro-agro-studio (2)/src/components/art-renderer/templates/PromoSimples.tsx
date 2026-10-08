@@ -48,6 +48,7 @@ export const PromoSimples: React.FC<PromoSimplesProps> = ({
   logoVariant,
   codigo,
   backgroundColorHex,
+  isLight,
 }) => {
   const isPet = scope === 'PET';
 
