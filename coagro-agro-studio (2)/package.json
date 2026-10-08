@@ -54,7 +54,7 @@
     },
     "win": {
       "target": "nsis",
-      "icon": "build/icon.jpg"
+      "icon": "public/icon.jpg"
     },
     "files": [
       "dist/**/*",
