@@ -14,6 +14,14 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
   isPhoto,
   isBlue,
 }) => {
+  if (!isPhoto || !activeBackground) {
+    let fallbackBg = 'bg-[#004d40]'; // default agro
+    if (theme === 'azul-coagro') fallbackBg = 'bg-[#002B82]'; // pet
+    if (theme === 'clean-branco') fallbackBg = 'bg-[#F5F5F5]'; // branco
+
+    return <div className={`absolute inset-0 pointer-events-none z-0 ${fallbackBg}`} />;
+  }
+
   return (
     <>
       {isPhoto && activeBackground && (
