@@ -86,7 +86,7 @@ export const PromoSimples: React.FC<PromoSimplesProps> = ({
             <img 
               src={processedProduct} 
               alt="Produto" 
-              className={`max-w-full max-h-full object-contain drop-shadow-sm ${isDark ? '' : 'mix-blend-multiply'}`} 
+              className={`max-w-full max-h-full object-contain drop-shadow-sm rounded-2xl ${isDark ? '' : 'mix-blend-multiply'}`} 
             />
             {codigo && (
               <span className={`absolute bottom-[-15px] text-[9px] font-mono font-bold z-20 ${isDark ? 'text-white/60' : 'text-gray-500'}`}>

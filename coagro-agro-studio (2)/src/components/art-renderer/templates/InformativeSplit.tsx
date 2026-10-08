@@ -80,7 +80,7 @@ export const InformativeSplit: React.FC<InformativeSplitProps> = ({
         <div className="w-[55%] flex items-center justify-center flex-1 min-h-0 relative z-40">
           {processedProduct && (
             <div className="relative flex items-center justify-center w-full h-full">
-              <img src={processedProduct} className="object-contain max-h-full max-w-full drop-shadow-2xl" alt="Produto" />
+              <img src={processedProduct} className="object-contain max-h-full max-w-full drop-shadow-2xl rounded-2xl" alt="Produto" />
               {codigo && (
                 <span className="absolute bottom-[-15px] text-[10px] text-gray-500 font-mono font-bold z-20">
                   Cód: {codigo}
