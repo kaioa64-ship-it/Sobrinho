@@ -73,7 +73,7 @@ export const UnifiedSplit: React.FC<UnifiedSplitProps> = ({
 
       {/* 1. Header (Topo - 15%) */}
       <header className="w-full flex flex-col items-center shrink-0 z-20">
-        <ArtHeader logoVariant={logoVariant || (isPet ? 'h-azul' : 'h-branca')} isStory={isStory} align="center" />
+        <ArtHeader logoVariant={logoVariant || (isPet ? 'h-azul' : 'h-branca')} isStory={isStory} align="center" scope={scope} />
       </header>
 
       {/* 1.5. Títulos Centralizados */}
@@ -116,7 +116,7 @@ export const UnifiedSplit: React.FC<UnifiedSplitProps> = ({
                 oldPrice={oldPrice}
                 currentPrice={currentPrice}
                 condition={condition}
-                variant={isPet ? 'pet' : 'primary'}
+                variant={isPet ? 'pet' : 'agro'}
               />
             </div>
           )}

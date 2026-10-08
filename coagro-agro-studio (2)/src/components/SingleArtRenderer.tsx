@@ -8,6 +8,7 @@ import { resolveCommunicationMode } from '../lib/communicationMode';
 import { cleanNoise, normalizeBenefits, resolveDefaultCta } from '../lib/contentNormalizer';
 import { resolveBackgroundFromPrompt } from '../lib/backgroundResolver';
 import { processAdaptiveProduct, AdaptiveProductInfo } from '../lib/alphaBounds';
+import { getPalette } from '../lib/brand.config';
 import { BackgroundLayer } from './art-renderer/BackgroundLayer';
 import { HeroCentral } from './art-renderer/templates/HeroCentral';
 import { SplitVertical } from './art-renderer/templates/SplitVertical';
@@ -225,8 +226,7 @@ export const SingleArtRenderer: React.FC<SingleArtRendererProps> = ({
     : 'aspect-square max-w-[480px]';
 
   const canvasClasses = `@container w-full ${aspectClass} relative overflow-hidden font-['Inter']`;
-  const titleColor = isLight ? 'text-[#001C71]' : 'text-white';
-  const subtitleColor = isLight ? 'text-gray-600' : 'text-[#E5E7EB]';
+  const { titleColor, subtitleColor, highlightColor } = getPalette(scope, isLight);
 
   // A imagem final do produto usa o recorte justo dos pixels visíveis (tight crop) para ancoragem pela base
   const finalProductImg = adaptiveInfo.croppedSrc || processedProduct;
@@ -245,7 +245,7 @@ export const SingleArtRenderer: React.FC<SingleArtRendererProps> = ({
         />
 
         {isArtEmpty && activeTemplate !== 'promo-text-only' && activeTemplate !== 'promo-agro-a4' && activeTemplate !== 'promo-mono-a4' ? (
-          <CanvasEmptyState logoVariant={logo} isStory={isStory} />
+          <CanvasEmptyState logoVariant={logo} isStory={isStory} scope={scope} />
         ) : activeTemplate === 'promo-text-only' ? (
           <PromoTextOnly 
             title={title || subtitle}
@@ -436,8 +436,10 @@ export const SingleArtRenderer: React.FC<SingleArtRendererProps> = ({
         ) : isSplit ? (
           <SplitVertical
             codigo={codigoProduto}
+            scope={scope}
             title={title}
             highlight={highlight}
+            highlightColor={highlightColor}
             titleColor={titleColor}
             subtitle={subtitle}
             subtitleColor={subtitleColor}
@@ -457,8 +459,10 @@ export const SingleArtRenderer: React.FC<SingleArtRendererProps> = ({
         ) : (
           <HeroCentral
             codigo={codigoProduto}
+            scope={scope}
             title={title}
             highlight={highlight}
+            highlightColor={highlightColor}
             titleColor={titleColor}
             subtitle={subtitle}
             subtitleColor={subtitleColor}

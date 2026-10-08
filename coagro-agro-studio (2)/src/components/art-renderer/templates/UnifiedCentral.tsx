@@ -75,7 +75,7 @@ export const UnifiedCentral: React.FC<UnifiedCentralProps> = ({
 
       {/* 1. Header (Topo - 20%) */}
       <header className="w-full flex flex-col items-center shrink-0 z-20">
-        <ArtHeader logoVariant={logoVariant || (isPet ? 'h-azul' : 'h-branca')} isStory={isStory} align="center" />
+        <ArtHeader logoVariant={logoVariant || (isPet ? 'h-azul' : 'h-branca')} isStory={isStory} align="center" scope={scope} />
 
         {title && (
           <h1 className={`mt-3 text-center ${getDynamicTitleSize(title)} leading-tight line-clamp-2 drop-shadow-md max-w-[95%] ${titleFont} ${titleColor}`}>
@@ -106,7 +106,7 @@ export const UnifiedCentral: React.FC<UnifiedCentralProps> = ({
               oldPrice={oldPrice}
               currentPrice={currentPrice}
               condition={condition}
-              variant={isPet ? 'pet' : 'primary'}
+              variant={isPet ? 'pet' : 'agro'}
             />
           </div>
         )}

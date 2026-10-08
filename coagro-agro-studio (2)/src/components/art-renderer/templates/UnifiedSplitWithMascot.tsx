@@ -83,7 +83,7 @@ export const UnifiedSplitWithMascot: React.FC<UnifiedSplitWithMascotProps> = ({
       
       {/* 1. Header (Topo - 15%) */}
       <header className="w-full flex flex-col items-center shrink-0 z-20">
-        <ArtHeader logoVariant={logoVariant || (isPet ? 'h-azul' : 'h-branca')} isStory={isStory} align="center" />
+        <ArtHeader logoVariant={logoVariant || (isPet ? 'h-azul' : 'h-branca')} isStory={isStory} align="center" scope={scope} />
       </header>
 
       {/* 2. Centro Split (Produto Esquerda / Infos Direita - 65%) */}
@@ -123,7 +123,7 @@ export const UnifiedSplitWithMascot: React.FC<UnifiedSplitWithMascotProps> = ({
                 oldPrice={oldPrice}
                 currentPrice={currentPrice}
                 condition={condition}
-                variant={isPet ? 'pet' : 'primary'}
+                variant={isPet ? 'pet' : 'agro'}
               />
             </div>
           )}

@@ -81,7 +81,7 @@ export const UnifiedCentralWithMascot: React.FC<UnifiedCentralWithMascotProps> =
       
       {/* 1. Header (Topo - 20%) */}
       <header className="w-full flex flex-col items-center shrink-0 z-20">
-        <ArtHeader logoVariant={logoVariant || (isPet ? 'h-azul' : 'h-branca')} isStory={isStory} align="center" />
+        <ArtHeader logoVariant={logoVariant || (isPet ? 'h-azul' : 'h-branca')} isStory={isStory} align="center" scope={scope} />
 
         {title && (
           <h1 className={`mt-3 text-center leading-[1.05] drop-shadow-md max-w-[95%] text-[28px] sm:text-[32px] line-clamp-3 ${titleFont} ${titleColor}`}>
@@ -112,7 +112,7 @@ export const UnifiedCentralWithMascot: React.FC<UnifiedCentralWithMascotProps> =
               oldPrice={oldPrice}
               currentPrice={currentPrice}
               condition={condition}
-              variant={isPet ? 'pet' : 'primary'}
+              variant={isPet ? 'pet' : 'agro'}
             />
           </div>
         )}

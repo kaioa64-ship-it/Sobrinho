@@ -11,8 +11,10 @@ import { SemanticProductImage } from '../SemanticProductImage';
 
 interface SplitVerticalTemplateProps {
   codigo?: string;
+  scope?: 'AGRO' | 'PET';
   title: string;
   highlight: string;
+  highlightColor: string;
   titleColor: string;
   subtitle?: string;
   subtitleColor: string;
@@ -32,8 +34,10 @@ interface SplitVerticalTemplateProps {
 
 export const SplitVertical: React.FC<SplitVerticalTemplateProps> = ({
   codigo,
+  scope,
   title,
   highlight,
+  highlightColor,
   titleColor,
   subtitle,
   subtitleColor,
@@ -60,7 +64,7 @@ export const SplitVertical: React.FC<SplitVerticalTemplateProps> = ({
       {/* 1. Topo: Logo Coagro e Títulos (se Story) */}
       <div className={`w-full shrink-0 flex flex-col ${isStory ? 'pt-10 px-6 gap-4' : 'pt-6 px-6'}`}>
         <div className={isStory ? 'flex justify-center' : ''}>
-          <ArtHeader logoVariant={logoVariant} isStory={isStory} align={isStory ? 'center' : 'left'} />
+          <ArtHeader logoVariant={logoVariant} isStory={isStory} align={isStory ? 'center' : 'left'} scope={scope} />
         </div>
         
         {/* No formato Story, Título e Subtítulo ficam centralizados logo abaixo da logo */}
@@ -101,7 +105,7 @@ export const SplitVertical: React.FC<SplitVerticalTemplateProps> = ({
           {!isStory && title ? (
             <div className="relative z-30">
               <h2 className={`font-exo2 font-black uppercase leading-[1.05] tracking-tight drop-shadow-md text-[20px] sm:text-[22px]`}>
-                {renderTitleWithHighlight(title, highlight, titleColor)}
+                {renderTitleWithHighlight(title, highlight, highlightColor)}
               </h2>
               {subtitle && (
                 <p className={`mt-1.5 font-bold tracking-wide uppercase leading-snug drop-shadow-sm ${subtitleColor} text-[13px] sm:text-[14px]`}>

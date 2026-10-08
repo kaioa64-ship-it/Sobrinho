@@ -6,16 +6,18 @@ import { Sparkles, Upload, FileText, CheckCircle2 } from 'lucide-react';
 interface CanvasEmptyStateProps {
   logoVariant: LogoVariant;
   isStory: boolean;
+  scope?: 'AGRO' | 'PET';
 }
 
 export const CanvasEmptyState: React.FC<CanvasEmptyStateProps> = ({
   logoVariant,
   isStory,
+  scope,
 }) => {
   return (
     <div className="relative z-10 h-full w-full flex flex-col justify-between p-6 select-none">
       {/* Top: Coagro Brand Header */}
-      <ArtHeader logoVariant={logoVariant} isStory={isStory} align="center" />
+      <ArtHeader logoVariant={logoVariant} isStory={isStory} align="center" scope={scope} />
 
       {/* Middle: Clean, Premium Waiting Card */}
       <div className="my-auto flex flex-col items-center justify-center text-center px-2">

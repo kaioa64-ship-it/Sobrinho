@@ -74,7 +74,7 @@ export const PromoSimples: React.FC<PromoSimplesProps> = ({
       
       {/* Header (Topo) */}
       <header className="w-full flex flex-col items-center shrink-0 z-20 mb-2">
-        <ArtHeader logoVariant={finalLogoVariant} isStory={isStory} align="center" />
+        <ArtHeader logoVariant={finalLogoVariant} isStory={isStory} align="center" scope={scope} />
       </header>
 
       {/* Imagem do Produto (Ocupa a parte central) */}

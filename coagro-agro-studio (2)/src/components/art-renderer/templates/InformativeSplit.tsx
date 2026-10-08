@@ -56,7 +56,7 @@ export const InformativeSplit: React.FC<InformativeSplitProps> = ({
       
       {/* 1. Header (Topo) */}
       <header className="w-full flex flex-col items-center shrink-0 z-20">
-        <ArtHeader logoVariant={logoVariant || (isPet ? 'h-azul' : 'h-branca')} isStory={isStory} align="center" />
+        <ArtHeader logoVariant={logoVariant || (isPet ? 'h-azul' : 'h-branca')} isStory={isStory} align="center" scope={scope} />
       </header>
 
       {/* 1.5. Títulos Centralizados */}

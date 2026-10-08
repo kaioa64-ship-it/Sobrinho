@@ -12,8 +12,10 @@ import { SemanticProductImage } from '../SemanticProductImage';
 
 export interface HeroCentralTemplateProps {
   codigo?: string;
+  scope?: 'AGRO' | 'PET';
   title: string;
   highlight: string;
+  highlightColor?: string;
   titleColor?: string;
   subtitle?: string;
   subtitleColor?: string;
@@ -49,8 +51,10 @@ export interface HeroCentralTemplateProps {
  */
 export const HeroCentral: React.FC<HeroCentralTemplateProps> = ({
   codigo,
+  scope,
   title,
   highlight,
+  highlightColor = 'text-[#ffab00]',
   titleColor = 'text-white',
   subtitle,
   subtitleColor = 'text-[#E5E7EB]',
@@ -80,7 +84,7 @@ export const HeroCentral: React.FC<HeroCentralTemplateProps> = ({
       {/* 1. Bloco Superior (Header & Títulos) */}
       {/* Ocupa apenas o topo e empurra a imagem para baixo sem sobreposição */}
       <header className="w-full flex flex-col items-center shrink-0">
-        <ArtHeader logoVariant={logoVariant} isStory={isStory} align="center" />
+        <ArtHeader logoVariant={logoVariant} isStory={isStory} align="center" scope={scope} />
 
         {title ? (
           <h1
@@ -88,7 +92,7 @@ export const HeroCentral: React.FC<HeroCentralTemplateProps> = ({
               isStory ? 'text-[28px] sm:text-[32px]' : 'text-[20px] sm:text-[22px]'
             }`}
           >
-            {renderTitleWithHighlight(title, highlight, 'text-[#ffab00]')}
+            {renderTitleWithHighlight(title, highlight, highlightColor)}
           </h1>
         ) : null}
 

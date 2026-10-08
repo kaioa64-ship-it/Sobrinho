@@ -59,7 +59,7 @@ export const InformativeCentral: React.FC<InformativeCentralProps> = ({
       
       {/* 1. Header (Topo - 10%) */}
       <header className="w-full flex flex-col items-center shrink-0 z-20">
-        <ArtHeader logoVariant={logoVariant || (isPet ? 'h-azul' : 'h-branca')} isStory={isStory} align="center" />
+        <ArtHeader logoVariant={logoVariant || (isPet ? 'h-azul' : 'h-branca')} isStory={isStory} align="center" scope={scope} />
       </header>
 
       {/* 2. Centro (Textos Principais - 40%) */}
