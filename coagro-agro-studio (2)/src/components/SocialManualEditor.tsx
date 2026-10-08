@@ -214,37 +214,18 @@ export const SocialManualEditor: React.FC<SocialManualEditorProps> = ({
                 </button>
               </div>
 
-              {/* Caixinha de Seleção Fixa: Com ou Sem Fundo */}
               <div className="pt-2 border-t border-gray-200">
-                <span className="block text-[11px] font-bold text-gray-700 uppercase tracking-wide mb-1.5">
-                  Fundo da Imagem
-                </span>
-                <div className="grid grid-cols-2 gap-2">
-                  <button
-                    type="button"
-                    onClick={() => handleToggleBackground(false)}
-                    className={`py-2 px-3 text-xs font-bold rounded-lg border flex items-center justify-center gap-1.5 transition-all ${
-                      !data.preserveProductBackground
-                        ? 'bg-[#004d40] text-white border-[#004d40] shadow-2xs'
-                        : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-100'
-                    }`}
-                  >
-                    <Wand2 className="w-3.5 h-3.5" />
-                    <span>Sem Fundo (Recortada)</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handleToggleBackground(true)}
-                    className={`py-2 px-3 text-xs font-bold rounded-lg border flex items-center justify-center gap-1.5 transition-all ${
-                      data.preserveProductBackground
-                        ? 'bg-[#004d40] text-white border-[#004d40] shadow-2xs'
-                        : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-100'
-                    }`}
-                  >
-                    <Palette className="w-3.5 h-3.5" />
-                    <span>Com Fundo Original</span>
-                  </button>
-                </div>
+                <label className="flex items-center gap-2 cursor-pointer p-2 hover:bg-gray-50 rounded-md transition-colors">
+                  <input
+                    type="checkbox"
+                    checked={data.preserveProductBackground || false}
+                    onChange={(e) => handleToggleBackground(e.target.checked)}
+                    className="w-4 h-4 text-[#004d40] border-gray-300 rounded focus:ring-[#004d40]"
+                  />
+                  <span className="text-[13px] font-medium text-gray-700">
+                    Manter o fundo original da imagem
+                  </span>
+                </label>
               </div>
             </div>
           ) : (
