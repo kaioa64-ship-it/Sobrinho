@@ -47,13 +47,14 @@
     "typescript": "^7.0.2"
   },
   "build": {
-    "appId": "com.coagro.gerador",
-    "productName": "Gerador de Cartazes Coagro",
+    "appId": "com.coagro.studio",
+    "productName": "Coagro Studio",
     "directories": {
       "output": "dist_electron"
     },
     "win": {
-      "target": "nsis"
+      "target": "nsis",
+      "icon": "build/icon.jpg"
     },
     "files": [
       "dist/**/*",
