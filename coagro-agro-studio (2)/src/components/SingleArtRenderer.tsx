@@ -352,6 +352,7 @@ export const SingleArtRenderer: React.FC<SingleArtRendererProps> = ({
         ) : activeTemplate === 'promo-simples' ? (
           <PromoSimples
             backgroundColorHex={content.fundo_cor_hex}
+            isLight={isLight}
             codigo={codigoProduto}
             scope={scope}
             title={title}

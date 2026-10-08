@@ -24,6 +24,7 @@ export interface PromoSimplesProps {
   renderizacao?: RenderizacaoVisual;
   codigo?: string;
   backgroundColorHex?: string;
+  isLight?: boolean;
 }
 
 /**
@@ -58,8 +59,8 @@ export const PromoSimples: React.FC<PromoSimplesProps> = ({
     'laranja': 'bg-[#E96C2C]'
   };
 
-  const bgClass = backgroundColorHex && bgMap[backgroundColorHex] ? bgMap[backgroundColorHex] : 'bg-white';
-  const isDark = backgroundColorHex && ['verde', 'azul', 'laranja'].includes(backgroundColorHex);
+  const bgClass = backgroundColorHex && bgMap[backgroundColorHex] ? bgMap[backgroundColorHex] : 'bg-transparent';
+  const isDark = backgroundColorHex && ['verde', 'azul', 'laranja'].includes(backgroundColorHex) ? true : !isLight;
 
   const titleColor = isDark ? 'text-white' : 'text-gray-900';
   const highlightColor = isDark ? 'text-white' : (isPet ? 'text-[#E96C2C]' : 'text-[#004d40]');

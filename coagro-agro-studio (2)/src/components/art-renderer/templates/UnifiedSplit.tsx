@@ -105,7 +105,7 @@ export const UnifiedSplit: React.FC<UnifiedSplitProps> = ({
           
           {displayBenefits.length > 0 && (
             <div className="w-full">
-              <BenefitsList benefits={displayBenefits} variant={isPet ? 'badges-horizontal' : 'list-vertical'} textColor="text-gray-800" />
+              <BenefitsList benefits={displayBenefits} variant={isPet ? 'badges-horizontal' : 'list-vertical'} textColor={textBackground ? 'text-gray-800' : titleColor} />
             </div>
           )}
 

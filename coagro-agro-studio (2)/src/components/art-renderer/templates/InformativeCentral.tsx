@@ -90,7 +90,7 @@ export const InformativeCentral: React.FC<InformativeCentralProps> = ({
       <footer className="w-full shrink-0 flex flex-col items-center z-20 gap-3 mt-1">
         {displayBenefits.length > 0 && (
           <div className={`w-[100%] max-h-[140px] overflow-hidden z-20`}>
-            <BenefitsList benefits={displayBenefits} variant={isPet ? 'badges-horizontal' : 'list-vertical'} textColor="text-white" />
+            <BenefitsList benefits={displayBenefits} variant={isPet ? 'badges-horizontal' : 'list-vertical'} textColor={titleColor} />
           </div>
         )}
         

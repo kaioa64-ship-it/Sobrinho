@@ -116,7 +116,7 @@ export const UnifiedCentral: React.FC<UnifiedCentralProps> = ({
       <footer className="w-full shrink-0 flex flex-col items-center z-20 gap-3">
         {displayBenefits.length > 0 && (
           <div className={`w-[95%] z-20 ${textBackground ? 'bg-white/95 backdrop-blur-sm rounded-xl p-3 shadow-lg border border-white/40' : ''}`}>
-            <BenefitsList benefits={displayBenefits} variant={isPet ? 'badges-horizontal' : 'list-vertical'} textColor="text-gray-800" />
+            <BenefitsList benefits={displayBenefits} variant={isPet ? 'badges-horizontal' : 'list-vertical'} textColor={textBackground ? 'text-gray-800' : titleColor} />
           </div>
         )}
         
