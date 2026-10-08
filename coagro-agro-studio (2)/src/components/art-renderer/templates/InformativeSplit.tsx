@@ -94,7 +94,7 @@ export const InformativeSplit: React.FC<InformativeSplitProps> = ({
         <div className={`w-[45%] h-full flex flex-col justify-center items-start z-30 pt-2 pr-2`}>
           {displayBenefits.length > 0 && (
             <div className="w-full">
-              <BenefitsList benefits={displayBenefits} variant={isPet ? 'badges-horizontal' : 'cards-vertical'} textColor={titleColor} />
+              <BenefitsList benefits={displayBenefits} variant={isPet ? 'badges-horizontal' : 'list-vertical'} textColor={titleColor} />
             </div>
           )}
         </div>
