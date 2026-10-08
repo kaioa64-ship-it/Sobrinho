@@ -1,25 +1,30 @@
-# Dependencias e builds
-node_modules/
-**/node_modules/
-dist/
-**/dist/
-dist_electron/
-**/dist_electron/
-scratch/
-**/scratch/
+# Compiled/Binary files
+*.pyc
+__pycache__/
 
-# Logs e arquivos de sistema
-*.log
+# Dependency directories
+venv/
+.venv/
+node_modules/
+
+# Editor/IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# System/Environment files
 .DS_Store
 Thumbs.db
-
-# Variaveis de ambiente com chaves
 .env
 .env.local
-**/ .env
-**/.env.local
-!.env.example
-**\!.env.example
+*.env.*
 
-# Arquivos temporarios / compactados pesados
-*.zip
+# Logs and temp files
+*.log
+*.tmp
+
+# Other common ignores
+coverage/
+htmlcov/
+.coverage

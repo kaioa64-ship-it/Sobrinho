@@ -105,7 +105,7 @@ export const UnifiedSplit: React.FC<UnifiedSplitProps> = ({
           
           {displayBenefits.length > 0 && (
             <div className="w-full">
-              <BenefitsList benefits={displayBenefits} variant={isPet ? 'badges-horizontal' : 'default'} textColor="text-gray-800" />
+              <BenefitsList benefits={displayBenefits} variant={isPet ? 'badges-horizontal' : 'list-vertical'} textColor="text-gray-800" />
             </div>
           )}
 
@@ -116,7 +116,7 @@ export const UnifiedSplit: React.FC<UnifiedSplitProps> = ({
                 oldPrice={oldPrice}
                 currentPrice={currentPrice}
                 condition={condition}
-                variant={isPet ? 'pet' : 'default'}
+                variant={isPet ? 'pet' : 'primary'}
               />
             </div>
           )}
@@ -127,7 +127,7 @@ export const UnifiedSplit: React.FC<UnifiedSplitProps> = ({
       <footer className="w-full shrink-0 flex flex-col items-center z-20">
         {cta && (
           <div className="w-[90%]">
-             <ArtCta ctaText={cta} variant={isPet ? 'pet' : 'default'} fullWidth />
+             <ArtCta ctaText={cta} variant={isPet ? 'pet' : 'primary'} fullWidth />
           </div>
         )}
       </footer>

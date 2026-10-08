@@ -3,7 +3,7 @@ import { Upload, X, Type, Tag, Palette, Wand2, Plus, Trash2, List, LayoutTemplat
 import { TemplateLayout, CanvasFormat } from '../types/agro';
 import { removeWhiteBackground, processProductImage } from '../lib/imageTransparency';
 
-interface SocialManualData {
+export interface SocialManualData {
   codigo?: string;
   titulo: string;
   subtitulo: string;

@@ -9,6 +9,7 @@ import { RenderizacaoVisual } from '../../../types/agro';
 import { SemanticProductImage } from '../SemanticProductImage';
 
 interface PetSplitVerticalTemplateProps {
+  codigo?: string;
   title: string;
   highlight: string;
   subtitle?: string;
@@ -26,6 +27,7 @@ interface PetSplitVerticalTemplateProps {
 }
 
 export const PetSplitVertical: React.FC<PetSplitVerticalTemplateProps> = ({
+  codigo,
   title,
   highlight,
   subtitle,
@@ -82,7 +84,7 @@ export const PetSplitVertical: React.FC<PetSplitVerticalTemplateProps> = ({
                 marginLeft: productMarginLeft,
                 transform: 'translateY(-3%)'
              }} className="h-full flex items-center justify-center pointer-events-none">
-                 <SemanticProductImage src={processedProduct} renderizacao={renderizacao} />
+                 <SemanticProductImage src={processedProduct} renderizacao={renderizacao} codigo={codigo} />
              </div>
           ) : null}
         </div>

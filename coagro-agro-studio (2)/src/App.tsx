@@ -11,7 +11,7 @@ import { ExcelBatchUploader, BatchItem } from './components/ExcelBatchUploader';
 import { BatchReviewGrid } from './components/BatchReviewGrid';
 import { BatchRendererModal } from './components/BatchRendererModal';
 import { PosterManualEditor } from './components/PosterManualEditor';
-import { SocialManualEditor } from './components/SocialManualEditor';
+import { SocialManualEditor, SocialManualData } from './components/SocialManualEditor';
 import { getAccessToken } from './lib/firebase';
 import { uploadToGoogleDrive } from './lib/googleDrive';
 import { resolveDefaultTemplate } from './lib/layoutRules';
@@ -49,7 +49,8 @@ export default function App() {
   };
   
   const [socialMode, setSocialMode] = useState<'MANUAL' | 'AI_BETA'>('MANUAL');
-  const [socialManualData, setSocialManualData] = useState({
+  const [socialManualData, setSocialManualData] = useState<SocialManualData>({
+    codigo: undefined,
     titulo: 'Ração Golden Special 15kg',
     subtitulo: 'Aproveite a oferta imperdível',
     valorDe: '159,90',
@@ -58,8 +59,10 @@ export default function App() {
     backgroundImageUrl: '',
     backgroundColorHex: '',
     theme: '',
+    textBackground: undefined,
     badge: 'Sem Selo',
-    cta: 'Garanta já o seu!'
+    cta: 'Garanta já o seu!',
+    preserveProductBackground: undefined
   });
 
   // Canvas styling states
@@ -84,7 +87,8 @@ export default function App() {
 
   // Lógica Automática de Cor da Logo (Garante contraste com o fundo)
   useEffect(() => {
-    const isLightBackground = canvasTheme === 'clean-branco' || canvasTheme === 'branco' || socialManualData.theme === 'clean-branco';
+    // 'branco' não existe no tipo CanvasTheme (legado); mantido apenas por tolerância em runtime.
+    const isLightBackground = canvasTheme === 'clean-branco' || (canvasTheme as string) === 'branco' || socialManualData.theme === 'clean-branco';
     if (isLightBackground) {
       setLogoVariant('h-azul');
     } else {

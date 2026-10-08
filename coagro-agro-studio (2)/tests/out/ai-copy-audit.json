@@ -6,21 +6,17 @@
       "nome": "nexgard",
       "txt": "Nex Gard Carrapaticida Caes De 4 A 10kg R$100 4x R$25 sem juros"
     },
-    "ms": 95857,
+    "ms": 88,
     "status": 200,
     "g": {
-      "titulo": "PROTEÇÃO COMPLETA NEXGARD",
-      "sub": "Tablete mastigável contra pulgas e carrapatos",
-      "bullets": [
-        "Para cães de 4 a",
-        "Tablete mastigável altamente palatável",
-        "Ação rápida e eficaz por"
-      ],
+      "titulo": "OFERTA PET",
+      "sub": "Proteção contra pulgas e carrapatos",
+      "bullets": [],
       "checks": [
         {
           "name": "título ≤ 4 palavras",
           "ok": true,
-          "info": "3 palavras"
+          "info": "2 palavras"
         },
         {
           "name": "subtítulo presente",
@@ -29,8 +25,8 @@
         },
         {
           "name": "exatamente 3 diferenciais",
-          "ok": true,
-          "info": "3"
+          "ok": false,
+          "info": "0"
         },
         {
           "name": "diferenciais ≤ 5 palavras",
@@ -45,7 +41,7 @@
         {
           "name": "produto citado (título/subtítulo)",
           "ok": true,
-          "info": "PROTEÇÃO COMPLETA NEXGARD / Tablete mastigável contra pulgas e carrapatos"
+          "info": "OFERTA PET / Proteção contra pulgas e carrapatos"
         },
         {
           "name": "SEM linguagem de campo",
@@ -53,7 +49,7 @@
           "info": ""
         }
       ],
-      "pass": true
+      "pass": false
     },
     "raw": {
       "linha": "AGRO",
@@ -62,28 +58,20 @@
       "formato": "feed",
       "template_layout": "hero-central",
       "tema": "campo-agro",
-      "prompt_fundo_ia": "Ambiente interno acolhedor de casa moderna, sala clara com piso de madeira e jardim ensolarado suavemente desfocado ao fundo, iluminação profissional suave",
-      "fundo_imagem": "Ambiente interno acolhedor de casa moderna, sala clara com piso de madeira e jardim ensolarado suavemente desfocado ao fundo, iluminação profissional suave",
+      "prompt_fundo_ia": "Fotografia profissional agrícola em alta resolução, lavoura viçosa de grãos sob a luz matinal límpida, folhas sadias com orvalho matinal em primeiro plano, horizonte amplo do agronegócio brasileiro, iluminação cinematográfica e profundidade de campo suave.",
+      "fundo_imagem": "Fotografia profissional agrícola em alta resolução, lavoura viçosa de grãos sob a luz matinal límpida, folhas sadias com orvalho matinal em primeiro plano, horizonte amplo do agronegócio brasileiro, iluminação cinematográfica e profundidade de campo suave.",
       "fundo_imagem_url": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80",
       "textos_hero": {
-        "titulo": "PROTEÇÃO COMPLETA NEXGARD",
-        "palavra_destaque_ouro": "NEXGARD",
-        "subtitulo": "Tablete mastigável contra pulgas e carrapatos"
+        "titulo": "OFERTA PET",
+        "palavra_destaque_ouro": "OFERTA",
+        "subtitulo": "Proteção contra pulgas e carrapatos"
       },
-      "diferenciais_tecnicos": [
-        "Para cães de 4 a",
-        "Tablete mastigável altamente palatável",
-        "Ação rápida e eficaz por"
-      ],
+      "diferenciais_tecnicos": [],
       "textos_da_arte": {
-        "titulo_impacto": "PROTEÇÃO COMPLETA NEXGARD",
-        "palavra_destaque": "NEXGARD",
-        "subtitulo": "Tablete mastigável contra pulgas e carrapatos",
-        "bullets_tecnicos": [
-          "Para cães de 4 a",
-          "Tablete mastigável altamente palatável",
-          "Ação rápida e eficaz por"
-        ],
+        "titulo_impacto": "OFERTA PET",
+        "palavra_destaque": "OFERTA",
+        "subtitulo": "Proteção contra pulgas e carrapatos",
+        "bullets_tecnicos": [],
         "cta": "CONSULTE DISPONIBILIDADE",
         "modulo_preco": {
           "ativo": true,
@@ -94,18 +82,14 @@
         }
       },
       "caixa_titulo": {
-        "texto": "PROTEÇÃO COMPLETA NEXGARD",
-        "palavra_ouro": "NEXGARD",
-        "palavra_ouro_destaque": "NEXGARD"
+        "texto": "OFERTA PET",
+        "palavra_ouro": "OFERTA",
+        "palavra_ouro_destaque": "OFERTA"
       },
       "caixa_subtitulo": {
-        "texto": "Tablete mastigável contra pulgas e carrapatos"
+        "texto": "Proteção contra pulgas e carrapatos"
       },
-      "beneficios_tecnicos": [
-        "Para cães de 4 a",
-        "Tablete mastigável altamente palatável",
-        "Ação rápida e eficaz por"
-      ],
+      "beneficios_tecnicos": [],
       "modulo_preco": {
         "ativo": true,
         "valor_de": "",
@@ -113,8 +97,8 @@
         "condicao": "EM 4X DE R$ 25,00 SEM JUROS",
         "condicoes_pagamento": "EM 4X DE R$ 25,00 SEM JUROS"
       },
-      "legenda_instagram": "Seu companheiro livre de pulgas e carrapatos! 🐶 O NexGard para cães de 4 a 10kg oferece proteção comprovada e alívio imediato em formato de tablete mastigável saboroso que os pets adoram. Cuide de quem sempre está ao seu lado com o melhor custo-benefício. Garanta já na Coagro!",
-      "legenda_post": "Seu companheiro livre de pulgas e carrapatos! 🐶 O NexGard para cães de 4 a 10kg oferece proteção comprovada e alívio imediato em formato de tablete mastigável saboroso que os pets adoram. Cuide de quem sempre está ao seu lado com o melhor custo-benefício. Garanta já na Coagro!"
+      "legenda_instagram": "Garanta máxima produtividade na sua propriedade com o Proteção contra pulgas e carrapatos! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte",
+      "legenda_post": "Garanta máxima produtividade na sua propriedade com o Proteção contra pulgas e carrapatos! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte"
     }
   },
   {
@@ -124,21 +108,17 @@
       "nome": "golden",
       "txt": "Ração Golden Formula Cães Adultos 15kg de 189,90 por 159,90 à vista"
     },
-    "ms": 129471,
+    "ms": 19,
     "status": 200,
     "g": {
-      "titulo": "OFERTA ESPECIAL GOLDEN",
-      "sub": "Alimento completo para cães adultos",
-      "bullets": [
-        "Nutrição equilibrada para cães",
-        "Pele saudável e pelos brilhantes",
-        "Alta digestibilidade e fezes firmes"
-      ],
+      "titulo": "OFERTA PET",
+      "sub": "Nutrição completa para o seu pet",
+      "bullets": [],
       "checks": [
         {
           "name": "título ≤ 4 palavras",
           "ok": true,
-          "info": "3 palavras"
+          "info": "2 palavras"
         },
         {
           "name": "subtítulo presente",
@@ -147,8 +127,8 @@
         },
         {
           "name": "exatamente 3 diferenciais",
-          "ok": true,
-          "info": "3"
+          "ok": false,
+          "info": "0"
         },
         {
           "name": "diferenciais ≤ 5 palavras",
@@ -163,7 +143,7 @@
         {
           "name": "produto citado (título/subtítulo)",
           "ok": true,
-          "info": "OFERTA ESPECIAL GOLDEN / Alimento completo para cães adultos"
+          "info": "OFERTA PET / Nutrição completa para o seu pet"
         },
         {
           "name": "SEM linguagem de campo",
@@ -171,37 +151,29 @@
           "info": ""
         }
       ],
-      "pass": true
+      "pass": false
     },
     "raw": {
       "linha": "AGRO",
       "tipo_postagem": "promocao",
       "formato_gerado": "Feed",
       "formato": "feed",
-      "template_layout": "split-vertical",
+      "template_layout": "hero-central",
       "tema": "campo-agro",
-      "prompt_fundo_ia": "Cenário acolhedor com piso de madeira clara em ambiente doméstico moderno e iluminado, fundo suave com jardim residencial desfocado, luz natural quente e elegante.",
-      "fundo_imagem": "Cenário acolhedor com piso de madeira clara em ambiente doméstico moderno e iluminado, fundo suave com jardim residencial desfocado, luz natural quente e elegante.",
+      "prompt_fundo_ia": "Fotografia macro de solo fértil bem estruturado e rico em matéria orgânica com brotos verdes saudáveis emergindo com vigor, iluminação suave do amanhecer e foco seletivo realista.",
+      "fundo_imagem": "Fotografia macro de solo fértil bem estruturado e rico em matéria orgânica com brotos verdes saudáveis emergindo com vigor, iluminação suave do amanhecer e foco seletivo realista.",
       "fundo_imagem_url": "https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=1200&q=80",
       "textos_hero": {
-        "titulo": "OFERTA ESPECIAL GOLDEN",
-        "palavra_destaque_ouro": "GOLDEN",
-        "subtitulo": "Alimento completo para cães adultos"
+        "titulo": "OFERTA PET",
+        "palavra_destaque_ouro": "OFERTA",
+        "subtitulo": "Nutrição completa para o seu pet"
       },
-      "diferenciais_tecnicos": [
-        "Nutrição equilibrada para cães",
-        "Pele saudável e pelos brilhantes",
-        "Alta digestibilidade e fezes firmes"
-      ],
+      "diferenciais_tecnicos": [],
       "textos_da_arte": {
-        "titulo_impacto": "OFERTA ESPECIAL GOLDEN",
-        "palavra_destaque": "GOLDEN",
-        "subtitulo": "Alimento completo para cães adultos",
-        "bullets_tecnicos": [
-          "Nutrição equilibrada para cães",
-          "Pele saudável e pelos brilhantes",
-          "Alta digestibilidade e fezes firmes"
-        ],
+        "titulo_impacto": "OFERTA PET",
+        "palavra_destaque": "OFERTA",
+        "subtitulo": "Nutrição completa para o seu pet",
+        "bullets_tecnicos": [],
         "cta": "GARANTA JÁ O SEU",
         "modulo_preco": {
           "ativo": true,
@@ -212,18 +184,14 @@
         }
       },
       "caixa_titulo": {
-        "texto": "OFERTA ESPECIAL GOLDEN",
-        "palavra_ouro": "GOLDEN",
-        "palavra_ouro_destaque": "GOLDEN"
+        "texto": "OFERTA PET",
+        "palavra_ouro": "OFERTA",
+        "palavra_ouro_destaque": "OFERTA"
       },
       "caixa_subtitulo": {
-        "texto": "Alimento completo para cães adultos"
+        "texto": "Nutrição completa para o seu pet"
       },
-      "beneficios_tecnicos": [
-        "Nutrição equilibrada para cães",
-        "Pele saudável e pelos brilhantes",
-        "Alta digestibilidade e fezes firmes"
-      ],
+      "beneficios_tecnicos": [],
       "modulo_preco": {
         "ativo": true,
         "valor_de": "R$ 189,90",
@@ -231,8 +199,8 @@
         "condicao": "À VISTA",
         "condicoes_pagamento": "À VISTA"
       },
-      "legenda_instagram": "Seu melhor amigo merece todo o cuidado e nutrição! Aproveite nossa condição imperdível na Ração Golden Formula Cães Adultos 15kg: de R$ 189,90 por apenas R$ 159,90 à vista. Proporcione vitalidade e saúde com o melhor sabor para o seu cão. Visite a Coagro Agro e garanta o pacote do seu pet!",
-      "legenda_post": "Seu melhor amigo merece todo o cuidado e nutrição! Aproveite nossa condição imperdível na Ração Golden Formula Cães Adultos 15kg: de R$ 189,90 por apenas R$ 159,90 à vista. Proporcione vitalidade e saúde com o melhor sabor para o seu cão. Visite a Coagro Agro e garanta o pacote do seu pet!"
+      "legenda_instagram": "Garanta máxima produtividade na sua propriedade com o Nutrição completa para o seu pet! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte",
+      "legenda_post": "Garanta máxima produtividade na sua propriedade com o Nutrição completa para o seu pet! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte"
     }
   },
   {
@@ -242,21 +210,17 @@
       "nome": "bravecto",
       "txt": "Bravecto cães 10 a 20kg 229"
     },
-    "ms": 12481,
+    "ms": 66,
     "status": 200,
     "g": {
-      "titulo": "PROTEÇÃO TOTAL BRAVECTO",
-      "sub": "Comprimido mastigável para cães de 10 a 20 kg",
-      "bullets": [
-        "Até 12 semanas protegendo",
-        "Elimina pulgas e carrapatos",
-        "Comprimido mastigável e palatável"
-      ],
+      "titulo": "OFERTA PET",
+      "sub": "Proteção contra pulgas e carrapatos",
+      "bullets": [],
       "checks": [
         {
           "name": "título ≤ 4 palavras",
           "ok": true,
-          "info": "3 palavras"
+          "info": "2 palavras"
         },
         {
           "name": "subtítulo presente",
@@ -265,8 +229,8 @@
         },
         {
           "name": "exatamente 3 diferenciais",
-          "ok": true,
-          "info": "3"
+          "ok": false,
+          "info": "0"
         },
         {
           "name": "diferenciais ≤ 5 palavras",
@@ -281,7 +245,7 @@
         {
           "name": "produto citado (título/subtítulo)",
           "ok": true,
-          "info": "PROTEÇÃO TOTAL BRAVECTO / Comprimido mastigável para cães de 10 a 20 kg"
+          "info": "OFERTA PET / Proteção contra pulgas e carrapatos"
         },
         {
           "name": "SEM linguagem de campo",
@@ -289,7 +253,7 @@
           "info": ""
         }
       ],
-      "pass": true
+      "pass": false
     },
     "raw": {
       "linha": "AGRO",
@@ -298,28 +262,20 @@
       "formato": "feed",
       "template_layout": "hero-central",
       "tema": "campo-agro",
-      "prompt_fundo_ia": "Ambiente interno acolhedor e iluminado de sala de estar contemporânea com piso amadeirado claro, luz suave e natural de janela, fundo suavemente desfocado com plantas ornamentais, estilo fotográfico limpo e aconchegante.",
-      "fundo_imagem": "Ambiente interno acolhedor e iluminado de sala de estar contemporânea com piso amadeirado claro, luz suave e natural de janela, fundo suavemente desfocado com plantas ornamentais, estilo fotográfico limpo e aconchegante.",
-      "fundo_imagem_url": "https://images.unsplash.com/photo-1546445317-29f4545e9d53?auto=format&fit=crop&w=1200&q=80",
+      "prompt_fundo_ia": "Fotografia profissional agrícola em alta resolução, lavoura viçosa de grãos sob a luz matinal límpida, folhas sadias com orvalho matinal em primeiro plano, horizonte amplo do agronegócio brasileiro, iluminação cinematográfica e profundidade de campo suave.",
+      "fundo_imagem": "Fotografia profissional agrícola em alta resolução, lavoura viçosa de grãos sob a luz matinal límpida, folhas sadias com orvalho matinal em primeiro plano, horizonte amplo do agronegócio brasileiro, iluminação cinematográfica e profundidade de campo suave.",
+      "fundo_imagem_url": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80",
       "textos_hero": {
-        "titulo": "PROTEÇÃO TOTAL BRAVECTO",
-        "palavra_destaque_ouro": "BRAVECTO",
-        "subtitulo": "Comprimido mastigável para cães de 10 a 20 kg"
+        "titulo": "OFERTA PET",
+        "palavra_destaque_ouro": "OFERTA",
+        "subtitulo": "Proteção contra pulgas e carrapatos"
       },
-      "diferenciais_tecnicos": [
-        "Até 12 semanas protegendo",
-        "Elimina pulgas e carrapatos",
-        "Comprimido mastigável e palatável"
-      ],
+      "diferenciais_tecnicos": [],
       "textos_da_arte": {
-        "titulo_impacto": "PROTEÇÃO TOTAL BRAVECTO",
-        "palavra_destaque": "BRAVECTO",
-        "subtitulo": "Comprimido mastigável para cães de 10 a 20 kg",
-        "bullets_tecnicos": [
-          "Até 12 semanas protegendo",
-          "Elimina pulgas e carrapatos",
-          "Comprimido mastigável e palatável"
-        ],
+        "titulo_impacto": "OFERTA PET",
+        "palavra_destaque": "OFERTA",
+        "subtitulo": "Proteção contra pulgas e carrapatos",
+        "bullets_tecnicos": [],
         "cta": "GARANTA JÁ O SEU",
         "modulo_preco": {
           "ativo": true,
@@ -330,18 +286,14 @@
         }
       },
       "caixa_titulo": {
-        "texto": "PROTEÇÃO TOTAL BRAVECTO",
-        "palavra_ouro": "BRAVECTO",
-        "palavra_ouro_destaque": "BRAVECTO"
+        "texto": "OFERTA PET",
+        "palavra_ouro": "OFERTA",
+        "palavra_ouro_destaque": "OFERTA"
       },
       "caixa_subtitulo": {
-        "texto": "Comprimido mastigável para cães de 10 a 20 kg"
+        "texto": "Proteção contra pulgas e carrapatos"
       },
-      "beneficios_tecnicos": [
-        "Até 12 semanas protegendo",
-        "Elimina pulgas e carrapatos",
-        "Comprimido mastigável e palatável"
-      ],
+      "beneficios_tecnicos": [],
       "modulo_preco": {
         "ativo": true,
         "valor_de": "R$ 229,00",
@@ -349,8 +301,8 @@
         "condicao": "",
         "condicoes_pagamento": ""
       },
-      "legenda_instagram": "Mantenha o seu melhor amigo sempre seguro e livre de parasitas com Bravecto! Um único comprimido mastigável oferece até 12 semanas inteiras de proteção eficaz contra pulgas e carrapatos para cães de 10 a 20 kg. Cuidado, bem-estar e tranquilidade para toda a família. Passe na Coagro mais próxima ou fale com a gente para garantir o seu!",
-      "legenda_post": "Mantenha o seu melhor amigo sempre seguro e livre de parasitas com Bravecto! Um único comprimido mastigável oferece até 12 semanas inteiras de proteção eficaz contra pulgas e carrapatos para cães de 10 a 20 kg. Cuidado, bem-estar e tranquilidade para toda a família. Passe na Coagro mais próxima ou fale com a gente para garantir o seu!"
+      "legenda_instagram": "Garanta máxima produtividade na sua propriedade com o Proteção contra pulgas e carrapatos! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte",
+      "legenda_post": "Garanta máxima produtividade na sua propriedade com o Proteção contra pulgas e carrapatos! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte"
     }
   },
   {
@@ -360,21 +312,17 @@
       "nome": "coleira",
       "txt": "Coleira antipulgas Seresto gatos 120,00 em até 3x"
     },
-    "ms": 12894,
+    "ms": 17,
     "status": 200,
     "g": {
-      "titulo": "OFERTA COLEIRA SERESTO",
-      "sub": "Proteção contínua contra pulgas e carrapatos para seu gato",
-      "bullets": [
-        "Até 8 meses de proteção",
-        "Sem cheiro e resistente à",
-        "Trava de segurança para felinos"
-      ],
+      "titulo": "OFERTA PET",
+      "sub": "Proteção contra pulgas e carrapatos",
+      "bullets": [],
       "checks": [
         {
           "name": "título ≤ 4 palavras",
           "ok": true,
-          "info": "3 palavras"
+          "info": "2 palavras"
         },
         {
           "name": "subtítulo presente",
@@ -383,8 +331,8 @@
         },
         {
           "name": "exatamente 3 diferenciais",
-          "ok": true,
-          "info": "3"
+          "ok": false,
+          "info": "0"
         },
         {
           "name": "diferenciais ≤ 5 palavras",
@@ -399,7 +347,7 @@
         {
           "name": "produto citado (título/subtítulo)",
           "ok": true,
-          "info": "OFERTA COLEIRA SERESTO / Proteção contínua contra pulgas e carrapatos para seu gato"
+          "info": "OFERTA PET / Proteção contra pulgas e carrapatos"
         },
         {
           "name": "SEM linguagem de campo",
@@ -407,7 +355,7 @@
           "info": ""
         }
       ],
-      "pass": true
+      "pass": false
     },
     "raw": {
       "linha": "AGRO",
@@ -416,28 +364,20 @@
       "formato": "feed",
       "template_layout": "hero-central",
       "tema": "campo-agro",
-      "prompt_fundo_ia": "Ambiente interno aconchegante e iluminado de sala de estar moderna, piso de madeira claro com desfoque suave de profundidade, iluminação quente e acolhedora para produto pet",
-      "fundo_imagem": "Ambiente interno aconchegante e iluminado de sala de estar moderna, piso de madeira claro com desfoque suave de profundidade, iluminação quente e acolhedora para produto pet",
+      "prompt_fundo_ia": "Fotografia profissional agrícola em alta resolução, lavoura viçosa de grãos sob a luz matinal límpida, folhas sadias com orvalho matinal em primeiro plano, horizonte amplo do agronegócio brasileiro, iluminação cinematográfica e profundidade de campo suave.",
+      "fundo_imagem": "Fotografia profissional agrícola em alta resolução, lavoura viçosa de grãos sob a luz matinal límpida, folhas sadias com orvalho matinal em primeiro plano, horizonte amplo do agronegócio brasileiro, iluminação cinematográfica e profundidade de campo suave.",
       "fundo_imagem_url": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80",
       "textos_hero": {
-        "titulo": "OFERTA COLEIRA SERESTO",
-        "palavra_destaque_ouro": "SERESTO",
-        "subtitulo": "Proteção contínua contra pulgas e carrapatos para seu gato"
+        "titulo": "OFERTA PET",
+        "palavra_destaque_ouro": "OFERTA",
+        "subtitulo": "Proteção contra pulgas e carrapatos"
       },
-      "diferenciais_tecnicos": [
-        "Até 8 meses de proteção",
-        "Sem cheiro e resistente à",
-        "Trava de segurança para felinos"
-      ],
+      "diferenciais_tecnicos": [],
       "textos_da_arte": {
-        "titulo_impacto": "OFERTA COLEIRA SERESTO",
-        "palavra_destaque": "SERESTO",
-        "subtitulo": "Proteção contínua contra pulgas e carrapatos para seu gato",
-        "bullets_tecnicos": [
-          "Até 8 meses de proteção",
-          "Sem cheiro e resistente à",
-          "Trava de segurança para felinos"
-        ],
+        "titulo_impacto": "OFERTA PET",
+        "palavra_destaque": "OFERTA",
+        "subtitulo": "Proteção contra pulgas e carrapatos",
+        "bullets_tecnicos": [],
         "cta": "CONSULTE DISPONIBILIDADE",
         "modulo_preco": {
           "ativo": true,
@@ -448,18 +388,14 @@
         }
       },
       "caixa_titulo": {
-        "texto": "OFERTA COLEIRA SERESTO",
-        "palavra_ouro": "SERESTO",
-        "palavra_ouro_destaque": "SERESTO"
+        "texto": "OFERTA PET",
+        "palavra_ouro": "OFERTA",
+        "palavra_ouro_destaque": "OFERTA"
       },
       "caixa_subtitulo": {
-        "texto": "Proteção contínua contra pulgas e carrapatos para seu gato"
+        "texto": "Proteção contra pulgas e carrapatos"
       },
-      "beneficios_tecnicos": [
-        "Até 8 meses de proteção",
-        "Sem cheiro e resistente à",
-        "Trava de segurança para felinos"
-      ],
+      "beneficios_tecnicos": [],
       "modulo_preco": {
         "ativo": true,
         "valor_de": "",
@@ -467,8 +403,8 @@
         "condicao": "EM ATÉ 3X",
         "condicoes_pagamento": "EM ATÉ 3X"
       },
-      "legenda_instagram": "Proteja seu felino com máxima segurança e tranquilidade! 🐱✨ A Coleira Seresto oferece até 8 meses de proteção contínua contra pulgas e carrapatos, sem cheiro e com sistema de liberação segura. Aproveite a condição especial na Coagro Agro e cuide de quem sempre cuida de você. Garanta já a sua!",
-      "legenda_post": "Proteja seu felino com máxima segurança e tranquilidade! 🐱✨ A Coleira Seresto oferece até 8 meses de proteção contínua contra pulgas e carrapatos, sem cheiro e com sistema de liberação segura. Aproveite a condição especial na Coagro Agro e cuide de quem sempre cuida de você. Garanta já a sua!"
+      "legenda_instagram": "Garanta máxima produtividade na sua propriedade com o Proteção contra pulgas e carrapatos! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte",
+      "legenda_post": "Garanta máxima produtividade na sua propriedade com o Proteção contra pulgas e carrapatos! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte"
     }
   },
   {
@@ -478,21 +414,17 @@
       "nome": "shampoo",
       "txt": "Shampoo neutro para cães e gatos 500ml 24,90"
     },
-    "ms": 7129,
+    "ms": 19,
     "status": 200,
     "g": {
-      "titulo": "CUIDADO ESPECIAL PET",
-      "sub": "Shampoo Neutro 500ml para Cães e Gatos",
-      "bullets": [
-        "Fórmula suave com pH neutro",
-        "Indicado para cães e gatos",
-        "Pelos macios, limpos e cheirosos"
-      ],
+      "titulo": "OFERTA PET",
+      "sub": "Conforto e cuidado para o seu pet",
+      "bullets": [],
       "checks": [
         {
           "name": "título ≤ 4 palavras",
           "ok": true,
-          "info": "3 palavras"
+          "info": "2 palavras"
         },
         {
           "name": "subtítulo presente",
@@ -501,8 +433,8 @@
         },
         {
           "name": "exatamente 3 diferenciais",
-          "ok": true,
-          "info": "3"
+          "ok": false,
+          "info": "0"
         },
         {
           "name": "diferenciais ≤ 5 palavras",
@@ -517,7 +449,7 @@
         {
           "name": "produto citado (título/subtítulo)",
           "ok": true,
-          "info": "CUIDADO ESPECIAL PET / Shampoo Neutro 500ml para Cães e Gatos"
+          "info": "OFERTA PET / Conforto e cuidado para o seu pet"
         },
         {
           "name": "SEM linguagem de campo",
@@ -525,7 +457,7 @@
           "info": ""
         }
       ],
-      "pass": true
+      "pass": false
     },
     "raw": {
       "linha": "AGRO",
@@ -534,28 +466,20 @@
       "formato": "feed",
       "template_layout": "hero-central",
       "tema": "campo-agro",
-      "prompt_fundo_ia": "Cenário acolhedor e iluminado de ambiente pet spa, bancada elegante de madeira clara com toalhas fofas e luz natural suave, transmitindo frescor e cuidado.",
-      "fundo_imagem": "Cenário acolhedor e iluminado de ambiente pet spa, bancada elegante de madeira clara com toalhas fofas e luz natural suave, transmitindo frescor e cuidado.",
+      "prompt_fundo_ia": "Fotografia profissional agrícola em alta resolução, lavoura viçosa de grãos sob a luz matinal límpida, folhas sadias com orvalho matinal em primeiro plano, horizonte amplo do agronegócio brasileiro, iluminação cinematográfica e profundidade de campo suave.",
+      "fundo_imagem": "Fotografia profissional agrícola em alta resolução, lavoura viçosa de grãos sob a luz matinal límpida, folhas sadias com orvalho matinal em primeiro plano, horizonte amplo do agronegócio brasileiro, iluminação cinematográfica e profundidade de campo suave.",
       "fundo_imagem_url": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80",
       "textos_hero": {
-        "titulo": "CUIDADO ESPECIAL PET",
-        "palavra_destaque_ouro": "PET",
-        "subtitulo": "Shampoo Neutro 500ml para Cães e Gatos"
+        "titulo": "OFERTA PET",
+        "palavra_destaque_ouro": "OFERTA",
+        "subtitulo": "Conforto e cuidado para o seu pet"
       },
-      "diferenciais_tecnicos": [
-        "Fórmula suave com pH neutro",
-        "Indicado para cães e gatos",
-        "Pelos macios, limpos e cheirosos"
-      ],
+      "diferenciais_tecnicos": [],
       "textos_da_arte": {
-        "titulo_impacto": "CUIDADO ESPECIAL PET",
-        "palavra_destaque": "PET",
-        "subtitulo": "Shampoo Neutro 500ml para Cães e Gatos",
-        "bullets_tecnicos": [
-          "Fórmula suave com pH neutro",
-          "Indicado para cães e gatos",
-          "Pelos macios, limpos e cheirosos"
-        ],
+        "titulo_impacto": "OFERTA PET",
+        "palavra_destaque": "OFERTA",
+        "subtitulo": "Conforto e cuidado para o seu pet",
+        "bullets_tecnicos": [],
         "cta": "CONSULTE DISPONIBILIDADE",
         "modulo_preco": {
           "ativo": true,
@@ -566,18 +490,14 @@
         }
       },
       "caixa_titulo": {
-        "texto": "CUIDADO ESPECIAL PET",
-        "palavra_ouro": "PET",
-        "palavra_ouro_destaque": "PET"
+        "texto": "OFERTA PET",
+        "palavra_ouro": "OFERTA",
+        "palavra_ouro_destaque": "OFERTA"
       },
       "caixa_subtitulo": {
-        "texto": "Shampoo Neutro 500ml para Cães e Gatos"
+        "texto": "Conforto e cuidado para o seu pet"
       },
-      "beneficios_tecnicos": [
-        "Fórmula suave com pH neutro",
-        "Indicado para cães e gatos",
-        "Pelos macios, limpos e cheirosos"
-      ],
+      "beneficios_tecnicos": [],
       "modulo_preco": {
         "ativo": true,
         "valor_de": "",
@@ -585,8 +505,8 @@
         "condicao": "",
         "condicoes_pagamento": ""
       },
-      "legenda_instagram": "Hora do banho com muito carinho e proteção para o seu melhor amigo! 🐶🐱 O Shampoo Neutro 500ml limpa suavemente sem agredir a pele, deixando a pelagem macia, brilhante e perfumada. Visite a Coagro e aproveite esta oferta especial para o seu pet!",
-      "legenda_post": "Hora do banho com muito carinho e proteção para o seu melhor amigo! 🐶🐱 O Shampoo Neutro 500ml limpa suavemente sem agredir a pele, deixando a pelagem macia, brilhante e perfumada. Visite a Coagro e aproveite esta oferta especial para o seu pet!"
+      "legenda_instagram": "Garanta máxima produtividade na sua propriedade com o Conforto e cuidado para o seu pet! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte",
+      "legenda_post": "Garanta máxima produtividade na sua propriedade com o Conforto e cuidado para o seu pet! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte"
     }
   },
   {
@@ -596,21 +516,17 @@
       "nome": "areia",
       "txt": "Areia higiênica para gatos 4kg de 29,90 por 22,90"
     },
-    "ms": 7551,
+    "ms": 26,
     "status": 200,
     "g": {
-      "titulo": "OFERTA ESPECIAL PET",
-      "sub": "Areia Higiênica para Gatos 4kg",
-      "bullets": [
-        "Alta absorção de líquidos",
-        "Controle eficaz de odores",
-        "Máximo conforto ao felino"
-      ],
+      "titulo": "OFERTA PET",
+      "sub": "Conforto e cuidado para o seu pet",
+      "bullets": [],
       "checks": [
         {
           "name": "título ≤ 4 palavras",
           "ok": true,
-          "info": "3 palavras"
+          "info": "2 palavras"
         },
         {
           "name": "subtítulo presente",
@@ -619,8 +535,8 @@
         },
         {
           "name": "exatamente 3 diferenciais",
-          "ok": true,
-          "info": "3"
+          "ok": false,
+          "info": "0"
         },
         {
           "name": "diferenciais ≤ 5 palavras",
@@ -635,7 +551,7 @@
         {
           "name": "produto citado (título/subtítulo)",
           "ok": true,
-          "info": "OFERTA ESPECIAL PET / Areia Higiênica para Gatos 4kg"
+          "info": "OFERTA PET / Conforto e cuidado para o seu pet"
         },
         {
           "name": "SEM linguagem de campo",
@@ -643,37 +559,29 @@
           "info": ""
         }
       ],
-      "pass": true
+      "pass": false
     },
     "raw": {
       "linha": "AGRO",
       "tipo_postagem": "promocao",
       "formato_gerado": "Feed",
       "formato": "feed",
-      "template_layout": "split-vertical",
+      "template_layout": "hero-central",
       "tema": "campo-agro",
-      "prompt_fundo_ia": "Ambiente interno residencial aconchegante, piso de porcelanato claro e limpo, iluminação natural suave entrando pela janela, atmosfera higiênica e acolhedora de lar para pets, fotografia publicitária limpa.",
-      "fundo_imagem": "Ambiente interno residencial aconchegante, piso de porcelanato claro e limpo, iluminação natural suave entrando pela janela, atmosfera higiênica e acolhedora de lar para pets, fotografia publicitária limpa.",
+      "prompt_fundo_ia": "Fotografia profissional agrícola em alta resolução, lavoura viçosa de grãos sob a luz matinal límpida, folhas sadias com orvalho matinal em primeiro plano, horizonte amplo do agronegócio brasileiro, iluminação cinematográfica e profundidade de campo suave.",
+      "fundo_imagem": "Fotografia profissional agrícola em alta resolução, lavoura viçosa de grãos sob a luz matinal límpida, folhas sadias com orvalho matinal em primeiro plano, horizonte amplo do agronegócio brasileiro, iluminação cinematográfica e profundidade de campo suave.",
       "fundo_imagem_url": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80",
       "textos_hero": {
-        "titulo": "OFERTA ESPECIAL PET",
-        "palavra_destaque_ouro": "PET",
-        "subtitulo": "Areia Higiênica para Gatos 4kg"
+        "titulo": "OFERTA PET",
+        "palavra_destaque_ouro": "OFERTA",
+        "subtitulo": "Conforto e cuidado para o seu pet"
       },
-      "diferenciais_tecnicos": [
-        "Alta absorção de líquidos",
-        "Controle eficaz de odores",
-        "Máximo conforto ao felino"
-      ],
+      "diferenciais_tecnicos": [],
       "textos_da_arte": {
-        "titulo_impacto": "OFERTA ESPECIAL PET",
-        "palavra_destaque": "PET",
-        "subtitulo": "Areia Higiênica para Gatos 4kg",
-        "bullets_tecnicos": [
-          "Alta absorção de líquidos",
-          "Controle eficaz de odores",
-          "Máximo conforto ao felino"
-        ],
+        "titulo_impacto": "OFERTA PET",
+        "palavra_destaque": "OFERTA",
+        "subtitulo": "Conforto e cuidado para o seu pet",
+        "bullets_tecnicos": [],
         "cta": "GARANTA JÁ O SEU",
         "modulo_preco": {
           "ativo": true,
@@ -684,18 +592,14 @@
         }
       },
       "caixa_titulo": {
-        "texto": "OFERTA ESPECIAL PET",
-        "palavra_ouro": "PET",
-        "palavra_ouro_destaque": "PET"
+        "texto": "OFERTA PET",
+        "palavra_ouro": "OFERTA",
+        "palavra_ouro_destaque": "OFERTA"
       },
       "caixa_subtitulo": {
-        "texto": "Areia Higiênica para Gatos 4kg"
+        "texto": "Conforto e cuidado para o seu pet"
       },
-      "beneficios_tecnicos": [
-        "Alta absorção de líquidos",
-        "Controle eficaz de odores",
-        "Máximo conforto ao felino"
-      ],
+      "beneficios_tecnicos": [],
       "modulo_preco": {
         "ativo": true,
         "valor_de": "R$ 29,90",
@@ -703,8 +607,8 @@
         "condicao": "",
         "condicoes_pagamento": ""
       },
-      "legenda_instagram": "Mais higiene para a sua casa e todo o conforto que o seu felino merece! 🐱 A Areia Higiênica para Gatos 4kg está com preço imperdível na Coagro: de R$ 29,90 por apenas R$ 22,90. Praticidade na rotina de limpeza e controle eficiente de odores. Passe na Coagro mais próxima ou chame no WhatsApp para garantir!",
-      "legenda_post": "Mais higiene para a sua casa e todo o conforto que o seu felino merece! 🐱 A Areia Higiênica para Gatos 4kg está com preço imperdível na Coagro: de R$ 29,90 por apenas R$ 22,90. Praticidade na rotina de limpeza e controle eficiente de odores. Passe na Coagro mais próxima ou chame no WhatsApp para garantir!"
+      "legenda_instagram": "Garanta máxima produtividade na sua propriedade com o Conforto e cuidado para o seu pet! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte",
+      "legenda_post": "Garanta máxima produtividade na sua propriedade com o Conforto e cuidado para o seu pet! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte"
     }
   },
   {
@@ -714,21 +618,17 @@
       "nome": "petisco",
       "txt": "Petisco bifinho Pedigree cachorro 500g 18,90"
     },
-    "ms": 6806,
+    "ms": 264,
     "status": 200,
     "g": {
-      "titulo": "OFERTA PET PEDIGREE",
-      "sub": "Petisco Bifinho para Cães 500g",
-      "bullets": [
-        "Sabor irresistível para cães",
-        "Ideal para recompensas diárias",
-        "Embalagem econômica de 500g"
-      ],
+      "titulo": "OFERTA PET",
+      "sub": "Nutrição completa para o seu pet",
+      "bullets": [],
       "checks": [
         {
           "name": "título ≤ 4 palavras",
           "ok": true,
-          "info": "3 palavras"
+          "info": "2 palavras"
         },
         {
           "name": "subtítulo presente",
@@ -737,8 +637,8 @@
         },
         {
           "name": "exatamente 3 diferenciais",
-          "ok": true,
-          "info": "3"
+          "ok": false,
+          "info": "0"
         },
         {
           "name": "diferenciais ≤ 5 palavras",
@@ -753,7 +653,7 @@
         {
           "name": "produto citado (título/subtítulo)",
           "ok": true,
-          "info": "OFERTA PET PEDIGREE / Petisco Bifinho para Cães 500g"
+          "info": "OFERTA PET / Nutrição completa para o seu pet"
         },
         {
           "name": "SEM linguagem de campo",
@@ -761,7 +661,7 @@
           "info": ""
         }
       ],
-      "pass": true
+      "pass": false
     },
     "raw": {
       "linha": "AGRO",
@@ -770,28 +670,20 @@
       "formato": "feed",
       "template_layout": "hero-central",
       "tema": "campo-agro",
-      "prompt_fundo_ia": "Ambiente interno acolhedor e iluminado de sala de estar, piso amadeirado claro com desfoque suave ao fundo, iluminação natural suave e atmosfera aconchegante para pets",
-      "fundo_imagem": "Ambiente interno acolhedor e iluminado de sala de estar, piso amadeirado claro com desfoque suave ao fundo, iluminação natural suave e atmosfera aconchegante para pets",
-      "fundo_imagem_url": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80",
+      "prompt_fundo_ia": "Fotografia macro de solo fértil bem estruturado e rico em matéria orgânica com brotos verdes saudáveis emergindo com vigor, iluminação suave do amanhecer e foco seletivo realista.",
+      "fundo_imagem": "Fotografia macro de solo fértil bem estruturado e rico em matéria orgânica com brotos verdes saudáveis emergindo com vigor, iluminação suave do amanhecer e foco seletivo realista.",
+      "fundo_imagem_url": "https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=1200&q=80",
       "textos_hero": {
-        "titulo": "OFERTA PET PEDIGREE",
-        "palavra_destaque_ouro": "PEDIGREE",
-        "subtitulo": "Petisco Bifinho para Cães 500g"
+        "titulo": "OFERTA PET",
+        "palavra_destaque_ouro": "OFERTA",
+        "subtitulo": "Nutrição completa para o seu pet"
       },
-      "diferenciais_tecnicos": [
-        "Sabor irresistível para cães",
-        "Ideal para recompensas diárias",
-        "Embalagem econômica de 500g"
-      ],
+      "diferenciais_tecnicos": [],
       "textos_da_arte": {
-        "titulo_impacto": "OFERTA PET PEDIGREE",
-        "palavra_destaque": "PEDIGREE",
-        "subtitulo": "Petisco Bifinho para Cães 500g",
-        "bullets_tecnicos": [
-          "Sabor irresistível para cães",
-          "Ideal para recompensas diárias",
-          "Embalagem econômica de 500g"
-        ],
+        "titulo_impacto": "OFERTA PET",
+        "palavra_destaque": "OFERTA",
+        "subtitulo": "Nutrição completa para o seu pet",
+        "bullets_tecnicos": [],
         "cta": "CONSULTE DISPONIBILIDADE",
         "modulo_preco": {
           "ativo": true,
@@ -802,18 +694,14 @@
         }
       },
       "caixa_titulo": {
-        "texto": "OFERTA PET PEDIGREE",
-        "palavra_ouro": "PEDIGREE",
-        "palavra_ouro_destaque": "PEDIGREE"
+        "texto": "OFERTA PET",
+        "palavra_ouro": "OFERTA",
+        "palavra_ouro_destaque": "OFERTA"
       },
       "caixa_subtitulo": {
-        "texto": "Petisco Bifinho para Cães 500g"
+        "texto": "Nutrição completa para o seu pet"
       },
-      "beneficios_tecnicos": [
-        "Sabor irresistível para cães",
-        "Ideal para recompensas diárias",
-        "Embalagem econômica de 500g"
-      ],
+      "beneficios_tecnicos": [],
       "modulo_preco": {
         "ativo": true,
         "valor_de": "",
@@ -821,8 +709,8 @@
         "condicao": "",
         "condicoes_pagamento": ""
       },
-      "legenda_instagram": "O agrado que o seu melhor amigo merece! 🐶 O Bifinho Pedigree 500g é perfeito para demonstrar carinho, recompensar bons comportamentos ou simplesmente fazer a alegria do seu cão no dia a dia. Aproveite o preço especial na Coagro e leve esse mimo para casa! 💛🐾",
-      "legenda_post": "O agrado que o seu melhor amigo merece! 🐶 O Bifinho Pedigree 500g é perfeito para demonstrar carinho, recompensar bons comportamentos ou simplesmente fazer a alegria do seu cão no dia a dia. Aproveite o preço especial na Coagro e leve esse mimo para casa! 💛🐾"
+      "legenda_instagram": "Garanta máxima produtividade na sua propriedade com o Nutrição completa para o seu pet! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte",
+      "legenda_post": "Garanta máxima produtividade na sua propriedade com o Nutrição completa para o seu pet! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte"
     }
   },
   {
@@ -832,21 +720,17 @@
       "nome": "caminha",
       "txt": "Caminha pet confortável tamanho M cães 89,90 em 3x"
     },
-    "ms": 7903,
+    "ms": 19,
     "status": 200,
     "g": {
-      "titulo": "CONFORTO PARA SEU PET",
-      "sub": "Cama Macia Tamanho M para Cães",
-      "bullets": [
-        "Máximo conforto e aconchego",
-        "Ideal para cães médios",
-        "Tecido macio e resistente"
-      ],
+      "titulo": "OFERTA PET",
+      "sub": "Conforto e cuidado para o seu pet",
+      "bullets": [],
       "checks": [
         {
           "name": "título ≤ 4 palavras",
           "ok": true,
-          "info": "4 palavras"
+          "info": "2 palavras"
         },
         {
           "name": "subtítulo presente",
@@ -855,8 +739,8 @@
         },
         {
           "name": "exatamente 3 diferenciais",
-          "ok": true,
-          "info": "3"
+          "ok": false,
+          "info": "0"
         },
         {
           "name": "diferenciais ≤ 5 palavras",
@@ -871,7 +755,7 @@
         {
           "name": "produto citado (título/subtítulo)",
           "ok": true,
-          "info": "CONFORTO PARA SEU PET / Cama Macia Tamanho M para Cães"
+          "info": "OFERTA PET / Conforto e cuidado para o seu pet"
         },
         {
           "name": "SEM linguagem de campo",
@@ -879,7 +763,7 @@
           "info": ""
         }
       ],
-      "pass": true
+      "pass": false
     },
     "raw": {
       "linha": "AGRO",
@@ -888,28 +772,20 @@
       "formato": "feed",
       "template_layout": "hero-central",
       "tema": "campo-agro",
-      "prompt_fundo_ia": "Ambiente interno aconchegante de sala de estar moderna, piso de madeira clara, iluminação suave e acolhedora, atmosfera caseira e acolhedora, profundidade de campo suave.",
-      "fundo_imagem": "Ambiente interno aconchegante de sala de estar moderna, piso de madeira clara, iluminação suave e acolhedora, atmosfera caseira e acolhedora, profundidade de campo suave.",
+      "prompt_fundo_ia": "Fotografia profissional agrícola em alta resolução, lavoura viçosa de grãos sob a luz matinal límpida, folhas sadias com orvalho matinal em primeiro plano, horizonte amplo do agronegócio brasileiro, iluminação cinematográfica e profundidade de campo suave.",
+      "fundo_imagem": "Fotografia profissional agrícola em alta resolução, lavoura viçosa de grãos sob a luz matinal límpida, folhas sadias com orvalho matinal em primeiro plano, horizonte amplo do agronegócio brasileiro, iluminação cinematográfica e profundidade de campo suave.",
       "fundo_imagem_url": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80",
       "textos_hero": {
-        "titulo": "CONFORTO PARA SEU PET",
-        "palavra_destaque_ouro": "CONFORTO",
-        "subtitulo": "Cama Macia Tamanho M para Cães"
+        "titulo": "OFERTA PET",
+        "palavra_destaque_ouro": "OFERTA",
+        "subtitulo": "Conforto e cuidado para o seu pet"
       },
-      "diferenciais_tecnicos": [
-        "Máximo conforto e aconchego",
-        "Ideal para cães médios",
-        "Tecido macio e resistente"
-      ],
+      "diferenciais_tecnicos": [],
       "textos_da_arte": {
-        "titulo_impacto": "CONFORTO PARA SEU PET",
-        "palavra_destaque": "CONFORTO",
-        "subtitulo": "Cama Macia Tamanho M para Cães",
-        "bullets_tecnicos": [
-          "Máximo conforto e aconchego",
-          "Ideal para cães médios",
-          "Tecido macio e resistente"
-        ],
+        "titulo_impacto": "OFERTA PET",
+        "palavra_destaque": "OFERTA",
+        "subtitulo": "Conforto e cuidado para o seu pet",
+        "bullets_tecnicos": [],
         "cta": "CONSULTE DISPONIBILIDADE",
         "modulo_preco": {
           "ativo": true,
@@ -920,18 +796,14 @@
         }
       },
       "caixa_titulo": {
-        "texto": "CONFORTO PARA SEU PET",
-        "palavra_ouro": "CONFORTO",
-        "palavra_ouro_destaque": "CONFORTO"
+        "texto": "OFERTA PET",
+        "palavra_ouro": "OFERTA",
+        "palavra_ouro_destaque": "OFERTA"
       },
       "caixa_subtitulo": {
-        "texto": "Cama Macia Tamanho M para Cães"
+        "texto": "Conforto e cuidado para o seu pet"
       },
-      "beneficios_tecnicos": [
-        "Máximo conforto e aconchego",
-        "Ideal para cães médios",
-        "Tecido macio e resistente"
-      ],
+      "beneficios_tecnicos": [],
       "modulo_preco": {
         "ativo": true,
         "valor_de": "",
@@ -939,8 +811,8 @@
         "condicao": "EM 3X",
         "condicoes_pagamento": "EM 3X"
       },
-      "legenda_instagram": "Seu melhor amigo merece todo o aconchego! A Caminha Pet Confortável Tamanho M proporciona momentos de puro relaxamento e bem-estar para o seu cão. Garanta já na Coagro com condições imperdíveis! 🐾❤️",
-      "legenda_post": "Seu melhor amigo merece todo o aconchego! A Caminha Pet Confortável Tamanho M proporciona momentos de puro relaxamento e bem-estar para o seu cão. Garanta já na Coagro com condições imperdíveis! 🐾❤️"
+      "legenda_instagram": "Garanta máxima produtividade na sua propriedade com o Conforto e cuidado para o seu pet! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte",
+      "legenda_post": "Garanta máxima produtividade na sua propriedade com o Conforto e cuidado para o seu pet! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte"
     }
   },
   {
@@ -950,21 +822,17 @@
       "nome": "vermifugo",
       "txt": "Vermífugo Drontal Plus cães 10kg 1 comprimido 39,90"
     },
-    "ms": 8832,
+    "ms": 16,
     "status": 200,
     "g": {
-      "titulo": "OFERTA DRONTAL PLUS",
-      "sub": "Proteção completa contra vermes intestinais",
-      "bullets": [
-        "Dose única para até 10kg",
-        "Elimina vermes redondos e chatos",
-        "Comprimido palatável sabor carne"
-      ],
+      "titulo": "OFERTA PET",
+      "sub": "Proteção contra pulgas e carrapatos",
+      "bullets": [],
       "checks": [
         {
           "name": "título ≤ 4 palavras",
           "ok": true,
-          "info": "3 palavras"
+          "info": "2 palavras"
         },
         {
           "name": "subtítulo presente",
@@ -973,8 +841,8 @@
         },
         {
           "name": "exatamente 3 diferenciais",
-          "ok": true,
-          "info": "3"
+          "ok": false,
+          "info": "0"
         },
         {
           "name": "diferenciais ≤ 5 palavras",
@@ -989,7 +857,7 @@
         {
           "name": "produto citado (título/subtítulo)",
           "ok": true,
-          "info": "OFERTA DRONTAL PLUS / Proteção completa contra vermes intestinais"
+          "info": "OFERTA PET / Proteção contra pulgas e carrapatos"
         },
         {
           "name": "SEM linguagem de campo",
@@ -997,7 +865,7 @@
           "info": ""
         }
       ],
-      "pass": true
+      "pass": false
     },
     "raw": {
       "linha": "AGRO",
@@ -1006,28 +874,20 @@
       "formato": "feed",
       "template_layout": "hero-central",
       "tema": "campo-agro",
-      "prompt_fundo_ia": "Cenário acolhedor de sala de estar moderna e iluminada, piso vinílico amadeirado claro com desfoque suave ao fundo, iluminação natural suave, atmosfera limpa e acolhedora para pets.",
-      "fundo_imagem": "Cenário acolhedor de sala de estar moderna e iluminada, piso vinílico amadeirado claro com desfoque suave ao fundo, iluminação natural suave, atmosfera limpa e acolhedora para pets.",
-      "fundo_imagem_url": "https://images.unsplash.com/photo-1546445317-29f4545e9d53?auto=format&fit=crop&w=1200&q=80",
+      "prompt_fundo_ia": "Fotografia profissional agrícola em alta resolução, lavoura viçosa de grãos sob a luz matinal límpida, folhas sadias com orvalho matinal em primeiro plano, horizonte amplo do agronegócio brasileiro, iluminação cinematográfica e profundidade de campo suave.",
+      "fundo_imagem": "Fotografia profissional agrícola em alta resolução, lavoura viçosa de grãos sob a luz matinal límpida, folhas sadias com orvalho matinal em primeiro plano, horizonte amplo do agronegócio brasileiro, iluminação cinematográfica e profundidade de campo suave.",
+      "fundo_imagem_url": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80",
       "textos_hero": {
-        "titulo": "OFERTA DRONTAL PLUS",
-        "palavra_destaque_ouro": "DRONTAL",
-        "subtitulo": "Proteção completa contra vermes intestinais"
+        "titulo": "OFERTA PET",
+        "palavra_destaque_ouro": "OFERTA",
+        "subtitulo": "Proteção contra pulgas e carrapatos"
       },
-      "diferenciais_tecnicos": [
-        "Dose única para até 10kg",
-        "Elimina vermes redondos e chatos",
-        "Comprimido palatável sabor carne"
-      ],
+      "diferenciais_tecnicos": [],
       "textos_da_arte": {
-        "titulo_impacto": "OFERTA DRONTAL PLUS",
-        "palavra_destaque": "DRONTAL",
-        "subtitulo": "Proteção completa contra vermes intestinais",
-        "bullets_tecnicos": [
-          "Dose única para até 10kg",
-          "Elimina vermes redondos e chatos",
-          "Comprimido palatável sabor carne"
-        ],
+        "titulo_impacto": "OFERTA PET",
+        "palavra_destaque": "OFERTA",
+        "subtitulo": "Proteção contra pulgas e carrapatos",
+        "bullets_tecnicos": [],
         "cta": "CONSULTE DISPONIBILIDADE",
         "modulo_preco": {
           "ativo": true,
@@ -1038,18 +898,14 @@
         }
       },
       "caixa_titulo": {
-        "texto": "OFERTA DRONTAL PLUS",
-        "palavra_ouro": "DRONTAL",
-        "palavra_ouro_destaque": "DRONTAL"
+        "texto": "OFERTA PET",
+        "palavra_ouro": "OFERTA",
+        "palavra_ouro_destaque": "OFERTA"
       },
       "caixa_subtitulo": {
-        "texto": "Proteção completa contra vermes intestinais"
+        "texto": "Proteção contra pulgas e carrapatos"
       },
-      "beneficios_tecnicos": [
-        "Dose única para até 10kg",
-        "Elimina vermes redondos e chatos",
-        "Comprimido palatável sabor carne"
-      ],
+      "beneficios_tecnicos": [],
       "modulo_preco": {
         "ativo": true,
         "valor_de": "",
@@ -1057,8 +913,8 @@
         "condicao": "",
         "condicoes_pagamento": ""
       },
-      "legenda_instagram": "A saúde e o bem-estar do seu cão começam com a prevenção! O Drontal Plus Cães 10kg oferece eficácia comprovada no tratamento e controle das principais verminoses intestinais, com comprimido palatável que facilita a administração. Proteja quem você ama com o cuidado que ele merece. Passe na Coagro e garanta já o do seu pet! 🐶💛",
-      "legenda_post": "A saúde e o bem-estar do seu cão começam com a prevenção! O Drontal Plus Cães 10kg oferece eficácia comprovada no tratamento e controle das principais verminoses intestinais, com comprimido palatável que facilita a administração. Proteja quem você ama com o cuidado que ele merece. Passe na Coagro e garanta já o do seu pet! 🐶💛"
+      "legenda_instagram": "Garanta máxima produtividade na sua propriedade com o Proteção contra pulgas e carrapatos! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte",
+      "legenda_post": "Garanta máxima produtividade na sua propriedade com o Proteção contra pulgas e carrapatos! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte"
     }
   },
   {
@@ -1068,21 +924,17 @@
       "nome": "comedouro",
       "txt": "Comedouro bebedouro automático pet 2 litros 69,90"
     },
-    "ms": 9388,
+    "ms": 17,
     "status": 200,
     "g": {
-      "titulo": "PRATICIDADE PARA SEU PET",
-      "sub": "Comedouro e Bebedouro Automático 2L",
-      "bullets": [
-        "Capacidade total de 2 litros",
-        "Abastecimento contínuo e prático",
-        "Fácil de higienizar"
-      ],
+      "titulo": "OFERTA PET",
+      "sub": "Conforto e cuidado para o seu pet",
+      "bullets": [],
       "checks": [
         {
           "name": "título ≤ 4 palavras",
           "ok": true,
-          "info": "4 palavras"
+          "info": "2 palavras"
         },
         {
           "name": "subtítulo presente",
@@ -1091,8 +943,8 @@
         },
         {
           "name": "exatamente 3 diferenciais",
-          "ok": true,
-          "info": "3"
+          "ok": false,
+          "info": "0"
         },
         {
           "name": "diferenciais ≤ 5 palavras",
@@ -1107,7 +959,7 @@
         {
           "name": "produto citado (título/subtítulo)",
           "ok": true,
-          "info": "PRATICIDADE PARA SEU PET / Comedouro e Bebedouro Automático 2L"
+          "info": "OFERTA PET / Conforto e cuidado para o seu pet"
         },
         {
           "name": "SEM linguagem de campo",
@@ -1115,7 +967,7 @@
           "info": ""
         }
       ],
-      "pass": true
+      "pass": false
     },
     "raw": {
       "linha": "AGRO",
@@ -1124,28 +976,20 @@
       "formato": "feed",
       "template_layout": "hero-central",
       "tema": "campo-agro",
-      "prompt_fundo_ia": "Ambiente interno moderno e aconchegante de sala de estar residencial, piso de madeira clara, iluminação suave e natural com desfoque de fundo elegante.",
-      "fundo_imagem": "Ambiente interno moderno e aconchegante de sala de estar residencial, piso de madeira clara, iluminação suave e natural com desfoque de fundo elegante.",
+      "prompt_fundo_ia": "Fotografia profissional agrícola em alta resolução, lavoura viçosa de grãos sob a luz matinal límpida, folhas sadias com orvalho matinal em primeiro plano, horizonte amplo do agronegócio brasileiro, iluminação cinematográfica e profundidade de campo suave.",
+      "fundo_imagem": "Fotografia profissional agrícola em alta resolução, lavoura viçosa de grãos sob a luz matinal límpida, folhas sadias com orvalho matinal em primeiro plano, horizonte amplo do agronegócio brasileiro, iluminação cinematográfica e profundidade de campo suave.",
       "fundo_imagem_url": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80",
       "textos_hero": {
-        "titulo": "PRATICIDADE PARA SEU PET",
-        "palavra_destaque_ouro": "PET",
-        "subtitulo": "Comedouro e Bebedouro Automático 2L"
+        "titulo": "OFERTA PET",
+        "palavra_destaque_ouro": "OFERTA",
+        "subtitulo": "Conforto e cuidado para o seu pet"
       },
-      "diferenciais_tecnicos": [
-        "Capacidade total de 2 litros",
-        "Abastecimento contínuo e prático",
-        "Fácil de higienizar"
-      ],
+      "diferenciais_tecnicos": [],
       "textos_da_arte": {
-        "titulo_impacto": "PRATICIDADE PARA SEU PET",
-        "palavra_destaque": "PET",
-        "subtitulo": "Comedouro e Bebedouro Automático 2L",
-        "bullets_tecnicos": [
-          "Capacidade total de 2 litros",
-          "Abastecimento contínuo e prático",
-          "Fácil de higienizar"
-        ],
+        "titulo_impacto": "OFERTA PET",
+        "palavra_destaque": "OFERTA",
+        "subtitulo": "Conforto e cuidado para o seu pet",
+        "bullets_tecnicos": [],
         "cta": "CONSULTE DISPONIBILIDADE",
         "modulo_preco": {
           "ativo": true,
@@ -1156,18 +1000,14 @@
         }
       },
       "caixa_titulo": {
-        "texto": "PRATICIDADE PARA SEU PET",
-        "palavra_ouro": "PET",
-        "palavra_ouro_destaque": "PET"
+        "texto": "OFERTA PET",
+        "palavra_ouro": "OFERTA",
+        "palavra_ouro_destaque": "OFERTA"
       },
       "caixa_subtitulo": {
-        "texto": "Comedouro e Bebedouro Automático 2L"
+        "texto": "Conforto e cuidado para o seu pet"
       },
-      "beneficios_tecnicos": [
-        "Capacidade total de 2 litros",
-        "Abastecimento contínuo e prático",
-        "Fácil de higienizar"
-      ],
+      "beneficios_tecnicos": [],
       "modulo_preco": {
         "ativo": true,
         "valor_de": "",
@@ -1175,8 +1015,8 @@
         "condicao": "",
         "condicoes_pagamento": ""
       },
-      "legenda_instagram": "Mais conforto e autonomia para o seu companheiro de quatro patas! O Comedouro e Bebedouro Automático de 2 Litros garante alimento e água sempre acessíveis na medida certa. Passe na Coagro e garanta já o seu por apenas R$ 69,90!",
-      "legenda_post": "Mais conforto e autonomia para o seu companheiro de quatro patas! O Comedouro e Bebedouro Automático de 2 Litros garante alimento e água sempre acessíveis na medida certa. Passe na Coagro e garanta já o seu por apenas R$ 69,90!"
+      "legenda_instagram": "Garanta máxima produtividade na sua propriedade com o Conforto e cuidado para o seu pet! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte",
+      "legenda_post": "Garanta máxima produtividade na sua propriedade com o Conforto e cuidado para o seu pet! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte"
     }
   },
   {
@@ -1186,21 +1026,21 @@
       "nome": "triturador",
       "txt": "Triturador TR30 Tramontina 2HP de 1992 por 1575"
     },
-    "ms": 72177,
+    "ms": 68,
     "status": 200,
     "g": {
-      "titulo": "POTÊNCIA E OFERTA IMBATÍVEL",
-      "sub": "Triturador TR30 Tramontina 2HP",
+      "titulo": "OFERTA ESPECIAL",
+      "sub": "Alta potência e eficiência no campo",
       "bullets": [
-        "Potente motor de 2HP",
-        "Alta capacidade de corte",
-        "Estrutura robusta e durável"
+        "Motor 2HP de alta potência",
+        "Saída lateral direcionável",
+        "Corte e trituração precisa"
       ],
       "checks": [
         {
           "name": "título ≤ 4 palavras",
           "ok": true,
-          "info": "4 palavras"
+          "info": "2 palavras"
         },
         {
           "name": "subtítulo presente",
@@ -1225,7 +1065,7 @@
         {
           "name": "produto citado (título/subtítulo)",
           "ok": true,
-          "info": "POTÊNCIA E OFERTA IMBATÍVEL / Triturador TR30 Tramontina 2HP"
+          "info": "OFERTA ESPECIAL / Alta potência e eficiência no campo"
         },
         {
           "name": "SEM linguagem pet",
@@ -1242,27 +1082,27 @@
       "formato": "feed",
       "template_layout": "split-vertical",
       "tema": "campo-agro",
-      "prompt_fundo_ia": "Fotografia realista de galpão agroindustrial limpo e bem iluminado, piso de concreto industrial, iluminação lateral dourada natural e fundo suavemente desfocado com ambiente de fazenda.",
-      "fundo_imagem": "Fotografia realista de galpão agroindustrial limpo e bem iluminado, piso de concreto industrial, iluminação lateral dourada natural e fundo suavemente desfocado com ambiente de fazenda.",
+      "prompt_fundo_ia": "Fotografia profissional agrícola em alta resolução, área de manejo e corte de capim forrageiro verde viçoso e denso, iluminação solar límpida com horizonte rural ao fundo, estética de maquinário e produtividade no campo, profundidade de campo cinematográfica.",
+      "fundo_imagem": "Fotografia profissional agrícola em alta resolução, área de manejo e corte de capim forrageiro verde viçoso e denso, iluminação solar límpida com horizonte rural ao fundo, estética de maquinário e produtividade no campo, profundidade de campo cinematográfica.",
       "fundo_imagem_url": "https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=1200&q=80",
       "textos_hero": {
-        "titulo": "POTÊNCIA E OFERTA IMBATÍVEL",
+        "titulo": "OFERTA ESPECIAL",
         "palavra_destaque_ouro": "OFERTA",
-        "subtitulo": "Triturador TR30 Tramontina 2HP"
+        "subtitulo": "Alta potência e eficiência no campo"
       },
       "diferenciais_tecnicos": [
-        "Potente motor de 2HP",
-        "Alta capacidade de corte",
-        "Estrutura robusta e durável"
+        "Motor 2HP de alta potência",
+        "Saída lateral direcionável",
+        "Corte e trituração precisa"
       ],
       "textos_da_arte": {
-        "titulo_impacto": "POTÊNCIA E OFERTA IMBATÍVEL",
+        "titulo_impacto": "OFERTA ESPECIAL",
         "palavra_destaque": "OFERTA",
-        "subtitulo": "Triturador TR30 Tramontina 2HP",
+        "subtitulo": "Alta potência e eficiência no campo",
         "bullets_tecnicos": [
-          "Potente motor de 2HP",
-          "Alta capacidade de corte",
-          "Estrutura robusta e durável"
+          "Motor 2HP de alta potência",
+          "Saída lateral direcionável",
+          "Corte e trituração precisa"
         ],
         "cta": "GARANTA JÁ O SEU",
         "modulo_preco": {
@@ -1274,17 +1114,17 @@
         }
       },
       "caixa_titulo": {
-        "texto": "POTÊNCIA E OFERTA IMBATÍVEL",
+        "texto": "OFERTA ESPECIAL",
         "palavra_ouro": "OFERTA",
         "palavra_ouro_destaque": "OFERTA"
       },
       "caixa_subtitulo": {
-        "texto": "Triturador TR30 Tramontina 2HP"
+        "texto": "Alta potência e eficiência no campo"
       },
       "beneficios_tecnicos": [
-        "Potente motor de 2HP",
-        "Alta capacidade de corte",
-        "Estrutura robusta e durável"
+        "Motor 2HP de alta potência",
+        "Saída lateral direcionável",
+        "Corte e trituração precisa"
       ],
       "modulo_preco": {
         "ativo": true,
@@ -1293,8 +1133,8 @@
         "condicao": "",
         "condicoes_pagamento": ""
       },
-      "legenda_instagram": "Mais eficiência e produtividade na sua rotina no campo! O Triturador TR30 Tramontina conta com motor potente de 2HP para triturar forragens e resíduos com total agilidade e economia. Aproveite nossa condição especial: de R$ 1.992,00 por apenas R$ 1.575,00. Passe na Coagro Agro mais próxima ou fale com a nossa equipe! #Coagro #Tramontina #Agro #Produtividade #EquipamentosAgricolas",
-      "legenda_post": "Mais eficiência e produtividade na sua rotina no campo! O Triturador TR30 Tramontina conta com motor potente de 2HP para triturar forragens e resíduos com total agilidade e economia. Aproveite nossa condição especial: de R$ 1.992,00 por apenas R$ 1.575,00. Passe na Coagro Agro mais próxima ou fale com a nossa equipe! #Coagro #Tramontina #Agro #Produtividade #EquipamentosAgricolas"
+      "legenda_instagram": "Garanta máxima produtividade na sua propriedade com o Alta potência e eficiência no campo! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte",
+      "legenda_post": "Garanta máxima produtividade na sua propriedade com o Alta potência e eficiência no campo! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte"
     }
   },
   {
@@ -1304,21 +1144,21 @@
       "nome": "pulverizador",
       "txt": "Pulverizador costal Jacto PJH 20 litros 489,90"
     },
-    "ms": 6731,
+    "ms": 68,
     "status": 200,
     "g": {
-      "titulo": "OFERTA PULVERIZADOR JACTO",
-      "sub": "Modelo Costal PJH de 20L",
+      "titulo": "OFERTA ESPECIAL",
+      "sub": "Alta potência e eficiência no campo",
       "bullets": [
-        "Capacidade para 20 litros",
-        "Câmara de latão resistente",
-        "Máxima eficiência no campo"
+        "Tanque ergonômico reforçado",
+        "Pressão constante e uniforme",
+        "Maior autonomia por aplicação"
       ],
       "checks": [
         {
           "name": "título ≤ 4 palavras",
           "ok": true,
-          "info": "3 palavras"
+          "info": "2 palavras"
         },
         {
           "name": "subtítulo presente",
@@ -1343,7 +1183,7 @@
         {
           "name": "produto citado (título/subtítulo)",
           "ok": true,
-          "info": "OFERTA PULVERIZADOR JACTO / Modelo Costal PJH de 20L"
+          "info": "OFERTA ESPECIAL / Alta potência e eficiência no campo"
         },
         {
           "name": "SEM linguagem pet",
@@ -1360,27 +1200,27 @@
       "formato": "feed",
       "template_layout": "split-vertical",
       "tema": "campo-agro",
-      "prompt_fundo_ia": "Piso de galpão agrícola rústico com iluminação lateral suave, lavoura ensolarada ao fundo com profundidade de campo cinematográfica, atmosfera limpa e profissional do agronegócio.",
-      "fundo_imagem": "Piso de galpão agrícola rústico com iluminação lateral suave, lavoura ensolarada ao fundo com profundidade de campo cinematográfica, atmosfera limpa e profissional do agronegócio.",
-      "fundo_imagem_url": "https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=1200&q=80",
+      "prompt_fundo_ia": "Fotografia profissional agrícola em alta resolução, lavoura viçosa de grãos sob iluminação solar suave, folhas sadias em primeiro plano com orvalho, campo verde com profundidade de campo cinematográfica.",
+      "fundo_imagem": "Fotografia profissional agrícola em alta resolução, lavoura viçosa de grãos sob iluminação solar suave, folhas sadias em primeiro plano com orvalho, campo verde com profundidade de campo cinematográfica.",
+      "fundo_imagem_url": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80",
       "textos_hero": {
-        "titulo": "OFERTA PULVERIZADOR JACTO",
-        "palavra_destaque_ouro": "JACTO",
-        "subtitulo": "Modelo Costal PJH de 20L"
+        "titulo": "OFERTA ESPECIAL",
+        "palavra_destaque_ouro": "OFERTA",
+        "subtitulo": "Alta potência e eficiência no campo"
       },
       "diferenciais_tecnicos": [
-        "Capacidade para 20 litros",
-        "Câmara de latão resistente",
-        "Máxima eficiência no campo"
+        "Tanque ergonômico reforçado",
+        "Pressão constante e uniforme",
+        "Maior autonomia por aplicação"
       ],
       "textos_da_arte": {
-        "titulo_impacto": "OFERTA PULVERIZADOR JACTO",
-        "palavra_destaque": "JACTO",
-        "subtitulo": "Modelo Costal PJH de 20L",
+        "titulo_impacto": "OFERTA ESPECIAL",
+        "palavra_destaque": "OFERTA",
+        "subtitulo": "Alta potência e eficiência no campo",
         "bullets_tecnicos": [
-          "Capacidade para 20 litros",
-          "Câmara de latão resistente",
-          "Máxima eficiência no campo"
+          "Tanque ergonômico reforçado",
+          "Pressão constante e uniforme",
+          "Maior autonomia por aplicação"
         ],
         "cta": "CONSULTE DISPONIBILIDADE",
         "modulo_preco": {
@@ -1392,17 +1232,17 @@
         }
       },
       "caixa_titulo": {
-        "texto": "OFERTA PULVERIZADOR JACTO",
-        "palavra_ouro": "JACTO",
-        "palavra_ouro_destaque": "JACTO"
+        "texto": "OFERTA ESPECIAL",
+        "palavra_ouro": "OFERTA",
+        "palavra_ouro_destaque": "OFERTA"
       },
       "caixa_subtitulo": {
-        "texto": "Modelo Costal PJH de 20L"
+        "texto": "Alta potência e eficiência no campo"
       },
       "beneficios_tecnicos": [
-        "Capacidade para 20 litros",
-        "Câmara de latão resistente",
-        "Máxima eficiência no campo"
+        "Tanque ergonômico reforçado",
+        "Pressão constante e uniforme",
+        "Maior autonomia por aplicação"
       ],
       "modulo_preco": {
         "ativo": true,
@@ -1411,8 +1251,8 @@
         "condicao": "",
         "condicoes_pagamento": ""
       },
-      "legenda_instagram": "Mais eficiência e durabilidade na lida do campo! O Pulverizador Costal Jacto PJH 20L é sinônimo de resistência e precisão na aplicação. Aproveite essa condição especial e garanta já o seu na Coagro Agro!",
-      "legenda_post": "Mais eficiência e durabilidade na lida do campo! O Pulverizador Costal Jacto PJH 20L é sinônimo de resistência e precisão na aplicação. Aproveite essa condição especial e garanta já o seu na Coagro Agro!"
+      "legenda_instagram": "Garanta máxima produtividade na sua propriedade com o Alta potência e eficiência no campo! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte",
+      "legenda_post": "Garanta máxima produtividade na sua propriedade com o Alta potência e eficiência no campo! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte"
     }
   },
   {
@@ -1422,21 +1262,17 @@
       "nome": "semente",
       "txt": "Semente de capim Brachiaria Marandu 5kg 74,90"
     },
-    "ms": 13006,
+    "ms": 69,
     "status": 200,
     "g": {
-      "titulo": "PASTAGEM DE ALTO RENDIMENTO",
-      "sub": "Semente Brachiaria Brizantha Marandu 5kg",
-      "bullets": [
-        "Alta germinação e pureza",
-        "Excelente valor nutricional",
-        "Rápida cobertura do solo"
-      ],
+      "titulo": "OFERTA ESPECIAL",
+      "sub": "Germinação vigorosa e pastagem densa",
+      "bullets": [],
       "checks": [
         {
           "name": "título ≤ 4 palavras",
           "ok": true,
-          "info": "4 palavras"
+          "info": "2 palavras"
         },
         {
           "name": "subtítulo presente",
@@ -1445,8 +1281,8 @@
         },
         {
           "name": "exatamente 3 diferenciais",
-          "ok": true,
-          "info": "3"
+          "ok": false,
+          "info": "0"
         },
         {
           "name": "diferenciais ≤ 5 palavras",
@@ -1461,7 +1297,7 @@
         {
           "name": "produto citado (título/subtítulo)",
           "ok": true,
-          "info": "PASTAGEM DE ALTO RENDIMENTO / Semente Brachiaria Brizantha Marandu 5kg"
+          "info": "OFERTA ESPECIAL / Germinação vigorosa e pastagem densa"
         },
         {
           "name": "SEM linguagem pet",
@@ -1469,37 +1305,29 @@
           "info": ""
         }
       ],
-      "pass": true
+      "pass": false
     },
     "raw": {
       "linha": "AGRO",
       "tipo_postagem": "preco-unico",
       "formato_gerado": "Feed",
       "formato": "feed",
-      "template_layout": "split-vertical",
+      "template_layout": "hero-central",
       "tema": "campo-agro",
-      "prompt_fundo_ia": "Cenário fotográfico rural realista com pastagem verde viçosa sob luz suave da manhã, profundidade de campo cinematográfica com fazenda e gado ao longe",
-      "fundo_imagem": "Cenário fotográfico rural realista com pastagem verde viçosa sob luz suave da manhã, profundidade de campo cinematográfica com fazenda e gado ao longe",
-      "fundo_imagem_url": "https://images.unsplash.com/photo-1546445317-29f4545e9d53?auto=format&fit=crop&w=1200&q=80",
+      "prompt_fundo_ia": "Fotografia em ângulo aberto de pastagem pura e uniforme de capim Brachiaria verdejante, textura vegetal rica e densa, raios de sol suaves iluminando a formação do pasto com horizonte rural límpido.",
+      "fundo_imagem": "Fotografia em ângulo aberto de pastagem pura e uniforme de capim Brachiaria verdejante, textura vegetal rica e densa, raios de sol suaves iluminando a formação do pasto com horizonte rural límpido.",
+      "fundo_imagem_url": "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1200&q=80",
       "textos_hero": {
-        "titulo": "PASTAGEM DE ALTO RENDIMENTO",
-        "palavra_destaque_ouro": "RENDIMENTO",
-        "subtitulo": "Semente Brachiaria Brizantha Marandu 5kg"
+        "titulo": "OFERTA ESPECIAL",
+        "palavra_destaque_ouro": "OFERTA",
+        "subtitulo": "Germinação vigorosa e pastagem densa"
       },
-      "diferenciais_tecnicos": [
-        "Alta germinação e pureza",
-        "Excelente valor nutricional",
-        "Rápida cobertura do solo"
-      ],
+      "diferenciais_tecnicos": [],
       "textos_da_arte": {
-        "titulo_impacto": "PASTAGEM DE ALTO RENDIMENTO",
-        "palavra_destaque": "RENDIMENTO",
-        "subtitulo": "Semente Brachiaria Brizantha Marandu 5kg",
-        "bullets_tecnicos": [
-          "Alta germinação e pureza",
-          "Excelente valor nutricional",
-          "Rápida cobertura do solo"
-        ],
+        "titulo_impacto": "OFERTA ESPECIAL",
+        "palavra_destaque": "OFERTA",
+        "subtitulo": "Germinação vigorosa e pastagem densa",
+        "bullets_tecnicos": [],
         "cta": "CONSULTE DISPONIBILIDADE",
         "modulo_preco": {
           "ativo": true,
@@ -1510,18 +1338,14 @@
         }
       },
       "caixa_titulo": {
-        "texto": "PASTAGEM DE ALTO RENDIMENTO",
-        "palavra_ouro": "RENDIMENTO",
-        "palavra_ouro_destaque": "RENDIMENTO"
+        "texto": "OFERTA ESPECIAL",
+        "palavra_ouro": "OFERTA",
+        "palavra_ouro_destaque": "OFERTA"
       },
       "caixa_subtitulo": {
-        "texto": "Semente Brachiaria Brizantha Marandu 5kg"
+        "texto": "Germinação vigorosa e pastagem densa"
       },
-      "beneficios_tecnicos": [
-        "Alta germinação e pureza",
-        "Excelente valor nutricional",
-        "Rápida cobertura do solo"
-      ],
+      "beneficios_tecnicos": [],
       "modulo_preco": {
         "ativo": true,
         "valor_de": "",
@@ -1529,8 +1353,8 @@
         "condicao": "",
         "condicoes_pagamento": ""
       },
-      "legenda_instagram": "Garanta a melhor formação de pasto para o seu rebanho! A Brachiaria Marandu oferece excelente produção de massa verde, alta palatabilidade e resistência. Aproveite as melhores condições para turbinar sua pastagem na Coagro. Visite nossa loja ou fale conosco pelo WhatsApp!",
-      "legenda_post": "Garanta a melhor formação de pasto para o seu rebanho! A Brachiaria Marandu oferece excelente produção de massa verde, alta palatabilidade e resistência. Aproveite as melhores condições para turbinar sua pastagem na Coagro. Visite nossa loja ou fale conosco pelo WhatsApp!"
+      "legenda_instagram": "Garanta máxima produtividade na sua propriedade com o Germinação vigorosa e pastagem densa! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte",
+      "legenda_post": "Garanta máxima produtividade na sua propriedade com o Germinação vigorosa e pastagem densa! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte"
     }
   },
   {
@@ -1540,21 +1364,17 @@
       "nome": "adubo",
       "txt": "Fertilizante NPK 20-05-20 saco 50kg 189"
     },
-    "ms": 8330,
+    "ms": 21,
     "status": 200,
     "g": {
-      "titulo": "OFERTA FERTILIZANTE NPK",
-      "sub": "Fórmula 20-05-20 para alto rendimento",
-      "bullets": [
-        "Nutrição equilibrada para lavoura",
-        "Fórmula concentrada 20-05-20",
-        "Saco reforçado com 50kg"
-      ],
+      "titulo": "OFERTA ESPECIAL",
+      "sub": "Nutrição de solo para alta produtividade",
+      "bullets": [],
       "checks": [
         {
           "name": "título ≤ 4 palavras",
           "ok": true,
-          "info": "3 palavras"
+          "info": "2 palavras"
         },
         {
           "name": "subtítulo presente",
@@ -1563,8 +1383,8 @@
         },
         {
           "name": "exatamente 3 diferenciais",
-          "ok": true,
-          "info": "3"
+          "ok": false,
+          "info": "0"
         },
         {
           "name": "diferenciais ≤ 5 palavras",
@@ -1579,7 +1399,7 @@
         {
           "name": "produto citado (título/subtítulo)",
           "ok": true,
-          "info": "OFERTA FERTILIZANTE NPK / Fórmula 20-05-20 para alto rendimento"
+          "info": "OFERTA ESPECIAL / Nutrição de solo para alta produtividade"
         },
         {
           "name": "SEM linguagem pet",
@@ -1587,37 +1407,29 @@
           "info": ""
         }
       ],
-      "pass": true
+      "pass": false
     },
     "raw": {
       "linha": "AGRO",
       "tipo_postagem": "promocao",
       "formato_gerado": "Feed",
       "formato": "feed",
-      "template_layout": "split-vertical",
+      "template_layout": "hero-central",
       "tema": "campo-agro",
-      "prompt_fundo_ia": "Fotografia publicitária de lavoura verde e solo fértil ao amanhecer, iluminação natural dourada suave, textura de terra arada ao fundo com desfoque profissional.",
-      "fundo_imagem": "Fotografia publicitária de lavoura verde e solo fértil ao amanhecer, iluminação natural dourada suave, textura de terra arada ao fundo com desfoque profissional.",
+      "prompt_fundo_ia": "Fotografia macro de solo fértil bem estruturado e rico em matéria orgânica com brotos verdes saudáveis emergindo com vigor, iluminação suave do amanhecer e foco seletivo realista.",
+      "fundo_imagem": "Fotografia macro de solo fértil bem estruturado e rico em matéria orgânica com brotos verdes saudáveis emergindo com vigor, iluminação suave do amanhecer e foco seletivo realista.",
       "fundo_imagem_url": "https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=1200&q=80",
       "textos_hero": {
-        "titulo": "OFERTA FERTILIZANTE NPK",
-        "palavra_destaque_ouro": "NPK",
-        "subtitulo": "Fórmula 20-05-20 para alto rendimento"
+        "titulo": "OFERTA ESPECIAL",
+        "palavra_destaque_ouro": "OFERTA",
+        "subtitulo": "Nutrição de solo para alta produtividade"
       },
-      "diferenciais_tecnicos": [
-        "Nutrição equilibrada para lavoura",
-        "Fórmula concentrada 20-05-20",
-        "Saco reforçado com 50kg"
-      ],
+      "diferenciais_tecnicos": [],
       "textos_da_arte": {
-        "titulo_impacto": "OFERTA FERTILIZANTE NPK",
-        "palavra_destaque": "NPK",
-        "subtitulo": "Fórmula 20-05-20 para alto rendimento",
-        "bullets_tecnicos": [
-          "Nutrição equilibrada para lavoura",
-          "Fórmula concentrada 20-05-20",
-          "Saco reforçado com 50kg"
-        ],
+        "titulo_impacto": "OFERTA ESPECIAL",
+        "palavra_destaque": "OFERTA",
+        "subtitulo": "Nutrição de solo para alta produtividade",
+        "bullets_tecnicos": [],
         "cta": "GARANTA JÁ O SEU",
         "modulo_preco": {
           "ativo": true,
@@ -1628,18 +1440,14 @@
         }
       },
       "caixa_titulo": {
-        "texto": "OFERTA FERTILIZANTE NPK",
-        "palavra_ouro": "NPK",
-        "palavra_ouro_destaque": "NPK"
+        "texto": "OFERTA ESPECIAL",
+        "palavra_ouro": "OFERTA",
+        "palavra_ouro_destaque": "OFERTA"
       },
       "caixa_subtitulo": {
-        "texto": "Fórmula 20-05-20 para alto rendimento"
+        "texto": "Nutrição de solo para alta produtividade"
       },
-      "beneficios_tecnicos": [
-        "Nutrição equilibrada para lavoura",
-        "Fórmula concentrada 20-05-20",
-        "Saco reforçado com 50kg"
-      ],
+      "beneficios_tecnicos": [],
       "modulo_preco": {
         "ativo": true,
         "valor_de": "R$ 20,00",
@@ -1647,8 +1455,8 @@
         "condicao": "",
         "condicoes_pagamento": ""
       },
-      "legenda_instagram": "Potencialize a produtividade da sua lavoura com o Fertilizante NPK 20-05-20! Nutrição balanceada e alta performance para o desenvolvimento vigoroso da sua plantação. Garanta já o seu na Coagro Agro mais próxima!",
-      "legenda_post": "Potencialize a produtividade da sua lavoura com o Fertilizante NPK 20-05-20! Nutrição balanceada e alta performance para o desenvolvimento vigoroso da sua plantação. Garanta já o seu na Coagro Agro mais próxima!"
+      "legenda_instagram": "Garanta máxima produtividade na sua propriedade com o Nutrição de solo para alta produtividade! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte",
+      "legenda_post": "Garanta máxima produtividade na sua propriedade com o Nutrição de solo para alta produtividade! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte"
     }
   },
   {
@@ -1658,21 +1466,17 @@
       "nome": "rocadeira",
       "txt": "Roçadeira Stihl FS 220 de 2890 por 2490 em 10x"
     },
-    "ms": 7328,
+    "ms": 18,
     "status": 200,
     "g": {
-      "titulo": "FORÇA STIHL NO CAMPO",
-      "sub": "Roçadeira FS 220 para serviço pesado",
-      "bullets": [
-        "Alta potência e durabilidade",
-        "Ideal para corte pesado",
-        "Excelente ergonomia e rendimento"
-      ],
+      "titulo": "OFERTA ESPECIAL",
+      "sub": "Alta potência e eficiência no campo",
+      "bullets": [],
       "checks": [
         {
           "name": "título ≤ 4 palavras",
           "ok": true,
-          "info": "4 palavras"
+          "info": "2 palavras"
         },
         {
           "name": "subtítulo presente",
@@ -1681,8 +1485,8 @@
         },
         {
           "name": "exatamente 3 diferenciais",
-          "ok": true,
-          "info": "3"
+          "ok": false,
+          "info": "0"
         },
         {
           "name": "diferenciais ≤ 5 palavras",
@@ -1697,7 +1501,7 @@
         {
           "name": "produto citado (título/subtítulo)",
           "ok": true,
-          "info": "FORÇA STIHL NO CAMPO / Roçadeira FS 220 para serviço pesado"
+          "info": "OFERTA ESPECIAL / Alta potência e eficiência no campo"
         },
         {
           "name": "SEM linguagem pet",
@@ -1705,7 +1509,7 @@
           "info": ""
         }
       ],
-      "pass": true
+      "pass": false
     },
     "raw": {
       "linha": "AGRO",
@@ -1714,28 +1518,20 @@
       "formato": "feed",
       "template_layout": "split-vertical",
       "tema": "campo-agro",
-      "prompt_fundo_ia": "Cenário rural em galpão de fazenda rústico, piso de concreto escovado com detalhes de grama ao fundo, iluminação natural suave de manhã, foco e profundidade de campo cinematográfica",
-      "fundo_imagem": "Cenário rural em galpão de fazenda rústico, piso de concreto escovado com detalhes de grama ao fundo, iluminação natural suave de manhã, foco e profundidade de campo cinematográfica",
-      "fundo_imagem_url": "https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=1200&q=80",
+      "prompt_fundo_ia": "Fotografia profissional agrícola em alta resolução, lavoura viçosa de grãos sob a luz matinal límpida, folhas sadias com orvalho matinal em primeiro plano, horizonte amplo do agronegócio brasileiro, iluminação cinematográfica e profundidade de campo suave.",
+      "fundo_imagem": "Fotografia profissional agrícola em alta resolução, lavoura viçosa de grãos sob a luz matinal límpida, folhas sadias com orvalho matinal em primeiro plano, horizonte amplo do agronegócio brasileiro, iluminação cinematográfica e profundidade de campo suave.",
+      "fundo_imagem_url": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80",
       "textos_hero": {
-        "titulo": "FORÇA STIHL NO CAMPO",
-        "palavra_destaque_ouro": "STIHL",
-        "subtitulo": "Roçadeira FS 220 para serviço pesado"
+        "titulo": "OFERTA ESPECIAL",
+        "palavra_destaque_ouro": "OFERTA",
+        "subtitulo": "Alta potência e eficiência no campo"
       },
-      "diferenciais_tecnicos": [
-        "Alta potência e durabilidade",
-        "Ideal para corte pesado",
-        "Excelente ergonomia e rendimento"
-      ],
+      "diferenciais_tecnicos": [],
       "textos_da_arte": {
-        "titulo_impacto": "FORÇA STIHL NO CAMPO",
-        "palavra_destaque": "STIHL",
-        "subtitulo": "Roçadeira FS 220 para serviço pesado",
-        "bullets_tecnicos": [
-          "Alta potência e durabilidade",
-          "Ideal para corte pesado",
-          "Excelente ergonomia e rendimento"
-        ],
+        "titulo_impacto": "OFERTA ESPECIAL",
+        "palavra_destaque": "OFERTA",
+        "subtitulo": "Alta potência e eficiência no campo",
+        "bullets_tecnicos": [],
         "cta": "GARANTA JÁ O SEU",
         "modulo_preco": {
           "ativo": true,
@@ -1746,18 +1542,14 @@
         }
       },
       "caixa_titulo": {
-        "texto": "FORÇA STIHL NO CAMPO",
-        "palavra_ouro": "STIHL",
-        "palavra_ouro_destaque": "STIHL"
+        "texto": "OFERTA ESPECIAL",
+        "palavra_ouro": "OFERTA",
+        "palavra_ouro_destaque": "OFERTA"
       },
       "caixa_subtitulo": {
-        "texto": "Roçadeira FS 220 para serviço pesado"
+        "texto": "Alta potência e eficiência no campo"
       },
-      "beneficios_tecnicos": [
-        "Alta potência e durabilidade",
-        "Ideal para corte pesado",
-        "Excelente ergonomia e rendimento"
-      ],
+      "beneficios_tecnicos": [],
       "modulo_preco": {
         "ativo": true,
         "valor_de": "R$ 2.890,00",
@@ -1765,8 +1557,8 @@
         "condicao": "EM 10X",
         "condicoes_pagamento": "EM 10X"
       },
-      "legenda_instagram": "Mais potência e produtividade para a manutenção da sua propriedade! A Roçadeira Stihl FS 220 entrega alto rendimento para as tarefas mais exigentes no campo. Aproveite as condições especiais na Coagro Agro: de R$ 2.890,00 por apenas R$ 2.490,00 em até 10x. Visite uma de nossas unidades ou fale com nossos consultores!",
-      "legenda_post": "Mais potência e produtividade para a manutenção da sua propriedade! A Roçadeira Stihl FS 220 entrega alto rendimento para as tarefas mais exigentes no campo. Aproveite as condições especiais na Coagro Agro: de R$ 2.890,00 por apenas R$ 2.490,00 em até 10x. Visite uma de nossas unidades ou fale com nossos consultores!"
+      "legenda_instagram": "Garanta máxima produtividade na sua propriedade com o Alta potência e eficiência no campo! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte",
+      "legenda_post": "Garanta máxima produtividade na sua propriedade com o Alta potência e eficiência no campo! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte"
     }
   },
   {
@@ -1776,21 +1568,17 @@
       "nome": "arame",
       "txt": "Arame farpado Belgo 500m rolo 349"
     },
-    "ms": 147686,
+    "ms": 19,
     "status": 200,
     "g": {
-      "titulo": "ARAME FARPADO BELGO",
-      "sub": "Rolo de 500 metros para cercamento resistente",
-      "bullets": [
-        "Rolo com 500 metros",
-        "Alta resistência contra impacto",
-        "Galvanização de longa durabilidade"
-      ],
+      "titulo": "OFERTA ESPECIAL",
+      "sub": "Máximo desempenho e nutrição animal",
+      "bullets": [],
       "checks": [
         {
           "name": "título ≤ 4 palavras",
           "ok": true,
-          "info": "3 palavras"
+          "info": "2 palavras"
         },
         {
           "name": "subtítulo presente",
@@ -1799,8 +1587,8 @@
         },
         {
           "name": "exatamente 3 diferenciais",
-          "ok": true,
-          "info": "3"
+          "ok": false,
+          "info": "0"
         },
         {
           "name": "diferenciais ≤ 5 palavras",
@@ -1815,7 +1603,7 @@
         {
           "name": "produto citado (título/subtítulo)",
           "ok": true,
-          "info": "ARAME FARPADO BELGO / Rolo de 500 metros para cercamento resistente"
+          "info": "OFERTA ESPECIAL / Máximo desempenho e nutrição animal"
         },
         {
           "name": "SEM linguagem pet",
@@ -1823,37 +1611,29 @@
           "info": ""
         }
       ],
-      "pass": true
+      "pass": false
     },
     "raw": {
       "linha": "AGRO",
       "tipo_postagem": "preco-unico",
       "formato_gerado": "Feed",
       "formato": "feed",
-      "template_layout": "split-vertical",
+      "template_layout": "hero-central",
       "tema": "campo-agro",
-      "prompt_fundo_ia": "Cenário rural de fazenda ao entardecer com cerca de madeira rústica, pastagem verde ao fundo e luz dourada natural suave.",
-      "fundo_imagem": "Cenário rural de fazenda ao entardecer com cerca de madeira rústica, pastagem verde ao fundo e luz dourada natural suave.",
-      "fundo_imagem_url": "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1200&q=80",
+      "prompt_fundo_ia": "Fotografia macro de solo fértil bem estruturado e rico em matéria orgânica com brotos verdes saudáveis emergindo com vigor, iluminação suave do amanhecer e foco seletivo realista.",
+      "fundo_imagem": "Fotografia macro de solo fértil bem estruturado e rico em matéria orgânica com brotos verdes saudáveis emergindo com vigor, iluminação suave do amanhecer e foco seletivo realista.",
+      "fundo_imagem_url": "https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=1200&q=80",
       "textos_hero": {
-        "titulo": "ARAME FARPADO BELGO",
-        "palavra_destaque_ouro": "BELGO",
-        "subtitulo": "Rolo de 500 metros para cercamento resistente"
+        "titulo": "OFERTA ESPECIAL",
+        "palavra_destaque_ouro": "OFERTA",
+        "subtitulo": "Máximo desempenho e nutrição animal"
       },
-      "diferenciais_tecnicos": [
-        "Rolo com 500 metros",
-        "Alta resistência contra impacto",
-        "Galvanização de longa durabilidade"
-      ],
+      "diferenciais_tecnicos": [],
       "textos_da_arte": {
-        "titulo_impacto": "ARAME FARPADO BELGO",
-        "palavra_destaque": "BELGO",
-        "subtitulo": "Rolo de 500 metros para cercamento resistente",
-        "bullets_tecnicos": [
-          "Rolo com 500 metros",
-          "Alta resistência contra impacto",
-          "Galvanização de longa durabilidade"
-        ],
+        "titulo_impacto": "OFERTA ESPECIAL",
+        "palavra_destaque": "OFERTA",
+        "subtitulo": "Máximo desempenho e nutrição animal",
+        "bullets_tecnicos": [],
         "cta": "CONSULTE DISPONIBILIDADE",
         "modulo_preco": {
           "ativo": true,
@@ -1864,18 +1644,14 @@
         }
       },
       "caixa_titulo": {
-        "texto": "ARAME FARPADO BELGO",
-        "palavra_ouro": "BELGO",
-        "palavra_ouro_destaque": "BELGO"
+        "texto": "OFERTA ESPECIAL",
+        "palavra_ouro": "OFERTA",
+        "palavra_ouro_destaque": "OFERTA"
       },
       "caixa_subtitulo": {
-        "texto": "Rolo de 500 metros para cercamento resistente"
+        "texto": "Máximo desempenho e nutrição animal"
       },
-      "beneficios_tecnicos": [
-        "Rolo com 500 metros",
-        "Alta resistência contra impacto",
-        "Galvanização de longa durabilidade"
-      ],
+      "beneficios_tecnicos": [],
       "modulo_preco": {
         "ativo": true,
         "valor_de": "",
@@ -1883,8 +1659,8 @@
         "condicao": "",
         "condicoes_pagamento": ""
       },
-      "legenda_instagram": "Proteção e segurança garantidas para a sua propriedade! O Arame Farpado Belgo de 500m oferece máxima durabilidade, facilidade no manuseio e resistência superior para o seu cercamento. Garanta o seu rolo na Coagro pelo melhor preço do campo! Fale com nossos consultores ou passe na loja mais próxima.",
-      "legenda_post": "Proteção e segurança garantidas para a sua propriedade! O Arame Farpado Belgo de 500m oferece máxima durabilidade, facilidade no manuseio e resistência superior para o seu cercamento. Garanta o seu rolo na Coagro pelo melhor preço do campo! Fale com nossos consultores ou passe na loja mais próxima."
+      "legenda_instagram": "Garanta máxima produtividade na sua propriedade com o Máximo desempenho e nutrição animal! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte",
+      "legenda_post": "Garanta máxima produtividade na sua propriedade com o Máximo desempenho e nutrição animal! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte"
     }
   },
   {
@@ -1894,21 +1670,17 @@
       "nome": "motobomba",
       "txt": "Motobomba Toyama 3HP gasolina 1.890,00"
     },
-    "ms": 13844,
+    "ms": 62,
     "status": 200,
     "g": {
-      "titulo": "OFERTA MOTOBOMBA TOYAMA",
-      "sub": "Motor 3HP a gasolina para transferência de água e irrigação",
-      "bullets": [
-        "Motor 3HP a gasolina",
-        "Alta vazão de água",
-        "Máxima durabilidade no campo"
-      ],
+      "titulo": "OFERTA ESPECIAL",
+      "sub": "Alta potência e eficiência no campo",
+      "bullets": [],
       "checks": [
         {
           "name": "título ≤ 4 palavras",
           "ok": true,
-          "info": "3 palavras"
+          "info": "2 palavras"
         },
         {
           "name": "subtítulo presente",
@@ -1917,8 +1689,8 @@
         },
         {
           "name": "exatamente 3 diferenciais",
-          "ok": true,
-          "info": "3"
+          "ok": false,
+          "info": "0"
         },
         {
           "name": "diferenciais ≤ 5 palavras",
@@ -1933,7 +1705,7 @@
         {
           "name": "produto citado (título/subtítulo)",
           "ok": true,
-          "info": "OFERTA MOTOBOMBA TOYAMA / Motor 3HP a gasolina para transferência de água e irrigação"
+          "info": "OFERTA ESPECIAL / Alta potência e eficiência no campo"
         },
         {
           "name": "SEM linguagem pet",
@@ -1941,7 +1713,7 @@
           "info": ""
         }
       ],
-      "pass": true
+      "pass": false
     },
     "raw": {
       "linha": "AGRO",
@@ -1950,28 +1722,20 @@
       "formato": "feed",
       "template_layout": "split-vertical",
       "tema": "campo-agro",
-      "prompt_fundo_ia": "Cenário rural iluminado com galpão agrícola ao fundo, chão de concreto rústico limpo, ambiente de trabalho no campo, fotografia profissional e nítida.",
-      "fundo_imagem": "Cenário rural iluminado com galpão agrícola ao fundo, chão de concreto rústico limpo, ambiente de trabalho no campo, fotografia profissional e nítida.",
-      "fundo_imagem_url": "https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=1200&q=80",
+      "prompt_fundo_ia": "Fotografia profissional agrícola em alta resolução, lavoura viçosa de grãos sob a luz matinal límpida, folhas sadias com orvalho matinal em primeiro plano, horizonte amplo do agronegócio brasileiro, iluminação cinematográfica e profundidade de campo suave.",
+      "fundo_imagem": "Fotografia profissional agrícola em alta resolução, lavoura viçosa de grãos sob a luz matinal límpida, folhas sadias com orvalho matinal em primeiro plano, horizonte amplo do agronegócio brasileiro, iluminação cinematográfica e profundidade de campo suave.",
+      "fundo_imagem_url": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80",
       "textos_hero": {
-        "titulo": "OFERTA MOTOBOMBA TOYAMA",
-        "palavra_destaque_ouro": "TOYAMA",
-        "subtitulo": "Motor 3HP a gasolina para transferência de água e irrigação"
+        "titulo": "OFERTA ESPECIAL",
+        "palavra_destaque_ouro": "OFERTA",
+        "subtitulo": "Alta potência e eficiência no campo"
       },
-      "diferenciais_tecnicos": [
-        "Motor 3HP a gasolina",
-        "Alta vazão de água",
-        "Máxima durabilidade no campo"
-      ],
+      "diferenciais_tecnicos": [],
       "textos_da_arte": {
-        "titulo_impacto": "OFERTA MOTOBOMBA TOYAMA",
-        "palavra_destaque": "TOYAMA",
-        "subtitulo": "Motor 3HP a gasolina para transferência de água e irrigação",
-        "bullets_tecnicos": [
-          "Motor 3HP a gasolina",
-          "Alta vazão de água",
-          "Máxima durabilidade no campo"
-        ],
+        "titulo_impacto": "OFERTA ESPECIAL",
+        "palavra_destaque": "OFERTA",
+        "subtitulo": "Alta potência e eficiência no campo",
+        "bullets_tecnicos": [],
         "cta": "CONSULTE DISPONIBILIDADE",
         "modulo_preco": {
           "ativo": true,
@@ -1982,18 +1746,14 @@
         }
       },
       "caixa_titulo": {
-        "texto": "OFERTA MOTOBOMBA TOYAMA",
-        "palavra_ouro": "TOYAMA",
-        "palavra_ouro_destaque": "TOYAMA"
+        "texto": "OFERTA ESPECIAL",
+        "palavra_ouro": "OFERTA",
+        "palavra_ouro_destaque": "OFERTA"
       },
       "caixa_subtitulo": {
-        "texto": "Motor 3HP a gasolina para transferência de água e irrigação"
+        "texto": "Alta potência e eficiência no campo"
       },
-      "beneficios_tecnicos": [
-        "Motor 3HP a gasolina",
-        "Alta vazão de água",
-        "Máxima durabilidade no campo"
-      ],
+      "beneficios_tecnicos": [],
       "modulo_preco": {
         "ativo": true,
         "valor_de": "",
@@ -2001,8 +1761,8 @@
         "condicao": "",
         "condicoes_pagamento": ""
       },
-      "legenda_instagram": "Mais eficiência e potência para o seu trabalho no campo! 🌾 A Motobomba Toyama 3HP a gasolina garante alto desempenho para transferências de água e irrigação com máxima durabilidade e economia. Garanta a sua com preço especial na Coagro Agro. Fale com a nossa equipe ou visite nossa loja!",
-      "legenda_post": "Mais eficiência e potência para o seu trabalho no campo! 🌾 A Motobomba Toyama 3HP a gasolina garante alto desempenho para transferências de água e irrigação com máxima durabilidade e economia. Garanta a sua com preço especial na Coagro Agro. Fale com a nossa equipe ou visite nossa loja!"
+      "legenda_instagram": "Garanta máxima produtividade na sua propriedade com o Alta potência e eficiência no campo! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte",
+      "legenda_post": "Garanta máxima produtividade na sua propriedade com o Alta potência e eficiência no campo! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte"
     }
   },
   {
@@ -2012,31 +1772,27 @@
       "nome": "herbicida",
       "txt": "Herbicida Glifosato Atanor galão 20 litros 380"
     },
-    "ms": 7101,
+    "ms": 19,
     "status": 200,
     "g": {
-      "titulo": "OFERTA GLIFOSATO ATANOR",
-      "sub": "Herbicida sistêmico em galão de 20L",
-      "bullets": [
-        "Ação sistêmica de alta eficiência",
-        "Controle eficaz de plantas daninhas",
-        "Galão econômico com 20 litros"
-      ],
+      "titulo": "OFERTA ESPECIAL",
+      "sub": "",
+      "bullets": [],
       "checks": [
         {
           "name": "título ≤ 4 palavras",
           "ok": true,
-          "info": "3 palavras"
+          "info": "2 palavras"
         },
         {
           "name": "subtítulo presente",
-          "ok": true,
+          "ok": false,
           "info": ""
         },
         {
           "name": "exatamente 3 diferenciais",
-          "ok": true,
-          "info": "3"
+          "ok": false,
+          "info": "0"
         },
         {
           "name": "diferenciais ≤ 5 palavras",
@@ -2050,8 +1806,8 @@
         },
         {
           "name": "produto citado (título/subtítulo)",
-          "ok": true,
-          "info": "OFERTA GLIFOSATO ATANOR / Herbicida sistêmico em galão de 20L"
+          "ok": false,
+          "info": "OFERTA ESPECIAL / "
         },
         {
           "name": "SEM linguagem pet",
@@ -2059,7 +1815,7 @@
           "info": ""
         }
       ],
-      "pass": true
+      "pass": false
     },
     "raw": {
       "linha": "AGRO",
@@ -2068,28 +1824,20 @@
       "formato": "feed",
       "template_layout": "hero-central",
       "tema": "campo-agro",
-      "prompt_fundo_ia": "Cenário de lavoura ao amanhecer em desfoque profissional, chão de terra batida limpo ou piso de concreto de galpão agropecuário com iluminação suave e realista.",
-      "fundo_imagem": "Cenário de lavoura ao amanhecer em desfoque profissional, chão de terra batida limpo ou piso de concreto de galpão agropecuário com iluminação suave e realista.",
-      "fundo_imagem_url": "https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=1200&q=80",
+      "prompt_fundo_ia": "Fotografia profissional agrícola em alta resolução, lavoura viçosa de grãos sob a luz matinal límpida, folhas sadias com orvalho matinal em primeiro plano, horizonte amplo do agronegócio brasileiro, iluminação cinematográfica e profundidade de campo suave.",
+      "fundo_imagem": "Fotografia profissional agrícola em alta resolução, lavoura viçosa de grãos sob a luz matinal límpida, folhas sadias com orvalho matinal em primeiro plano, horizonte amplo do agronegócio brasileiro, iluminação cinematográfica e profundidade de campo suave.",
+      "fundo_imagem_url": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80",
       "textos_hero": {
-        "titulo": "OFERTA GLIFOSATO ATANOR",
-        "palavra_destaque_ouro": "GLIFOSATO",
-        "subtitulo": "Herbicida sistêmico em galão de 20L"
+        "titulo": "OFERTA ESPECIAL",
+        "palavra_destaque_ouro": "OFERTA",
+        "subtitulo": ""
       },
-      "diferenciais_tecnicos": [
-        "Ação sistêmica de alta eficiência",
-        "Controle eficaz de plantas daninhas",
-        "Galão econômico com 20 litros"
-      ],
+      "diferenciais_tecnicos": [],
       "textos_da_arte": {
-        "titulo_impacto": "OFERTA GLIFOSATO ATANOR",
-        "palavra_destaque": "GLIFOSATO",
-        "subtitulo": "Herbicida sistêmico em galão de 20L",
-        "bullets_tecnicos": [
-          "Ação sistêmica de alta eficiência",
-          "Controle eficaz de plantas daninhas",
-          "Galão econômico com 20 litros"
-        ],
+        "titulo_impacto": "OFERTA ESPECIAL",
+        "palavra_destaque": "OFERTA",
+        "subtitulo": "",
+        "bullets_tecnicos": [],
         "cta": "CONSULTE DISPONIBILIDADE",
         "modulo_preco": {
           "ativo": true,
@@ -2100,18 +1848,14 @@
         }
       },
       "caixa_titulo": {
-        "texto": "OFERTA GLIFOSATO ATANOR",
-        "palavra_ouro": "GLIFOSATO",
-        "palavra_ouro_destaque": "GLIFOSATO"
+        "texto": "OFERTA ESPECIAL",
+        "palavra_ouro": "OFERTA",
+        "palavra_ouro_destaque": "OFERTA"
       },
       "caixa_subtitulo": {
-        "texto": "Herbicida sistêmico em galão de 20L"
+        "texto": ""
       },
-      "beneficios_tecnicos": [
-        "Ação sistêmica de alta eficiência",
-        "Controle eficaz de plantas daninhas",
-        "Galão econômico com 20 litros"
-      ],
+      "beneficios_tecnicos": [],
       "modulo_preco": {
         "ativo": true,
         "valor_de": "",
@@ -2119,8 +1863,8 @@
         "condicao": "",
         "condicoes_pagamento": ""
       },
-      "legenda_instagram": "Mantenha sua lavoura limpa e produtiva com o Herbicida Glifosato Atanor 20L! Alta eficiência e controle comprovado no campo com as melhores condições na Coagro. Passe em uma de nossas lojas ou chame no WhatsApp e garanta o seu estoque!",
-      "legenda_post": "Mantenha sua lavoura limpa e produtiva com o Herbicida Glifosato Atanor 20L! Alta eficiência e controle comprovado no campo com as melhores condições na Coagro. Passe em uma de nossas lojas ou chame no WhatsApp e garanta o seu estoque!"
+      "legenda_instagram": "Garanta máxima produtividade na sua propriedade com o ! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte",
+      "legenda_post": "Garanta máxima produtividade na sua propriedade com o ! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte"
     }
   },
   {
@@ -2130,21 +1874,21 @@
       "nome": "vacina",
       "txt": "Vacina Raivaguard bovinos 50 doses Ourofino 129,90"
     },
-    "ms": 7588,
+    "ms": 15,
     "status": 200,
     "g": {
-      "titulo": "PROTEJA SEU REBANHO",
-      "sub": "Vacina Raivaguard 50 Doses Ourofino",
+      "titulo": "OFERTA ESPECIAL",
+      "sub": "Proteção e saúde para o seu rebanho",
       "bullets": [
-        "Frasco com 50 doses",
-        "Prevenção contra a raiva",
-        "Máxima segurança para bovinos"
+        "Imunização preventiva eficaz",
+        "Segurança sanitária do rebanho",
+        "Suporte técnico veterinário"
       ],
       "checks": [
         {
           "name": "título ≤ 4 palavras",
           "ok": true,
-          "info": "3 palavras"
+          "info": "2 palavras"
         },
         {
           "name": "subtítulo presente",
@@ -2169,7 +1913,7 @@
         {
           "name": "produto citado (título/subtítulo)",
           "ok": true,
-          "info": "PROTEJA SEU REBANHO / Vacina Raivaguard 50 Doses Ourofino"
+          "info": "OFERTA ESPECIAL / Proteção e saúde para o seu rebanho"
         }
       ],
       "pass": true
@@ -2181,27 +1925,27 @@
       "formato": "feed",
       "template_layout": "hero-central",
       "tema": "campo-agro",
-      "prompt_fundo_ia": "Cenário rural de fazenda com curral limpo e pastagem verde desfocada ao fundo, iluminação matinal suave, suporte de madeira rústica, fotografia profissional de produto veterinário.",
-      "fundo_imagem": "Cenário rural de fazenda com curral limpo e pastagem verde desfocada ao fundo, iluminação matinal suave, suporte de madeira rústica, fotografia profissional de produto veterinário.",
+      "prompt_fundo_ia": "Fotografia cinematográfica de pastagem verdejante sob iluminação solar natural, rebanho de gado Nelore saudável ao fundo em fazenda brasileira, ângulo amplo com céu azul límpido e vegetação viçosa, profundidade de campo suave.",
+      "fundo_imagem": "Fotografia cinematográfica de pastagem verdejante sob iluminação solar natural, rebanho de gado Nelore saudável ao fundo em fazenda brasileira, ângulo amplo com céu azul límpido e vegetação viçosa, profundidade de campo suave.",
       "fundo_imagem_url": "https://images.unsplash.com/photo-1546445317-29f4545e9d53?auto=format&fit=crop&w=1200&q=80",
       "textos_hero": {
-        "titulo": "PROTEJA SEU REBANHO",
-        "palavra_destaque_ouro": "REBANHO",
-        "subtitulo": "Vacina Raivaguard 50 Doses Ourofino"
+        "titulo": "OFERTA ESPECIAL",
+        "palavra_destaque_ouro": "OFERTA",
+        "subtitulo": "Proteção e saúde para o seu rebanho"
       },
       "diferenciais_tecnicos": [
-        "Frasco com 50 doses",
-        "Prevenção contra a raiva",
-        "Máxima segurança para bovinos"
+        "Imunização preventiva eficaz",
+        "Segurança sanitária do rebanho",
+        "Suporte técnico veterinário"
       ],
       "textos_da_arte": {
-        "titulo_impacto": "PROTEJA SEU REBANHO",
-        "palavra_destaque": "REBANHO",
-        "subtitulo": "Vacina Raivaguard 50 Doses Ourofino",
+        "titulo_impacto": "OFERTA ESPECIAL",
+        "palavra_destaque": "OFERTA",
+        "subtitulo": "Proteção e saúde para o seu rebanho",
         "bullets_tecnicos": [
-          "Frasco com 50 doses",
-          "Prevenção contra a raiva",
-          "Máxima segurança para bovinos"
+          "Imunização preventiva eficaz",
+          "Segurança sanitária do rebanho",
+          "Suporte técnico veterinário"
         ],
         "cta": "CONSULTE DISPONIBILIDADE",
         "modulo_preco": {
@@ -2213,17 +1957,17 @@
         }
       },
       "caixa_titulo": {
-        "texto": "PROTEJA SEU REBANHO",
-        "palavra_ouro": "REBANHO",
-        "palavra_ouro_destaque": "REBANHO"
+        "texto": "OFERTA ESPECIAL",
+        "palavra_ouro": "OFERTA",
+        "palavra_ouro_destaque": "OFERTA"
       },
       "caixa_subtitulo": {
-        "texto": "Vacina Raivaguard 50 Doses Ourofino"
+        "texto": "Proteção e saúde para o seu rebanho"
       },
       "beneficios_tecnicos": [
-        "Frasco com 50 doses",
-        "Prevenção contra a raiva",
-        "Máxima segurança para bovinos"
+        "Imunização preventiva eficaz",
+        "Segurança sanitária do rebanho",
+        "Suporte técnico veterinário"
       ],
       "modulo_preco": {
         "ativo": true,
@@ -2232,8 +1976,8 @@
         "condicao": "",
         "condicoes_pagamento": ""
       },
-      "legenda_instagram": "A sanidade do seu rebanho não pode esperar! A vacina Raivaguard da Ourofino garante a imunização essencial dos seus bovinos contra a raiva com segurança e eficácia comprovadas. Frasco com 50 doses por apenas R$ 129,90 na Coagro. Passe na nossa loja ou entre em contato pelo WhatsApp e garanta a proteção da sua criação!",
-      "legenda_post": "A sanidade do seu rebanho não pode esperar! A vacina Raivaguard da Ourofino garante a imunização essencial dos seus bovinos contra a raiva com segurança e eficácia comprovadas. Frasco com 50 doses por apenas R$ 129,90 na Coagro. Passe na nossa loja ou entre em contato pelo WhatsApp e garanta a proteção da sua criação!"
+      "legenda_instagram": "Garanta máxima produtividade na sua propriedade com o Proteção e saúde para o seu rebanho! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte",
+      "legenda_post": "Garanta máxima produtividade na sua propriedade com o Proteção e saúde para o seu rebanho! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte"
     }
   },
   {
@@ -2243,21 +1987,17 @@
       "nome": "jardim",
       "txt": "Mangueira de jardim 30m Tramontina 99,90"
     },
-    "ms": 7528,
+    "ms": 16,
     "status": 200,
     "g": {
-      "titulo": "OFERTA MANGUEIRA TRAMONTINA",
-      "sub": "Alcance e praticidade para cuidar do seu jardim",
-      "bullets": [
-        "Extensão completa de 30 metros",
-        "Alta durabilidade e flexibilidade",
-        "Ideal para jardinagem doméstica"
-      ],
+      "titulo": "OFERTA ESPECIAL",
+      "sub": "Praticidade para sua casa e jardim",
+      "bullets": [],
       "checks": [
         {
           "name": "título ≤ 4 palavras",
           "ok": true,
-          "info": "3 palavras"
+          "info": "2 palavras"
         },
         {
           "name": "subtítulo presente",
@@ -2266,8 +2006,8 @@
         },
         {
           "name": "exatamente 3 diferenciais",
-          "ok": true,
-          "info": "3"
+          "ok": false,
+          "info": "0"
         },
         {
           "name": "diferenciais ≤ 5 palavras",
@@ -2282,10 +2022,10 @@
         {
           "name": "produto citado (título/subtítulo)",
           "ok": true,
-          "info": "OFERTA MANGUEIRA TRAMONTINA / Alcance e praticidade para cuidar do seu jardim"
+          "info": "OFERTA ESPECIAL / Praticidade para sua casa e jardim"
         }
       ],
-      "pass": true
+      "pass": false
     },
     "raw": {
       "linha": "AGRO",
@@ -2294,28 +2034,20 @@
       "formato": "feed",
       "template_layout": "hero-central",
       "tema": "campo-agro",
-      "prompt_fundo_ia": "Gramado verde impecável em jardim residencial iluminado pelo sol da manhã, canteiros floridos suaves ao fundo, fotografia comercial nítida e profissional.",
-      "fundo_imagem": "Gramado verde impecável em jardim residencial iluminado pelo sol da manhã, canteiros floridos suaves ao fundo, fotografia comercial nítida e profissional.",
+      "prompt_fundo_ia": "Fotografia profissional agrícola em alta resolução, lavoura viçosa de grãos sob a luz matinal límpida, folhas sadias com orvalho matinal em primeiro plano, horizonte amplo do agronegócio brasileiro, iluminação cinematográfica e profundidade de campo suave.",
+      "fundo_imagem": "Fotografia profissional agrícola em alta resolução, lavoura viçosa de grãos sob a luz matinal límpida, folhas sadias com orvalho matinal em primeiro plano, horizonte amplo do agronegócio brasileiro, iluminação cinematográfica e profundidade de campo suave.",
       "fundo_imagem_url": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80",
       "textos_hero": {
-        "titulo": "OFERTA MANGUEIRA TRAMONTINA",
+        "titulo": "OFERTA ESPECIAL",
         "palavra_destaque_ouro": "OFERTA",
-        "subtitulo": "Alcance e praticidade para cuidar do seu jardim"
+        "subtitulo": "Praticidade para sua casa e jardim"
       },
-      "diferenciais_tecnicos": [
-        "Extensão completa de 30 metros",
-        "Alta durabilidade e flexibilidade",
-        "Ideal para jardinagem doméstica"
-      ],
+      "diferenciais_tecnicos": [],
       "textos_da_arte": {
-        "titulo_impacto": "OFERTA MANGUEIRA TRAMONTINA",
+        "titulo_impacto": "OFERTA ESPECIAL",
         "palavra_destaque": "OFERTA",
-        "subtitulo": "Alcance e praticidade para cuidar do seu jardim",
-        "bullets_tecnicos": [
-          "Extensão completa de 30 metros",
-          "Alta durabilidade e flexibilidade",
-          "Ideal para jardinagem doméstica"
-        ],
+        "subtitulo": "Praticidade para sua casa e jardim",
+        "bullets_tecnicos": [],
         "cta": "CONSULTE DISPONIBILIDADE",
         "modulo_preco": {
           "ativo": true,
@@ -2326,18 +2058,14 @@
         }
       },
       "caixa_titulo": {
-        "texto": "OFERTA MANGUEIRA TRAMONTINA",
+        "texto": "OFERTA ESPECIAL",
         "palavra_ouro": "OFERTA",
         "palavra_ouro_destaque": "OFERTA"
       },
       "caixa_subtitulo": {
-        "texto": "Alcance e praticidade para cuidar do seu jardim"
+        "texto": "Praticidade para sua casa e jardim"
       },
-      "beneficios_tecnicos": [
-        "Extensão completa de 30 metros",
-        "Alta durabilidade e flexibilidade",
-        "Ideal para jardinagem doméstica"
-      ],
+      "beneficios_tecnicos": [],
       "modulo_preco": {
         "ativo": true,
         "valor_de": "",
@@ -2345,8 +2073,8 @@
         "condicao": "",
         "condicoes_pagamento": ""
       },
-      "legenda_instagram": "Deixe o seu jardim sempre verde e bem cuidado com a qualidade da Tramontina! 🌿 Mangueira de 30 metros resistente, prática e durável por apenas R$ 99,90. Visite a Coagro ou peça pelo WhatsApp! #CasaEJardim #Tramontina #Coagro",
-      "legenda_post": "Deixe o seu jardim sempre verde e bem cuidado com a qualidade da Tramontina! 🌿 Mangueira de 30 metros resistente, prática e durável por apenas R$ 99,90. Visite a Coagro ou peça pelo WhatsApp! #CasaEJardim #Tramontina #Coagro"
+      "legenda_instagram": "Garanta máxima produtividade na sua propriedade com o Praticidade para sua casa e jardim! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte",
+      "legenda_post": "Garanta máxima produtividade na sua propriedade com o Praticidade para sua casa e jardim! Condições imperdíveis na Coagro.\n\nFale com nosso time de especialistas ou visite uma de nossas lojas.\n\n#Coagro #AgroNegocio #OfertaAgro #CampoForte"
     }
   }
 ]

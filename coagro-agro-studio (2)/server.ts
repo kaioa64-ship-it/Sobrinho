@@ -1503,9 +1503,9 @@ app.post('/api/generate-image', async (req, res) => {
 });
 
 // --- ROTA DE REMOÇÃO DE FUNDO VIA HUGGING FACE (RMBG 1.4) ---
-app.get('/api/hf-token', (req, res) => {
-  res.json({ token: process.env.HF_TOKEN || process.env.FAL_KEY || null });
-});
+// NOTA DE SEGURANÇA: o endpoint GET /api/hf-token foi REMOVIDO porque expunha
+// o segredo do servidor (HF_TOKEN/FAL_KEY) ao navegador. A remoção de fundo
+// continua 100% server-side via POST /api/remove-bg abaixo.
 
 app.post('/api/remove-bg', async (req, res) => {
   try {

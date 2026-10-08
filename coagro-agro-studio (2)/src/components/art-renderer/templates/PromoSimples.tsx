@@ -120,7 +120,7 @@ export const PromoSimples: React.FC<PromoSimplesProps> = ({
               oldPrice={oldPrice}
               currentPrice={currentPrice}
               condition={condition}
-              variant={isPet ? 'pet' : 'default'}
+              variant={isPet ? 'pet' : 'agro'}
             />
           </div>
         )}

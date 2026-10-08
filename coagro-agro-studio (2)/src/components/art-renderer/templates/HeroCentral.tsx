@@ -11,6 +11,7 @@ import { RenderizacaoVisual } from '../../../types/agro';
 import { SemanticProductImage } from '../SemanticProductImage';
 
 export interface HeroCentralTemplateProps {
+  codigo?: string;
   title: string;
   highlight: string;
   titleColor?: string;
@@ -47,6 +48,7 @@ export interface HeroCentralTemplateProps {
  * 3. Cores dinâmicas: respeitam titleColor e subtitleColor do tema ativo.
  */
 export const HeroCentral: React.FC<HeroCentralTemplateProps> = ({
+  codigo,
   title,
   highlight,
   titleColor = 'text-white',
@@ -122,7 +124,7 @@ export const HeroCentral: React.FC<HeroCentralTemplateProps> = ({
         {/* Container interno de contenção estrita da imagem (nunca vaza do contêiner) */}
         <div className="w-full h-full flex items-center justify-center overflow-hidden">
           {processedProduct ? (
-            <SemanticProductImage src={processedProduct} renderizacao={renderizacao} />
+            <SemanticProductImage src={processedProduct} renderizacao={renderizacao} codigo={codigo} />
           ) : null}
         </div>
 
