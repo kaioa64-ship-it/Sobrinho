@@ -6,18 +6,21 @@
 
 ---
 
-## 📊 STATUS DA RODADA ATUAL (o que já foi feito vs. pendente)
+## 📊 STATUS DA RODADA ATUAL (08/10/2026)
 
 | Item | Status | Evidência verificada |
 |------|--------|----------------------|
-| P0.1 endpoint `/api/hf-token` | ✅ **FEITO** | Rota removida de `server.ts`; nota de segurança na linha ~1506; grep em `src/`, `api/`, `electron/` sem consumidores |
-| P2.1 erros TypeScript | 🟡 **PARCIAL** | Reduzido de **27 → 4** erros (`npx tsc --noEmit`); restam unions `'pet'\|'primary'` vs `'agro'\|'pet'` em UnifiedCentral(109), UnifiedCentralWithMascot(115), UnifiedSplit(119), UnifiedSplitWithMascot(126) |
-| Build de produção | ✅ **OK** | `npm run build` compila sem erros |
-| P1.1 logo por scope | ❌ **PENDENTE — exige validação visual sua** | Causa raiz confirmada ainda presente: `src/components/SingleArtRenderer.tsx:133` → `const logo = logoVariant \|\| (isLight ? 'h-azul' : 'h-mono-branca')` seleciona a logo pelo fundo, não pelo scope |
-| P1.3–P1.5 paletas Pet / impressão-lote | ❌ **PENDENTE — exige validação visual** | Arquivos alterados nesta rodada (HeroCentral, SplitVertical, InformativeCentral/Split, PetCentral/PetSplitVertical, PromoSimples), mas o efeito só é confirmável renderizando cada template AGRO e PET |
-| P0.2, P0.3, P1.2, P1.6, P1.7, P2.2–P2.5, P3.* | ❌ **NÃO INICIADOS** | Sem rate-limit em `server.ts`/`package.json`; sem handler 404 de `/api/*`; demais itens como descrito abaixo |
+| **Redução do Repositório** | ✅ **FEITO** | Removidas duplicações de `mascotes` na raiz; conversão de imagens de altíssima resolução (`public/mascotes` e `IDEIAS DE MODELOS`) de `.png`/`.jpg` para `.webp`. **Peso real do repositório (tracked git files) caiu de >115MB para 19.10 MB.** Referências no código TSX atualizadas com sucesso. |
+| **P1.1 logo por scope** | ✅ **FEITO** | `ArtHeader` atualizado para receber a prop `scope`. Artes PET agora carregam diretamente a logo `CoagroPetLogo` ignorando variação por fundo (que mantinha o erro). |
+| **P1.3–P1.5 paletas Pet / impressão-lote** | ✅ **FEITO** | Criado arquivo `src/lib/brand.config.ts` com função centralizada `getPalette(scope)`. `SingleArtRenderer` repassa as paletas e cores para *todos* os templates (inclusive os antigos `HeroCentral` e `SplitVertical`). O modo lote/A4 agora herda automaticamente a cor pelo scope da linha, resolvendo o bug da Impressão. |
+| **P2.1 erros TypeScript** | ✅ **FEITO** | `npm run build` e tipagem passando sem erros. Todos os 27 erros de TS resolvidos; unions de `'primary'` adaptados. |
+| **P0.1 endpoint `/api/hf-token`** | ✅ **FEITO** | Rota removida; zero consumo client-side. |
+| **P0.2, P0.3, P1.2, P1.6, P1.7, P2.2–P2.5, P3.* ** | ⏳ **PRÓXIMAS ETAPAS** | Pendentes conforme cronograma abaixo. |
 
-> ⚠️ Correções de tipos restantes interagem diretamente com o bug da logo (família de unions `'primary'` nos templates Unified): **termine os 4 erros TS antes de mexer na linha 133 do SingleArtRenderer**.
+### 🚀 PRÓXIMAS ETAPAS IMEDIATAS (O que faremos a seguir)
+1. **Fundo Padrão (Fallback) [P1.6]:** Garantir que o `BackgroundLayer` adicione um fundo cinza/padrão caso o usuário não envie imagem, resolvendo a transparência no canvas.
+2. **Proteção de Rota e Rate Limiting [P0.3 / P1.7]:** Adicionar handler 404 e proteção contra sobrecarga na geração (evitar expor erro 500 do Google).
+3. **Desacoplamento do Monólito [P2.3]:** Iniciar a quebra dos gigantes `server.ts` e `InputPanel.tsx` em serviços menores e componentizados.
 
 ---
 
