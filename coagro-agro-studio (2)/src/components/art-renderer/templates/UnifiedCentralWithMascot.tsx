@@ -64,8 +64,8 @@ export const UnifiedCentralWithMascot: React.FC<UnifiedCentralWithMascotProps> =
 
   // Lógica de Mascotes
   const mascotSrc = isPet 
-    ? '/mascotes/GATA/GATA LARANJA.png' // ou CHARLES P1.png
-    : '/mascotes/ricardo.png';
+    ? '/mascotes/GATA/GATA LARANJA.webp' // ou CHARLES P1.webp
+    : '/mascotes/ricardo.webp';
 
   return (
     <div className={`relative z-10 w-full h-full flex flex-col justify-between items-center px-5 ${isStory ? 'py-8' : 'py-3'} select-none font-['Inter']`}>

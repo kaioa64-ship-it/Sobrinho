@@ -66,8 +66,8 @@ export const UnifiedSplitWithMascot: React.FC<UnifiedSplitWithMascotProps> = ({
 
   // Lógica de Mascotes (Variação para o modelo Split: Ricardo para Agro, Charles para Pet)
   const mascotSrc = isPet 
-    ? '/mascotes/charles/CHARLES P1.png'
-    : '/mascotes/ricardo.png';
+    ? '/mascotes/charles/CHARLES P1.webp'
+    : '/mascotes/ricardo.webp';
 
   return (
     <div className={`relative z-10 w-full h-full flex flex-col justify-between items-center px-4 ${isStory ? 'py-8' : 'py-3'} select-none font-['Inter']`}>
