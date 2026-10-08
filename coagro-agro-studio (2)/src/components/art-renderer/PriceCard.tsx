@@ -7,6 +7,7 @@ interface PriceCardProps {
   currentPrice: string;
   condition?: string;
   variant?: 'agro' | 'pet';
+  className?: string;
 }
 
 export const PriceCard: React.FC<PriceCardProps> = ({
@@ -14,13 +15,14 @@ export const PriceCard: React.FC<PriceCardProps> = ({
   oldPrice,
   currentPrice,
   condition,
-  variant = 'agro'
+  variant = 'agro',
+  className = '',
 }) => {
   const isPromotion = mode === 'PROMOTION';
   const isPet = variant === 'pet';
 
   return (
-    <div className={`min-w-[150px] px-4 py-3 rounded-2xl shadow-2xl flex flex-col items-center border-2 ${isPet ? 'bg-[#4897D0] text-white border-white' : 'bg-[#ffab00] text-[#001C71] border-white/80'}`}>
+    <div className={`min-w-[150px] px-4 py-3 rounded-2xl shadow-2xl flex flex-col items-center border-2 ${isPet ? 'bg-[#4897D0] text-white border-white' : 'bg-[#ffab00] text-[#001C71] border-white/80'} ${className}`}>
       {isPromotion && oldPrice && (
         <div className="text-[10px] font-bold opacity-75 line-through whitespace-nowrap">
           DE: {oldPrice}

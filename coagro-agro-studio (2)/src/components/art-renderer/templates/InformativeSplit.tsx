@@ -52,7 +52,7 @@ export const InformativeSplit: React.FC<InformativeSplitProps> = ({
   const displayBenefits = benefits && benefits.length > 0 ? benefits.slice(0, 3) : [];
 
   return (
-    <div className={`relative z-10 w-full h-full flex flex-col justify-between items-center px-4 ${isStory ? 'py-8' : 'py-3'} select-none font-['Inter']`}>
+    <div className={`relative z-10 w-full h-full flex flex-col justify-between items-center ${isStory ? 'px-6 pt-8 pb-6' : 'px-4 py-4'} select-none font-['Inter']`}>
       
       {/* 1. Header (Topo) */}
       <header className="w-full flex flex-col items-center shrink-0 z-20">
@@ -76,18 +76,25 @@ export const InformativeSplit: React.FC<InformativeSplitProps> = ({
       {/* 2. Centro Split (Produto Esquerda / Textos Direita) */}
       <div className="flex-1 min-h-0 w-full relative flex flex-row items-center justify-between my-2 gap-4">
         
-        {/* Lado Esquerdo: Produto Centralizado Harmoniosamente */}
-        <div className="w-[50%] h-full flex flex-col items-center justify-center relative z-40">
+        {/* Lado Esquerdo: Produto Centralizado (55%) */}
+        <div className="w-[55%] flex items-center justify-center flex-1 min-h-0 relative z-40">
           {processedProduct && (
-            <SemanticProductImage src={processedProduct} renderizacao={renderizacao} codigo={codigo} />
+            <div className="relative flex items-center justify-center w-full h-full">
+              <img src={processedProduct} className="object-contain max-h-full max-w-full drop-shadow-2xl" alt="Produto" />
+              {codigo && (
+                <span className="absolute bottom-[-15px] text-[10px] text-gray-500 font-mono font-bold z-20">
+                  Cód: {codigo}
+                </span>
+              )}
+            </div>
           )}
         </div>
 
-        {/* Lado Direito: Textos */}
-        <div className={`w-[50%] h-full flex flex-col justify-center items-start z-30 pt-2 pr-2`}>
+        {/* Lado Direito: Textos e Diferenciais (45%) */}
+        <div className={`w-[45%] h-full flex flex-col justify-center items-start z-30 pt-2 pr-2`}>
           {displayBenefits.length > 0 && (
             <div className="w-full">
-              <BenefitsList benefits={displayBenefits} variant={isPet ? 'badges-horizontal' : 'list-vertical'} textColor={titleColor} />
+              <BenefitsList benefits={displayBenefits} variant={isPet ? 'badges-horizontal' : 'cards-vertical'} textColor={titleColor} />
             </div>
           )}
         </div>

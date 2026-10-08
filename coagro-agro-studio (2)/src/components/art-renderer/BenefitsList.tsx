@@ -3,7 +3,7 @@ import { CheckCircle } from 'lucide-react';
 
 interface BenefitsListProps {
   benefits: string[];
-  variant: 'badges-horizontal' | 'list-vertical';
+  variant: 'badges-horizontal' | 'list-vertical' | 'cards-vertical';
   textColor?: string;
   className?: string;
 }
@@ -23,6 +23,21 @@ export const BenefitsList: React.FC<BenefitsListProps> = ({
           <div key={`${index}-${benefit}`} className="flex items-start gap-2.5">
             <CheckCircle className="w-5 h-5 text-[#ffab00] shrink-0 mt-0.5" />
             <span className={`text-[12px] sm:text-[14px] font-bold leading-snug uppercase tracking-wide ${textColor}`}>
+              {benefit}
+            </span>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  if (variant === 'cards-vertical') {
+    return (
+      <div className={`flex flex-col justify-center gap-4 w-full ${className}`}>
+        {benefits.map((benefit, index) => (
+          <div key={`${index}-${benefit}`} className="flex items-center gap-3 py-2.5 px-3.5 rounded-xl bg-white/10 border border-white/15 shadow-sm backdrop-blur-sm w-full">
+            <CheckCircle className="w-5 h-5 text-[#ffab00] shrink-0" />
+            <span className={`text-[13px] sm:text-[15px] font-bold leading-snug tracking-wide ${textColor}`}>
               {benefit}
             </span>
           </div>

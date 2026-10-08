@@ -68,7 +68,7 @@ export const UnifiedSplit: React.FC<UnifiedSplitProps> = ({
   const displayBenefits = benefits && benefits.length > 0 ? benefits.slice(0, 3) : [];
 
   return (
-    <div className={`relative z-10 w-full h-full flex flex-col justify-between items-center px-4 ${isStory ? 'py-8' : 'py-3'} select-none font-['Inter']`}>
+    <div className={`relative z-10 w-full h-full flex flex-col justify-between items-center ${isStory ? 'px-6 pt-8 pb-6' : 'px-4 py-4'} select-none font-['Inter']`}>
       
 
       {/* 1. Header (Topo - 15%) */}
@@ -93,15 +93,22 @@ export const UnifiedSplit: React.FC<UnifiedSplitProps> = ({
       {/* 2. Centro Split (Produto Esquerda / Infos Direita) */}
       <div className="flex-1 min-h-0 w-full relative flex flex-row items-center justify-between my-2 gap-4">
         
-        {/* Lado Esquerdo: Produto */}
-        <div className="w-[50%] h-full flex flex-col items-center justify-end pb-8 relative z-40">
+        {/* Lado Esquerdo: Produto Centralizado */}
+        <div className="w-[50%] flex items-center justify-center flex-1 min-h-0 relative z-40">
           {processedProduct && (
-            <SemanticProductImage src={processedProduct} renderizacao={renderizacao} codigo={codigo} />
+            <div className="relative flex items-center justify-center w-full h-full">
+              <img src={processedProduct} className="object-contain max-h-full max-w-full drop-shadow-2xl" alt="Produto" />
+              {codigo && (
+                <span className="absolute bottom-[-15px] text-[10px] text-gray-500 font-mono font-bold z-20">
+                  Cód: {codigo}
+                </span>
+              )}
+            </div>
           )}
         </div>
 
         {/* Lado Direito: Diferenciais e Preço */}
-        <div className={`w-[50%] h-full flex flex-col justify-center items-start z-30 pt-4 pr-4 ${textBackground ? 'bg-white/95 backdrop-blur-sm rounded-2xl p-4 shadow-xl border border-white/40' : ''}`}>
+        <div className={`w-[50%] h-full flex flex-col justify-center gap-3 z-30 pt-2 ${textBackground ? 'bg-white/95 backdrop-blur-sm rounded-2xl p-4 shadow-xl border border-white/40' : 'pr-2'}`}>
           
           {displayBenefits.length > 0 && (
             <div className="w-full">
@@ -110,13 +117,14 @@ export const UnifiedSplit: React.FC<UnifiedSplitProps> = ({
           )}
 
           {hasPrice && currentPrice && (
-            <div className="mt-4 w-full drop-shadow-xl scale-110 origin-left">
+            <div className="w-full drop-shadow-xl flex items-center justify-center mt-1">
                <PriceCard
                 mode={mode}
                 oldPrice={oldPrice}
                 currentPrice={currentPrice}
                 condition={condition}
                 variant={isPet ? 'pet' : 'agro'}
+                className="w-full"
               />
             </div>
           )}
