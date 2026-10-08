@@ -401,24 +401,27 @@ export default function App() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left Column: Input and Processing Engine Controls (5 cols) */}
           <div className="lg:col-span-5 space-y-5">
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-2 flex items-center justify-center gap-2">
-              <button 
-                onClick={() => {
-                  setSocialMode('MANUAL');
-                  setTemplateLayout('unified-central');
-                }}
-                className={`flex-1 py-2 text-sm font-bold rounded-xl transition ${socialMode === 'MANUAL' ? (appMode === 'PET' ? 'bg-[#001C71] text-white' : 'bg-[#004d40] text-white') : 'text-gray-500 hover:bg-gray-100'}`}
-              >
-                Criação Manual
-              </button>
-              <button 
-                onClick={() => setSocialMode('AI_BETA')}
-                className={`flex-1 py-2 text-sm font-bold rounded-xl transition flex items-center justify-center gap-2 ${socialMode === 'AI_BETA' ? (appMode === 'PET' ? 'bg-[#001C71] text-white' : 'bg-[#004d40] text-white') : 'text-gray-500 hover:bg-gray-100'}`}
-              >
-                Gerar com IA
-                <span className="text-[10px] bg-red-500 text-white px-1.5 py-0.5 rounded uppercase">Beta</span>
-              </button>
-            </div>
+            {/* AI Mode Hidden for MVP */}
+            {false && (
+              <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-2 flex items-center justify-center gap-2">
+                <button 
+                  onClick={() => {
+                    setSocialMode('MANUAL');
+                    setTemplateLayout('unified-central');
+                  }}
+                  className={`flex-1 py-2 text-sm font-bold rounded-xl transition ${socialMode === 'MANUAL' ? (appMode === 'PET' ? 'bg-[#001C71] text-white' : 'bg-[#004d40] text-white') : 'text-gray-500 hover:bg-gray-100'}`}
+                >
+                  Criação Manual
+                </button>
+                <button 
+                  onClick={() => setSocialMode('AI_BETA')}
+                  className={`flex-1 py-2 text-sm font-bold rounded-xl transition flex items-center justify-center gap-2 ${socialMode === 'AI_BETA' ? (appMode === 'PET' ? 'bg-[#001C71] text-white' : 'bg-[#004d40] text-white') : 'text-gray-500 hover:bg-gray-100'}`}
+                >
+                  Gerar com IA
+                  <span className="text-[10px] bg-red-500 text-white px-1.5 py-0.5 rounded uppercase">Beta</span>
+                </button>
+              </div>
+            )}
 
             {socialMode === 'MANUAL' ? (
               <SocialManualEditor
@@ -639,12 +642,15 @@ export default function App() {
               >
                 Lote (Simples)
               </button>
-              <button 
-                onClick={() => setPosterMode('REVIEW')}
-                className={`flex-1 py-2 px-2 text-xs font-bold rounded-xl transition ${posterMode === 'REVIEW' ? 'bg-[#d67022] text-white shadow-xs' : 'text-gray-500 hover:bg-gray-100'}`}
-              >
-                Correção/Revisão
-              </button>
+              {/* Correção/Revisão Hidden for MVP */}
+              {false && (
+                <button 
+                  onClick={() => setPosterMode('REVIEW')}
+                  className={`flex-1 py-2 px-2 text-xs font-bold rounded-xl transition ${posterMode === 'REVIEW' ? 'bg-[#d67022] text-white shadow-xs' : 'text-gray-500 hover:bg-gray-100'}`}
+                >
+                  Correção/Revisão
+                </button>
+              )}
             </div>
 
             {posterMode === 'REVIEW' ? (
