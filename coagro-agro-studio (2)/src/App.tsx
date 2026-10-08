@@ -365,9 +365,8 @@ export default function App() {
       <Header />
 
       {/* 2. Module Switcher Navigation */}
-      {!isElectron && (
-        <div className="bg-white border-b border-gray-200">
-          <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
             <nav className="flex space-x-8" aria-label="Tabs">
               <button
                 onClick={() => setCurrentModule('SOCIAL_MEDIA')}
@@ -393,7 +392,6 @@ export default function App() {
             </nav>
           </div>
         </div>
-      )}
 
       {/* 3. Main Workspace */}
       <main className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 flex-1">
