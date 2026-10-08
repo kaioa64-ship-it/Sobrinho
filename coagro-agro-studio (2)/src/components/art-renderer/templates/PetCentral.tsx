@@ -9,6 +9,7 @@ import { SemanticProductImage } from '../SemanticProductImage';
 import { BenefitsList } from '../BenefitsList';
 
 export interface PetCentralTemplateProps {
+  codigo?: string;
   title: string;
   subtitle?: string;
   processedProduct: string;
@@ -24,6 +25,7 @@ export interface PetCentralTemplateProps {
 }
 
 export const PetCentral: React.FC<PetCentralTemplateProps> = ({
+  codigo,
   title,
   subtitle,
   processedProduct,
@@ -76,7 +78,7 @@ export const PetCentral: React.FC<PetCentralTemplateProps> = ({
       <div className="flex-1 w-full min-h-0 relative flex flex-col justify-center items-center px-6 mt-2 mb-2 overflow-visible">
         {processedProduct && (
           <div className="w-[85%] h-full flex flex-col items-center justify-center">
-             <SemanticProductImage src={processedProduct} renderizacao={renderizacao} />
+             <SemanticProductImage src={processedProduct} renderizacao={renderizacao} codigo={codigo} />
           </div>
         )}
       </div>

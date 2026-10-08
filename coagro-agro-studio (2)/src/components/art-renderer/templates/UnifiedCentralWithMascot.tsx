@@ -112,7 +112,7 @@ export const UnifiedCentralWithMascot: React.FC<UnifiedCentralWithMascotProps> =
               oldPrice={oldPrice}
               currentPrice={currentPrice}
               condition={condition}
-              variant={isPet ? 'pet' : 'default'}
+              variant={isPet ? 'pet' : 'primary'}
             />
           </div>
         )}
@@ -122,13 +122,13 @@ export const UnifiedCentralWithMascot: React.FC<UnifiedCentralWithMascotProps> =
       <footer className="w-full shrink-0 flex flex-col items-center z-20 gap-3">
         {displayBenefits.length > 0 && (
           <div className="w-[95%] z-20">
-            <BenefitsList benefits={displayBenefits} variant={isPet ? 'badges-horizontal' : 'default'} textColor="text-gray-800" />
+            <BenefitsList benefits={displayBenefits} variant={isPet ? 'badges-horizontal' : 'list-vertical'} textColor="text-gray-800" />
           </div>
         )}
         
         {cta && (
           <div className="w-[85%] mt-1">
-             <ArtCta ctaText={cta} variant={isPet ? 'pet' : 'default'} fullWidth />
+             <ArtCta ctaText={cta} variant={isPet ? 'pet' : 'primary'} fullWidth />
           </div>
         )}
       </footer>

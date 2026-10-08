@@ -278,7 +278,7 @@ export async function processProductImage(
 
     rawCutoutBlob = await removeBackground(preprocessed.blob, {
       publicPath: 'https://staticimgly.com/@imgly/background-removal-data/1.7.0/dist/',
-      model: 'small', // Modelo leve e super rápido (substitui o pesado isnet_fp16)
+      model: 'isnet_fp16', // Modelo leve e super rápido (substitui o pesado isnet_fp16)
       device: 'cpu',
       proxyToWorker: true,
       progress: (key, current, total) => {

@@ -12,6 +12,7 @@ import { SemanticProductImage } from '../SemanticProductImage';
 import { getDynamicTitleSize } from '../../../lib/typography';
 
 export interface UnifiedCentralProps {
+  codigo?: string;
   scope: 'AGRO' | 'PET';
   title: string;
   highlight: string;
@@ -37,6 +38,7 @@ export interface UnifiedCentralProps {
  * Adapta tipografia, cores e mascotes com base no `scope`.
  */
 export const UnifiedCentral: React.FC<UnifiedCentralProps> = ({
+  codigo,
   scope,
   title,
   highlight,
@@ -92,7 +94,7 @@ export const UnifiedCentral: React.FC<UnifiedCentralProps> = ({
       <div className="flex-1 min-h-0 w-full relative flex flex-col items-center justify-center my-2">
         {processedProduct && (
           <div className="w-[95%] h-full flex flex-col items-center justify-center relative">
-            <SemanticProductImage src={processedProduct} renderizacao={renderizacao} />
+            <SemanticProductImage src={processedProduct} renderizacao={renderizacao} codigo={codigo} />
           </div>
         )}
         
@@ -104,7 +106,7 @@ export const UnifiedCentral: React.FC<UnifiedCentralProps> = ({
               oldPrice={oldPrice}
               currentPrice={currentPrice}
               condition={condition}
-              variant={isPet ? 'pet' : 'default'}
+              variant={isPet ? 'pet' : 'primary'}
             />
           </div>
         )}
@@ -114,13 +116,13 @@ export const UnifiedCentral: React.FC<UnifiedCentralProps> = ({
       <footer className="w-full shrink-0 flex flex-col items-center z-20 gap-3">
         {displayBenefits.length > 0 && (
           <div className={`w-[95%] z-20 ${textBackground ? 'bg-white/95 backdrop-blur-sm rounded-xl p-3 shadow-lg border border-white/40' : ''}`}>
-            <BenefitsList benefits={displayBenefits} variant={isPet ? 'badges-horizontal' : 'default'} textColor="text-gray-800" />
+            <BenefitsList benefits={displayBenefits} variant={isPet ? 'badges-horizontal' : 'list-vertical'} textColor="text-gray-800" />
           </div>
         )}
         
         {cta && (
           <div className="w-[85%] mt-1">
-             <ArtCta ctaText={cta} variant={isPet ? 'pet' : 'default'} fullWidth />
+             <ArtCta ctaText={cta} variant={isPet ? 'pet' : 'primary'} fullWidth />
           </div>
         )}
       </footer>

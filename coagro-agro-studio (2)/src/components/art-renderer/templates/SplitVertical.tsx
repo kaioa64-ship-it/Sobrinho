@@ -10,6 +10,7 @@ import { RenderizacaoVisual } from '../../../types/agro';
 import { SemanticProductImage } from '../SemanticProductImage';
 
 interface SplitVerticalTemplateProps {
+  codigo?: string;
   title: string;
   highlight: string;
   titleColor: string;
@@ -30,6 +31,7 @@ interface SplitVerticalTemplateProps {
 }
 
 export const SplitVertical: React.FC<SplitVerticalTemplateProps> = ({
+  codigo,
   title,
   highlight,
   titleColor,
@@ -87,7 +89,7 @@ export const SplitVertical: React.FC<SplitVerticalTemplateProps> = ({
                 marginLeft: productMarginLeft,
                 transform: 'translateY(-3%)'
              }} className="h-full flex items-center justify-center pointer-events-none">
-                 <SemanticProductImage src={processedProduct} renderizacao={renderizacao} />
+                 <SemanticProductImage src={processedProduct} renderizacao={renderizacao} codigo={codigo} />
              </div>
           ) : null}
         </div>

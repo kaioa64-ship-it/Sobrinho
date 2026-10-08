@@ -11,6 +11,7 @@ import { RenderizacaoVisual } from '../../../types/agro';
 import { SemanticProductImage } from '../SemanticProductImage';
 
 export interface UnifiedSplitWithMascotProps {
+  codigo?: string;
   scope: 'AGRO' | 'PET';
   title: string;
   highlight: string;
@@ -26,6 +27,7 @@ export interface UnifiedSplitWithMascotProps {
   benefits: string[];
   cta: string;
   renderizacao?: RenderizacaoVisual;
+  textBackground?: boolean;
 }
 
 /**
@@ -35,6 +37,7 @@ export interface UnifiedSplitWithMascotProps {
  * Produto fica à esquerda, blocos de texto/preço à direita.
  */
 export const UnifiedSplitWithMascot: React.FC<UnifiedSplitWithMascotProps> = ({
+  codigo,
   scope,
   title,
   highlight,
@@ -50,6 +53,7 @@ export const UnifiedSplitWithMascot: React.FC<UnifiedSplitWithMascotProps> = ({
   benefits = [],
   cta,
   renderizacao,
+  textBackground = false,
 }) => {
   const isPet = scope === 'PET';
 
@@ -88,7 +92,7 @@ export const UnifiedSplitWithMascot: React.FC<UnifiedSplitWithMascotProps> = ({
         {/* Lado Esquerdo: Produto */}
         <div className="w-[55%] h-full flex flex-col items-center justify-end pb-8 relative z-40">
           {processedProduct && (
-            <SemanticProductImage src={processedProduct} renderizacao={renderizacao} />
+            <SemanticProductImage src={processedProduct} renderizacao={renderizacao} codigo={codigo} />
           )}
         </div>
 
@@ -108,7 +112,7 @@ export const UnifiedSplitWithMascot: React.FC<UnifiedSplitWithMascotProps> = ({
 
           {displayBenefits.length > 0 && (
             <div className="mt-4 w-full">
-              <BenefitsList benefits={displayBenefits} variant={isPet ? 'badges-horizontal' : 'default'} textColor="text-white" />
+              <BenefitsList benefits={displayBenefits} variant={isPet ? 'badges-horizontal' : 'list-vertical'} textColor="text-white" />
             </div>
           )}
 
@@ -119,7 +123,7 @@ export const UnifiedSplitWithMascot: React.FC<UnifiedSplitWithMascotProps> = ({
                 oldPrice={oldPrice}
                 currentPrice={currentPrice}
                 condition={condition}
-                variant={isPet ? 'pet' : 'default'}
+                variant={isPet ? 'pet' : 'primary'}
               />
             </div>
           )}
@@ -130,7 +134,7 @@ export const UnifiedSplitWithMascot: React.FC<UnifiedSplitWithMascotProps> = ({
       <footer className="w-full shrink-0 flex flex-col items-center z-20">
         {cta && (
           <div className="w-[90%]">
-             <ArtCta ctaText={cta} variant={isPet ? 'pet' : 'default'} fullWidth />
+             <ArtCta ctaText={cta} variant={isPet ? 'pet' : 'primary'} fullWidth />
           </div>
         )}
       </footer>
