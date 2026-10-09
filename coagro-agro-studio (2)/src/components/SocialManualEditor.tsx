@@ -505,9 +505,18 @@ export const SocialManualEditor: React.FC<SocialManualEditorProps> = ({
                   onChange={(e) => onChange({ ...data, theme: e.target.value })}
                   className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm font-bold text-gray-800 focus:ring-2 focus:border-[#004d40] transition-all"
                 >
-                  <option value="campo-agro">Verde Coagro (Institucional)</option>
-                  <option value="azul-coagro">Azul Coagro (Publicitário)</option>
-                  <option value="clean-branco">Branco / Clean (Invertido)</option>
+                  {appMode === 'PET' ? (
+                    <>
+                      <option value="azul-coagro">Azul Pet (Institucional)</option>
+                      <option value="clean-branco">Branco / Clean (Invertido)</option>
+                    </>
+                  ) : (
+                    <>
+                      <option value="campo-agro">Verde Coagro (Institucional)</option>
+                      <option value="azul-coagro">Azul Coagro (Publicitário)</option>
+                      <option value="clean-branco">Branco / Clean (Invertido)</option>
+                    </>
+                  )}
                 </select>
               </div>
 
@@ -523,8 +532,8 @@ export const SocialManualEditor: React.FC<SocialManualEditorProps> = ({
                     className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm font-bold text-gray-800 focus:ring-2 focus:border-[#004d40] transition-all"
                   >
                     <option value="branco">Branco (Padrão)</option>
-                    <option value="verde">Verde Institucional</option>
-                    <option value="azul">Azul Publicitário</option>
+                    {appMode !== 'PET' && <option value="verde">Verde Institucional</option>}
+                    <option value="azul">{appMode === 'PET' ? 'Azul Pet' : 'Azul Publicitário'}</option>
                     <option value="laranja">Laranja (Alerta)</option>
                   </select>
                 </div>

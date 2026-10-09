@@ -8,6 +8,7 @@
 * `9b05640` — Fase 2 (Bloco 1 & 2): Higienização de scripts órfãos e Template `PromoPetA4`
 * `ff3d3e7` — Fase 2 (Bloco 3 & 4): Desacoplamento `useArtworkForm` e Cache IndexedDB por SKU
 * `86884b4` — Fase 2 (Refinamento): Nomenclatura dinâmica de download, pílulas de CTA e automação E2E
+* `Em andamento` — Fase 3: Blindagem rigorosa de contraste de marca (Agro ↔ Pet), isolamento de paletas e Matriz E2E com 12 cenários reais
 
 ---
 
@@ -17,20 +18,22 @@
 |---|---|---|
 | **P0.1 Remoção do `/api/hf-token`** | ✅ **CONCLUÍDO** | Endpoint removido do backend; zero consumo no frontend (`grep` vazio). |
 | **P0.3 Rate Limiting** | ✅ **CONCLUÍDO** | `express-rate-limit` ativo no backend (15 req/min por IP) em `server/middleware/rateLimit.ts`. |
-| **P1.1 Logo por Scope** | ✅ **CONCLUÍDO** | `SingleArtRenderer.tsx` consome `ScopeId` e `brand.config.ts`. Logo Pet nunca vaza em Agro e vice-versa. |
+| **P1.1 Logo por Scope & Contraste** | ✅ **CONCLUÍDO** | `brand.config.ts`: `resolveLogoVariant` proíbe logo branca em fundo claro (`isLight === true` força `azul`). Logo Pet nunca vaza em Agro. |
 | **P1.2 Roteamento Pet sem Preço** | ✅ **CONCLUÍDO** | Templates informativos recebem escopo e paleta Pet sem fallback genérico para verde Agro. |
 | **P1.3–P1.5 Cores & Impressão/Lote** | ✅ **CONCLUÍDO** | `PromoPetA4.tsx` criado como layout dedicado A4; paletas unificadas em `brand.config.ts`. |
 | **P1.6 Rota 404 em `/api/*`** | ✅ **CONCLUÍDO** | Middleware em `server.ts:40-42` devolve status 404 em JSON sem engolir pelo SPA index.html. |
 | **P1.7 Tratamento de Erros de IA** | ✅ **CONCLUÍDO** | Erros do Gemini capturados e mascarados com mensagens amigáveis em `server/routes/generate.ts`. |
+| **P1.8 Isolamento de Paleta no Editor** | ✅ **CONCLUÍDO** | Dropdown de temas no `SocialManualEditor` filtra estritamente as opções da marca ativa (Pet nunca exibe Verde Coagro). |
+| **P1.9 Troca a Quente Agro ↔ Pet** | ✅ **CONCLUÍDO** | `App.tsx` reseta temas incompatíveis na alternância de escopo (ex: `campo-agro` vira `clean-branco` no Pet). |
 | **P2.1 Erros de TypeScript** | ✅ **CONCLUÍDO** | **0 erros**. `tsc --noEmit` exit 0 no app, testes e servidor (`tsconfig.server.json`). |
 | **P2.2 Dependências & Lockfile** | ✅ **CONCLUÍDO** | TS pinado em `5.9.3`, `bun.lock` excluído, mantido apenas `package-lock.json` alinhado com Vite 8. |
 | **P2.3 Quebra de Monólitos** | ✅ **CONCLUÍDO** | `server.ts` decomposto em rotas e serviços; `InputPanel.tsx` desacoplado via hook `useArtworkForm` (−74% linhas). |
-| **P2.4 Testes Automatizados (Vitest)** | ✅ **CONCLUÍDO** | **133 testes passando** em 9 arquivos de spec (`npm test` rodando em < 1s). |
+| **P2.4 Testes Automatizados (Vitest)** | ✅ **CONCLUÍDO** | **134 testes passando** em 9 arquivos de spec (`npm test` rodando em < 1s). |
 | **P3.1 Higienização de Scripts** | ✅ **CONCLUÍDO** | Deletados 8 scripts órfãos de DNS/APIs obsoletas da pasta `tests/`. |
 | **P3.4 Centralização de Marca** | ✅ **CONCLUÍDO** | Paletas, logos e regras centralizadas em `brand.config.ts`. |
 | **P3.6 Fontes 100% Offline** | ✅ **CONCLUÍDO** | Fontes Exo 2 e Inter baixadas em `.woff2` locais com caminhos relativos em `src/assets/fonts/`. |
 | **P3.7 Persistência por SKU** | ✅ **CONCLUÍDO** | IndexedDB local `CoagroStudioDB` via `productStorage.ts` com busca em 0ms. |
-| **P3.8 Automação Visual E2E** | ✅ **CONCLUÍDO** | Script `run-visual-tests.mjs` validando 5 cenários via Google Chrome CDP Headless local. |
+| **P3.8 Matriz Visual E2E (12 Cenários)** | ✅ **CONCLUÍDO** | `run-matrix-visual-tests.mjs`: 12 capturas densas com produtos reais (adubos e rações), auditando Agro/Pet, fundos claros/escuros e cartazes A4. |
 | **P3.9 Nomenclatura Dinâmica & CTAs** | ✅ **CONCLUÍDO** | Downloads PNG/PDF e Google Drive geram prefixos `coagro-pet-*` / `coagro-agro-*`; pílulas de WhatsApp no editor. |
 | **P3.10 Higienização de ERP & NFe** | ✅ **CONCLUÍDO** | Módulo `erpSanitizer.ts` traduzindo abreviações brutas (ex: RAC -> Ração, 20L) no lote Excel e manuais. |
 | **P3.11 Template Vertical WhatsApp (9:16)** | ✅ **CONCLUÍDO** | Template `WhatsappStatusVertical.tsx` integrado no seletor ("Status Zap") e Helena CRM. |
@@ -140,10 +143,10 @@
 
 | Verificação | Comando | Resultado Obtido |
 |---|---|---|
-| **Testes Unitários** | `npm test` | **133 passed** (100% de sucesso) |
+| **Testes Unitários** | `npm test` | **134 passed** (100% de sucesso) |
 | **Linting & Checagem de Tipos** | `npm run lint` | **Exit 0** (3 tsconfigs validados) |
 | **Compilação de Produção** | `npm run build` | **Exit 0** (Vite build em ~3.1s) |
-| **Validação Visual E2E** | `node tests/e2e-visual/run-visual-tests.mjs` | **5/5 cenários validados** no Chrome local |
+| **Matriz Visual E2E** | `node tests/e2e-visual/run-matrix-visual-tests.mjs` | **12/12 cenários validados** (screenshots densos > 28 KB com produtos e contraste auditados) |
 | **Servidor em Desenvolvimento** | `npm run dev` | **HTTP 200** ativo na porta 3000 |
 | **Status Git** | `git status` | Árvore limpa e sincronizada com `origin/main` |
 

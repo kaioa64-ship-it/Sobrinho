@@ -93,8 +93,17 @@ describe('getPalette', () => {
     expect(p.titleFont).not.toContain('uppercase');
   });
 
-  it('PET ignora isLight (paleta própria da marca)', () => {
-    expect(getPalette('PET', true)).toEqual(getPalette('PET', false));
+  it('PET em fundo claro: alto contraste com azul escuro e subtítulo escuro', () => {
+    const p = getPalette('PET', true);
+    expect(p.titleColor).toBe('text-[#001C71]');
+    expect(p.subtitleColor).toBe('text-gray-700');
+    expect(p.highlightColor).toBe('text-[#E96C2C]');
+  });
+
+  it('PET em fundo escuro: azul claro e subtítulo claro', () => {
+    const p = getPalette('PET', false);
+    expect(p.titleColor).toBe('text-[#4897D0]');
+    expect(p.subtitleColor).toBe('text-gray-100');
   });
 });
 
@@ -107,9 +116,13 @@ describe('resolveLogoVariant', () => {
     expect(resolveLogoVariant(true)).toBe('h-azul');
   });
 
-  it('a escolha manual do operador tem precedência sobre o contraste', () => {
+  it('a escolha manual do operador respeita segurança de contraste', () => {
     expect(resolveLogoVariant(false, 'h-branca')).toBe('h-branca');
     expect(resolveLogoVariant(true, 'v-azul')).toBe('v-azul');
+    // Segurança: se operador pedir branca em fundo claro, forçado azul
+    expect(resolveLogoVariant(true, 'h-mono-branca')).toBe('h-azul');
+    // Segurança: se operador pedir azul em fundo escuro, forçado branca
+    expect(resolveLogoVariant(false, 'h-azul')).toBe('h-mono-branca');
   });
 });
 

@@ -67,9 +67,9 @@ export interface BrandPalette {
 export function getPalette(scopeId: ScopeId, isLight: boolean = false): BrandPalette {
   if (isPetScope(scopeId)) {
     return {
-      titleColor: 'text-[#4897D0]',
+      titleColor: isLight ? 'text-[#001C71]' : 'text-[#4897D0]',
       highlightColor: 'text-[#E96C2C]',
-      subtitleColor: 'text-gray-100',
+      subtitleColor: isLight ? 'text-gray-700' : 'text-gray-100',
       titleFont: 'font-exo2 font-black tracking-tight',
     };
   }
@@ -96,8 +96,19 @@ export function resolveLogoVariant(
   isLight: boolean,
   explicit?: LogoVariant
 ): LogoVariant {
-  if (explicit) return explicit;
-  return isLight ? 'h-azul' : 'h-mono-branca';
+  // REGRA DE SEGURANÇA VISUAL & CONTRASTE (Grupo Coagro):
+  // 1. Em fundo claro (clean-branco), NUNCA permitir logo branca (fica invisível).
+  if (isLight) {
+    if (explicit === 'h-mono-branca' || explicit === 'h-branca') return 'h-azul';
+    if (explicit === 'v-mono-branca' || explicit === 'v-branca') return 'v-azul';
+    return explicit || 'h-azul';
+  }
+
+  // 2. Em fundo escuro ou foto, NUNCA permitir logo azul escura (perde contraste contra verde/azul escuro).
+  if (explicit === 'h-azul') return 'h-mono-branca';
+  if (explicit === 'v-azul') return 'v-mono-branca';
+
+  return explicit || 'h-mono-branca';
 }
 
 /**

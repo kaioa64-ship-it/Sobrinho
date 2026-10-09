@@ -10,6 +10,7 @@ import { ArtCta } from '../ArtCta';
 import { RenderizacaoVisual } from '../../../types/agro';
 import { SemanticProductImage } from '../SemanticProductImage';
 import { getDynamicTitleSize } from '../../../lib/typography';
+import { getPalette } from '../../../lib/brand.config';
 
 export interface UnifiedCentralProps {
   codigo?: string;
@@ -58,14 +59,7 @@ export const UnifiedCentral: React.FC<UnifiedCentralProps> = ({
   isLight = false,
 }) => {
   const isPet = scope === 'PET';
-
-  // Cores dinâmicas com suporte a fundo claro/invertido
-  const titleColor = isLight ? 'text-[#004d40]' : isPet ? 'text-[#4897D0]' : 'text-white';
-  const highlightColor = isPet ? 'text-[#E96C2C]' : 'text-[#ffab00]';
-  const subtitleColor = isLight ? 'text-gray-700' : isPet ? 'text-gray-200' : 'text-[#E5E7EB]';
-  
-  // Fonte: Agro usa Exo 2 Black, Pet usa Exo 2 Black / Arredondada
-  const titleFont = isPet ? 'font-exo2 font-black tracking-tight' : 'font-exo2 font-black uppercase tracking-tight';
+  const { titleColor, subtitleColor, highlightColor, titleFont } = getPalette(scope, isLight);
   
   const displayBenefits = benefits && benefits.length > 0 ? benefits.slice(0, 3) : [];
 

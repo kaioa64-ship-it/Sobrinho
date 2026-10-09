@@ -81,6 +81,10 @@ export default function App() {
       // Cartaz físico: no escopo Pet o padrão sugerido é o template A4 dedicado,
       // que usa a paleta e a logo oficiais da Coagro Pet (nunca o verde Agro).
       setPosterTemplate('promo-pet-a4');
+      setSocialManualData(prev => ({
+        ...prev,
+        theme: prev.theme === 'campo-agro' ? 'clean-branco' : prev.theme
+      }));
     } else {
       setCanvasTheme('campo-agro');
       setTemplateLayout(resolveDefaultTemplate(canvasFormat, 'AGRO'));
@@ -89,7 +93,6 @@ export default function App() {
     }
   }, [appMode]);
 
-  // Lógica Automática de Cor da Logo (Garante contraste com o fundo)
   useEffect(() => {
     // 'branco' não existe no tipo CanvasTheme (legado); mantido apenas por tolerância em runtime.
     const isLightBackground = canvasTheme === 'clean-branco' || (canvasTheme as string) === 'branco' || socialManualData.theme === 'clean-branco';
@@ -99,6 +102,106 @@ export default function App() {
       setLogoVariant('h-branca');
     }
   }, [canvasTheme, socialManualData.theme]);
+
+  // Ponte de Automação Segura para Testes Visuais E2E
+  if (typeof window !== 'undefined') {
+    (window as any).__studioTestBridge = {
+      setProductImage,
+      setCurrentContent,
+      setTemplateLayout,
+      setCanvasFormat,
+      setCanvasTheme,
+      setAppMode: handleSetAppMode,
+      setModule: setCurrentModule,
+      setPosterTemplate,
+      setManualPosterData,
+      setSocialManualData: (patch: Partial<SocialManualData>) => {
+        const next = { ...socialManualData, ...patch };
+        setSocialManualData(next);
+        setCurrentContent({
+          ...EMPTY_AGRO_CONTENT,
+          linha: appMode,
+          textos_hero: {
+            titulo: next.titulo,
+            subtitulo: next.subtitulo,
+            palavra_destaque_ouro: '',
+          },
+          textos_da_arte: {
+            titulo_impacto: next.titulo,
+            subtitulo: next.subtitulo,
+            palavra_destaque: '',
+            bullets_tecnicos: next.diferenciais,
+            cta: next.cta || '',
+          },
+          diferenciais_tecnicos: next.diferenciais,
+          modulo_preco: {
+            ativo: Boolean(next.valorPor),
+            valor_de: next.valorDe,
+            valor_por: next.valorPor,
+          },
+          fundo_imagem_url: next.backgroundImageUrl || '',
+          fundo_imagem: next.backgroundImageUrl || '',
+          fundo_cor_hex: next.backgroundColorHex || '',
+          tipo_postagem: next.valorPor ? 'promocao' : 'informativo',
+          fundo_texto: next.textBackground,
+        });
+        if (next.theme) setCanvasTheme(next.theme as any);
+      },
+      setFullArtwork: (params: {
+        title: string;
+        subtitle?: string;
+        priceDe?: string;
+        pricePor?: string;
+        productImg?: string;
+        scope?: 'AGRO' | 'PET';
+        template?: TemplateLayout;
+        format?: CanvasFormat;
+        theme?: CanvasTheme;
+      }) => {
+        if (params.scope) handleSetAppMode(params.scope);
+        if (params.template) setTemplateLayout(params.template);
+        if (params.format) setCanvasFormat(params.format);
+        if (params.theme) setCanvasTheme(params.theme);
+        if (params.productImg !== undefined) setProductImage(params.productImg);
+
+        const newManual: SocialManualData = {
+          titulo: params.title || '',
+          subtitulo: params.subtitle || '',
+          valorDe: params.priceDe || '',
+          valorPor: params.pricePor || '',
+          diferenciais: ['Tanque anatômico 16L', 'Bico cônico regulável', 'Válvula de alívio'],
+          theme: params.theme || (params.scope === 'PET' ? 'clean-branco' : 'campo-agro'),
+          cta: 'PEÇA NO WHATSAPP',
+          badge: 'Sem Selo',
+        };
+        setSocialManualData(newManual);
+
+        setCurrentContent({
+          ...EMPTY_AGRO_CONTENT,
+          linha: params.scope || 'AGRO',
+          textos_hero: {
+            titulo: params.title || '',
+            subtitulo: params.subtitle || '',
+            palavra_destaque_ouro: '',
+          },
+          textos_da_arte: {
+            titulo_impacto: params.title || '',
+            subtitulo: params.subtitle || '',
+            palavra_destaque: '',
+            bullets_tecnicos: ['Tanque anatômico 16L', 'Bico cônico regulável', 'Válvula de alívio'],
+            cta: 'PEÇA NO WHATSAPP',
+          },
+          diferenciais_tecnicos: ['Tanque anatômico 16L', 'Bico cônico regulável', 'Válvula de alívio'],
+          modulo_preco: {
+            ativo: Boolean(params.pricePor),
+            valor_de: params.priceDe || '',
+            valor_por: params.pricePor || '',
+          },
+          tipo_postagem: params.pricePor ? 'promocao' : 'informativo',
+        });
+      }
+    };
+  }
 
   const handleSelectTemplate = (template: TemplateLayout) => {
     setTemplateLayout(template);

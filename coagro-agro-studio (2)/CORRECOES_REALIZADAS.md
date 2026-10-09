@@ -756,7 +756,31 @@ Consolidado das verificações desta rodada:
 - Integração comercial com selo de atendimento direto, badge de status exclusivo, tipografia Exo 2 monumental de preço e card de ação rápida com botão oficial WhatsApp (Helena CRM).
 - Suporte total aos dois escopos (`AGRO` e `PET`), respeitando a paleta e logotipos oficiais de cada marca.
 - Adicionado ao seletor de layout em [`SocialManualEditor.tsx`](src/components/SocialManualEditor.tsx) ("Status Zap") e registrado em [`SingleArtRenderer.tsx`](src/components/SingleArtRenderer.tsx).
-- Suíte de testes [`whatsappTemplate.test.ts`](tests/unit/whatsappTemplate.test.ts) criada, elevando a suíte para **133 testes unitários** 100% aprovados.
+- Suíte de testes [`whatsappTemplate.test.ts`](tests/unit/whatsappTemplate.test.ts) criada.
+
+### I. Blindagem de Contraste e Bateria Matriz E2E (12/12 Aprovados)
+- **Blindagem de Contraste e Marca:**
+  - `resolveLogoVariant` ([`brand.config.ts`](src/lib/brand.config.ts)): em fundos claros (`isLight = true`), é proibido o uso de logo branca (`h-mono-branca`), forçando estritamente a variante azul de alto contraste (`h-azul` / `v-azul`).
+  - `getPalette` ([`brand.config.ts`](src/lib/brand.config.ts)): ajustado para que o escopo `PET` em fundo claro utilize título azul escuro (`text-[#001C71]`) e subtítulo escuro (`text-gray-700`), eliminando qualquer vazamento de verde Agro no Pet.
+  - `UnifiedCentral.tsx` e `UnifiedSplit.tsx`: unificados para consumirem `getPalette(scope, isLight)`, eliminando cores hardcoded nos templates.
+  - `SocialManualEditor.tsx`: escopo de cores restrito por marca (elimina opção de Verde Agro no escopo Pet).
+  - `App.tsx`: alternância a quente entre `AGRO` e `PET` sanitiza resíduos de tema anterior e registra ponte de automação atômica (`__studioTestBridge.setFullArtwork`).
+- **Bateria Matriz Visual Automatizada E2E:**
+  - Criado [`run-matrix-visual-tests.mjs`](tests/e2e-visual/run-matrix-visual-tests.mjs) executando bateria com Chrome Headless (CDP) cobrindo **12 cenários exaustivos**:
+    1. AGRO: Status Zap (9:16) em Fundo Escuro Oficial (107.1 KB)
+    2. AGRO: Status Zap (9:16) em Clean Branco (106.9 KB)
+    3. AGRO: Central (1:1) em Verde Coagro (47.6 KB)
+    4. AGRO: Central (1:1) em Clean Branco com Logo Azul (51.6 KB)
+    5. AGRO: Split (1:1) em Verde Coagro (57.7 KB)
+    6. AGRO: Promo Simples (1:1) em Fundo Branco (34.7 KB)
+    7. PET: Troca Imediata a Quente (1:1) com CoagroPetLogo (50.4 KB)
+    8. PET: Central (1:1) em Clean Branco sem resíduo verde (51.6 KB)
+    9. PET: Status Zap (9:16) em Azul Pet Oficial (110.8 KB)
+    10. PET: Split (1:1) em Azul Pet Oficial (65.2 KB)
+    11. CARTAZ A4: PromoPetA4 Azul/Ouro Pet em gôndola (28.3 KB)
+    12. CARTAZ A4: PromoAgroA4 Verde/Ouro Agro em gôndola (33.2 KB)
+  - **Resultado:** **12 de 12 cenários APROVADOS (100%)** com densidade visual sólida (> 25 KB) e zero telas vazias.
+  - Suíte de testes unitários elevada para **134 testes** (Vitest exit 0) e TypeCheck (npm run lint exit 0).
 
 ---
 

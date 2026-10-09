@@ -10,4 +10,5 @@ dist_electron/
 scratch/
 *.zip
 tests/e2e-visual/temp-profile/
+tests/e2e-visual/matrix-profile/
 tests/e2e-visual/screenshots/
