@@ -116,8 +116,12 @@ export const WhatsappStatusVertical: React.FC<WhatsappStatusVerticalProps> = ({
       )}
 
       {/* --- ZONA 1: CABEÇALHO & IDENTIDADE --- */}
-      <header className="relative z-10 flex items-center justify-between w-full pt-[1cqw]">
-        <div className="w-[32cqw] max-w-[140px] flex items-center">
+      <header className={`relative z-10 flex items-center w-full pt-[1cqw] ${
+        hasBadge ? 'justify-between' : 'justify-center'
+      }`}>
+        <div className={`flex items-center ${
+          hasBadge ? 'w-[32cqw] max-w-[140px]' : 'w-[38cqw] max-w-[170px] justify-center'
+        }`}>
           {isPet ? (
             <CoagroPetLogo className="w-full h-auto drop-shadow-md" />
           ) : (

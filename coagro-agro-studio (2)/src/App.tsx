@@ -18,7 +18,7 @@ import { resolveDefaultTemplate } from './lib/layoutRules';
 import { CommunicationMode } from './lib/communicationMode';
 import { toPng, toJpeg } from 'html-to-image';
 import { jsPDF } from 'jspdf';
-import { Eye, Sparkles, Copy, Download, Columns2, Maximize2, Box, FileText } from 'lucide-react';
+import { Eye, Sparkles, Copy, Download, Columns2, Maximize2, Box, FileText, Printer } from 'lucide-react';
 
 export default function App() {
   // Estado inicial 100% zerado - sem nenhum produto ou texto pré-carregado
@@ -157,6 +157,7 @@ export default function App() {
         template?: TemplateLayout;
         format?: CanvasFormat;
         theme?: CanvasTheme;
+        badge?: string;
       }) => {
         if (params.scope) handleSetAppMode(params.scope);
         if (params.template) setTemplateLayout(params.template);
@@ -172,7 +173,7 @@ export default function App() {
           diferenciais: ['Tanque anatômico 16L', 'Bico cônico regulável', 'Válvula de alívio'],
           theme: params.theme || (params.scope === 'PET' ? 'clean-branco' : 'campo-agro'),
           cta: 'PEÇA NO WHATSAPP',
-          badge: 'Sem Selo',
+          badge: params.badge || 'Sem Selo',
         };
         setSocialManualData(newManual);
 
@@ -333,6 +334,38 @@ export default function App() {
       pdf.save(`${prefix}-${suffix}-${Date.now()}.pdf`);
     } catch (err: any) {
       alert('Erro ao gerar PDF: ' + err.message);
+    }
+  };
+
+  const handlePrintCanvas = async (elementId: string) => {
+    try {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      const dataUrl = await toPng(el, { quality: 0.98, pixelRatio: 2 });
+      const printWindow = window.open('', '_blank');
+      if (!printWindow) {
+        alert('Por favor, permita pop-ups no navegador para imprimir o cartaz diretamente.');
+        return;
+      }
+      printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <title>Imprimir Cartaz Coagro</title>
+            <style>
+              @page { size: A4 portrait; margin: 0; }
+              body { margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; width: 100vw; height: 100vh; background: #fff; }
+              img { width: 100%; height: 100%; object-fit: contain; }
+            </style>
+          </head>
+          <body>
+            <img src="${dataUrl}" onload="window.print(); window.close();" />
+          </body>
+        </html>
+      `);
+      printWindow.document.close();
+    } catch (err: any) {
+      alert('Erro ao preparar impressão: ' + err.message);
     }
   };
 
@@ -871,14 +904,22 @@ export default function App() {
                       className="flex-1 py-3 bg-[#d67022] hover:bg-[#b55b17] text-white rounded-xl text-xs sm:text-sm font-bold font-exo2 tracking-wide uppercase flex items-center justify-center gap-1 sm:gap-2 shadow-sm transition active:scale-95 cursor-pointer"
                     >
                       <Download className="w-4 h-4 sm:w-5 sm:h-5" />
-                      Baixar PNG
+                      PNG
                     </button>
                     <button
                       onClick={() => handleDownloadPdf('preview-poster-a4', 'cartaz-a4')}
                       className="flex-1 py-3 bg-[#004d40] hover:bg-[#00382e] text-white rounded-xl text-xs sm:text-sm font-bold font-exo2 tracking-wide uppercase flex items-center justify-center gap-1 sm:gap-2 shadow-sm transition active:scale-95 cursor-pointer"
                     >
                       <FileText className="w-4 h-4 sm:w-5 sm:h-5" />
-                      Baixar PDF
+                      PDF
+                    </button>
+                    <button
+                      onClick={() => handlePrintCanvas('preview-poster-a4')}
+                      className="flex-1 py-3 bg-[#0284c7] hover:bg-[#0369a1] text-white rounded-xl text-xs sm:text-sm font-bold font-exo2 tracking-wide uppercase flex items-center justify-center gap-1 sm:gap-2 shadow-sm transition active:scale-95 cursor-pointer"
+                      title="Imprimir cartaz diretamente em folha A4"
+                    >
+                      <Printer className="w-4 h-4 sm:w-5 sm:h-5" />
+                      Imprimir
                     </button>
                   </div>
                 </div>

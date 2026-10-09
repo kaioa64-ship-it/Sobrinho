@@ -117,33 +117,47 @@ A aplicação cresceu rápido e acumulou dívida técnica que precisa ser sanead
 
 ```mermaid
 graph TD
-    A["Fase 1: Limpeza & Bugs (Imediato)"] --> B["Fase 2: Autonomia em Loja (Curto Prazo)"]
-    B --> C["Fase 3: Mascotes com Propósito (Médio Prazo)"]
-    C --> D["Fase 4: Core White-Label & SaaS (Longo Prazo)"]
+    A["Fase 1: Limpeza, Tipos & Estabilização (Concluído)"] --> B["Fase 2: Autonomia em Loja, SKU & WhatsApp (Concluído)"]
+    B --> C["Fase 3: Mascotes & Brand Hub Corporativo (Médio Prazo)"]
+    C --> D["Fase 4: Core White-Label, IA de Catálogo & SaaS (Longo Prazo)"]
 ```
 
-### 🔴 FASE 1: Limpeza, Estabilização e Correção de Bugs (Imediato)
-1. **Saneamento do Bug de Recorte:** Garantir que o estado `cutoutImage` não seja sobrescrito na troca de temas ou paletas.
-2. **Tratamento na Troca Agro <-> Pet:** Forçar seleção defensiva de template padrão seguro (`resolveDefaultTemplate`) ao alternar de aba.
-3. **Refatoração dos componentes inflados:** Quebrar `InputPanel.tsx` e `SocialManualEditor.tsx` em partes limpas e de fácil manutenção.
-4. **Verificação de Build Offline:** Testar o executável Electron desconectado da internet para validar funcionamento 100% autônomo do modo manual.
+### 🔴 FASE 1: Limpeza, Estabilização e Correção de Bugs (Concluído)
+* Saneamento de monólitos (`server.ts` decomposto, `useArtworkForm` desacoplado).
+* Tipagem TypeScript estrita e 100% de fontes Exo 2 e Inter offline.
+* Blindagem de marcas Agro ↔ Pet em `brand.config.ts`.
 
-### 🟡 FASE 2: Refinamento de Operação em Loja (Curto Prazo)
-1. **Cache Local de Fotos por SKU (IndexedDB):** Permitir que o operador digite o código do produto e o sistema busque automaticamente o recorte já processado anteriormente.
-2. **Higienização de Siglas de ERP:** Dicionário interno para traduzir códigos e nomes abreviados de notas/planilhas em nomes comerciais limpos para os cartazes.
-3. **Templates Verticais de WhatsApp:** Criação de artes com leitura rápida e botões de chamada focados no atendimento via WhatsApp / Helena CRM.
+### 🟡 FASE 2: Refinamento de Operação em Loja & WhatsApp (Concluído)
+* Cache Local IndexedDB com busca instantânea por código/SKU (`productStorage.ts`).
+* Códigos de demonstração rápida (`00` para Pet e `01` para Agro).
+* Template oficial `WhatsappStatusVertical.tsx` (9:16) com ícone SVG canônico, preço monumental e cabeçalho dinâmico (logo centralizada sem selo, ou logo à esquerda com selo de campanha à direita).
+* Template `PromoPetA4.tsx` e unificação do preço em `PromoSimples.tsx`.
+* Botão de Impressão Direta em 1 Clique (`window.print()`) no preview de cartazes A4.
+* Matriz de testes visuais E2E com 15 cenários reais aprovados.
 
-### 🟢 FASE 3: Reintrodução dos Mascotes com Propósito (Médio Prazo)
-1. **Templates Exclusivos para Mascotes:** Criar de 2 a 3 layouts desenhados em torno do mascote (com balões de fala de ofertas, selos comemorativos e proporção ajustada), sem forçá-los nos grids genéricos de produto.
-2. **Módulo de RH e Endomarketing:** Aba independente para comunicados internos, aniversariantes do mês e boas-vindas da equipe Coagro.
+### 🟢 FASE 3: Cartazes de Gôndola, Brand Hub & Endomarketing (Médio Prazo)
+1. **🏷️ Otimização de Cartazes de Gôndola e Prateleira:**
+   * **Cartaz Duplo (Meia-Folha A5 / 2 por folha A4 em Paisagem):** Folha A4 em formato deitado (297x210mm) dividida ao meio em dois cartazes verticais com linha guia de corte tracejada. Resolve o desperdício de papel em produtos de prateleira média sem achatar nem perder legibilidade do preço.
+   * **Card Quadrado para Grade 4 por Folha A4:** Novo layout com proporção quadrada dedicado para etiquetas de gôndola compacta, desenhado do zero para que o preço monumental e centavos não sumam ao reduzir o tamanho.
+   * **Cálculo Dinâmico & Importação de % de Desconto (`XX% OFF`):**
+     - *Modo Individual:* cálculo automático a partir dos campos DE e POR (`((de - por) / de) * 100`) gerando selo dinâmico de economia (ex: `25% OFF`).
+     - *Modo Lote (Excel):* leitura direta da coluna de percentual de desconto das planilhas macro de campanha.
+2. **Templates Exclusivos para Mascotes:** Criar de 2 a 3 layouts desenhados em torno do mascote (com balões de fala de ofertas, selos comemorativos e proporção ajustada), sem forçá-los nos grids genéricos de produto.
+3. **Módulo de RH e Endomarketing:** Aba independente para comunicados internos, aniversariantes do mês e boas-vindas da equipe Coagro.
+4. **📁 Módulo Brand Hub / Documentos & Ativos Oficiais (Visão Corporativa):**
+   * **Papel Timbrado Oficial (A4):** Modelos corporativos padronizados para orçamentos formais, ofícios, ordens de serviço e comunicados de filial com cabeçalho oficial, CNPJ e rodapé institucional.
+   * **Central de Download de Ativos de Marca:** Portal seguro para o pessoal administrativo e de lojas baixarem as logomarcas oficiais em vetor SVG e PNG transparente em alta definição, impedindo o uso de arquivos de baixa qualidade ou deformados.
+   * **Pacote de Tipografia Oficial:** Distribuição interna dos arquivos `.ttf` e `.woff2` das fontes oficiais Exo 2 e Inter para instalação nos computadores das filiais.
+   * **Guia de Paleta Rápida:** Códigos hexadecimais com 1-clique para cópia (Verde Agro `#004d40`, Ouro `#ffab00`, Azul Pet `#001C71`, Apoio `#4897D0`).
 
-### 🔵 FASE 4: Modularização White-Label & Expansão (Longo Prazo)
+### 🔵 FASE 4: Modularização White-Label, IA de Catálogo & SaaS (Longo Prazo)
 1. **Core Desacoplado ("Sobrinho Studio"):** Motor genérico alimentado por arquivos de configuração de marca, permitindo uso pela Coagro ou por novas operações e empresas.
-2. **Plataforma Web SaaS:** Migração para modelo Web robusto com controle de filiais e cotas.
-3. **Multimídia & Vídeo Programático:** Geração de cartazes animados e carrosséis para Instagram via React Remotion.
+2. **IA Generativa Vinculada a Catálogo ERP:** Reabilitação da IA apenas quando integrada a banco de packshots reais indexados por SKU, gerando artes sem alucinações.
+3. **Plataforma Web SaaS:** Migração para modelo Web robusto com controle de filiais e cotas.
+4. **Multimídia & Vídeo Programático:** Geração de cartazes animados e carrosséis para Instagram via React Remotion.
 
 ---
 
 *Documento mantido pela equipe de Desenvolvimento & Operações do Grupo Coagro.*
-*Versão do Roadmap: 2.0.0 — Outubro/2026*
+*Versão do Roadmap: 2.3.0 — Outubro/2026*
 
