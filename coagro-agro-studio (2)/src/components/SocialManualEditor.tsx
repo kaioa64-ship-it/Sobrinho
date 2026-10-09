@@ -377,8 +377,33 @@ export const SocialManualEditor: React.FC<SocialManualEditorProps> = ({
             value={data.cta || ''}
             onChange={(e) => onChange({ ...data, cta: e.target.value })}
             placeholder="Ex: Garanta já o seu!"
-            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:border-[#004d40] transition-all font-medium text-gray-800"
+            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 transition-all font-medium text-gray-800"
           />
+          {/* Pílulas de CTA Rápidas (Agro / Pet / WhatsApp Helena CRM) */}
+          <div className="flex flex-wrap gap-1.5 mt-2">
+            {(isPet ? [
+              'GARANTA JÁ O SEU!',
+              'PEÇA NO WHATSAPP',
+              'O MELHOR PRO SEU PET',
+              'COMPRE NA LOJA OU NO ZAP',
+              'CONSULTE DISPONIBILIDADE'
+            ] : [
+              'GARANTA JÁ O SEU!',
+              'PEÇA NO WHATSAPP',
+              'FALE COM NOSSO CONSULTOR',
+              'OFERTA POR TEMPO LIMITADO',
+              'CONSULTE DISPONIBILIDADE'
+            ]).map((sugestao) => (
+              <button
+                key={sugestao}
+                type="button"
+                onClick={() => onChange({ ...data, cta: sugestao })}
+                className="text-[11px] font-semibold px-2.5 py-1 rounded-full border transition-all text-gray-600 bg-gray-50 border-gray-200 hover:bg-gray-100 hover:text-gray-900 active:scale-95"
+              >
+                {sugestao}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Preço (Escondido se for Informativo) */}

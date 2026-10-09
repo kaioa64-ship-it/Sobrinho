@@ -72,7 +72,8 @@ export const ExportToolbar: React.FC<ExportToolbarProps> = ({
         pixelRatio: 1.5,
       });
 
-      const filename = `coagro-agro-${(content.formato || 'post').toLowerCase()}-${Date.now()}.png`;
+      const prefix = appMode === 'PET' ? 'coagro-pet' : 'coagro-agro';
+      const filename = `${prefix}-${(content.formato || 'post').toLowerCase()}-${Date.now()}.png`;
       const link = document.createElement('a');
       link.download = filename;
       link.href = dataUrl;
@@ -109,16 +110,16 @@ export const ExportToolbar: React.FC<ExportToolbarProps> = ({
         pixelRatio: 1.5,
       });
 
-      const title =
-        content.caixa_titulo?.texto || 'Campanha Coagro Agro';
-
-      const fileName = `Coagro_Agro_${title.replace(/[^a-zA-Z0-9]/g, '_')}_${Date.now()}.png`;
+      const brandLabel = appMode === 'PET' ? 'Pet' : 'Agro';
+      const defaultTitle = `Campanha Coagro ${brandLabel}`;
+      const title = content.caixa_titulo?.texto || defaultTitle;
+      const fileName = `Coagro_${brandLabel}_${title.replace(/[^a-zA-Z0-9]/g, '_')}_${Date.now()}.png`;
 
       const uploaded = await uploadToGoogleDrive({
         name: fileName,
         mimeType: 'image/png',
         data: dataUrl,
-        description: `Arte oficial gerada para a divisão AGRO do Grupo Coagro.\nLegenda: ${content.legenda_post || ''}`,
+        description: `Arte oficial gerada para a divisão ${brandLabel.toUpperCase()} do Grupo Coagro.\nLegenda: ${content.legenda_post || ''}`,
       });
 
       if (uploaded.webViewLink) {

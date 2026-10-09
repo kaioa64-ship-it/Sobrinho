@@ -718,6 +718,36 @@ Consolidado das verificações desta rodada:
 
 ---
 
+## 2️⃣1️⃣ Fase 2 — Entregas de Operação em Loja & Automação
+
+### A. Higienização de Scripts Órfãos
+- Deletados 8 scripts obsoletos de diagnóstico de DNS/provedores (`test-bria-dns.mjs`, `test-fal-dns.mjs`, `test-groq.mjs`, `test-pollinations.mjs`, `test-all-models.mjs`, `test-multimodal.mjs`, `test-dns.mjs`, `test-doh.mjs`).
+- Corrigido `normalizeBenefits` em [`contentNormalizer.ts`](src/lib/contentNormalizer.ts): eliminada geração de bullets vazios `['']` quando recebia strings com espaços ou termos filtrados. Adicionados testes unitários específicos.
+
+### B. Template Dedicado PromoPetA4
+- Criado [`PromoPetA4.tsx`](src/components/art-renderer/templates/PromoPetA4.tsx): layout A4 de alta conversão para impressão em loja com a paleta oficial Coagro Pet (Azul `#004b87`, Azul de apoio `#4897D0`, Ouro `#ffab00`), tipografia Exo 2 / Inter e `<CoagroPetLogo>`.
+- Registrado em [`PosterRenderer.tsx`](src/components/PosterRenderer.tsx), [`PosterTemplateSelector.tsx`](src/components/PosterTemplateSelector.tsx), [`BatchReviewGrid.tsx`](src/components/BatchReviewGrid.tsx), [`BatchRendererModal.tsx`](src/components/BatchRendererModal.tsx) e [`App.tsx`](src/App.tsx).
+
+### C. Desacoplamento de Estado — `useArtworkForm`
+- Extraído o hook [`useArtworkForm.ts`](src/hooks/useArtworkForm.ts) contendo os 14 estados do formulário e handlers unificados.
+- [`InputPanel.tsx`](src/components/InputPanel.tsx) reduzido de 853 para 221 linhas (−74% de complexidade ciclomática), mantendo 100% de retrocompatibilidade de props.
+
+### D. Armazenamento Local por SKU (IndexedDB)
+- Criado [`productStorage.ts`](src/lib/productStorage.ts) com banco IndexedDB `CoagroStudioDB` e fallback em memória.
+- Permite persistência local offline de produtos, imagens recortadas e metadados.
+- Integrado a [`SocialManualEditor.tsx`](src/components/SocialManualEditor.tsx) e [`PosterManualEditor.tsx`](src/components/PosterManualEditor.tsx) para auto-preenchimento instantâneo (0ms) ao digitar o código/SKU.
+
+### E. Automação de Testes Visuais E2E com Chrome CDP
+- Criado [`run-visual-tests.mjs`](tests/e2e-visual/run-visual-tests.mjs) controlando o Google Chrome local via Chrome DevTools Protocol (`--remote-debugging-port=9222`) e WebSocket nativo do Node 22.
+- Bateria visual com 5 cenários com produtos reais, validação de temas claro/escuro e alternância Agro/Pet.
+- Corrigido contraste adaptativo no [`CanvasEmptyState.tsx`](src/components/art-renderer/CanvasEmptyState.tsx) para fundos claros (`clean-branco`).
+
+### F. Nomenclatura Dinâmica de Exportação & Pílulas de CTA
+- Downloads de PNG e PDF em [`App.tsx`](src/App.tsx) e [`ExportToolbar.tsx`](src/components/ExportToolbar.tsx) agora geram prefixos dinâmicos `coagro-pet-*` quando em modo Pet e `coagro-agro-*` em modo Agro.
+- Adicionadas pílulas rápidas de CTA em [`SocialManualEditor.tsx`](src/components/SocialManualEditor.tsx) com sugestões de WhatsApp (Helena CRM), consultor técnico e loja para agilizar a criação em loja.
+
+---
+
 ## 🔄 Como reverter
 
 ```bash

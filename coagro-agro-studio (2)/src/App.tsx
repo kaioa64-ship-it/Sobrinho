@@ -203,7 +203,8 @@ export default function App() {
       const el = document.getElementById(elementId);
       if (!el) return;
       const dataUrl = await toPng(el, { quality: 0.98, pixelRatio: 1.5 });
-      const filename = `coagro-agro-${suffix}-${Date.now()}.png`;
+      const prefix = appMode === 'PET' ? 'coagro-pet' : 'coagro-agro';
+      const filename = `${prefix}-${suffix}-${Date.now()}.png`;
       const link = document.createElement('a');
       link.download = filename;
       link.href = dataUrl;
@@ -225,7 +226,8 @@ export default function App() {
         compress: true
       });
       pdf.addImage(dataUrl, 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
-      pdf.save(`coagro-agro-${suffix}-${Date.now()}.pdf`);
+      const prefix = appMode === 'PET' ? 'coagro-pet' : 'coagro-agro';
+      pdf.save(`${prefix}-${suffix}-${Date.now()}.pdf`);
     } catch (err: any) {
       alert('Erro ao gerar PDF: ' + err.message);
     }
