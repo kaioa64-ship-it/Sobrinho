@@ -163,6 +163,7 @@ graph TD
 2. **IA Generativa Vinculada a Catálogo ERP:** Reabilitação da IA apenas quando integrada a banco de packshots reais indexados por SKU, gerando artes sem alucinações.
 3. **Plataforma Web SaaS:** Migração para modelo Web robusto com controle de filiais e cotas.
 4. **Multimídia & Vídeo Programático:** Geração de cartazes animados e carrosséis para Instagram via React Remotion.
+5. **TV Corporativa & Mídia Indoor (Digital Signage 16:9):** Modo de exibição full-screen em loop para Smart TVs nas lojas e balcões das filiais, alternando ofertas ativas, comunicados institucionais e cotações agrícolas em tempo real.
 
 ---
 
