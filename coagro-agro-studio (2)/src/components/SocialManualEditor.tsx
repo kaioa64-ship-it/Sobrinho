@@ -75,6 +75,22 @@ export const SocialManualEditor: React.FC<SocialManualEditorProps> = ({
             setCutoutImage(quickCutout);
             onSetProductImage(quickCutout);
             onChange({ ...data, preserveProductBackground: false });
+
+            if (data.codigo) {
+              import('../lib/productStorage').then(({ saveProductToStorage }) => {
+                saveProductToStorage({
+                  codigo: data.codigo!,
+                  nome: data.titulo || 'Produto',
+                  imagemRecortada: quickCutout,
+                  imagemOriginal: base64,
+                  valorDe: data.valorDe,
+                  valorPor: data.valorPor,
+                  diferenciais: data.diferenciais,
+                  templateLayout,
+                  updatedAt: Date.now()
+                }).catch(console.warn);
+              });
+            }
           } catch (err) {
             setCutoutImage(null);
             onSetProductImage(base64);
@@ -98,6 +114,22 @@ export const SocialManualEditor: React.FC<SocialManualEditorProps> = ({
       setCutoutImage(result.finalUrl);
       onSetProductImage(result.finalUrl);
       onChange({ ...data, preserveProductBackground: false });
+
+      if (data.codigo) {
+        import('../lib/productStorage').then(({ saveProductToStorage }) => {
+          saveProductToStorage({
+            codigo: data.codigo!,
+            nome: data.titulo || 'Produto',
+            imagemRecortada: result.finalUrl,
+            imagemOriginal: src,
+            valorDe: data.valorDe,
+            valorPor: data.valorPor,
+            diferenciais: data.diferenciais,
+            templateLayout,
+            updatedAt: Date.now()
+          }).catch(console.warn);
+        });
+      }
     } catch (e) {
       console.warn('Erro ao refinar recorte:', e);
     } finally {
@@ -129,30 +161,37 @@ export const SocialManualEditor: React.FC<SocialManualEditorProps> = ({
     }
   };
 
-  const handleCodigoChange = (codigoDigitado: string) => {
+  const handleCodigoChange = async (codigoDigitado: string) => {
     onChange({ ...data, codigo: codigoDigitado });
     
-    // Tentativa de puxar do banco interno
-    import('../data/productDatabase').then(({ getInternalProductByCode }) => {
-      const dbProduct = getInternalProductByCode(codigoDigitado);
-      if (dbProduct) {
-        // Encontrou o produto, vamos auto-preencher
-        const textos = dbProduct.jsonBase?.textos_da_arte;
+    if (!codigoDigitado || codigoDigitado.trim().length === 0) return;
+
+    try {
+      const { findProductBySku } = await import('../lib/productStorage');
+      const product = await findProductBySku(codigoDigitado);
+      if (product) {
         onChange({
           ...data,
           codigo: codigoDigitado,
-          titulo: dbProduct.nome,
-          subtitulo: textos?.subtitulo || '',
-          diferenciais: textos?.bullets_tecnicos || []
+          titulo: product.nome,
+          subtitulo: product.subtitulo || data.subtitulo,
+          valorDe: product.valorDe || data.valorDe,
+          valorPor: product.valorPor || data.valorPor,
+          diferenciais: product.diferenciais && product.diferenciais.length > 0 ? product.diferenciais : data.diferenciais
         });
-        if (dbProduct.imagemUrl) {
-          onSetProductImage(dbProduct.imagemUrl);
+        if (product.imagemRecortada) {
+          setCutoutImage(product.imagemRecortada);
+          onSetProductImage(product.imagemRecortada);
+        } else if (product.imagemUrl) {
+          onSetProductImage(product.imagemUrl);
         }
-        if (dbProduct.templateLayout) {
-          onTemplateChange(dbProduct.templateLayout);
+        if (product.templateLayout) {
+          onTemplateChange(product.templateLayout);
         }
       }
-    });
+    } catch (err) {
+      console.warn('Erro ao consultar cache de produtos por SKU:', err);
+    }
   };
 
   const isPet = appMode === 'PET';

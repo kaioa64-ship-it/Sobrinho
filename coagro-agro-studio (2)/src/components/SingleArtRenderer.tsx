@@ -261,7 +261,7 @@ export const SingleArtRenderer: React.FC<SingleArtRendererProps> = ({
         />
 
         {isArtEmpty && !['promo-text-only', 'promo-agro-a4', 'promo-mono-a4', 'promo-pet-a4'].includes(activeTemplate) ? (
-          <CanvasEmptyState logoVariant={logo} isStory={isStory} scope={scope} />
+          <CanvasEmptyState logoVariant={logo} isStory={isStory} scope={scope} isLight={isLight} />
         ) : activeTemplate === 'promo-text-only' ? (
           <PromoTextOnly 
             title={title || subtitle}

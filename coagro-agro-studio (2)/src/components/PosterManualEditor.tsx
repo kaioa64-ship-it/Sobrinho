@@ -34,15 +34,20 @@ export const PosterManualEditor: React.FC<PosterManualEditorProps> = ({ data, on
             onChange={(e) => {
               const novoCodigo = e.target.value;
               onChange({ ...data, codigo: novoCodigo });
-              import('../data/productDatabase').then(({ getInternalProductByCode }) => {
-                const dbProduct = getInternalProductByCode(novoCodigo);
-                if (dbProduct) {
-                  onChange({
-                    ...data,
-                    codigo: novoCodigo,
-                    titulo: dbProduct.nome
-                  });
-                }
+              if (!novoCodigo || novoCodigo.trim().length === 0) return;
+
+              import('../lib/productStorage').then(({ findProductBySku }) => {
+                findProductBySku(novoCodigo).then(product => {
+                  if (product) {
+                    onChange({
+                      ...data,
+                      codigo: novoCodigo,
+                      titulo: product.nome,
+                      valorDe: product.valorDe || data.valorDe,
+                      valorPor: product.valorPor || data.valorPor,
+                    });
+                  }
+                });
               });
             }}
             placeholder="Ex: 12345"

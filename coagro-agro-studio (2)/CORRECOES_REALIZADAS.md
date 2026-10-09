@@ -40,6 +40,8 @@
 | 21 | 🧹 **Higienização**: 8 scripts órfãos removidos + `normalizeBenefits` corrigido | `tests/` (8 removidos), [`contentNormalizer.ts`](src/lib/contentNormalizer.ts), [`contentNormalizer.test.ts`](tests/unit/contentNormalizer.test.ts) | 117 testes (+2) |
 | 22 | 🐾 **Template A4 Pet** (`PromoPetA4`) + tipo compartilhado `PosterTemplateLayout` | [`PromoPetA4.tsx`](src/components/art-renderer/templates/PromoPetA4.tsx) + 8 arquivos de registro | paleta Pet verificada; Pet vira padrão no escopo PET |
 | 23 | 🧠 **Desacoplamento de Estado (`useArtworkForm`)** | [`src/hooks/useArtworkForm.ts`](src/hooks/useArtworkForm.ts), [`InputPanel.tsx`](src/components/InputPanel.tsx) | **853 → 221 linhas** (−74%); zero alteração em props/CSS |
+| 24 | 🗄️ **Cache Local por SKU (IndexedDB)** + busca inteligente com ERP | [`src/lib/productStorage.ts`](src/lib/productStorage.ts), [`SocialManualEditor.tsx`](src/components/SocialManualEditor.tsx), [`PosterManualEditor.tsx`](src/components/PosterManualEditor.tsx), [`productStorage.test.ts`](tests/unit/productStorage.test.ts) | 123 testes (+6); recortes e dados persistidos localmente |
+| 25 | 👁️ **Contraste no Empty State em Fundo Claro** (descoberto via E2E) | [`CanvasEmptyState.tsx`](src/components/art-renderer/CanvasEmptyState.tsx), [`SingleArtRenderer.tsx`](src/components/SingleArtRenderer.tsx) | `isLight` aplicado; fim de textos brancos em fundo claro |
 
 ---
 
@@ -582,6 +584,28 @@ ocorrências de verde Agro (#004d40 / #006b59 / #00382e): NENHUMA
 - `npm run lint` → **Exit 0** (src, server e tests)
 - `npm test` → **Exit 0** (117 testes)
 - `vite build` → **Exit 0** (2.55s)
+
+---
+
+## 2️⃣4️⃣ Fase 2 · Etapa 4 — Cache Local de Produtos por SKU (IndexedDB) & ERP
+
+**A dor:** Quando o operador de loja digitava o código do produto e recortava uma foto, ao recarregar a página ou alternar de produto, o recorte e os dados eram perdidos.
+**A solução:**
+- Implementado [`src/lib/productStorage.ts`](src/lib/productStorage.ts) com banco IndexedDB `CoagroStudioDB` e fallback seguro em memória para ambientes sem IDB.
+- Função mestre `findProductBySku(codigo)`: busca primeiro no IndexedDB local da loja; se não encontrar, consulta o catálogo interno com higienização automática de nomes abreviados de ERP via [`dataSanitizer.ts`](src/lib/dataSanitizer.ts).
+- Conectado em tempo real no [`SocialManualEditor.tsx`](src/components/SocialManualEditor.tsx) e [`PosterManualEditor.tsx`](src/components/PosterManualEditor.tsx).
+- Salvamento automático: recortes e refinamentos de foto com SKU definido são persistidos no cache local em segundo plano.
+- **Specs:** 6 novos testes unitários em [`tests/unit/productStorage.test.ts`](tests/unit/productStorage.test.ts) (total: **123 testes**).
+
+---
+
+## 2️⃣5️⃣ Correção Visual em Tempo Real: Contraste do Empty State em Fundo Claro
+
+**Descoberta:** Identificado através do teste visual automatizado no Chrome (`tests/e2e-visual/run-visual-tests.mjs`) que o cartão de *Aguardando Produto ou Dados* usava `text-white` fixo, ficando ilegível quando o operador selecionava o tema `clean-branco`, além de manter um tom `emerald` no modo Pet.
+- **Correção cirúrgica:**
+  - Adicionada prop `isLight?: boolean` em [`CanvasEmptyState.tsx`](src/components/art-renderer/CanvasEmptyState.tsx) e repassada por [`SingleArtRenderer.tsx`](src/components/SingleArtRenderer.tsx).
+  - Em fundos claros, os textos assumem `text-gray-900` e `text-gray-600` com badge de alto contraste.
+  - No escopo Pet, a paleta adota azul institucional em vez de esmeralda.
 
 ---
 
