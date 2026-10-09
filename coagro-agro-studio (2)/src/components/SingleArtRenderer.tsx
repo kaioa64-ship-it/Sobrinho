@@ -8,7 +8,13 @@ import { resolveCommunicationMode } from '../lib/communicationMode';
 import { cleanNoise, normalizeBenefits, resolveDefaultCta } from '../lib/contentNormalizer';
 import { resolveBackgroundFromPrompt } from '../lib/backgroundResolver';
 import { processAdaptiveProduct, AdaptiveProductInfo } from '../lib/alphaBounds';
-import { getPalette } from '../lib/brand.config';
+import {
+  getPalette,
+  normalizeScopeId,
+  resolveBackgroundStyle,
+  resolveLogoVariant,
+  type ScopeId,
+} from '../lib/brand.config';
 import { BackgroundLayer } from './art-renderer/BackgroundLayer';
 import { HeroCentral } from './art-renderer/templates/HeroCentral';
 import { SplitVertical } from './art-renderer/templates/SplitVertical';
@@ -20,8 +26,11 @@ import { PromoAgroA4 } from './art-renderer/templates/PromoAgroA4';
 import { PromoMonoA4 } from './art-renderer/templates/PromoMonoA4';
 import { UnifiedCentral } from './art-renderer/templates/UnifiedCentral';
 import { UnifiedSplit } from './art-renderer/templates/UnifiedSplit';
-import { UnifiedCentralWithMascot } from './art-renderer/templates/UnifiedCentralWithMascot';
-import { UnifiedSplitWithMascot } from './art-renderer/templates/UnifiedSplitWithMascot';
+// NOTA: os templates de mascote (UnifiedCentralWithMascot / UnifiedSplitWithMascot)
+// permanecem no repositório como acervo para a Fase 3 do roadmap (templates
+// desenhados especificamente para os personagens). Eles NÃO são referenciados
+// aqui porque os grids genéricos de produto deformam a proporção dos mascotes —
+// ver ROADMAP_COAGRO_STUDIO.md §3.
 import { InformativeCentral } from './art-renderer/templates/InformativeCentral';
 import { InformativeSplit } from './art-renderer/templates/InformativeSplit';
 import { PromoSimples } from './art-renderer/templates/PromoSimples';
@@ -39,7 +48,7 @@ interface SingleArtRendererProps {
   imageBoxFormat?: 'rectangular' | 'square';
   codigoProduto?: string;
   preserveProductBackground?: boolean;
-  scopeOverride?: 'AGRO' | 'PET'; // Modo manual: força a marca vinda do appMode
+  scopeOverride?: ScopeId; // Modo manual/tenant: força a marca (ver brand.config.ts)
 }
 
 export const SingleArtRenderer: React.FC<SingleArtRendererProps> = ({
@@ -129,9 +138,19 @@ export const SingleArtRenderer: React.FC<SingleArtRendererProps> = ({
   const effectiveTheme = theme || content.tema || 'campo-agro';
   const isLight = effectiveTheme === 'clean-branco';
   const isBlue = effectiveTheme === 'azul-coagro';
-  const scope: 'AGRO' | 'PET' =
-    scopeOverride || (content.tema === 'clean-branco' || content.tema === 'azul-coagro' ? 'PET' : 'AGRO');
-  const logo = logoVariant || (isLight ? 'h-azul' : 'h-mono-branca');
+
+  // ── FONTE ÚNICA DE ESCOPO (correções P1.1 / P1.2) ──────────────────────────
+  // O escopo/marca NUNCA é inferido da cor de fundo. A precedência é explícita:
+  //   1. `scopeOverride` — modo do app / tenant ativo (fonte de verdade);
+  //   2. `content.linha` — linha de negócio do próprio conteúdo (planilha/IA);
+  //   3. DEFAULT_SCOPE.
+  // Isso elimina a heurística antiga (tema 'clean-branco'/'azul-coagro' ⇒ PET),
+  // que impedia uma marca de usar qualquer paleta livremente (ver Fase 4).
+  const scope = normalizeScopeId(scopeOverride ?? content.linha);
+
+  // A logo segue a MARCA. `isLight` decide apenas a variante claro/escuro da
+  // marca. Escopos com logotipo próprio (PET) são resolvidos no ArtHeader.
+  const logo = resolveLogoVariant(isLight, logoVariant);
 
   const activeBackground = resolveBackgroundFromPrompt(
     content.fundo_imagem,
@@ -143,11 +162,7 @@ export const SingleArtRenderer: React.FC<SingleArtRendererProps> = ({
     ['campo-agro', 'fundo-gerado'].includes(effectiveTheme) &&
     Boolean(activeBackground);
 
-  const backgroundStyle: React.CSSProperties = isBlue
-    ? { background: 'radial-gradient(circle at 50% 40%, #002b82 0%, #001C71 80%)' }
-    : isLight
-    ? { background: 'radial-gradient(circle at 50% 40%, #ffffff 0%, #f1f5f9 85%)' }
-    : { background: 'radial-gradient(circle at 50% 40%, #006b59 0%, #004d40 80%)' };
+  const backgroundStyle: React.CSSProperties = resolveBackgroundStyle(scope, isLight, isBlue);
 
   // Processamento do produto: sem produto padrão, começa vazio se não fornecido
   const sourceProduct = productImage || '';
@@ -290,25 +305,6 @@ export const SingleArtRenderer: React.FC<SingleArtRendererProps> = ({
             cta={cta}
             renderizacao={content.renderizacao_visual}
           />
-        ) : activeTemplate === 'unified-central-mascot' ? (
-          <UnifiedCentral
-            
-            scope={content.tema === 'clean-branco' || content.tema === 'azul-coagro' ? 'PET' : 'AGRO'}
-            title={title}
-            highlight={highlight}
-            subtitle={subtitle}
-            processedProduct={finalProductImg}
-            isStory={isStory}
-            logoVariant={logo}
-            mode={mode}
-            hasPrice={hasPrice}
-            currentPrice={currentPrice}
-            oldPrice={oldPrice}
-            condition={condition}
-            benefits={benefits}
-            cta={cta}
-            renderizacao={content.renderizacao_visual}
-          />
         ) : activeTemplate === 'unified-split' ? (
           <UnifiedSplit
             codigo={codigoProduto}
@@ -328,26 +324,6 @@ export const SingleArtRenderer: React.FC<SingleArtRendererProps> = ({
             benefits={benefits}
             cta={cta}
             renderizacao={content.renderizacao_visual}
-          />
-        ) : activeTemplate === 'unified-split-mascot' ? (
-          <UnifiedSplitWithMascot
-            
-            scope={content.tema === 'clean-branco' || content.tema === 'azul-coagro' ? 'PET' : 'AGRO'}
-            title={title}
-            highlight={highlight}
-            subtitle={subtitle}
-            processedProduct={finalProductImg}
-            isStory={isStory}
-            logoVariant={logo}
-            mode={mode}
-            hasPrice={hasPrice}
-            currentPrice={currentPrice}
-            oldPrice={oldPrice}
-            condition={condition}
-            benefits={benefits}
-            cta={cta}
-            renderizacao={content.renderizacao_visual}
-            textBackground={content.fundo_texto}
           />
         ) : activeTemplate === 'promo-simples' ? (
           <PromoSimples

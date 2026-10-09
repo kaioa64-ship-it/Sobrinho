@@ -124,6 +124,18 @@ function maskNonPriceSegments(text: string): string {
   const yearRegex = /\b(?:ano|fabrica[cç][aã]o|safra)\s*[:#-]?\s*(?:19|20)\d{2}\b/gi;
   masked = masked.replace(yearRegex, (match) => ' '.repeat(match.length));
 
+  // 5. Multiplicadores de parcelamento (ex: "10x", "10x de", "12 x sem juros").
+  //
+  // DEFEITO CORRIGIDO: o multiplicador NÃO é preço. Sem esta máscara, em
+  // "10x de 180" o parser descartava corretamente o VALOR da parcela (180, via
+  // `installmentPrice`) mas promovia o MULTIPLICADOR (10) a preço principal —
+  // produzindo "valorPor: 10,00", um preço inexistente no texto.
+  //
+  // O valor da parcela continua sendo extraído por `extractPaymentConditions`
+  // para compor a condição ("EM 10X DE R$ 180,00").
+  const installmentMultiplierRegex = /\b\d{1,2}\s*[xX](?:\s*de)?\b/gi;
+  masked = masked.replace(installmentMultiplierRegex, (match) => ' '.repeat(match.length));
+
   return masked;
 }
 
@@ -183,7 +195,14 @@ export function extractPriceFromText(text?: string | null): ExtractedPriceInfo {
 
   // 3. Varredura semântica de todos os números candidatos no texto mascarado
   // Ignora se estiver imediatamente seguido por % ou OFF%
-  const candidateRegex = /(?:r\$\s*)?(\d{1,3}(?:\.\d{3})*(?:[.,]\d{1,2})?|\d{1,7}(?:[.,]\d{1,2})?)(?!\s*%)/gi;
+  //
+  // ORDEM DAS ALTERNATIVAS IMPORTA (defeito corrigido):
+  // a alternativa de milhar vem primeiro para casar "1.992,00" por inteiro;
+  // a de dígitos simples vem depois para casar "1992" por inteiro.
+  // Antes, `\d{1,3}(?:\.\d{3})*…` (com `*`) casava apenas "199" de "1992" e a
+  // segunda alternativa nunca era tentada — truncando todo valor de 4+ dígitos
+  // sem separador de milhar. Ex.: "de 1575 por 1992" produzia 157/199.
+  const candidateRegex = /(?:r\$\s*)?((?:\d{1,3}(?:\.\d{3})+)(?:,\d{1,2})?|\d{1,9}(?:[.,]\d{1,2})?)(?!\s*%)/gi;
   let match: RegExpExecArray | null;
   const candidates: PriceCandidate[] = [];
 

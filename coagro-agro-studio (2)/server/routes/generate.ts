@@ -1,9 +1,24 @@
 import { Router } from 'express';
 import { apiLimiter } from '../middleware/rateLimit.js';
 import { ai } from '../config/gemini.js';
+// System prompts do motor de IA. Ficaram ÓRFÃOS na modularização P2.3 e foram
+// restaurados do histórico do git — sem eles /api/generate-content lançava
+// ReferenceError em runtime. Ver CORRECOES_REALIZADAS.md.
+import {
+  AGRO_SYSTEM_INSTRUCTION,
+  PET_SYSTEM_INSTRUCTION,
+  TONE_MATRIX,
+  OUTPUT_SCHEMA,
+} from '../config/instructions.js';
 import { analyzeAgroDescriptionServer } from '../services/analyzer.js';
 import { generateHeuristicAgroContent } from '../services/heuristic.js';
-import { extractPriceFromText, formatBrlWithSymbol, formatBrlValue, parsePriceToFloat } from '../utils/priceParser.js';
+// FONTE ÚNICA DE VERDADE MONETÁRIA:
+// o servidor consome o MESMO parser/formatador que o cliente (src/lib).
+// Antes existia uma cópia em server/utils/priceParser.ts com regex diferente,
+// o que permitia que preview e geração por IA calculassem preços distintos
+// para o mesmo texto. Ver CORRECOES_REALIZADAS.md (achado F).
+import { extractPriceFromText, parsePriceToFloat } from '../../src/lib/priceParser.js';
+import { formatBrlWithSymbol, formatBrlValue } from '../../src/lib/priceFormatter.js';
 import { generateOptimizedPhotoPrompt, inferAgroBackground } from '../utils/prompts.js';
 
 export const generateRouter = Router();
@@ -433,7 +448,9 @@ SÓ APÓS A ANÁLISE COMPLETA ACIMA, gere todos os campos de renderização da a
 
     // 11. Final structured render object satisfying exact schema and backward compatibility
     const finalRenderObject = {
-      linha: 'AGRO',
+      // A linha de negócio do conteúdo reflete o escopo em que a arte foi gerada.
+      // Correção: antes era `'AGRO'` fixo, mesmo em modo Pet.
+      linha: appMode === 'PET' ? 'PET' : 'AGRO',
       tipo_postagem: tipoPostagem,
       formato_gerado: format === 'story' ? 'Story' : 'Feed',
       formato: format === 'story' ? 'story' : 'feed',

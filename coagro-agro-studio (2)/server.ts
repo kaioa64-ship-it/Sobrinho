@@ -3,26 +3,10 @@ import { createServer as createViteServer } from 'vite';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import rateLimit from 'express-rate-limit';
-import { ai } from './server/config/gemini.js';
-import { generateOptimizedPhotoPrompt, inferAgroBackground } from './server/utils/prompts.js';
-import { analyzeAgroDescriptionServer } from './server/services/analyzer.js';
-import { generateHeuristicAgroContent } from './server/services/heuristic.js';
-import {
-  formatBrlWithSymbol,
-  formatBrlValue,
-  parsePriceToFloat,
-  normalizeAgroPrice,
-  maskNonPriceSegments,
-  extractPaymentConditions,
-  extractPriceFromText,
-  ExtractedPriceInfo
-} from './server/utils/priceParser.js';
 
 dotenv.config();
 
 import { generateRouter } from './server/routes/generate.js';
-import { removeBgRouter } from './server/routes/removeBg.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -33,11 +17,16 @@ const PORT = 3000;
 app.use(express.json({ limit: '30mb' }));
 
 app.use('/', generateRouter);
-app.use('/', removeBgRouter);
+
+// NOTA: a rota POST /api/remove-bg (Hugging Face / RMBG-1.4) foi REMOVIDA.
+// O recorte de fundo é feito 100% no cliente (Web Worker + Canvas em
+// src/lib/imageTransparency.ts), com fallback local por chroma-key.
+// Manter o endpoint era código morto e induzia à falsa ideia de que HF_TOKEN
+// é pré-requisito da aplicação. Ver CORRECOES_REALIZADAS.md.
 
 async function startServer() {
-  // Tratamento 404 para qualquer rota da API não interceptada acima (antes do fallback do SPA)
-  app.use('/api', (req, res) => {
+  // 404 JSON para qualquer rota da API não interceptada acima (antes do fallback do SPA)
+  app.use('/api', (_req, res) => {
     res.status(404).json({ error: 'Rota da API não encontrada ou removida.' });
   });
 
@@ -64,4 +53,3 @@ if (!process.env.VERCEL) {
 }
 
 export default app;
-

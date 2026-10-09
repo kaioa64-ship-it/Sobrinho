@@ -1,4 +1,7 @@
 @import "tailwindcss";
+/* Fontes da marca auto-hospedadas — sem dependência de fonts.googleapis.com.
+   Ver src/assets/fonts/fonts.css e CORRECOES_REALIZADAS.md (meta "offline"). */
+@import "./assets/fonts/fonts.css";
 
 @theme {
   --font-exo2: "Exo 2", sans-serif;

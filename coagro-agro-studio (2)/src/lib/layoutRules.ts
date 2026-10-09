@@ -1,3 +1,5 @@
+import { isPetScope, type ScopeId } from './brand.config';
+
 export const STORY_LAYOUT = {
   safeArea: { top: 72, right: 64, bottom: 84, left: 64 },
   rows: '9% 15% 43% 17% 8%',
@@ -27,8 +29,17 @@ export const CONTENT_LIMITS = {
   },
 } as const;
 
-export function resolveDefaultTemplate(format: string, appMode: 'AGRO' | 'PET' = 'AGRO'): 'hero-central' | 'split-vertical' | 'pet-central' | 'pet-split-vertical' {
-  if (appMode === 'PET') {
+/**
+ * Seleção defensiva de template ao trocar de escopo/formato.
+ *
+ * Aceita `ScopeId` (tipo aberto) para não fechar a porta a novas marcas —
+ * ver src/lib/brand.config.ts.
+ */
+export function resolveDefaultTemplate(
+  format: string,
+  scopeId?: ScopeId
+): 'hero-central' | 'split-vertical' | 'pet-central' | 'pet-split-vertical' {
+  if (isPetScope(scopeId)) {
     return format === 'story' ? 'pet-central' : 'pet-split-vertical';
   }
   return format === 'story' ? 'hero-central' : 'split-vertical';

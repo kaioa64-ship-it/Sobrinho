@@ -4,6 +4,7 @@ import { SingleArtRenderer } from './SingleArtRenderer';
 import { BatchItem } from './ExcelBatchUploader';
 import { jsPDF } from 'jspdf';
 import { EMPTY_AGRO_CONTENT } from '../types/agro';
+import type { ScopeId } from '../lib/brand.config';
 import { CheckCircle2, Loader2, X } from 'lucide-react';
 
 interface BatchRendererModalProps {
@@ -11,10 +12,12 @@ interface BatchRendererModalProps {
   exportFormat?: 'PNG' | 'PDF';
   templateLayout?: 'promo-agro-a4' | 'promo-text-only' | 'promo-mono-a4';
   headerText?: string;
+  /** Escopo/marca do lote (vem do tenant ativo). Ver src/lib/brand.config.ts. */
+  scope?: ScopeId;
   onClose: () => void;
 }
 
-export const BatchRendererModal: React.FC<BatchRendererModalProps> = ({ items, exportFormat = 'PNG', templateLayout = 'promo-text-only', headerText = 'OFERTA', onClose }) => {
+export const BatchRendererModal: React.FC<BatchRendererModalProps> = ({ items, exportFormat = 'PNG', templateLayout = 'promo-text-only', headerText = 'OFERTA', scope, onClose }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
   const [isCancelled, setIsCancelled] = useState(false);
@@ -173,6 +176,7 @@ export const BatchRendererModal: React.FC<BatchRendererModalProps> = ({ items, e
                 codigoProduto={String(items[currentIndex].codigo)}
                 containerId={`batch-render-${items[currentIndex].id}`}
                 badgeText={headerText}
+                scopeOverride={scope}
               />
             </div>
           )}

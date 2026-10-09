@@ -40,6 +40,16 @@ export interface CaixaSubtitulo {
 
 export type CanvasFormat = 'feed-quadrado' | 'feed-retrato' | 'story' | 'a4-retrato';
 
+/**
+ * Layouts disponíveis.
+ *
+ * NOTA: `unified-central-mascot` e `unified-split-mascot` estão **reservados**
+ * (não implementados). Os grids genéricos de produto deformam a proporção dos
+ * mascotes, por isso eles saíram do renderizador e voltarão apenas em templates
+ * desenhados especificamente para os personagens — ver ROADMAP_COAGRO_STUDIO.md §3
+ * e a Fase 3 do roadmap. Os componentes seguem preservados em
+ * `src/components/art-renderer/templates/`.
+ */
 export type TemplateLayout = 'unified-central' | 'unified-split' | 'unified-central-mascot' | 'unified-split-mascot' | 'informative-central' | 'informative-split' | 'promo-simples' | 'split-vertical' | 'hero-central' | 'pet-central' | 'pet-split-vertical' | 'pet-split' | 'promo-text-only' | 'promo-agro-a4' | 'promo-mono-a4';
 
 export type CanvasTheme =

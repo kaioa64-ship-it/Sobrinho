@@ -5,6 +5,7 @@ import { batchRepository } from '../lib/batchRepository';
 import { sanitizeProductName, formatBrlStrict, validateProductRow } from '../lib/dataSanitizer';
 import { SingleArtRenderer } from './SingleArtRenderer';
 import { EMPTY_AGRO_CONTENT } from '../types/agro';
+import type { ScopeId } from '../lib/brand.config';
 import { BatchItem } from './ExcelBatchUploader';
 import { 
   Upload, Search, CheckCircle2, Clock, Check, CheckCheck, 
@@ -14,9 +15,11 @@ import {
 
 interface BatchReviewGridProps {
   onStartExport: (items: BatchItem[], template: 'promo-mono-a4' | 'promo-agro-a4' | 'promo-text-only', badgeText: string) => void;
+  /** Escopo/marca do lote (vem do tenant ativo). Ver src/lib/brand.config.ts. */
+  scope?: ScopeId;
 }
 
-export const BatchReviewGrid: React.FC<BatchReviewGridProps> = ({ onStartExport }) => {
+export const BatchReviewGrid: React.FC<BatchReviewGridProps> = ({ onStartExport, scope }) => {
   // Estado do Modo de Operação (Chavinha de Agilidade)
   // false = Modo Rápido (Direto / Ágil, como a planilha anterior com deduplicação)
   // true = Modo Revisão (Workstation Split-Screen para validação fina um-a-um)
@@ -892,6 +895,7 @@ export const BatchReviewGrid: React.FC<BatchReviewGridProps> = ({ onStartExport 
                       codigoProduto={selectedProduct.code}
                       containerId="preview-poster-batch"
                       badgeText={activeBadgeText}
+                      scopeOverride={scope}
                     />
                   </div>
                 </div>
@@ -1105,6 +1109,7 @@ export const BatchReviewGrid: React.FC<BatchReviewGridProps> = ({ onStartExport 
                   codigoProduto={quickPreviewProduct.code}
                   containerId="preview-poster-quick-modal"
                   badgeText={activeBadgeText}
+                  scopeOverride={scope}
                 />
               </div>
             </div>

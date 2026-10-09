@@ -652,7 +652,7 @@ export default function App() {
             </div>
 
             {posterMode === 'REVIEW' ? (
-              <BatchReviewGrid onStartExport={handleStartBatchFromGrid} />
+              <BatchReviewGrid onStartExport={handleStartBatchFromGrid} scope={appMode} />
             ) : (
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                 <div className="lg:col-span-7 space-y-6">
@@ -725,6 +725,7 @@ export default function App() {
                   <SingleArtRenderer
                     content={{
                       ...EMPTY_AGRO_CONTENT,
+                      linha: appMode,
                       textos_hero: { titulo: manualPosterData.titulo, palavra_destaque_ouro: '', subtitulo: '' },
                       modulo_preco: {
                         ativo: true,
@@ -741,6 +742,7 @@ export default function App() {
                     codigoProduto={manualPosterData.codigo}
                     containerId="preview-poster-a4"
                     badgeText={posterHeaderText}
+                    scopeOverride={appMode}
                   />
                   
                   <div className="flex w-full max-w-[420px] gap-2 mt-2">
@@ -773,6 +775,7 @@ export default function App() {
           exportFormat={batchExportFormat}
           templateLayout={batchTemplateToRender}
           headerText={batchHeaderTextToRender}
+          scope={appMode}
           onClose={() => setBatchItemsToRender(null)}
         />
       )}

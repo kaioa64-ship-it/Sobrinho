@@ -1,4 +1,6 @@
-import { extractPriceFromText, formatBrlWithSymbol, parsePriceToFloat } from '../utils/priceParser.js';
+// Fonte única de verdade monetária: mesmo parser/formatador do cliente.
+import { extractPriceFromText, parsePriceToFloat } from '../../src/lib/priceParser.js';
+import { formatBrlWithSymbol } from '../../src/lib/priceFormatter.js';
 import { generateOptimizedPhotoPrompt, inferAgroBackground } from '../utils/prompts.js';
 import { analyzeAgroDescriptionServer } from './analyzer.js';
 
