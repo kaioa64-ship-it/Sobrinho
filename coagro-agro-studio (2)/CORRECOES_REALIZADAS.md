@@ -748,9 +748,15 @@ Consolidado das verificações desta rodada:
 
 ### G. Higienização Inteligente de Siglas de ERP & NFe
 - Criado [`erpSanitizer.ts`](src/lib/erpSanitizer.ts) com dicionário de termos técnicos, acrônimos (NPK, PVC, etc.) e normalização de medidas (20L, 10.1 kg, 500 ml).
-- Suíte [`erpSanitizer.test.ts`](tests/unit/erpSanitizer.test.ts) com 8 testes unitários (total do Vitest elevado para 131 testes passando).
-- Integrado a [`ExcelBatchUploader.tsx`](src/components/ExcelBatchUploader.tsx) com toggle automático na barra de importação.
-- Integrado a [`PosterManualEditor.tsx`](src/components/PosterManualEditor.tsx) e [`SocialManualEditor.tsx`](src/components/SocialManualEditor.tsx) através de botão "Limpar Siglas" em 1 clique.
+- Suíte [`erpSanitizer.test.ts`](tests/unit/erpSanitizer.test.ts) com 8 testes unitários.
+- Integrado a [`ExcelBatchUploader.tsx`](src/components/ExcelBatchUploader.tsx), [`PosterManualEditor.tsx`](src/components/PosterManualEditor.tsx) e [`SocialManualEditor.tsx`](src/components/SocialManualEditor.tsx).
+
+### H. Template Vertical de WhatsApp / Helena CRM (9:16)
+- Criado [`WhatsappStatusVertical.tsx`](src/components/art-renderer/templates/WhatsappStatusVertical.tsx) desenhado exclusivamente para conversão em Status de WhatsApp e Stories do Instagram.
+- Integração comercial com selo de atendimento direto, badge de status exclusivo, tipografia Exo 2 monumental de preço e card de ação rápida com botão oficial WhatsApp (Helena CRM).
+- Suporte total aos dois escopos (`AGRO` e `PET`), respeitando a paleta e logotipos oficiais de cada marca.
+- Adicionado ao seletor de layout em [`SocialManualEditor.tsx`](src/components/SocialManualEditor.tsx) ("Status Zap") e registrado em [`SingleArtRenderer.tsx`](src/components/SingleArtRenderer.tsx).
+- Suíte de testes [`whatsappTemplate.test.ts`](tests/unit/whatsappTemplate.test.ts) criada, elevando a suíte para **133 testes unitários** 100% aprovados.
 
 ---
 

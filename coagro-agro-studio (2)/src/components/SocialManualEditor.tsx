@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Upload, X, Type, Tag, Palette, Wand2, Plus, Trash2, List, LayoutTemplate, Store, Sparkles } from 'lucide-react';
+import { Upload, X, Type, Tag, Palette, Wand2, Plus, Trash2, List, LayoutTemplate, Store, Sparkles, MessageCircle } from 'lucide-react';
 import { TemplateLayout, CanvasFormat } from '../types/agro';
 import { removeWhiteBackground, processProductImage } from '../lib/imageTransparency';
 import { sanitizeErpTitle } from '../lib/erpSanitizer';
@@ -467,8 +467,9 @@ export const SocialManualEditor: React.FC<SocialManualEditorProps> = ({
               <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-2">
                 Layout da Arte
               </label>
-              <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2">
                 {[
+                  { id: 'whatsapp-status', label: 'Status Zap', icon: MessageCircle },
                   { id: 'unified-central', label: 'Central', icon: Store },
                   { id: 'unified-split', label: 'Split (Lado)', icon: LayoutTemplate },
                   { id: 'promo-simples', label: 'Promo Simples', icon: Tag },
@@ -480,9 +481,10 @@ export const SocialManualEditor: React.FC<SocialManualEditorProps> = ({
                     onClick={(e) => { e.preventDefault(); onTemplateChange(tpl.id as TemplateLayout); }}
                     className={`py-3 px-1 text-xs font-bold rounded-xl border flex flex-col items-center justify-center gap-2 transition-all ${
                       templateLayout === tpl.id 
-                        ? 'bg-[#004d40] text-white border-[#004d40] shadow-md' 
+                        ? 'text-white shadow-md' 
                         : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50 hover:border-gray-300'
                     }`}
+                    style={templateLayout === tpl.id ? { backgroundColor: isPet ? '#004b87' : '#004d40', borderColor: isPet ? '#004b87' : '#004d40' } : undefined}
                   >
                     <tpl.icon className="w-5 h-5" />
                     <span className="text-[10px] sm:text-xs text-center">{tpl.label}</span>

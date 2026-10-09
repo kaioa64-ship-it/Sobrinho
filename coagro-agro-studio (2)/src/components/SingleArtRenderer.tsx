@@ -35,6 +35,7 @@ import { UnifiedSplit } from './art-renderer/templates/UnifiedSplit';
 import { InformativeCentral } from './art-renderer/templates/InformativeCentral';
 import { InformativeSplit } from './art-renderer/templates/InformativeSplit';
 import { PromoSimples } from './art-renderer/templates/PromoSimples';
+import { WhatsappStatusVertical } from './art-renderer/templates/WhatsappStatusVertical';
 
 interface SingleArtRendererProps {
   content: AgroPostContent;
@@ -333,6 +334,24 @@ export const SingleArtRenderer: React.FC<SingleArtRendererProps> = ({
             benefits={benefits}
             cta={cta}
             renderizacao={content.renderizacao_visual}
+          />
+        ) : activeTemplate === 'whatsapp-status' ? (
+          <WhatsappStatusVertical
+            codigo={codigoProduto}
+            scope={scope}
+            isLight={isLight}
+            title={title}
+            highlight={highlight}
+            subtitle={subtitle}
+            processedProduct={finalProductImg}
+            logoVariant={logo}
+            mode={mode}
+            hasPrice={hasPrice}
+            currentPrice={currentPrice}
+            oldPrice={oldPrice}
+            condition={condition}
+            benefits={benefits}
+            cta={cta}
           />
         ) : activeTemplate === 'promo-simples' ? (
           <PromoSimples
