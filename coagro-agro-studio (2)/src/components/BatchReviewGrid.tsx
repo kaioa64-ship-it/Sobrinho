@@ -5,6 +5,7 @@ import { batchRepository } from '../lib/batchRepository';
 import { sanitizeProductName, formatBrlStrict, validateProductRow } from '../lib/dataSanitizer';
 import { SingleArtRenderer } from './SingleArtRenderer';
 import { EMPTY_AGRO_CONTENT } from '../types/agro';
+import type { PosterTemplateLayout } from '../types/agro';
 import type { ScopeId } from '../lib/brand.config';
 import { BatchItem } from './ExcelBatchUploader';
 import { 
@@ -14,7 +15,7 @@ import {
 } from 'lucide-react';
 
 interface BatchReviewGridProps {
-  onStartExport: (items: BatchItem[], template: 'promo-mono-a4' | 'promo-agro-a4' | 'promo-text-only', badgeText: string) => void;
+  onStartExport: (items: BatchItem[], template: PosterTemplateLayout, badgeText: string) => void;
   /** Escopo/marca do lote (vem do tenant ativo). Ver src/lib/brand.config.ts. */
   scope?: ScopeId;
 }
@@ -47,7 +48,7 @@ export const BatchReviewGrid: React.FC<BatchReviewGridProps> = ({ onStartExport,
   const [stats, setStats] = useState({ total: 0, approved: 0, pending: 0 });
 
   // Configuração de Template do Cartaz para o Preview e Exportação
-  const [activeTemplate, setActiveTemplate] = useState<'promo-mono-a4' | 'promo-agro-a4' | 'promo-text-only'>('promo-mono-a4');
+  const [activeTemplate, setActiveTemplate] = useState<PosterTemplateLayout>('promo-mono-a4');
   const [activeBadgeText, setActiveBadgeText] = useState('OFERTA');
 
   // Loading
@@ -861,6 +862,7 @@ export const BatchReviewGrid: React.FC<BatchReviewGridProps> = ({ onStartExport,
                         >
                           <option value="promo-mono-a4">Laser P&B (Econômico)</option>
                           <option value="promo-agro-a4">Promocional Colorido</option>
+                          <option value="promo-pet-a4">Promocional Pet</option>
                           <option value="promo-text-only">Apenas Texto (Limpo)</option>
                         </select>
                       </div>
@@ -933,6 +935,7 @@ export const BatchReviewGrid: React.FC<BatchReviewGridProps> = ({ onStartExport,
                 >
                   <option value="promo-mono-a4">Laser P&B (Econômico)</option>
                   <option value="promo-agro-a4">Promocional Colorido</option>
+                  <option value="promo-pet-a4">Promocional Pet</option>
                   <option value="promo-text-only">Apenas Texto</option>
                 </select>
               </div>

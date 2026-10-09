@@ -15,8 +15,12 @@ export const normalizeBenefit = (value?: string): string =>
 export const normalizeBenefits = (values?: any): string[] => {
   if (!values) return [];
   if (typeof values === 'string') {
-    // If AI returned a string by mistake, split it if possible
-    return [normalizeBenefit(values)];
+    // Caso a IA devolva uma string por engano em vez de lista.
+    // CORREÇÃO: strings vazias ou só com espaços precisam ser DESCARTADAS,
+    // não virar `['']` — isso gerava um bullet vazio no layout. O ramo de
+    // string não passava pelo `filter(Boolean)` que o ramo de array usa.
+    const normalized = normalizeBenefit(values);
+    return normalized ? [normalized] : [];
   }
   if (!Array.isArray(values)) return [];
   return values.map(normalizeBenefit).filter(Boolean).slice(0, 3);

@@ -33,6 +33,14 @@
 | 19 | **`tsconfig.server.json` amarrado ao lint** + specs dos normalizadores | [`tsconfig.server.json`](tsconfig.server.json), [`package.json`](package.json), [`tests/unit/`](tests/unit) | `npm test` → **115 testes** |
 | 20 | 🧩 **Decomposição do `InputPanel.tsx`** (passo 5, concluída) | [`src/components/input-panel/`](src/components/input-panel) (6 submódulos) | **1915 → 853 linhas** (−55%) |
 
+### Fase 2 — execução do briefing do time
+
+| # | Entrega | Arquivos | Verificação |
+|---|---|---|---|
+| 21 | 🧹 **Higienização**: 8 scripts órfãos removidos + `normalizeBenefits` corrigido | `tests/` (8 removidos), [`contentNormalizer.ts`](src/lib/contentNormalizer.ts), [`contentNormalizer.test.ts`](tests/unit/contentNormalizer.test.ts) | 117 testes (+2) |
+| 22 | 🐾 **Template A4 Pet** (`PromoPetA4`) + tipo compartilhado `PosterTemplateLayout` | [`PromoPetA4.tsx`](src/components/art-renderer/templates/PromoPetA4.tsx) + 8 arquivos de registro | paleta Pet verificada; Pet vira padrão no escopo PET |
+| 23 | 🧠 **Desacoplamento de Estado (`useArtworkForm`)** | [`src/hooks/useArtworkForm.ts`](src/hooks/useArtworkForm.ts), [`InputPanel.tsx`](src/components/InputPanel.tsx) | **853 → 221 linhas** (−74%); zero alteração em props/CSS |
+
 ---
 
 ## 🔬 Evidências (comandos executados)
@@ -491,6 +499,92 @@ Lição registrada: **script destrutivo precisa validar a saída e ter rollback*
 
 ---
 
+## 2️⃣1️⃣ Fase 2 · Etapa 1 — Higienização de resíduos e normalizador
+
+**Scripts órfãos removidos** (diagnósticos de serviços externos já retirados da aplicação):
+`test-bria-dns.mjs`, `test-fal-dns.mjs`, `test-groq.mjs`, `test-pollinations.mjs`, `test-all-models.mjs`, `test-multimodal.mjs`, `test-dns.mjs`, `test-doh.mjs`.
+Ficaram **apenas** os dois que ainda têm valor: `test-regex.mjs` (bateria manual do parser de preço) e `ai-copy-audit.mjs` (auditoria de copy da IA).
+
+**`normalizeBenefits` corrigido** — [`contentNormalizer.ts`](src/lib/contentNormalizer.ts):
+```ts
+// ANTES: o ramo de string devolvia [''] para entrada em branco,
+//        porque não passava pelo filter(Boolean) que o ramo de array usa.
+if (typeof values === 'string') {
+  return [normalizeBenefit(values)];
+}
+
+// DEPOIS:
+if (typeof values === 'string') {
+  const normalized = normalizeBenefit(values);
+  return normalized ? [normalized] : [];
+}
+```
+Impacto: uma string só com espaços (ou que vira ruído após a limpeza, ex.: `"Divisão Agropecuária"`) gerava **um bullet vazio** no layout. As specs foram atualizadas e ganharam 2 casos novos (ruído → `[]`, conteúdo real → `['…']`). Total: **117 testes**.
+
+---
+
+## 2️⃣2️⃣ Fase 2 · Etapa 2 — Template A4 físico Pet (`PromoPetA4`)
+
+**A dor:** a loja Pet conseguia gerar posts de redes sociais, mas ao imprimir cartaz A4 na filial só existiam layouts com identidade Agro. Era a maior lacuna funcional aberta.
+
+**Decisão de arquitetura:** criar um **irmão dedicado** ([`PromoPetA4.tsx`](src/components/art-renderer/templates/PromoPetA4.tsx)), e **não** injetar `scope` no `PromoAgroA4`. Os A4 são artes fechadas e full-bleed (o fundo do template cobre o canvas); condicionar cores dentro de um componente já calibrado criaria ramificação em código sensível e contraria a diretriz de mudanças cirúrgicas.
+
+**Paleta aplicada** (conforme briefing e `AUDITORIA_INSTRUCOES_IA.md`):
+
+| Papel | Cor |
+|---|---|
+| Fundo / rodapé | `#004b87` (azul institucional Pet) |
+| Borda | `#00335e` |
+| Cabeçalho + preço + "POR" | `#ffab00` (dourado) |
+| Texto sobre fundo azul | `#ffffff` / `text-blue-100` |
+
+**Verificação de conformidade** (varredura das cores reais no código, excluindo comentários):
+```
+#ffab00  x5
+#004b87  x3
+#00335e  x1
+ocorrências de verde Agro (#004d40 / #006b59 / #00382e): NENHUMA
+```
+> Nota: a primeira varredura acusou `#004d40` na linha 25 — era o **meu próprio comentário** de docstring listando as cores proibidas. Refiz o check ignorando comentários para não gerar falso positivo.
+
+**Tipografia** (diretriz do briefing): `font-exo2` em cabeçalho, título, "POR" e nos números do preço; `font-['Inter']` na base para o código e os detalhes do rodapé.
+
+**Logo:** `<CoagroPetLogo>` renderizada no rodapé (zona 4), ao lado da chamada e do código do produto.
+
+**Pontos de registro** (o template só aparece na loja se estiver em todos):
+
+| Arquivo | O que mudou |
+|---|---|
+| [`types/agro.ts`](src/types/agro.ts) | novo tipo **`PosterTemplateLayout`** + `'promo-pet-a4'` |
+| [`types/batch.ts`](src/types/batch.ts) | passa a usar `PosterTemplateLayout` |
+| [`SingleArtRenderer.tsx`](src/components/SingleArtRenderer.tsx) | import, ramo de render e **as 2 listas de exceção** (`isArtEmpty` e selo promocional) |
+| [`BatchRendererModal.tsx`](src/components/BatchRendererModal.tsx) | prop tipada com `PosterTemplateLayout` |
+| [`BatchReviewGrid.tsx`](src/components/BatchReviewGrid.tsx) | tipo + **2 listas de `<option>`** |
+| [`App.tsx`](src/App.tsx) | tipos de estado/handler, botão **"Tema Pet"** e padrão por escopo |
+
+**Melhoria de manutenção:** a união de templates A4 estava **copiada literalmente em 6 arquivos**, o que fazia "adicionar um cartaz novo" virar caça ao tesouro. Criei o alias `PosterTemplateLayout` — agora um template novo se registra em **1 tipo + renderizador + listas de opção da UI**.
+
+**Padrão por escopo:** o `useEffect` de troca de escopo em [`App.tsx`](src/App.tsx) agora define `posterTemplate = 'promo-pet-a4'` no escopo Pet e `'promo-agro-a4'` no Agro. No seletor, "Tema Verde" aparece só em AGRO e **"Tema Pet" só em PET** (mesmo padrão da matriz de templates de redes sociais).
+
+**Gate:** `npm run lint` exit 0 (src + testes + servidor) · `npm test` 117 passando · `vite build` exit 0.
+
+## 2️⃣3️⃣ Fase 2 · Etapa 3 — Extração do hook `useArtworkForm.ts` (CONCLUÍDA)
+
+**Objetivo:** Desacoplar a máquina de estados (14 estados + 16 handlers) do componente visual [`InputPanel.tsx`](src/components/InputPanel.tsx), transformando-o puramente em um orquestrador de layout que consome os 6 submódulos atômicos.
+
+**Estratégia:**
+- Todo o corpo lógico, estados, setters e handlers originais foram movidos para [`src/hooks/useArtworkForm.ts`](src/hooks/useArtworkForm.ts).
+- O contrato de entrada e saída foi rigorosamente mantido: o hook recebe os mesmos props de `InputPanelProps` e devolve 56 identificadores necessários para alimentar o layout e os submódulos de formulário.
+- **Zero alteração** em nomes de props, handlers ou classes CSS.
+- **Resultado estrutural:** [`InputPanel.tsx`](src/components/InputPanel.tsx) enxugado de **853 para 221 linhas** (−74%).
+
+**Gate pós-extração:**
+- `npm run lint` → **Exit 0** (src, server e tests)
+- `npm test` → **Exit 0** (117 testes)
+- `vite build` → **Exit 0** (2.55s)
+
+---
+
 ## 🆕 Achados novos durante a execução
 
 ### A. `/api/remove-bg` está órfão (código morto no backend)
@@ -589,17 +683,13 @@ Consolidado das verificações desta rodada:
 
 | Item | Motivo |
 |---|---|
-| **Extrair `useArtworkForm()`** (14 estados + 16 handlers do `InputPanel`) | A decomposição do **formulário** está feita (6 submódulos). Isto é **extração de estado**, com risco maior — merece rodada própria e testes de componente (`jsdom` + Testing Library) antes |
 | Validação do Electron offline | Exige **executar** o app empacotado sem rede. Validação **estática** completa feita (achados A/B/C/D + varredura do bundle); o teste dinâmico precisa de `npm run build:electron` com a rede desligada |
 | Restrições/rotação da chave Firebase (P0.2) | Ação **externa** no console Google/Firebase |
-| `PromoPetA4.tsx` (template A4 da marca Pet) | **Decisão do time:** entrega prioritária da Fase 2, consumindo o `scopeId` da Fase 1 |
 | Auto-hospedar modelo `@imgly` | **Decisão do time:** manter o fallback chroma-key; evoluir para download sob demanda com cache local na Fase 2 |
 | Empacotar imagens de preset (Unsplash) localmente | Baixo impacto (só produtos de exemplo) |
 | ESLint + Prettier | Vitest **já feito**; falta o lint estático (código morto, hooks) |
 | Code-splitting do chunk de 1,4 MB e WASM de 23,9 MB (P3.5) | Fase 2 (performance), sem impacto funcional |
 | Renomear pastas com espaços/parênteses (P3.1) | Toca o repositório inteiro; melhor em commit dedicado |
-| **Demais scripts de diagnóstico órfãos em `tests/`** (`test-bria-dns`, `test-fal-dns`, `test-groq`, `test-pollinations`, `test-all-models`, `test-multimodal`, `test-dns`, `test-doh`) | Mesma lógica dos 4 de HF já removidos, mas **aguardando sua decisão** — não removi por conta própria |
-| **`normalizeBenefits('   ')` → `['']`** (achado J) | Mudança de comportamento; documentado em teste, não corrigido |
 | **Auditar o commit `dd4420e`** por outras pontas soltas como o achado I | Recomendado: aquela modularização foi commitada sem type-check no backend |
 
 ---

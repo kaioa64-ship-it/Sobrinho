@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTenantStore } from './store/tenantStore';
-import { AgroPostContent, CanvasFormat, CanvasTheme, PresetProduct, TemplateLayout, EMPTY_AGRO_CONTENT, EMPTY_PET_CONTENT } from './types/agro';
+import { AgroPostContent, CanvasFormat, CanvasTheme, PresetProduct, TemplateLayout, PosterTemplateLayout, EMPTY_AGRO_CONTENT, EMPTY_PET_CONTENT } from './types/agro';
 import { LogoVariant } from './assets/coagroLogos';
 import { AGRO_PRESETS } from './data/agroPresets';
 import { Header } from './components/Header';
@@ -32,7 +32,7 @@ export default function App() {
   const isElectron = navigator.userAgent.toLowerCase().includes('electron');
   const [currentModule, setCurrentModule] = useState<'SOCIAL_MEDIA' | 'STORE_POSTERS'>(isElectron ? 'STORE_POSTERS' : 'SOCIAL_MEDIA');
   const [posterMode, setPosterMode] = useState<'MANUAL' | 'BATCH' | 'REVIEW'>('MANUAL');
-  const [posterTemplate, setPosterTemplate] = useState<'promo-mono-a4' | 'promo-agro-a4' | 'promo-text-only'>('promo-mono-a4');
+  const [posterTemplate, setPosterTemplate] = useState<PosterTemplateLayout>('promo-mono-a4');
   const [posterHeaderText, setPosterHeaderText] = useState<string>('OFERTA');
   const [manualPosterData, setManualPosterData] = useState({
     codigo: '12345',
@@ -78,10 +78,14 @@ export default function App() {
       setCanvasTheme('clean-branco');
       setTemplateLayout(resolveDefaultTemplate(canvasFormat, 'PET'));
       setLogoVariant('h-azul');
+      // Cartaz físico: no escopo Pet o padrão sugerido é o template A4 dedicado,
+      // que usa a paleta e a logo oficiais da Coagro Pet (nunca o verde Agro).
+      setPosterTemplate('promo-pet-a4');
     } else {
       setCanvasTheme('campo-agro');
       setTemplateLayout(resolveDefaultTemplate(canvasFormat, 'AGRO'));
       setLogoVariant('h-branca');
+      setPosterTemplate('promo-agro-a4');
     }
   }, [appMode]);
 
@@ -114,7 +118,7 @@ export default function App() {
   // Modals
   const [batchItemsToRender, setBatchItemsToRender] = useState<BatchItem[] | null>(null);
   const [batchExportFormat, setBatchExportFormat] = useState<'PNG' | 'PDF'>('PNG');
-  const [batchTemplateToRender, setBatchTemplateToRender] = useState<'promo-mono-a4' | 'promo-agro-a4' | 'promo-text-only'>('promo-mono-a4');
+  const [batchTemplateToRender, setBatchTemplateToRender] = useState<PosterTemplateLayout>('promo-mono-a4');
   const [batchHeaderTextToRender, setBatchHeaderTextToRender] = useState<string>('OFERTA');
 
   const handleStartBatch = (items: BatchItem[], format: 'PNG' | 'PDF') => {
@@ -126,7 +130,7 @@ export default function App() {
 
   const handleStartBatchFromGrid = (
     items: BatchItem[],
-    template: 'promo-mono-a4' | 'promo-agro-a4' | 'promo-text-only',
+    template: PosterTemplateLayout,
     badgeText: string
   ) => {
     setBatchExportFormat('PDF');
@@ -667,13 +671,24 @@ export default function App() {
                         <div className="w-2.5 h-2.5 rounded-full bg-gray-400" />
                         Econômico (P&B)
                       </button>
-                      <button 
-                        onClick={() => setPosterTemplate('promo-agro-a4')}
-                        className={`flex-1 py-2 text-xs sm:text-sm font-bold rounded-xl transition border flex items-center justify-center gap-1.5 ${posterTemplate === 'promo-agro-a4' ? 'bg-[#004d40] text-white border-[#004d40]' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'}`}
-                      >
-                        <div className="w-2.5 h-2.5 rounded-full bg-[#ffab00]" />
-                        Tema Verde
-                      </button>
+                      {appMode === 'AGRO' && (
+                        <button 
+                          onClick={() => setPosterTemplate('promo-agro-a4')}
+                          className={`flex-1 py-2 text-xs sm:text-sm font-bold rounded-xl transition border flex items-center justify-center gap-1.5 ${posterTemplate === 'promo-agro-a4' ? 'bg-[#004d40] text-white border-[#004d40]' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'}`}
+                        >
+                          <div className="w-2.5 h-2.5 rounded-full bg-[#ffab00]" />
+                          Tema Verde
+                        </button>
+                      )}
+                      {appMode === 'PET' && (
+                        <button 
+                          onClick={() => setPosterTemplate('promo-pet-a4')}
+                          className={`flex-1 py-2 text-xs sm:text-sm font-bold rounded-xl transition border flex items-center justify-center gap-1.5 ${posterTemplate === 'promo-pet-a4' ? 'bg-[#004b87] text-white border-[#004b87]' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'}`}
+                        >
+                          <div className="w-2.5 h-2.5 rounded-full bg-[#4897D0]" />
+                          Tema Pet
+                        </button>
+                      )}
                       <button 
                         onClick={() => setPosterTemplate('promo-text-only')}
                         className={`flex-1 py-2 text-xs sm:text-sm font-bold rounded-xl transition border flex items-center justify-center gap-1.5 ${posterTemplate === 'promo-text-only' ? 'bg-[#0047b3] text-white border-[#0047b3]' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'}`}

@@ -67,15 +67,19 @@ describe('normalizeBenefits', () => {
     expect(normalizeBenefits(42)).toEqual([]);
   });
 
-  /**
-   * ⚠️ COMPORTAMENTO DE BORDA (não é o ideal, mas é o atual):
-   * quando a entrada é uma string, o ramo de string devolve o array SEM passar
-   * pelo `filter(Boolean)` — então uma string só com espaços vira `['']` em vez
-   * de `[]`. Isso pode gerar um bullet vazio no layout.
-   * Se for corrigido, este teste vai falhar de propósito.
-   */
-  it('string em branco vira [""] em vez de [] (quirk documentado)', () => {
-    expect(normalizeBenefits('   ')).toEqual(['']);
+  it('string em branco é descartada e devolve lista vazia', () => {
+    // CORRIGIDO na Fase 2: antes o ramo de string devolvia [''] — o array não
+    // passava pelo `filter(Boolean)`, o que gerava um bullet vazio no layout.
+    expect(normalizeBenefits('   ')).toEqual([]);
+    expect(normalizeBenefits('')).toEqual([]);
+  });
+
+  it('string que vira ruído depois da limpeza também é descartada', () => {
+    expect(normalizeBenefits('Divisão Agropecuária')).toEqual([]);
+  });
+
+  it('string com conteúdo real continua virando uma lista de um item', () => {
+    expect(normalizeBenefits('  Rotor balanceado  ')).toEqual(['Rotor balanceado']);
   });
 });
 

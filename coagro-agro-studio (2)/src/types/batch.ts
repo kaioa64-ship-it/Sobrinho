@@ -1,3 +1,5 @@
+import type { PosterTemplateLayout } from './agro';
+
 export interface Batch {
   id: string;
   name: string;
@@ -20,7 +22,7 @@ export interface BatchProduct {
   locations: string[]; // Ex: ['Catedral', '15 de Novembro']
   status: 'pending' | 'approved' | 'rejected' | 'printed';
   isSelected: boolean;
-  templateLayout?: 'promo-mono-a4' | 'promo-agro-a4' | 'promo-text-only';
+  templateLayout?: PosterTemplateLayout;
   badgeText?: string;
 }
 

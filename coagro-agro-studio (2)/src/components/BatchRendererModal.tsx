@@ -4,13 +4,14 @@ import { SingleArtRenderer } from './SingleArtRenderer';
 import { BatchItem } from './ExcelBatchUploader';
 import { jsPDF } from 'jspdf';
 import { EMPTY_AGRO_CONTENT } from '../types/agro';
+import type { PosterTemplateLayout } from '../types/agro';
 import type { ScopeId } from '../lib/brand.config';
 import { CheckCircle2, Loader2, X } from 'lucide-react';
 
 interface BatchRendererModalProps {
   items: BatchItem[];
   exportFormat?: 'PNG' | 'PDF';
-  templateLayout?: 'promo-agro-a4' | 'promo-text-only' | 'promo-mono-a4';
+  templateLayout?: PosterTemplateLayout;
   headerText?: string;
   /** Escopo/marca do lote (vem do tenant ativo). Ver src/lib/brand.config.ts. */
   scope?: ScopeId;

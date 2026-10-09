@@ -41,6 +41,20 @@ export interface CaixaSubtitulo {
 export type CanvasFormat = 'feed-quadrado' | 'feed-retrato' | 'story' | 'a4-retrato';
 
 /**
+ * Templates de CARTAZ A4 (impressão física).
+ *
+ * Tipo compartilhado de propósito: antes esta união estava copiada literalmente
+ * em 6 arquivos (App, BatchReviewGrid, BatchRendererModal, types/batch…), o que
+ * fazia "adicionar um cartaz novo" virar uma caça ao tesouro. Com o alias, um
+ * template novo se registra aqui + no renderizador + na lista de opções da UI.
+ */
+export type PosterTemplateLayout =
+  | 'promo-mono-a4'
+  | 'promo-agro-a4'
+  | 'promo-pet-a4'
+  | 'promo-text-only';
+
+/**
  * Layouts disponíveis.
  *
  * NOTA: `unified-central-mascot` e `unified-split-mascot` estão **reservados**
@@ -50,7 +64,7 @@ export type CanvasFormat = 'feed-quadrado' | 'feed-retrato' | 'story' | 'a4-retr
  * e a Fase 3 do roadmap. Os componentes seguem preservados em
  * `src/components/art-renderer/templates/`.
  */
-export type TemplateLayout = 'unified-central' | 'unified-split' | 'unified-central-mascot' | 'unified-split-mascot' | 'informative-central' | 'informative-split' | 'promo-simples' | 'split-vertical' | 'hero-central' | 'pet-central' | 'pet-split-vertical' | 'pet-split' | 'promo-text-only' | 'promo-agro-a4' | 'promo-mono-a4';
+export type TemplateLayout = 'unified-central' | 'unified-split' | 'unified-central-mascot' | 'unified-split-mascot' | 'informative-central' | 'informative-split' | 'promo-simples' | 'split-vertical' | 'hero-central' | 'pet-central' | 'pet-split-vertical' | 'pet-split' | PosterTemplateLayout;
 
 export type CanvasTheme =
   | 'verde-coagro'   // #004d40 Dominante Institucional
