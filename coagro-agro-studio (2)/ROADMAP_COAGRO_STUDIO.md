@@ -139,16 +139,24 @@ graph TD
 1. **🏷️ Otimização de Cartazes de Gôndola e Prateleira:**
    * **Cartaz Duplo (Meia-Folha A5 / 2 por folha A4 em Paisagem):** Folha A4 em formato deitado (297x210mm) dividida ao meio em dois cartazes verticais com linha guia de corte tracejada. Resolve o desperdício de papel em produtos de prateleira média sem achatar nem perder legibilidade do preço.
    * **Card Quadrado para Grade 4 por Folha A4:** Novo layout com proporção quadrada dedicado para etiquetas de gôndola compacta, desenhado do zero para que o preço monumental e centavos não sumam ao reduzir o tamanho.
+   * **Encarte Promocional Multi-Produtos (Tabloide A4 com 4 a 8 itens):** *(Condicionado à maturação do banco de packshots por SKU)* Grade promocional de múltiplos produtos em folha A4/A3 para campanhas sazonais de alto impacto ("Sabadão Agro", "Fecha Mês", "Semana do Pet").
    * **Cálculo Dinâmico & Importação de % de Desconto (`XX% OFF`):**
      - *Modo Individual:* cálculo automático a partir dos campos DE e POR (`((de - por) / de) * 100`) gerando selo dinâmico de economia (ex: `25% OFF`).
      - *Modo Lote (Excel):* leitura direta da coluna de percentual de desconto das planilhas macro de campanha.
 2. **Templates Exclusivos para Mascotes:** Criar de 2 a 3 layouts desenhados em torno do mascote (com balões de fala de ofertas, selos comemorativos e proporção ajustada), sem forçá-los nos grids genéricos de produto.
-3. **Módulo de RH e Endomarketing:** Aba independente para comunicados internos, aniversariantes do mês e boas-vindas da equipe Coagro.
-4. **📁 Módulo Brand Hub / Documentos & Ativos Oficiais (Visão Corporativa):**
-   * **Papel Timbrado Oficial (A4):** Modelos corporativos padronizados para orçamentos formais, ofícios, ordens de serviço e comunicados de filial com cabeçalho oficial, CNPJ e rodapé institucional.
-   * **Central de Download de Ativos de Marca:** Portal seguro para o pessoal administrativo e de lojas baixarem as logomarcas oficiais em vetor SVG e PNG transparente em alta definição, impedindo o uso de arquivos de baixa qualidade ou deformados.
-   * **Pacote de Tipografia Oficial:** Distribuição interna dos arquivos `.ttf` e `.woff2` das fontes oficiais Exo 2 e Inter para instalação nos computadores das filiais.
-   * **Guia de Paleta Rápida:** Códigos hexadecimais com 1-clique para cópia (Verde Agro `#004d40`, Ouro `#ffab00`, Azul Pet `#001C71`, Apoio `#4897D0`).
+3. **Módulo de RH e Endomarketing Automatizado:** *(Agendado para pós-integração ERP/RH)* Geração automática mensal de cartazes de aniversariantes do mês, funcionário destaque e metas batidas via dados do sistema.
+4. **📁 Módulo Brand Hub Corporativo (Central de Governança de Marca):**
+   * **Papel Timbrado Oficial Adaptável às 12 Filiais:**
+     - *Seletor Dinâmico de Filial:* Matriz ou filiais (Arapiraca/Bananeira, Maceió/Jatiúca, Aracaju, Lagarto, Delmiro, etc.) injeta automaticamente Razão Social, CNPJ, IE, Endereço e Telefone da unidade.
+     - *Modo Web (PDF/Print):* Impressão de folhas timbradas em branco para a bandeja da loja ou geração de comunicado oficial rápido de 1 página.
+     - *Modo Word (.DOCX):* Download do modelo oficial do Microsoft Word com cabeçalho/rodapé travados e tipografia oficial para documentos longos e contratos.
+   * **Central de Downloads de Ativos Oficiais:** Logos Coagro e Coagro Pet em SVG (vetor) e PNG 300 DPI (alta resolução), em versões colorida, monocromática branca e preta.
+   * **Pacote de Tipografia & Paleta Rápida:** Download das fontes Exo 2 e Inter (.ttf/.woff2) e códigos de cores copiáveis (HEX, RGB, CMYK).
+   * **Fundos Corporativos para Videoconferência (Meet / Teams):** 4 modelos elegantes em 1920x1080 (Escritório Corporativo, Lavoura Tecnológica, Verde Institucional Profundo e Clean Minimalista) padronizados pela diretoria.
+   * **Gerador de Avatar / Foto de Perfil WhatsApp:** Enquadramento circular oficial com aro da marca, com modo Foto Pessoal do Consultor ou modo Ícone do Setor/Departamento (ex: "Coagro • Atendimento").
+   * **Gerador de Assinatura de E-mail:** Formulário rápido que gera a assinatura padronizada para colar no Outlook dos colaboradores com dados da filial.
+   * **Diretório Rápido das 12 Filiais:** Tabela para consulta e cópia instantânea de CNPJ, endereço e contatos das lojas para emissão de notas e cadastros.
+   * **Modelo de Apresentação Institucional (.PPTX):** Deck essencial de 4 lâminas (Capa, Slide de Conteúdo, Comparativo e Encerramento).
 
 ### 🔵 FASE 4: Modularização White-Label, IA de Catálogo & SaaS (Longo Prazo)
 1. **Core Desacoplado ("Sobrinho Studio"):** Motor genérico alimentado por arquivos de configuração de marca, permitindo uso pela Coagro ou por novas operações e empresas.
