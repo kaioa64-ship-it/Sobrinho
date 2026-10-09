@@ -302,10 +302,21 @@ export default function App() {
     }
   };
 
+  const [downloadNotice, setDownloadNotice] = useState<string | null>(null);
+
+  const showNotice = (msg: string) => {
+    setDownloadNotice(msg);
+    setTimeout(() => setDownloadNotice(null), 4000);
+  };
+
   const handleDownloadCanvas = async (elementId: string, suffix: string) => {
     try {
       const el = document.getElementById(elementId);
-      if (!el) return;
+      if (!el) {
+        showNotice('⚠️ Elemento da arte não encontrado.');
+        return;
+      }
+      showNotice('⏳ Gerando imagem...');
       const dataUrl = await toPng(el, { quality: 0.98, pixelRatio: 1.5 });
       const prefix = appMode === 'PET' ? 'coagro-pet' : 'coagro-agro';
       const filename = `${prefix}-${suffix}-${Date.now()}.png`;
@@ -313,6 +324,7 @@ export default function App() {
       link.download = filename;
       link.href = dataUrl;
       link.click();
+      showNotice(`✅ Imagem salva em Downloads (${filename})`);
     } catch (err: any) {
       alert('Erro ao gerar imagem: ' + err.message);
     }
@@ -321,7 +333,11 @@ export default function App() {
   const handleDownloadPdf = async (elementId: string, suffix: string) => {
     try {
       const el = document.getElementById(elementId);
-      if (!el) return;
+      if (!el) {
+        showNotice('⚠️ Elemento da arte não encontrado.');
+        return;
+      }
+      showNotice('⏳ Preparando arquivo PDF...');
       const dataUrl = await toJpeg(el, { quality: 0.9, pixelRatio: 1.5 });
       const pdf = new jsPDF({
         orientation: 'portrait',
@@ -331,7 +347,9 @@ export default function App() {
       });
       pdf.addImage(dataUrl, 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
       const prefix = appMode === 'PET' ? 'coagro-pet' : 'coagro-agro';
-      pdf.save(`${prefix}-${suffix}-${Date.now()}.pdf`);
+      const filename = `${prefix}-${suffix}-${Date.now()}.pdf`;
+      pdf.save(filename);
+      showNotice(`✅ PDF salvo em Downloads (${filename})! Para imprimir direto, use o botão "Imprimir".`);
     } catch (err: any) {
       alert('Erro ao gerar PDF: ' + err.message);
     }
@@ -340,32 +358,84 @@ export default function App() {
   const handlePrintCanvas = async (elementId: string) => {
     try {
       const el = document.getElementById(elementId);
-      if (!el) return;
-      const dataUrl = await toPng(el, { quality: 0.98, pixelRatio: 2 });
-      const printWindow = window.open('', '_blank');
-      if (!printWindow) {
-        alert('Por favor, permita pop-ups no navegador para imprimir o cartaz diretamente.');
+      if (!el) {
+        showNotice('⚠️ Elemento da arte não encontrado para impressão.');
         return;
       }
-      printWindow.document.write(`
+      showNotice('🖨️ Abrindo diálogo de impressão...');
+      const dataUrl = await toPng(el, { quality: 0.98, pixelRatio: 2 });
+      
+      // Iframe invisível para disparar impressão nativa - 100% imune a bloqueador de pop-ups
+      let iframe = document.getElementById('coagro-print-frame') as HTMLIFrameElement | null;
+      if (!iframe) {
+        iframe = document.createElement('iframe');
+        iframe.id = 'coagro-print-frame';
+        iframe.style.position = 'fixed';
+        iframe.style.top = '-10000px';
+        iframe.style.left = '-10000px';
+        iframe.style.width = '0px';
+        iframe.style.height = '0px';
+        iframe.style.border = 'none';
+        document.body.appendChild(iframe);
+      }
+
+      const frameDoc = iframe.contentWindow?.document || iframe.contentDocument;
+      if (!frameDoc || !iframe.contentWindow) {
+        alert('Não foi possível acessar a janela de impressão nativa.');
+        return;
+      }
+
+      frameDoc.open();
+      frameDoc.write(`
         <!DOCTYPE html>
         <html>
           <head>
-            <title>Imprimir Cartaz Coagro</title>
+            <title>Imprimir Cartaz - Grupo Coagro</title>
             <style>
-              @page { size: A4 portrait; margin: 0; }
-              body { margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; width: 100vw; height: 100vh; background: #fff; }
-              img { width: 100%; height: 100%; object-fit: contain; }
+              @page {
+                size: A4 portrait;
+                margin: 0;
+              }
+              html, body {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 100%;
+                background: #ffffff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              }
+              img {
+                width: 100vw;
+                height: 100vh;
+                object-fit: contain;
+                page-break-after: avoid;
+              }
             </style>
           </head>
           <body>
-            <img src="${dataUrl}" onload="window.print(); window.close();" />
+            <img src="${dataUrl}" />
           </body>
         </html>
       `);
-      printWindow.document.close();
+      frameDoc.close();
+
+      const img = frameDoc.querySelector('img');
+      const triggerPrint = () => {
+        setTimeout(() => {
+          iframe?.contentWindow?.focus();
+          iframe?.contentWindow?.print();
+        }, 150);
+      };
+
+      if (img && !img.complete) {
+        img.onload = triggerPrint;
+      } else {
+        triggerPrint();
+      }
     } catch (err: any) {
-      alert('Erro ao preparar impressão: ' + err.message);
+      alert('Erro ao preparar impressão: ' + (err?.message || err));
     }
   };
 
@@ -753,13 +823,23 @@ export default function App() {
                     preserveProductBackground={socialManualData.preserveProductBackground}
                     scopeOverride={appMode}
                   />
-                  <button
-                    onClick={() => handleDownloadCanvas('agro-canvas-main', 'final')}
-                    className={`w-full max-w-[390px] py-2.5 hover:opacity-90 text-white rounded-xl text-xs font-bold font-exo2 tracking-wide uppercase flex items-center justify-center gap-2 shadow-sm transition active:scale-95 cursor-pointer mt-2 ${appMode === 'PET' ? 'bg-[#4897D0]' : 'bg-[#004d40]'}`}
-                  >
-                    <Download className="w-4 h-4 text-[#ffab00]" />
-                    Baixar Arte Final
-                  </button>
+                  <div className="flex w-full max-w-[390px] gap-2 mt-2">
+                    <button
+                      onClick={() => handleDownloadCanvas('agro-canvas-main', 'final')}
+                      className={`flex-1 py-2.5 hover:opacity-90 text-white rounded-xl text-xs font-bold font-exo2 tracking-wide uppercase flex items-center justify-center gap-1.5 shadow-sm transition active:scale-95 cursor-pointer ${appMode === 'PET' ? 'bg-[#001C71]' : 'bg-[#004d40]'}`}
+                    >
+                      <Download className="w-4 h-4 text-[#ffab00]" />
+                      Baixar Imagem
+                    </button>
+                    <button
+                      onClick={() => handlePrintCanvas('agro-canvas-main')}
+                      className="px-4 py-2.5 bg-gray-800 hover:bg-gray-900 text-white rounded-xl text-xs font-bold font-exo2 tracking-wide uppercase flex items-center justify-center gap-1.5 shadow-sm transition active:scale-95 cursor-pointer"
+                      title="Imprimir arte diretamente em folha de papel"
+                    >
+                      <Printer className="w-4 h-4 text-white" />
+                      Imprimir
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -939,6 +1019,13 @@ export default function App() {
           scope={appMode}
           onClose={() => setBatchItemsToRender(null)}
         />
+      )}
+
+      {/* 4. Notificação Toast de Download e Impressão */}
+      {downloadNotice && (
+        <div className="fixed bottom-6 right-6 z-50 bg-[#004d40] text-white px-5 py-3 rounded-2xl shadow-2xl border border-[#ffab00]/50 flex items-center gap-3 transition-all duration-300 pointer-events-none">
+          <span className="font-exo2 font-bold text-xs sm:text-sm tracking-wide">{downloadNotice}</span>
+        </div>
       )}
     </div>
   );
