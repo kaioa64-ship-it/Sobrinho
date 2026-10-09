@@ -20,16 +20,15 @@ A aplicação está dividida em dois grandes módulos operacionais com suporte n
 ### 📱 Módulo A: Redes Sociais (Feed & Stories)
 | Funcionalidade | Estado | Descrição Técnica |
 |---|---|---|
-| **Editor Manual (`SocialManualEditor`)** | ✅ Ativo (Padrão) | Permite preenchimento direto de título, subtítulo, preços (DE / POR), diferenciais em tópicos e chamada para ação (CTA). |
+| **Editor Manual (`SocialManualEditor`)** | ✅ Ativo (Padrão) | Permite preenchimento direto de título, subtítulo, preços (DE / POR), diferenciais em tópicos, pílulas de CTA e seletor de tema/selo. |
 | **Recorte de Imagem Client-side** | ✅ Ativo | Algoritmo em canvas (`imageTransparency.ts`) com remoção de fundo branco e detecção de contraste sem depender de API externa. |
-| **Alerta de Proporção de Foto** | ✅ Ativo | Avisa o operador caso a foto enviada esteja muito esticada ou fora da proporção recomendada. |
-| **Formatos de Canvas** | ✅ Ativo | Feed Quadrado (1:1), Feed Retrato (4:5) e Stories (9:16). |
-| **Biblioteca de Templates** | ✅ Ativo | Templates unificados e dedicados: `UnifiedCentral`, `UnifiedSplit`, `HeroCentral`, `InformativeCentral`, `PetCentral`, `PetSplitVertical`. |
-| **Alternância Agro / Pet** | ✅ Ativo | Gerido via Zustand (`useTenantStore`). Muda automaticamente paletas de cores, temas visuais e variante da logomarca. |
-| **Contraste Inteligente de Logo** | ✅ Ativo | Alterna automaticamente entre logo branca e logo colorida/azul com base na luminância do fundo. |
-| **Monitor de Tamanho de Título** | ✅ Ativo | Indicador em tempo real: ideal (até 28 caracteres), recomendado (até 35) e alerta visual de excesso. |
-| **Legenda Oficial do Post** | ✅ Ativo | Bloco com cópia rápida da legenda sugerida e hashtags técnicas padronizadas. |
-| **Exportação de Imagem** | ✅ Ativo | Renderização via `html-to-image` gerando PNG em alta resolução (`pixelRatio: 1.5`, qualidade 98%). |
+| **Template Status Zap 9:16 (`WhatsappStatusVertical`)** | ✅ Ativo (Destaque) | Template focado em WhatsApp/Helena CRM com ícone oficial SVG, DE/POR monumental, degradês oficiais (Agro, Verde-Azul e Pet) e selo condicional. |
+| **Template Promo Simples (`PromoSimples`)** | ✅ Ativo | Varejo rápido com tipografia monumental de preço DE/POR e compatibilidade com fotos sem recorte. |
+| **Formatos de Canvas** | ✅ Ativo | Feed Quadrado (1:1), Feed Retrato (4:5) e Stories/Status (9:16). |
+| **Biblioteca de Templates** | ✅ Ativo | Templates unificados e dedicados: `UnifiedCentral`, `UnifiedSplit`, `WhatsappStatusVertical`, `PromoSimples`, `PromoAgroA4`, `PromoPetA4`. |
+| **Alternância Agro / Pet** | ✅ Ativo | Gerido via Zustand e `brand.config.ts`. Troca a quente sem vazamento de cores ou logos. |
+| **Contraste Inteligente & Regras de Marca** | ✅ Ativo | Fundo claro proíbe terminantemente logo branca. Pet proíbe verde Agro. |
+| **Matriz de Testes E2E** | ✅ Ativo | 15 cenários reais auditados via Chrome Headless CDP (`run-matrix-visual-tests.mjs`). |
 
 ---
 
@@ -38,9 +37,10 @@ A aplicação está dividida em dois grandes módulos operacionais com suporte n
 |---|---|---|
 | **Criação Individual (`PosterManualEditor`)** | ✅ Ativo | Entrada de Código/SKU, Título em caixa alta, Preço DE / POR e seletor de cabeçalho de destaque. |
 | **Cabeçalhos de Destaque** | ✅ Ativo | Seleção rápida: *OFERTA, LIQUIDAÇÃO, PROMOÇÃO, SUPER PREÇO, ESPECIAL, NOVIDADE, PREÇO BAIXO*. |
-| **Templates A4 Físicos** | ✅ Ativo | 3 opções operacionais: **Econômico P&B** (`promo-mono-a4`), **Tema Verde Agro** (`promo-agro-a4`) e **Tema Azul Pet** (`promo-text-only`). |
+| **Templates A4 Físicos** | ✅ Ativo | 3 opções operacionais: **Econômico P&B** (`promo-mono-a4`), **Tema Verde Agro** (`promo-agro-a4`) e **Tema Azul Pet** (`promo-pet-a4`). |
 | **Processamento em Lote (`ExcelBatchUploader`)** | ✅ Ativo | Leitura direta de planilhas Excel (`.xlsx`/`.xls`) ou `.csv`, com detecção inteligente de colunas de código, produto e preços. |
-| **Renderizador em Lote (`BatchRendererModal`)** | ✅ Ativo | Modal de geração serial de dezenas de cartazes de uma única vez a partir da lista importada. |
+| **Higienização de ERP & NFe** | ✅ Ativo | Tradução automática de abreviações técnicas (`erpSanitizer.ts`). |
+| **Cache Local IndexedDB por SKU** | ✅ Ativo | Busca instantânea em 0ms (`productStorage.ts`). |
 | **Exportação A4 (PNG & PDF)** | ✅ Ativo | Download de cartazes individuais em PNG ou geração de PDF A4 exato (210x297mm) via `jsPDF`. |
 
 ---
@@ -49,15 +49,15 @@ A aplicação está dividida em dois grandes módulos operacionais com suporte n
 
 Para garantir estabilidade e focar no que agrega valor imediato à ponta, certos recursos foram conscientemente pausados ou ocultos no código:
 
-1. **🎭 Mascotes da Marca:**
+1. **🤖 Geração Automática por IA na UI (`socialMode === 'AI_BETA'`):**
+   * *Status:* **Congelado / Oculto no Frontend** (`false &&` em `src/App.tsx`).
+   * *Diretriz Operacional do Kaio:* A IA é um diferencial futuro que só será reabilitado quando os templates estiverem 100% validados e integrados a um banco estruturado de packshots por código de produto. A interface não deve prometer IA prematuramente na rotina manual da loja.
+   * *Solução futura (Fase 4):* Motor de auto-preenchimento por catálogo vinculado a ERP ou modelo multimodal local.
+
+2. **🎭 Mascotes da Marca:**
    * *Status:* **Pausado / Desabilitado**.
    * *Motivo:* Os componentes `UnifiedCentralWithMascot` e `UnifiedSplitWithMascot` tentavam encaixar os personagens no mesmo grid genérico dos produtos. Isso gerava deformação de proporção e conflito de hierarquia visual.
    * *Solução futura:* Serão reativados apenas em **templates exclusivos**, desenhados especificamente para a narrativa do mascote.
-
-2. **🤖 Geração Automática por IA na UI (`socialMode === 'AI_BETA'`):**
-   * *Status:* **Oculto no Frontend** (`false &&` em `src/App.tsx`).
-   * *Motivo:* A dependência de chave Gemini em nuvem gera custo por chamada, instabilidade caso a loja esteja sem internet e risco de o operador gerar textos fora do tom sem supervisão.
-   * *Solução futura:* Manter a IA como apoio de retaguarda ou rodar com modelos/scripts locais mais leves.
 
 3. **🔍 Tela de Conferência/Revisão em Grade (`posterMode === 'REVIEW'`):**
    * *Status:* **Oculto no Frontend** (`false &&` em `src/App.tsx`).

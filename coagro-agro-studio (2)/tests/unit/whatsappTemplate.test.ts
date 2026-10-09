@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { TemplateLayout } from '../../src/types/agro';
+import { WhatsAppIcon } from '../../src/components/art-renderer/templates/WhatsappStatusVertical';
 
 describe('WhatsappStatusVertical Template Layout', () => {
   it('reconhece whatsapp-status como um identificador válido de TemplateLayout', () => {
@@ -19,5 +20,10 @@ describe('WhatsappStatusVertical Template Layout', () => {
 
     expect(validSocialTemplates).toContain('whatsapp-status');
     expect(validSocialTemplates.length).toBe(6);
+  });
+
+  it('exporta o componente vetorial canônico WhatsAppIcon', () => {
+    expect(WhatsAppIcon).toBeDefined();
+    expect(typeof WhatsAppIcon).toBe('function');
   });
 });

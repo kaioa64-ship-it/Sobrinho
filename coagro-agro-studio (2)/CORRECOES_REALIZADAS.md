@@ -784,6 +784,21 @@ Consolidado das verificações desta rodada:
 
 ---
 
+### J. Refinamentos Visuais de WhatsApp Status, Preço Monumental e Alinhamento Operacional
+
+A partir do feedback por áudio do gestor Kaio Virgínio, foram aplicados os seguintes aprimoramentos cirúrgicos:
+1. **Ícone Oficial do WhatsApp:** Substituição do `MessageCircle` genérico pelo componente vetorial canônico `WhatsAppIcon` (balão de diálogo oficial com fone), renderizado em SVG sem dependência externa.
+2. **Eliminação de Ruído no Rodapé:** Remoção do botão redundante `ENVIAR` dentro da barra verde de CTA, unificando a chamada para ação com atendimento imediato.
+3. **Topo Limpo e Selo Condicional:** Remoção do badge fixo `STATUS EXCLUSIVO`. Agora o topo exibe com destaque apenas a Logo oficial Coagro/Pet; quando selecionado um selo promocional no editor (`OFERTA`, `LANÇAMENTO`, `SABADÃO`, `FECHA MÊS`), ele é renderizado dinamicamente.
+4. **Degradê Dinâmico de Cores:**
+   - Suporte ao degradê oficial Verde ➔ Azul escuro (`linear-gradient(180deg, #004d40 0%, #003b5c 50%, #001C71 100%)`) ao selecionar o tema `azul-coagro` no Agro.
+   - Suporte a fundo claro invertido e degradê Azul Pet oficial.
+5. **Preço Monumental no `PromoSimples`:** O layout `PromoSimples.tsx` herdou a mesma tipografia monumental em Exo 2 do WhatsApp Status (DE riscado sutil + POR R$ monumental com centavos elevados e condições de pagamento), substituindo o componente antigo com scaling artificial.
+6. **Alinhamento do Estado Vazio (`CanvasEmptyState`):** Remoção de mensagens sobre geração automática prematura de IA; texto ajustado para a realidade operacional de loja (orientação de preenchimento manual e busca de SKU no painel lateral).
+7. **Bateria Visual Ampliada para 15 Cenários:** A esteira `run-matrix-visual-tests.mjs` agora valida 15 cenários (incluindo degradê verde-azul, topo sem selo e estresse de texto longo com 48 caracteres), com **15/15 aprovados (100%)**.
+
+---
+
 ## 🔄 Como reverter
 
 ```bash

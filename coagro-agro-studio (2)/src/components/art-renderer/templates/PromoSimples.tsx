@@ -1,8 +1,7 @@
 import React from 'react';
-import { CoagroLogo, LogoVariant } from '../../../assets/coagroLogos';
+import { LogoVariant } from '../../../assets/coagroLogos';
 import { renderTitleWithHighlight } from '../../../lib/renderHelper';
 import { CommunicationMode } from '../../../lib/communicationMode';
-import { PriceCard } from '../PriceCard';
 import { ArtHeader } from '../ArtHeader';
 import { SemanticProductImage } from '../SemanticProductImage';
 import { getDynamicTitleSize } from '../../../lib/typography';
@@ -68,7 +67,12 @@ export const PromoSimples: React.FC<PromoSimplesProps> = ({
   const subtitleColor = isDark ? 'text-white/80' : 'text-gray-500';
   const titleFont = 'font-exo2 font-black uppercase tracking-tight';
   
-  // Decide logo variant based on background: branco SEMPRE h-azul
+  // Preço quebrado em reais e centavos para tipografia editorial monumental
+  const priceParts = currentPrice.replace('R$', '').trim().split(',');
+  const mainPrice = priceParts[0] || '0';
+  const cents = priceParts[1] ? `,${priceParts[1]}` : ',00';
+
+  // Variante da logo para contraste no ArtHeader
   const finalLogoVariant: LogoVariant = isDark ? 'h-branca' : 'h-azul';
 
   return (
@@ -97,8 +101,8 @@ export const PromoSimples: React.FC<PromoSimplesProps> = ({
         )}
       </div>
 
-      {/* Bloco Inferior: Título, Subtítulo, Preço e Logo */}
-      <div className="w-full flex flex-col items-center justify-end shrink-0 z-20 mt-4 gap-3">
+      {/* Bloco Inferior: Título, Subtítulo e Preço Monumental */}
+      <div className="w-full flex flex-col items-center justify-end shrink-0 z-20 mt-4 gap-2.5">
         
         {/* Título e Subtítulo */}
         <div className="w-full flex flex-col items-center text-center">
@@ -114,17 +118,61 @@ export const PromoSimples: React.FC<PromoSimplesProps> = ({
           )}
         </div>
 
-        {/* Preço (Aumentado para destaque) */}
+        {/* Preço Monumental (Estilo Oficial WhatsApp Status adaptado para Varejo Rápido) */}
         {hasPrice && currentPrice && (
-          <div className="w-full flex justify-center mt-2 mb-2 scale-125 sm:scale-135 origin-center">
-             <PriceCard
-              mode={mode}
-              oldPrice={oldPrice}
-              currentPrice={currentPrice}
-              condition={condition}
-              variant={isPet ? 'pet' : 'agro'}
-            />
-          </div>
+          <section className={`w-full max-w-[340px] flex flex-col items-center justify-center py-2 px-4 rounded-2xl border transition-all ${
+            isDark 
+              ? 'bg-black/35 backdrop-blur-md border-white/15' 
+              : 'bg-amber-50/70 border-amber-200/80 shadow-xs'
+          }`}>
+            {oldPrice && (
+              <div className={`flex items-center gap-1.5 text-xs font-semibold uppercase ${
+                isDark ? 'text-white/70' : 'text-gray-500'
+              }`}>
+                <span>DE:</span>
+                <span className="line-through decoration-[#ffab00] decoration-2">
+                  R$ {oldPrice.replace('R$', '').trim()}
+                </span>
+              </div>
+            )}
+
+            <div className="flex items-baseline justify-center font-exo2 font-black leading-none tracking-tight my-0.5">
+              <span className={`text-base mr-1.5 font-extrabold ${
+                isDark ? 'text-white' : 'text-gray-700'
+              }`}>
+                POR
+              </span>
+              <span className={`text-base mr-0.5 font-extrabold ${
+                isDark 
+                  ? 'text-[#ffab00]' 
+                  : (isPet ? 'text-[#004b87]' : 'text-[#004d40]')
+              }`}>
+                R$
+              </span>
+              <span className={`text-4xl sm:text-5xl drop-shadow-xs ${
+                isDark 
+                  ? 'text-[#ffab00]' 
+                  : (isPet ? 'text-[#004b87]' : 'text-[#004d40]')
+              }`}>
+                {mainPrice}
+              </span>
+              <span className={`text-xl sm:text-2xl font-extrabold ${
+                isDark 
+                  ? 'text-[#ffab00]' 
+                  : (isPet ? 'text-[#004b87]' : 'text-[#004d40]')
+              }`}>
+                {cents}
+              </span>
+            </div>
+
+            {condition && (
+              <p className={`text-[11px] font-bold uppercase tracking-wide ${
+                isDark ? 'text-white/90' : 'text-gray-700'
+              }`}>
+                {condition}
+              </p>
+            )}
+          </section>
         )}
 
       </div>

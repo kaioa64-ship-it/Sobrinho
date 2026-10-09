@@ -330,6 +330,63 @@ async function runMatrix() {
   await wait(1400);
   results.push(await captureElement('#agro-canvas-main', 'matrix_10_pet_split_azul.png'));
 
+  // Cenário 11: AGRO + WhatsApp Status com Degradê Verde-Azul e Selo de Oferta
+  console.log('\n[11/14] AGRO: WhatsApp Status com Degradê Especial Verde-Azul e Selo "OFERTA"');
+  await evalJs(`(() => {
+    window.__studioTestBridge.setModule('SOCIAL_MEDIA');
+    window.__studioTestBridge.setFullArtwork({
+      title: 'Adubo Especial Grãos e Café',
+      subtitle: 'Nutrição equilibrada para alta produtividade',
+      priceDe: '189,90',
+      pricePor: '159,90',
+      productImg: ${JSON.stringify(MOCK_AGRO_PRODUCT)},
+      scope: 'AGRO',
+      template: 'whatsapp-status',
+      format: 'story',
+      theme: 'azul-coagro',
+      badge: 'OFERTA'
+    });
+  })()`);
+  await wait(1400);
+  results.push(await captureElement('#agro-canvas-main', 'matrix_11_agro_whatsapp_status_verde_azul_selo.png'));
+
+  // Cenário 12: AGRO + WhatsApp Status com Topo Limpo (Sem Selo)
+  console.log('\n[12/14] AGRO: WhatsApp Status com Topo Limpo (Sem Selo, apenas Logo)');
+  await evalJs(`(() => {
+    window.__studioTestBridge.setFullArtwork({
+      title: 'Pulverizador Costal XP 16L',
+      subtitle: 'Conforto e pressão constante no campo',
+      priceDe: '299,90',
+      pricePor: '249,90',
+      productImg: ${JSON.stringify(MOCK_AGRO_PRODUCT)},
+      scope: 'AGRO',
+      template: 'whatsapp-status',
+      format: 'story',
+      theme: 'campo-agro',
+      badge: 'Sem Selo'
+    });
+  })()`);
+  await wait(1400);
+  results.push(await captureElement('#agro-canvas-main', 'matrix_12_agro_whatsapp_status_sem_selo.png'));
+
+  // Cenário 13: TESTE DE ESTRESSE DE CARACTERES (Texto Longo sem quebrar o layout)
+  console.log('\n[13/14] ESTRESSE: Título Longo (48 chars) e Benefícios sem vazar do container');
+  await evalJs(`(() => {
+    window.__studioTestBridge.setFullArtwork({
+      title: 'FERTILIZANTE MINERAL NPK 10-10-10 ESPECIAL PASTAGEM',
+      subtitle: 'Desenvolvimento radicular vigoroso e rápida recuperação foliar em solos arenosos',
+      priceDe: '1.580,00',
+      pricePor: '1.390,00',
+      productImg: ${JSON.stringify(MOCK_AGRO_PRODUCT)},
+      scope: 'AGRO',
+      template: 'unified-central',
+      format: 'feed-quadrado',
+      theme: 'campo-agro'
+    });
+  })()`);
+  await wait(1400);
+  results.push(await captureElement('#agro-canvas-main', 'matrix_13_estresse_texto_longo.png'));
+
   // =========================================================================
   // BLOCO 3: MÓDULO CARTAZES A4 DE LOJA (AGRO & PET)
   // =========================================================================
@@ -338,7 +395,7 @@ async function runMatrix() {
   console.log('=================================================');
 
   // Abre módulo de Cartazes A4 no Pet
-  console.log('\n[11/12] CARTAZ A4: Template PromoPetA4 (Identidade Azul/Ouro Pet)');
+  console.log('\n[14/15] CARTAZ A4: Template PromoPetA4 (Identidade Azul/Ouro Pet)');
   await evalJs(`(() => {
     window.__studioTestBridge.setModule('STORE_POSTERS');
     window.__studioTestBridge.setAppMode('PET');
@@ -351,10 +408,10 @@ async function runMatrix() {
     });
   })()`);
   await wait(1800);
-  results.push(await captureElement('#preview-poster-a4', 'matrix_11_cartaz_a4_pet.png'));
+  results.push(await captureElement('#preview-poster-a4', 'matrix_14_cartaz_a4_pet.png'));
 
   // Seleciona template PromoAgroA4 no Agro
-  console.log('\n[12/12] CARTAZ A4: Template PromoAgroA4 (Identidade Verde/Ouro Agro)');
+  console.log('\n[15/15] CARTAZ A4: Template PromoAgroA4 (Identidade Verde/Ouro Agro)');
   await evalJs(`(() => {
     window.__studioTestBridge.setAppMode('AGRO');
     window.__studioTestBridge.setPosterTemplate('promo-agro-a4');
@@ -366,7 +423,7 @@ async function runMatrix() {
     });
   })()`);
   await wait(1800);
-  results.push(await captureElement('#preview-poster-a4', 'matrix_12_cartaz_a4_agro.png'));
+  results.push(await captureElement('#preview-poster-a4', 'matrix_15_cartaz_a4_agro.png'));
 
   // =========================================================================
   // RELATÓRIO FINAL CONSOLIDADO

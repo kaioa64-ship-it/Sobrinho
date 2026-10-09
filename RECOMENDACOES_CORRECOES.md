@@ -143,10 +143,10 @@
 
 | Verificação | Comando | Resultado Obtido |
 |---|---|---|
-| **Testes Unitários** | `npm test` | **134 passed** (100% de sucesso) |
+| **Testes Unitários** | `npm test` | **135 passed** (100% de sucesso) |
 | **Linting & Checagem de Tipos** | `npm run lint` | **Exit 0** (3 tsconfigs validados) |
 | **Compilação de Produção** | `npm run build` | **Exit 0** (Vite build em ~3.1s) |
-| **Matriz Visual E2E** | `node tests/e2e-visual/run-matrix-visual-tests.mjs` | **12/12 cenários validados** (screenshots densos > 28 KB com produtos e contraste auditados) |
+| **Matriz Visual E2E** | `node tests/e2e-visual/run-matrix-visual-tests.mjs` | **15/15 cenários validados** (densos > 28 KB a 107 KB, incluindo WhatsApp oficial, Promo Simples monumental e estresse de texto longo) |
 | **Servidor em Desenvolvimento** | `npm run dev` | **HTTP 200** ativo na porta 3000 |
 | **Status Git** | `git status` | Árvore limpa e sincronizada com `origin/main` |
 

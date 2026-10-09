@@ -39,36 +39,36 @@ export const CanvasEmptyState: React.FC<CanvasEmptyStateProps> = ({
           Aguardando Produto ou Dados
         </h3>
         <p className={`text-xs sm:text-sm font-medium max-w-[90%] mt-1.5 leading-relaxed ${subClass}`}>
-          Nenhum produto ou valor pré-carregado. Insira a foto e/ou a descrição no painel ao lado para a IA gerar a arte oficial completa.
+          Selecione um produto, digite o código/SKU ou preencha os dados no painel ao lado para renderizar a arte oficial.
         </p>
 
         {/* Feature Highlights Grid */}
         <div className={`mt-5 w-full max-w-[94%] rounded-2xl p-4 border text-left space-y-2.5 ${boxClass}`}>
           <div className="text-[10px] uppercase font-bold text-[#ffab00] tracking-wider font-exo2 flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-[#ffab00] animate-ping" />
-            <span>O que a IA criará automaticamente:</span>
+            <span>Recursos do Estúdio Oficial Coagro:</span>
           </div>
 
           <div className={`grid grid-cols-1 gap-2 text-[11px] ${itemTextClass}`}>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-3.5 h-3.5 text-[#ffab00] shrink-0" />
-              <span>Identificação do produto com recorte transparente</span>
+              <span>Recorte de fundo e ancoragem física do produto</span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-3.5 h-3.5 text-[#ffab00] shrink-0" />
-              <span>Título de impacto em caixa alta com destaque ouro</span>
+              <span>Tipografia editorial oficial Exo 2 e Inter em alta fidelidade</span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-3.5 h-3.5 text-[#ffab00] shrink-0" />
-              <span>Subtítulo técnico e 3 diferenciações no campo</span>
+              <span>Preço monumental DE/POR e condições comerciais</span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-3.5 h-3.5 text-[#ffab00] shrink-0" />
-              <span>Preço De/Por ou modo Informativo contextualizado</span>
+              <span>Isolamento estrito entre marcas Agro e Pet</span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-3.5 h-3.5 text-[#ffab00] shrink-0" />
-              <span>Fundo fotográfico e legenda oficial para Instagram</span>
+              <span>Exportação direta para Feed, Story, WhatsApp e Cartaz A4</span>
             </div>
           </div>
         </div>
@@ -78,7 +78,7 @@ export const CanvasEmptyState: React.FC<CanvasEmptyStateProps> = ({
       <div className="w-full flex items-center justify-center">
         <div className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-xs border border-white/20 text-[11px] text-white/90 font-medium flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span>Envie uma foto ou digite a descrição ao lado</span>
+          <span>Preencha o formulário ou busque por código/SKU ao lado</span>
         </div>
       </div>
     </div>
