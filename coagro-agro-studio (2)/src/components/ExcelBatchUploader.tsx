@@ -1,11 +1,13 @@
 import React, { useState, useRef } from 'react';
 import * as xlsx from 'xlsx';
-import { Upload, Check, Trash2, Download, Search } from 'lucide-react';
+import { Upload, Check, Trash2, Download, Search, Sparkles } from 'lucide-react';
+import { sanitizeErpTitle } from '../lib/erpSanitizer';
 
 export interface BatchItem {
   id: string;
   codigo: string | number;
   titulo: string;
+  rawTitulo?: string;
   valorDe: string;
   valorPor: string;
   selected: boolean;
@@ -19,6 +21,7 @@ export const ExcelBatchUploader: React.FC<ExcelBatchUploaderProps> = ({ onProces
   const [items, setItems] = useState<BatchItem[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [autoSanitizeErp, setAutoSanitizeErp] = useState(true);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,10 +70,12 @@ export const ExcelBatchUploader: React.FC<ExcelBatchUploaderProps> = ({ onProces
 
           if (!titulo || !por) continue;
 
+          const rawTitulo = String(titulo).trim();
           parsedItems.push({
             id: `item-${i}`,
             codigo: codigo,
-            titulo: String(titulo).trim(),
+            rawTitulo,
+            titulo: autoSanitizeErp ? sanitizeErpTitle(rawTitulo) : rawTitulo,
             valorDe: de ? Number(de).toFixed(2).replace('.', ',') : '',
             valorPor: por ? Number(por).toFixed(2).replace('.', ',') : '',
             selected: true, // Auto-select all initially
@@ -92,6 +97,16 @@ export const ExcelBatchUploader: React.FC<ExcelBatchUploaderProps> = ({ onProces
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
+  };
+
+  const handleToggleSanitize = (checked: boolean) => {
+    setAutoSanitizeErp(checked);
+    setItems(items.map(it => ({
+      ...it,
+      titulo: checked 
+        ? sanitizeErpTitle(it.rawTitulo || it.titulo) 
+        : (it.rawTitulo || it.titulo)
+    })));
   };
 
   const toggleSelection = (id: string) => {
@@ -149,12 +164,22 @@ export const ExcelBatchUploader: React.FC<ExcelBatchUploaderProps> = ({ onProces
       {items.length > 0 && (
         <div className="space-y-4">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs text-gray-600 bg-gray-50 px-3 py-3 rounded-lg border border-gray-100 gap-3">
-            <div className="flex gap-4 items-center">
+            <div className="flex flex-wrap gap-4 items-center">
               <button onClick={() => selectAll(true)} className="hover:text-emerald-700 font-semibold underline underline-offset-2">Selecionar Todos</button>
               <button onClick={() => selectAll(false)} className="hover:text-rose-700 font-semibold underline underline-offset-2">Limpar Seleção</button>
               <div className="font-bold font-exo2 bg-white px-2 py-1 rounded-md border border-gray-200">
                 <span className="text-[#004d40]">{selectedCount}</span> de {items.length} marcados
               </div>
+              <label className="flex items-center gap-1.5 cursor-pointer text-xs font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200 hover:bg-emerald-100 transition select-none">
+                <input
+                  type="checkbox"
+                  checked={autoSanitizeErp}
+                  onChange={(e) => handleToggleSanitize(e.target.checked)}
+                  className="w-3.5 h-3.5 rounded text-emerald-600 focus:ring-emerald-500"
+                />
+                <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+                <span>Higienizar siglas de ERP</span>
+              </label>
             </div>
             
             <div className="relative w-full sm:w-64">

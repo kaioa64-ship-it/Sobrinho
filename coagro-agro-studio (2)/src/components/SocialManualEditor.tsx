@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
-import { Upload, X, Type, Tag, Palette, Wand2, Plus, Trash2, List, LayoutTemplate, Store } from 'lucide-react';
+import { Upload, X, Type, Tag, Palette, Wand2, Plus, Trash2, List, LayoutTemplate, Store, Sparkles } from 'lucide-react';
 import { TemplateLayout, CanvasFormat } from '../types/agro';
 import { removeWhiteBackground, processProductImage } from '../lib/imageTransparency';
+import { sanitizeErpTitle } from '../lib/erpSanitizer';
 
 export interface SocialManualData {
   codigo?: string;
@@ -294,9 +295,21 @@ export const SocialManualEditor: React.FC<SocialManualEditorProps> = ({
             />
           </div>
           <div className="sm:col-span-2">
-            <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1.5">
-              Título da Arte
-            </label>
+            <div className="flex items-center justify-between mb-1.5">
+              <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide">
+                Título da Arte
+              </label>
+              {data.titulo && (
+                <button
+                  type="button"
+                  onClick={() => onChange({ ...data, titulo: sanitizeErpTitle(data.titulo) })}
+                  className="text-[10px] text-emerald-700 hover:text-emerald-800 font-bold bg-emerald-50 hover:bg-emerald-100 px-2 py-0.5 rounded transition flex items-center gap-1"
+                  title="Expande abreviações e limpa siglas (ex: RAC -> Ração, 20L)"
+                >
+                  <Sparkles className="w-3 h-3" /> Limpar Siglas
+                </button>
+              )}
+            </div>
             <input
               type="text"
               value={data.titulo}

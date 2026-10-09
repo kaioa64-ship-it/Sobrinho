@@ -25,13 +25,14 @@
 | **P2.1 Erros de TypeScript** | ✅ **CONCLUÍDO** | **0 erros**. `tsc --noEmit` exit 0 no app, testes e servidor (`tsconfig.server.json`). |
 | **P2.2 Dependências & Lockfile** | ✅ **CONCLUÍDO** | TS pinado em `5.9.3`, `bun.lock` excluído, mantido apenas `package-lock.json` alinhado com Vite 8. |
 | **P2.3 Quebra de Monólitos** | ✅ **CONCLUÍDO** | `server.ts` decomposto em rotas e serviços; `InputPanel.tsx` desacoplado via hook `useArtworkForm` (−74% linhas). |
-| **P2.4 Testes Automatizados (Vitest)** | ✅ **CONCLUÍDO** | **123 testes passando** em 7 arquivos de spec (`npm test` rodando em < 1s). |
+| **P2.4 Testes Automatizados (Vitest)** | ✅ **CONCLUÍDO** | **131 testes passando** em 8 arquivos de spec (`npm test` rodando em < 1s). |
 | **P3.1 Higienização de Scripts** | ✅ **CONCLUÍDO** | Deletados 8 scripts órfãos de DNS/APIs obsoletas da pasta `tests/`. |
 | **P3.4 Centralização de Marca** | ✅ **CONCLUÍDO** | Paletas, logos e regras centralizadas em `brand.config.ts`. |
 | **P3.6 Fontes 100% Offline** | ✅ **CONCLUÍDO** | Fontes Exo 2 e Inter baixadas em `.woff2` locais com caminhos relativos em `src/assets/fonts/`. |
 | **P3.7 Persistência por SKU** | ✅ **CONCLUÍDO** | IndexedDB local `CoagroStudioDB` via `productStorage.ts` com busca em 0ms. |
 | **P3.8 Automação Visual E2E** | ✅ **CONCLUÍDO** | Script `run-visual-tests.mjs` validando 5 cenários via Google Chrome CDP Headless local. |
 | **P3.9 Nomenclatura Dinâmica & CTAs** | ✅ **CONCLUÍDO** | Downloads PNG/PDF e Google Drive geram prefixos `coagro-pet-*` / `coagro-agro-*`; pílulas de WhatsApp no editor. |
+| **P3.10 Higienização de ERP & NFe** | ✅ **CONCLUÍDO** | Módulo `erpSanitizer.ts` traduzindo abreviações brutas (ex: RAC -> Ração, 20L) no lote Excel e manuais. |
 
 ---
 

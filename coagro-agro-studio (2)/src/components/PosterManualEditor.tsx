@@ -1,5 +1,6 @@
 import React from 'react';
-import { Type, Tag } from 'lucide-react';
+import { Type, Tag, Sparkles } from 'lucide-react';
+import { sanitizeErpTitle } from '../lib/erpSanitizer';
 
 interface PosterManualData {
   codigo: string;
@@ -56,9 +57,21 @@ export const PosterManualEditor: React.FC<PosterManualEditorProps> = ({ data, on
         </div>
 
         <div>
-          <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1.5 flex items-center gap-1.5">
-            Nome do Produto
-          </label>
+          <div className="flex items-center justify-between mb-1.5">
+            <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide flex items-center gap-1.5">
+              Nome do Produto
+            </label>
+            {data.titulo && (
+              <button
+                type="button"
+                onClick={() => onChange({ ...data, titulo: sanitizeErpTitle(data.titulo) })}
+                className="text-[10px] text-emerald-700 hover:text-emerald-800 font-bold bg-emerald-50 hover:bg-emerald-100 px-2 py-0.5 rounded transition flex items-center gap-1"
+                title="Expande abreviações e limpa siglas (ex: RAC -> Ração, 20L)"
+              >
+                <Sparkles className="w-3 h-3" /> Limpar Siglas
+              </button>
+            )}
+          </div>
           <input
             type="text"
             value={data.titulo}

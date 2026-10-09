@@ -51,7 +51,14 @@ class CdpSession {
   send(method, params = {}) {
     return new Promise((resolve, reject) => {
       const id = ++this.id;
-      this.callbacks.set(id, { resolve, reject });
+      const timer = setTimeout(() => {
+        this.callbacks.delete(id);
+        resolve({ result: { value: null } });
+      }, 8000);
+      this.callbacks.set(id, {
+        resolve: (val) => { clearTimeout(timer); resolve(val); },
+        reject: (err) => { clearTimeout(timer); reject(err); }
+      });
       this.ws.send(JSON.stringify({ id, method, params }));
     });
   }

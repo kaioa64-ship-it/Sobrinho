@@ -746,6 +746,12 @@ Consolidado das verificações desta rodada:
 - Downloads de PNG e PDF em [`App.tsx`](src/App.tsx) e [`ExportToolbar.tsx`](src/components/ExportToolbar.tsx) agora geram prefixos dinâmicos `coagro-pet-*` quando em modo Pet e `coagro-agro-*` em modo Agro.
 - Adicionadas pílulas rápidas de CTA em [`SocialManualEditor.tsx`](src/components/SocialManualEditor.tsx) com sugestões de WhatsApp (Helena CRM), consultor técnico e loja para agilizar a criação em loja.
 
+### G. Higienização Inteligente de Siglas de ERP & NFe
+- Criado [`erpSanitizer.ts`](src/lib/erpSanitizer.ts) com dicionário de termos técnicos, acrônimos (NPK, PVC, etc.) e normalização de medidas (20L, 10.1 kg, 500 ml).
+- Suíte [`erpSanitizer.test.ts`](tests/unit/erpSanitizer.test.ts) com 8 testes unitários (total do Vitest elevado para 131 testes passando).
+- Integrado a [`ExcelBatchUploader.tsx`](src/components/ExcelBatchUploader.tsx) com toggle automático na barra de importação.
+- Integrado a [`PosterManualEditor.tsx`](src/components/PosterManualEditor.tsx) e [`SocialManualEditor.tsx`](src/components/SocialManualEditor.tsx) através de botão "Limpar Siglas" em 1 clique.
+
 ---
 
 ## 🔄 Como reverter
