@@ -79,6 +79,31 @@ describe('productStorage — Cache Local de Produtos por SKU', () => {
       expect(found?.templateLayout).toBe('hero-central');
     });
 
+    it('recupera com sucesso o código de teste rápido 00 (Ração Golden Special 15kg Pet)', async () => {
+      const found = await findProductBySku('00');
+
+      expect(found).not.toBeNull();
+      expect(found?.codigo).toBe('00');
+      expect(found?.nome).toContain('Ração Golden Special');
+      expect(found?.categoria).toBe('PET');
+      expect(found?.valorDe).toBe('179,90');
+      expect(found?.valorPor).toBe('144,90');
+      expect(found?.templateLayout).toBe('whatsapp-status');
+      expect(found?.imagemRecortada).toContain('data:image/svg+xml');
+    });
+
+    it('recupera com sucesso o código de teste rápido 01 (Pulverizador XP 16L Agro)', async () => {
+      const found = await findProductBySku('01');
+
+      expect(found).not.toBeNull();
+      expect(found?.codigo).toBe('01');
+      expect(found?.nome).toContain('Pulverizador Costal');
+      expect(found?.categoria).toBe('AGRO');
+      expect(found?.valorDe).toBe('299,90');
+      expect(found?.valorPor).toBe('249,90');
+      expect(found?.templateLayout).toBe('whatsapp-status');
+    });
+
     it('retorna null para código inexistente ou vazio', async () => {
       const nonExistent = await findProductBySku('99999999999');
       expect(nonExistent).toBeNull();

@@ -193,8 +193,12 @@ export async function findProductBySku(codigo: string | number): Promise<StoredP
     return {
       codigo: codeStr,
       nome: cleanName,
-      subtitulo: textos?.subtitulo || '',
+      subtitulo: textos?.subtitulo || internal.descricao || '',
       imagemUrl: internal.imagemUrl || '',
+      imagemRecortada: internal.imagemRecortada || internal.imagemUrl || '',
+      valorDe: internal.valorDe || internal.jsonBase?.modulo_preco?.valor_de || '',
+      valorPor: internal.valorPor || internal.jsonBase?.modulo_preco?.valor_por || '',
+      categoria: internal.categoria,
       templateLayout: internal.templateLayout,
       diferenciais: textos?.bullets_tecnicos || [],
       updatedAt: Date.now()

@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Upload, X, Type, Tag, Palette, Wand2, Plus, Trash2, List, LayoutTemplate, Store, Sparkles, MessageCircle } from 'lucide-react';
+import { Upload, X, Type, Tag, Palette, Wand2, Plus, Trash2, List, LayoutTemplate, Store, Sparkles, MessageCircle, Loader2 } from 'lucide-react';
 import { TemplateLayout, CanvasFormat } from '../types/agro';
 import { removeWhiteBackground, processProductImage } from '../lib/imageTransparency';
 import { sanitizeErpTitle } from '../lib/erpSanitizer';
@@ -109,9 +109,27 @@ export const SocialManualEditor: React.FC<SocialManualEditorProps> = ({
   const handleRefineCutout = async () => {
     const src = originalImage || productImage;
     if (!src) return;
+
+    // Se a imagem já for um packshot vetorial SVG, não precisa de WASM neural
+    if (src.startsWith('data:image/svg+xml')) {
+      setCutoutImage(src);
+      onSetProductImage(src);
+      onChange({ ...data, preserveProductBackground: false });
+      return;
+    }
+
     setIsProcessingBg(true);
     try {
-      const result = await processProductImage(src, 'standard');
+      // Timeout defensivo de 10 segundos para não congelar computadores de loja
+      const timeoutPromise = new Promise<never>((_, reject) =>
+        setTimeout(() => reject(new Error('Tempo limite excedido no recorte neural local.')), 10000)
+      );
+
+      const result = await Promise.race([
+        processProductImage(src, 'standard'),
+        timeoutPromise,
+      ]);
+
       setCutoutImage(result.finalUrl);
       onSetProductImage(result.finalUrl);
       onChange({ ...data, preserveProductBackground: false });
@@ -132,7 +150,16 @@ export const SocialManualEditor: React.FC<SocialManualEditorProps> = ({
         });
       }
     } catch (e) {
-      console.warn('Erro ao refinar recorte:', e);
+      console.warn('Recorte neural WASM lento ou indisponível, aplicando Chroma-Key instantâneo:', e);
+      // Fallback gracioso instantâneo via Canvas puro (20ms)
+      try {
+        const fallback = await removeWhiteBackground(src);
+        setCutoutImage(fallback);
+        onSetProductImage(fallback);
+        onChange({ ...data, preserveProductBackground: false });
+      } catch (err) {
+        console.warn('Erro no fallback:', err);
+      }
     } finally {
       setIsProcessingBg(false);
     }
@@ -171,6 +198,11 @@ export const SocialManualEditor: React.FC<SocialManualEditorProps> = ({
       const { findProductBySku } = await import('../lib/productStorage');
       const product = await findProductBySku(codigoDigitado);
       if (product) {
+        // Se o produto tiver categoria cadastrada (ex: Pet vs Agro), alinha a marca automaticamente
+        if (product.categoria && product.categoria !== appMode) {
+          onAppModeChange(product.categoria);
+        }
+
         onChange({
           ...data,
           codigo: codigoDigitado,
@@ -236,8 +268,12 @@ export const SocialManualEditor: React.FC<SocialManualEditorProps> = ({
                     disabled={isProcessingBg}
                     className="text-xs font-bold bg-white border border-gray-200 px-2.5 py-1 rounded-md text-gray-600 hover:bg-gray-50 flex items-center gap-1.5 transition disabled:opacity-50"
                   >
-                    <Wand2 className="w-3 h-3 text-[#004d40]" />
-                    {isProcessingBg ? 'Refinando...' : 'Refinar Recorte com IA'}
+                    {isProcessingBg ? (
+                      <Loader2 className="w-3 h-3 animate-spin text-[#004d40]" />
+                    ) : (
+                      <Wand2 className="w-3 h-3 text-[#004d40]" />
+                    )}
+                    {isProcessingBg ? 'Refinando (WASM)...' : 'Refinar Recorte com IA'}
                   </button>
                 </div>
                 <button
