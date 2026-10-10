@@ -58,13 +58,13 @@ export const BrandAssetsTab: React.FC<BrandAssetsTabProps> = ({ scope, onShowNot
   const isPet = scope === 'PET';
   const [copiedColor, setCopiedColor] = useState<string | null>(null);
 
-  // PALETA OFICIAL: O Azul Coagro (#001C71) tem a primazia da marca
+  // PALETA OFICIAL: Nomenclatura definida pelo Kaio (Azul Primária, Verde Secundária, Ouro Acento)
   const agroColors = [
-    { name: 'Azul Coagro (Tipografia & Identidade Titular)', hex: '#001C71', rgb: 'rgb(0, 28, 113)', cmyk: 'C:100 M:85 Y:10 K:40', use: 'Texto titular COAGRO na logo, títulos formais, contrastes executivos' },
-    { name: 'Verde Profundo Safra (Primária)', hex: '#004d40', rgb: 'rgb(0, 77, 64)', cmyk: 'C:90 M:30 Y:75 K:60', use: 'Fundos institucionais, botões principais, cabeçalhos de filiais' },
-    { name: 'Ouro / Âmbar Safra (Acento & Promoção)', hex: '#ffab00', rgb: 'rgb(255, 171, 0)', cmyk: 'C:0 M:35 Y:100 K:0', use: 'Telhado da casinha, preços promocionais, selos de destaque' },
-    { name: 'Azul Claro Suporte', hex: '#4897D0', rgb: 'rgb(72, 151, 208)', cmyk: 'C:65 M:25 Y:0 K:0', use: 'Linhas divisórias, tags técnicas, suporte visual secundário' },
-    { name: 'Branco Puro', hex: '#ffffff', rgb: 'rgb(255, 255, 255)', cmyk: 'C:0 M:0 Y:0 K:0', use: 'Fundo clean, contraste sobre verde escuro e leitura' },
+    { name: 'Azul Coagro (Primária Titular)', hex: '#001C71', rgb: 'rgb(0, 28, 113)', cmyk: 'C:100 M:85 Y:10 K:40', use: 'Texto titular COAGRO na logo oficial, títulos de impacto, contrastes executivos' },
+    { name: 'Verde Safra (Secundária)', hex: '#004d40', rgb: 'rgb(0, 77, 64)', cmyk: 'C:90 M:30 Y:75 K:60', use: 'Fundos institucionais, botões principais, cabeçalhos de filiais' },
+    { name: 'Ouro Safra (Secundária / Acento)', hex: '#ffab00', rgb: 'rgb(255, 171, 0)', cmyk: 'C:0 M:35 Y:100 K:0', use: 'Telhado da casinha, preços promocionais, selos de destaque' },
+    { name: 'Azul Claro (Apoio Pet / Suporte)', hex: '#4897D0', rgb: 'rgb(72, 151, 208)', cmyk: 'C:65 M:25 Y:0 K:0', use: 'Linhas divisórias, tags técnicas, suporte visual secundário' },
+    { name: 'Branco Puro (Base Neutra)', hex: '#ffffff', rgb: 'rgb(255, 255, 255)', cmyk: 'C:0 M:0 Y:0 K:0', use: 'Fundo clean, contraste sobre verde escuro e leitura' },
   ];
 
   const petColors = [
@@ -313,33 +313,57 @@ export const BrandAssetsTab: React.FC<BrandAssetsTabProps> = ({ scope, onShowNot
             <p className="text-xs text-gray-600 leading-relaxed font-sans">
               Utilizada exclusivamente para títulos, chamadas promocionais, valores de preço, selos e nomes de lojas. Caracteriza robustez e tecnologia no campo.
             </p>
-            <div className="flex flex-wrap gap-2 pt-2">
-              <span className="px-2.5 py-1 bg-white border border-gray-200 rounded-md text-[11px] font-exo2 font-bold">Black 900</span>
-              <span className="px-2.5 py-1 bg-white border border-gray-200 rounded-md text-[11px] font-exo2 font-bold">Bold 700</span>
-              <span className="px-2.5 py-1 bg-white border border-gray-200 rounded-md text-[11px] font-exo2 font-medium">Medium 500</span>
+            <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-gray-200/60">
+              <div className="flex flex-wrap gap-1.5">
+                <span className="px-2 py-0.5 bg-white border border-gray-200 rounded text-[10px] font-exo2 font-black">Black 900</span>
+                <span className="px-2 py-0.5 bg-white border border-gray-200 rounded text-[10px] font-exo2 font-bold">Bold 700</span>
+                <span className="px-2 py-0.5 bg-white border border-gray-200 rounded text-[10px] font-exo2 font-medium">Medium 500</span>
+              </div>
+              <a
+                href="https://fonts.google.com/download?family=Exo%202"
+                target="_blank"
+                rel="noreferrer"
+                className="px-3 py-1.5 bg-[#004d40] hover:bg-[#00382e] text-white rounded-lg text-xs font-bold font-exo2 flex items-center gap-1.5 transition cursor-pointer"
+              >
+                <Download className="w-3.5 h-3.5 text-[#ffab00]" />
+                Baixar Exo 2 (.ZIP)
+              </a>
             </div>
           </div>
 
           {/* Família 2: Inter */}
-          <div className="border border-gray-200 rounded-xl p-5 bg-gray-50 space-y-3">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-[#004d40] uppercase font-exo2 tracking-wider">
-                Tipografia de Leitura & Documentos
-              </span>
-              <span className="text-[10px] bg-blue-100 text-blue-900 px-2 py-0.5 rounded-full font-bold">
-                Inter
-              </span>
+          <div className="border border-gray-200 rounded-xl p-5 bg-gray-50 space-y-3 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-[#004d40] uppercase font-exo2 tracking-wider">
+                  Tipografia de Leitura & Documentos
+                </span>
+                <span className="text-[10px] bg-blue-100 text-blue-900 px-2 py-0.5 rounded-full font-bold">
+                  Inter
+                </span>
+              </div>
+              <div className="text-2xl font-semibold text-gray-900 leading-tight mt-2">
+                Especificações Técnicas e Bullets
+              </div>
+              <p className="text-xs text-gray-600 leading-relaxed font-sans mt-2">
+                Utilizada em textos corridos, laudos, comunicados de loja, descrições de dosagem, parágrafos de legendas e dados fiscais. Máxima legibilidade em telas e impressão.
+              </p>
             </div>
-            <div className="text-2xl font-semibold text-gray-900 leading-tight">
-              Especificações Técnicas e Bullets
-            </div>
-            <p className="text-xs text-gray-600 leading-relaxed font-sans">
-              Utilizada em textos corridos, laudos, comunicados de loja, descrições de dosagem, parágrafos de legendas e dados fiscais. Máxima legibilidade em telas e impressão.
-            </p>
-            <div className="flex flex-wrap gap-2 pt-2">
-              <span className="px-2.5 py-1 bg-white border border-gray-200 rounded-md text-[11px] font-sans font-bold">SemiBold 600</span>
-              <span className="px-2.5 py-1 bg-white border border-gray-200 rounded-md text-[11px] font-sans font-medium">Regular 400</span>
-              <span className="px-2.5 py-1 bg-white border border-gray-200 rounded-md text-[11px] font-sans font-light">Light 300</span>
+            <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-gray-200/60">
+              <div className="flex flex-wrap gap-1.5">
+                <span className="px-2 py-0.5 bg-white border border-gray-200 rounded text-[10px] font-sans font-bold">SemiBold 600</span>
+                <span className="px-2 py-0.5 bg-white border border-gray-200 rounded text-[10px] font-sans font-medium">Regular 400</span>
+                <span className="px-2 py-0.5 bg-white border border-gray-200 rounded text-[10px] font-sans font-light">Light 300</span>
+              </div>
+              <a
+                href="https://fonts.google.com/download?family=Inter"
+                target="_blank"
+                rel="noreferrer"
+                className="px-3 py-1.5 bg-[#004d40] hover:bg-[#00382e] text-white rounded-lg text-xs font-bold font-exo2 flex items-center gap-1.5 transition cursor-pointer"
+              >
+                <Download className="w-3.5 h-3.5 text-[#ffab00]" />
+                Baixar Inter (.ZIP)
+              </a>
             </div>
           </div>
         </div>

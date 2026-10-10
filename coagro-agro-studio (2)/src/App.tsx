@@ -29,9 +29,8 @@ export default function App() {
   const [productImage, setProductImage] = useState<string>('');
   const [backgroundImage, setBackgroundImage] = useState<string | undefined>(undefined);
 
-  // App Module State: SOCIAL_MEDIA vs STORE_POSTERS vs BRAND_HUB
-  const isElectron = navigator.userAgent.toLowerCase().includes('electron');
-  const [currentModule, setCurrentModule] = useState<'SOCIAL_MEDIA' | 'STORE_POSTERS' | 'BRAND_HUB'>(isElectron ? 'STORE_POSTERS' : 'SOCIAL_MEDIA');
+  // App Module State: STORE_POSTERS por padrão (Preto e Branco A4 pré-selecionado)
+  const [currentModule, setCurrentModule] = useState<'SOCIAL_MEDIA' | 'STORE_POSTERS' | 'BRAND_HUB'>('STORE_POSTERS');
   const [posterMode, setPosterMode] = useState<'MANUAL' | 'BATCH' | 'REVIEW'>('MANUAL');
   const [posterTemplate, setPosterTemplate] = useState<PosterTemplateLayout>('promo-mono-a4');
   const [posterHeaderText, setPosterHeaderText] = useState<string>('OFERTA');

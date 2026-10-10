@@ -50,6 +50,7 @@ export const SocialManualEditor: React.FC<SocialManualEditorProps> = ({
   const [isProcessingBg, setIsProcessingBg] = useState(false);
   const [originalImage, setOriginalImage] = useState<string | null>(null);
   const [cutoutImage, setCutoutImage] = useState<string | null>(null);
+  const [showAllCtas, setShowAllCtas] = useState(false);
 
   const handleProductUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -428,8 +429,8 @@ export const SocialManualEditor: React.FC<SocialManualEditorProps> = ({
             placeholder="Ex: Garanta já o seu!"
             className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 transition-all font-medium text-gray-800"
           />
-          {/* Pílulas de CTA Rápidas (Agro / Pet / WhatsApp Helena CRM) */}
-          <div className="flex flex-wrap gap-1.5 mt-2">
+          {/* Pílulas de CTA Rápidas compactas (2 visíveis por padrão + Ver mais sugestões) */}
+          <div className="flex flex-wrap items-center gap-1.5 mt-2">
             {(isPet ? [
               'GARANTA JÁ O SEU!',
               'PEÇA NO WHATSAPP',
@@ -442,16 +443,23 @@ export const SocialManualEditor: React.FC<SocialManualEditorProps> = ({
               'FALE COM NOSSO CONSULTOR',
               'OFERTA POR TEMPO LIMITADO',
               'CONSULTE DISPONIBILIDADE'
-            ]).map((sugestao) => (
+            ]).slice(0, showAllCtas ? undefined : 2).map((sugestao) => (
               <button
                 key={sugestao}
                 type="button"
                 onClick={() => onChange({ ...data, cta: sugestao })}
-                className="text-[11px] font-semibold px-2.5 py-1 rounded-full border transition-all text-gray-600 bg-gray-50 border-gray-200 hover:bg-gray-100 hover:text-gray-900 active:scale-95"
+                className="text-[11px] font-semibold px-2.5 py-1 rounded-full border transition-all text-gray-600 bg-gray-50 border-gray-200 hover:bg-gray-100 hover:text-gray-900 active:scale-95 cursor-pointer"
               >
                 {sugestao}
               </button>
             ))}
+            <button
+              type="button"
+              onClick={() => setShowAllCtas(!showAllCtas)}
+              className="text-[11px] font-bold text-[#004d40] hover:underline px-2 py-0.5 rounded transition cursor-pointer"
+            >
+              {showAllCtas ? 'Ver menos' : '+ Ver mais sugestões'}
+            </button>
           </div>
         </div>
 
@@ -485,8 +493,8 @@ export const SocialManualEditor: React.FC<SocialManualEditorProps> = ({
           </div>
         )}
 
-        {/* Design e Layout (Sanfona) */}
-        <details className="group border border-gray-200 bg-gray-50 rounded-xl overflow-hidden" open>
+        {/* Design e Layout (Sanfona recolhida por padrão) */}
+        <details className="group border border-gray-200 bg-gray-50 rounded-xl overflow-hidden">
           <summary className="flex cursor-pointer list-none items-center justify-between p-4 font-bold text-gray-800 focus:outline-none">
             <div className="flex items-center gap-2">
               <Palette className="w-5 h-5 text-gray-500" />

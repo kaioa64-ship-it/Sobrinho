@@ -24,14 +24,15 @@ export const TeamDigitalTab: React.FC<TeamDigitalTabProps> = ({ scope, onShowNot
   const [sigStoreId, setSigStoreId] = useState('aracaju');
   const [sigPhone, setSigPhone] = useState('(79) 99601-0164');
   const [sigEmail, setSigEmail] = useState('marketing@grupocoagro.com.br');
-  const [sigPhoto, setSigPhoto] = useState<string | null>(null);
   const sigPhotoInputRef = useRef<HTMLInputElement>(null);
+
+  // Foto compartilhada do colaborador (sincronizada automaticamente entre Assinatura de E-mail e Avatar de WhatsApp)
+  const [collaboratorPhoto, setCollaboratorPhoto] = useState<string | null>(null);
 
   const selectedStore = COAGRO_STORES.find(s => s.id === sigStoreId) || COAGRO_STORES[0];
 
   // --- 2. Estado do Avatar de WhatsApp ---
   const [avatarMode, setAvatarMode] = useState<'PERSON' | 'DEPT'>('PERSON');
-  const [avatarPersonPhoto, setAvatarPersonPhoto] = useState<string | null>(null);
   const [avatarDeptName, setAvatarDeptName] = useState('Atendimento Loja');
   const avatarPhotoInputRef = useRef<HTMLInputElement>(null);
 
@@ -40,9 +41,9 @@ export const TeamDigitalTab: React.FC<TeamDigitalTabProps> = ({ scope, onShowNot
       const signatureHtml = `
         <table cellpadding="0" cellspacing="0" border="0" style="font-family: Arial, sans-serif; color: #1f2937; font-size: 13px; line-height: 1.45; border-collapse: collapse;">
           <tr>
-            ${sigPhoto ? `
+            ${collaboratorPhoto ? `
             <td style="padding-right: 16px; vertical-align: middle;">
-              <img src="${sigPhoto}" alt="${sigName}" width="68" height="68" style="width: 68px; height: 68px; border-radius: 50%; object-fit: cover; display: block; border: 2px solid #004d40;" />
+              <img src="${collaboratorPhoto}" alt="${sigName}" width="68" height="68" style="width: 68px; height: 68px; border-radius: 50%; object-fit: cover; display: block; border: 2px solid #004d40;" />
             </td>
             ` : ''}
             <td style="padding-right: 18px; border-right: 3px solid #004d40; vertical-align: middle; text-align: center;">
@@ -100,28 +101,35 @@ export const TeamDigitalTab: React.FC<TeamDigitalTabProps> = ({ scope, onShowNot
     }
   };
 
+  // Upload sincronizado a partir do avatar (atualiza avatar e assinatura de e-mail)
   const handleAvatarUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setAvatarPersonPhoto(reader.result as string);
-        onShowNotice('✅ Foto do consultor aplicada no avatar!');
+        setCollaboratorPhoto(reader.result as string);
+        onShowNotice('✅ Foto do consultor sincronizada no avatar e na assinatura!');
       };
       reader.readAsDataURL(file);
     }
   };
 
+  // Upload sincronizado a partir da assinatura (atualiza assinatura e avatar de e-mail)
   const handleSigPhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setSigPhoto(reader.result as string);
-        onShowNotice('✅ Foto do colaborador inserida na assinatura!');
+        setCollaboratorPhoto(reader.result as string);
+        onShowNotice('✅ Foto do colaborador sincronizada na assinatura e no avatar!');
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  const handleRemoveCollaboratorPhoto = () => {
+    setCollaboratorPhoto(null);
+    onShowNotice('Foto do colaborador removida de ambas as prévias.');
   };
 
   const handleDownloadAvatar = async () => {
@@ -140,39 +148,220 @@ export const TeamDigitalTab: React.FC<TeamDigitalTabProps> = ({ scope, onShowNot
     }
   };
 
-  const handleDownloadWallpaper = (title: string, bgColor: string, textColor: string, isBlue = false) => {
-    const canvas = document.createElement('canvas');
-    canvas.width = 1920;
-    canvas.height = 1080;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+  const handleDownloadWallpaper = async (themeKey: 'azul_titular' | 'agro_tech' | 'verde_institucional' | 'sala_clean', title: string) => {
+    try {
+      onShowNotice(`⏳ Gerando fundo "${title}" em Full HD 1920x1080...`);
+      const canvas = document.createElement('canvas');
+      canvas.width = 1920;
+      canvas.height = 1080;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
 
-    // Fundo
-    ctx.fillStyle = bgColor;
-    ctx.fillRect(0, 0, 1920, 1080);
+      const casinhaSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="525 0 235 210" width="235" height="210">
+        <path fill="#508D2B" d="M661.66 81.01c-45.81,13.1 -59.02,56.87 -59.34,85.88 28.19,7.76 61.47,5.98 82.06,-5.22 46.07,-25.06 33.65,-70.29 33.65,-70.29 0,0 -14.18,-13.08 -37.65,-13.08 -5.71,0 -11.98,0.77 -18.72,2.7l0 0z"/>
+        <path fill="#F0A01B" d="M644.15 3.65l-108.78 69.55c-6.34,4.25 -3.52,14.05 4.04,14.05l25 0c4.31,0 8.53,-1.19 12.2,-3.44l71.66 -43.85c4.49,-2.91 10.21,-2.91 14.59,-0.01l69.35 43.12c-52.53,7.92 -107.56,41.6 -125.83,78.32 33.4,-30.47 81.65,-61.01 151.48,-65.42 5.08,-0.32 10.45,0.07 15.23,-1.31 9.14,-2.64 11.21,-14.73 3.47,-20.03l-108.69 -70.99c-3.53,-2.42 -7.64,-3.63 -11.77,-3.63 -4.14,0 -8.31,1.22 -11.94,3.65l0 0z"/>
+        <path fill="#386A27" d="M743.55 189.58l0 -76.98c0,-2.62 -2.11,-4.74 -4.72,-4.74 -2.28,0 -4.24,1.63 -4.64,3.88 -3.4,18.95 -14.21,42.16 -43.98,58.78 -26.43,14.76 -69.03,17.27 -105.07,7.3l0 0c0.37,-24.42 7.63,-56.88 28.46,-81.52 0.85,-1 0.14,-2.53 -1.17,-2.53l-0 0 -29.77 0c-7.2,0 -13.04,5.84 -13.04,13.05l0 82.75c0,7.21 5.84,13.05 13.04,13.05l147.87 0c7.21,0 13.04,-5.85 13.04,-13.05z"/>
+      </svg>`;
 
-    // Efeito de vinheta ou textura suave
-    const grad = ctx.createRadialGradient(960, 540, 100, 960, 540, 900);
-    grad.addColorStop(0, 'rgba(255, 255, 255, 0.08)');
-    grad.addColorStop(1, 'rgba(0, 0, 0, 0.3)');
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, 1920, 1080);
+      let casinhaImg: HTMLImageElement | null = null;
+      try {
+        casinhaImg = await new Promise<HTMLImageElement>((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => resolve(img);
+          img.onerror = reject;
+          img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(casinhaSvg);
+        });
+      } catch {
+        casinhaImg = null;
+      }
 
-    // Texto de apoio
-    ctx.fillStyle = textColor;
-    ctx.font = 'bold 32px "Arial"';
-    ctx.textAlign = 'right';
-    ctx.fillText('GRUPO COAGRO', 1840, 1000);
-    ctx.font = '20px "Arial"';
-    ctx.fillStyle = '#ffab00';
-    ctx.fillText('www.grupocoagro.com.br', 1840, 1030);
+      if (themeKey === 'azul_titular') {
+        // Modelo 1: Azul Titular Coagro (#001C71) com Logo Vertical Oficial
+        const grad = ctx.createLinearGradient(0, 0, 1920, 1080);
+        grad.addColorStop(0, '#001C71');
+        grad.addColorStop(0.5, '#082585');
+        grad.addColorStop(1, '#020d29');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, 1920, 1080);
 
-    const dataUrl = canvas.toDataURL('image/png');
-    const link = document.createElement('a');
-    link.download = `Fundo_Videoconferencia_${title.replace(/[^a-zA-Z0-9]/g, '_')}_1920x1080.png`;
-    link.href = dataUrl;
-    link.click();
-    onShowNotice(`✅ Fundo de videoconferência "${title}" baixado (1920x1080)!`);
+        // Iluminação central suave
+        const rad = ctx.createRadialGradient(960, 480, 50, 960, 480, 850);
+        rad.addColorStop(0, 'rgba(72, 151, 208, 0.18)');
+        rad.addColorStop(1, 'rgba(0, 0, 0, 0.35)');
+        ctx.fillStyle = rad;
+        ctx.fillRect(0, 0, 1920, 1080);
+
+        // Casinha no topo central
+        if (casinhaImg) {
+          ctx.drawImage(casinhaImg, 960 - 80, 310, 160, 142);
+        }
+        // Tipografia oficial
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = '900 88px "Exo 2", Arial, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('COAGRO', 960, 530);
+
+        ctx.fillStyle = '#ffab00';
+        ctx.font = 'bold 24px "Exo 2", Arial, sans-serif';
+        ctx.fillText('GRUPO COAGRO • MARCA OFICIAL', 960, 580);
+
+        // Rodapé corporativo
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#93c5fd';
+        ctx.font = '16px "Inter", Arial, sans-serif';
+        ctx.fillText('Alagoas • Sergipe • Bahia', 1840, 1010);
+        ctx.fillStyle = '#ffab00';
+        ctx.font = 'bold 18px "Exo 2", Arial, sans-serif';
+        ctx.fillText('www.grupocoagro.com.br', 1840, 1040);
+      } else if (themeKey === 'agro_tech') {
+        // Modelo 2: Campo Tecnológico (Agro Tech)
+        const grad = ctx.createLinearGradient(0, 0, 1920, 1080);
+        grad.addColorStop(0, '#00261f');
+        grad.addColorStop(0.6, '#004d40');
+        grad.addColorStop(1, '#02332a');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, 1920, 1080);
+
+        // Linhas de padrão tecnológico
+        ctx.strokeStyle = 'rgba(255, 171, 0, 0.08)';
+        ctx.lineWidth = 1.5;
+        for (let i = -500; i < 2500; i += 120) {
+          ctx.beginPath();
+          ctx.moveTo(i, 0);
+          ctx.lineTo(i + 400, 1080);
+          ctx.stroke();
+        }
+
+        if (casinhaImg) {
+          ctx.drawImage(casinhaImg, 960 - 75, 320, 150, 133);
+        }
+        ctx.fillStyle = '#ffab00';
+        ctx.font = '900 78px "Exo 2", Arial, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('AGRO TECH', 960, 530);
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 22px "Inter", Arial, sans-serif';
+        ctx.fillText('TECNOLOGIA & CONSULTORIA AGRONÔMICA', 960, 580);
+
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#a7f3d0';
+        ctx.font = '16px "Inter", Arial, sans-serif';
+        ctx.fillText('Grupo Coagro • Inovação no Campo', 1840, 1010);
+        ctx.fillStyle = '#ffab00';
+        ctx.font = 'bold 18px "Exo 2", Arial, sans-serif';
+        ctx.fillText('www.grupocoagro.com.br', 1840, 1040);
+      } else if (themeKey === 'verde_institucional') {
+        // Modelo 3: Verde Safra Institucional Oficial (#004d40)
+        const grad = ctx.createRadialGradient(960, 540, 100, 960, 540, 950);
+        grad.addColorStop(0, '#005b4c');
+        grad.addColorStop(0.7, '#004d40');
+        grad.addColorStop(1, '#002f27');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, 1920, 1080);
+
+        if (casinhaImg) {
+          ctx.drawImage(casinhaImg, 960 - 90, 310, 180, 160);
+        }
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '900 84px "Exo 2", Arial, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('COAGRO', 960, 540);
+
+        ctx.fillStyle = '#ffab00';
+        ctx.font = 'bold 22px "Exo 2", Arial, sans-serif';
+        ctx.fillText('DESDE 1980 • NUTRIÇÃO VEGETAL, DEFENSIVOS E VETERINÁRIA', 960, 590);
+
+        ctx.textAlign = 'right';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+        ctx.font = '16px "Inter", Arial, sans-serif';
+        ctx.fillText('12 Unidades no Nordeste • Alagoas, Sergipe e Bahia', 1840, 1010);
+        ctx.fillStyle = '#ffab00';
+        ctx.font = 'bold 18px "Exo 2", Arial, sans-serif';
+        ctx.fillText('www.grupocoagro.com.br', 1840, 1040);
+      } else {
+        // Modelo 4: Sala Clean / Escritório Executivo com Quadro da Coagro na Parede
+        // Parede de sala corporativa clean
+        const wallGrad = ctx.createLinearGradient(0, 0, 0, 960);
+        wallGrad.addColorStop(0, '#f8fafc');
+        wallGrad.addColorStop(1, '#e2e8f0');
+        ctx.fillStyle = wallGrad;
+        ctx.fillRect(0, 0, 1920, 960);
+
+        // Piso e rodapé moderno na base inferior
+        ctx.fillStyle = '#94a3b8';
+        ctx.fillRect(0, 960, 1920, 16);
+        const floorGrad = ctx.createLinearGradient(0, 976, 0, 1080);
+        floorGrad.addColorStop(0, '#334155');
+        floorGrad.addColorStop(1, '#1e293b');
+        ctx.fillStyle = floorGrad;
+        ctx.fillRect(0, 976, 1920, 104);
+
+        // Quadro emoldurado na parede (centralizado e com proporção elegante)
+        const frameX = 960 - 320;
+        const frameY = 180;
+        const frameW = 640;
+        const frameH = 440;
+
+        // Sombra suave do quadro
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.18)';
+        ctx.fillRect(frameX + 12, frameY + 12, frameW, frameH);
+
+        // Moldura preta fosca executiva
+        ctx.fillStyle = '#0f172a';
+        ctx.fillRect(frameX, frameY, frameW, frameH);
+
+        // Paspatur branco nobre
+        const borderM = 24;
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(frameX + borderM, frameY + borderM, frameW - borderM * 2, frameH - borderM * 2);
+
+        // Tela interna institucional verde safra
+        const innerM = borderM + 26;
+        ctx.fillStyle = '#004d40';
+        ctx.fillRect(frameX + innerM, frameY + innerM, frameW - innerM * 2, frameH - innerM * 2);
+
+        // Conteúdo do quadro: Casinha e Coagro
+        if (casinhaImg) {
+          ctx.drawImage(casinhaImg, 960 - 50, frameY + innerM + 40, 100, 89);
+        }
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '900 52px "Exo 2", Arial, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('COAGRO', 960, frameY + innerM + 190);
+
+        ctx.fillStyle = '#ffab00';
+        ctx.font = 'bold 16px "Exo 2", Arial, sans-serif';
+        ctx.fillText('GRUPO COAGRO', 960, frameY + innerM + 225);
+
+        // Reflexo sutil de vidro na tela
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+        ctx.beginPath();
+        ctx.moveTo(frameX + innerM, frameY + innerM);
+        ctx.lineTo(frameX + innerM + 200, frameY + innerM);
+        ctx.lineTo(frameX + innerM + 80, frameY + frameH - innerM);
+        ctx.lineTo(frameX + innerM, frameY + frameH - innerM);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#cbd5e1';
+        ctx.font = '15px "Inter", Arial, sans-serif';
+        ctx.fillText('Grupo Coagro • Sala Executiva', 1840, 1020);
+        ctx.fillStyle = '#ffab00';
+        ctx.font = 'bold 16px "Exo 2", Arial, sans-serif';
+        ctx.fillText('www.grupocoagro.com.br', 1840, 1050);
+      }
+
+      const dataUrl = canvas.toDataURL('image/png');
+      const link = document.createElement('a');
+      link.download = `Fundo_Videoconferencia_${themeKey}_1920x1080.png`;
+      link.href = dataUrl;
+      link.click();
+      onShowNotice(`✅ Fundo de videoconferência "${title}" baixado em Full HD (1920x1080)!`);
+    } catch (err: any) {
+      alert('Erro ao gerar fundo: ' + err.message);
+    }
   };
 
   const handleDownloadPptxTemplate = () => {
@@ -295,7 +484,7 @@ export const TeamDigitalTab: React.FC<TeamDigitalTabProps> = ({ scope, onShowNot
             </div>
 
             <div>
-              <label className="block text-[11px] font-bold text-gray-700 uppercase mb-1">Foto do Colaborador (Opcional)</label>
+              <label className="block text-[11px] font-bold text-gray-700 uppercase mb-1">Foto do Colaborador (Sincronizada)</label>
               <div className="flex gap-2 items-center">
                 <input
                   type="file"
@@ -310,18 +499,19 @@ export const TeamDigitalTab: React.FC<TeamDigitalTabProps> = ({ scope, onShowNot
                   className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-xs font-bold font-exo2 flex items-center gap-1.5 transition cursor-pointer"
                 >
                   <Upload className="w-3.5 h-3.5 text-[#004d40]" />
-                  {sigPhoto ? 'Trocar Foto' : 'Inserir Foto'}
+                  {collaboratorPhoto ? 'Trocar Foto' : 'Inserir Foto'}
                 </button>
-                {sigPhoto && (
+                {collaboratorPhoto && (
                   <button
                     type="button"
-                    onClick={() => setSigPhoto(null)}
+                    onClick={handleRemoveCollaboratorPhoto}
                     className="text-[11px] text-rose-600 hover:underline font-bold"
                   >
                     Remover Foto
                   </button>
                 )}
               </div>
+              <p className="text-[10px] text-gray-400 mt-1">Sincronizada automaticamente com o Avatar de WhatsApp.</p>
             </div>
           </div>
 
@@ -338,9 +528,9 @@ export const TeamDigitalTab: React.FC<TeamDigitalTabProps> = ({ scope, onShowNot
                 className="p-5 bg-white rounded-xl border border-gray-200 shadow-sm flex items-center gap-4"
               >
                 {/* Foto Opcional */}
-                {sigPhoto && (
+                {collaboratorPhoto && (
                   <img
-                    src={sigPhoto}
+                    src={collaboratorPhoto}
                     alt={sigName}
                     className="w-16 h-16 rounded-full object-cover border-2 border-[#004d40] shadow-2xs flex-shrink-0"
                   />
@@ -398,7 +588,7 @@ export const TeamDigitalTab: React.FC<TeamDigitalTabProps> = ({ scope, onShowNot
             Gerador de Avatar Oficial com a Casinha Coagro (WhatsApp & CRM)
           </h3>
           <p className="text-xs text-gray-500 mt-0.5">
-            Padroniza os números comerciais da Coagro com a casinha oficial da marca, suportando foto do consultor ou avatar setorial.
+            Padroniza os números comerciais da Coagro com a casinha oficial da marca, sincronizando com a assinatura e CRM.
           </p>
         </div>
 
@@ -429,7 +619,7 @@ export const TeamDigitalTab: React.FC<TeamDigitalTabProps> = ({ scope, onShowNot
             {avatarMode === 'PERSON' ? (
               <div className="space-y-3">
                 <p className="text-xs text-gray-600 leading-relaxed">
-                  Carregue a foto do colaborador. A foto será enquadrada com o aro ouro e verde e a <strong>Casinha Coagro oficial</strong> como insígnia institucional.
+                  Carregue a foto do colaborador. A foto sincroniza com a assinatura de e-mail e recebe a <strong>Casinha Coagro oficial</strong> como insígnia institucional.
                 </p>
                 <div className="flex gap-2">
                   <input
@@ -445,12 +635,12 @@ export const TeamDigitalTab: React.FC<TeamDigitalTabProps> = ({ scope, onShowNot
                     className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-xl text-xs font-bold font-exo2 flex items-center gap-2 transition cursor-pointer"
                   >
                     <Upload className="w-4 h-4 text-[#004d40]" />
-                    Carregar Foto do Consultor
+                    {collaboratorPhoto ? 'Trocar Foto do Consultor' : 'Carregar Foto do Consultor'}
                   </button>
-                  {avatarPersonPhoto && (
+                  {collaboratorPhoto && (
                     <button
                       type="button"
-                      onClick={() => setAvatarPersonPhoto(null)}
+                      onClick={handleRemoveCollaboratorPhoto}
                       className="px-3 py-2 text-xs font-bold text-rose-600 hover:bg-rose-50 rounded-xl transition cursor-pointer"
                     >
                       Remover
@@ -487,9 +677,9 @@ export const TeamDigitalTab: React.FC<TeamDigitalTabProps> = ({ scope, onShowNot
               className="w-48 h-48 rounded-full p-2 bg-gradient-to-tr from-[#004d40] via-[#ffab00] to-[#004d40] shadow-xl flex items-center justify-center relative select-none overflow-hidden"
             >
               <div className="w-full h-full rounded-full bg-white flex flex-col items-center justify-center overflow-hidden relative">
-                {avatarMode === 'PERSON' && avatarPersonPhoto ? (
+                {avatarMode === 'PERSON' && collaboratorPhoto ? (
                   <div className="w-full h-full relative">
-                    <img src={avatarPersonPhoto} alt="Consultor" className="w-full h-full object-cover" />
+                    <img src={collaboratorPhoto} alt="Consultor" className="w-full h-full object-cover" />
                     <div className="absolute bottom-1 right-1/2 translate-x-1/2 bg-white/95 rounded-full p-1 shadow-md border border-[#ffab00]/60">
                       <CoagroSimboloCasinha className="w-6 h-6" />
                     </div>
@@ -536,22 +726,24 @@ export const TeamDigitalTab: React.FC<TeamDigitalTabProps> = ({ scope, onShowNot
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {/* Modelo 1: Escritório Corporativo */}
+          {/* Modelo 1: Azul Titular Coagro Oficial */}
           <div className="border border-gray-200 rounded-xl overflow-hidden bg-gray-50 flex flex-col justify-between">
-            <div className="h-28 bg-gradient-to-br from-slate-900 via-zinc-900 to-black p-3.5 flex flex-col justify-between relative overflow-hidden">
-              <span className="text-[9px] font-mono text-gray-400 z-10">FHD • 1920x1080</span>
-              <div className="z-10 flex items-center gap-2 self-end">
-                <CoagroSimboloCasinha className="w-6 h-6" />
-                <span className="font-exo2 font-black text-sm text-white">COAGRO</span>
+            <div className="h-28 bg-gradient-to-br from-[#001C71] via-[#0b2b8a] to-[#001247] p-3.5 flex flex-col justify-between relative overflow-hidden">
+              <span className="text-[9px] font-mono text-sky-200 z-10">FHD • 1920x1080</span>
+              <div className="z-10 flex flex-col items-center justify-center self-center my-auto">
+                <CoagroSimboloCasinha className="w-7 h-7 drop-shadow-md" />
+                <span className="font-exo2 font-black text-xs text-white tracking-wider mt-0.5">COAGRO</span>
+                <span className="text-[7px] font-bold text-[#ffab00] uppercase tracking-wider">Grupo Coagro</span>
               </div>
+              <span className="text-[8px] font-mono text-sky-300/70 z-10 self-end">Azul Titular Oficial</span>
             </div>
             <div className="p-3 space-y-2">
-              <h4 className="text-xs font-bold text-gray-800 font-exo2 uppercase">1. Escritório Executivo</h4>
-              <p className="text-[10px] text-gray-500">Fundo sóbrio escuro com a Casinha Coagro para reuniões de diretoria.</p>
+              <h4 className="text-xs font-bold text-gray-800 font-exo2 uppercase">1. Azul Titular Coagro</h4>
+              <p className="text-[10px] text-gray-500">Azul oficial #001C71 com a logomarca vertical e casinha no topo para reuniões e diretoria.</p>
               <button
                 type="button"
-                onClick={() => handleDownloadWallpaper('Escritorio_Executivo', '#0f172a', '#ffffff')}
-                className="w-full py-1.5 bg-[#004d40] hover:bg-[#00382e] text-white rounded-lg text-xs font-bold font-exo2 flex items-center justify-center gap-1.5 transition cursor-pointer"
+                onClick={() => handleDownloadWallpaper('azul_titular', 'Azul Titular Coagro')}
+                className="w-full py-1.5 bg-[#001C71] hover:bg-[#001452] text-white rounded-lg text-xs font-bold font-exo2 flex items-center justify-center gap-1.5 transition cursor-pointer"
               >
                 <Download className="w-3.5 h-3.5 text-[#ffab00]" />
                 Baixar Fundo FHD
@@ -559,7 +751,7 @@ export const TeamDigitalTab: React.FC<TeamDigitalTabProps> = ({ scope, onShowNot
             </div>
           </div>
 
-          {/* Modelo 2: Campo Tecnológico */}
+          {/* Modelo 2: Campo Tecnológico (Agro Tech) */}
           <div className="border border-gray-200 rounded-xl overflow-hidden bg-gray-50 flex flex-col justify-between">
             <div className="h-28 bg-gradient-to-br from-[#00382e] via-[#004d40] to-[#022c24] p-3.5 flex flex-col justify-between relative overflow-hidden">
               <span className="text-[9px] font-mono text-emerald-200 z-10">FHD • 1920x1080</span>
@@ -567,13 +759,14 @@ export const TeamDigitalTab: React.FC<TeamDigitalTabProps> = ({ scope, onShowNot
                 <CoagroSimboloCasinha className="w-6 h-6" />
                 <span className="font-exo2 font-black text-sm text-[#ffab00]">AGRO TECH</span>
               </div>
+              <span className="text-[8px] font-mono text-emerald-300/70 z-10 self-end">Tecnologia no Campo</span>
             </div>
             <div className="p-3 space-y-2">
               <h4 className="text-xs font-bold text-gray-800 font-exo2 uppercase">2. Campo Tecnológico</h4>
-              <p className="text-[10px] text-gray-500">Identidade agropecuária de inovação para engenheiros e consultores.</p>
+              <p className="text-[10px] text-gray-500">Identidade agropecuária com linhas de inovação para consultores e engenheiros.</p>
               <button
                 type="button"
-                onClick={() => handleDownloadWallpaper('Campo_Tecnologico', '#004d40', '#ffab00')}
+                onClick={() => handleDownloadWallpaper('agro_tech', 'Campo Tecnológico')}
                 className="w-full py-1.5 bg-[#004d40] hover:bg-[#00382e] text-white rounded-lg text-xs font-bold font-exo2 flex items-center justify-center gap-1.5 transition cursor-pointer"
               >
                 <Download className="w-3.5 h-3.5 text-[#ffab00]" />
@@ -582,20 +775,24 @@ export const TeamDigitalTab: React.FC<TeamDigitalTabProps> = ({ scope, onShowNot
             </div>
           </div>
 
-          {/* Modelo 3: Verde Institucional com a Casinha Coagro */}
+          {/* Modelo 3: Verde Safra Institucional Oficial */}
           <div className="border border-gray-200 rounded-xl overflow-hidden bg-gray-50 flex flex-col justify-between">
-            <div className="h-28 bg-[#004d40] p-3.5 flex flex-col justify-between relative">
-              <div className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center p-1">
-                <CoagroSimboloCasinha className="w-full h-full" />
+            <div className="h-28 bg-[#004d40] p-3.5 flex flex-col justify-between relative overflow-hidden">
+              <span className="text-[9px] font-mono text-emerald-200/80 z-10">FHD • 1920x1080</span>
+              <div className="z-10 flex flex-col items-center justify-center self-center my-auto">
+                <div className="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center p-1 backdrop-blur-xs border border-white/10">
+                  <CoagroSimboloCasinha className="w-full h-full" />
+                </div>
+                <span className="font-exo2 font-black text-xs text-white mt-1">COAGRO</span>
               </div>
-              <span className="text-[9px] font-mono text-white/80 self-end">Verde Safra Oficial</span>
+              <span className="text-[8px] font-mono text-white/70 z-10 self-end">Verde Safra Oficial</span>
             </div>
             <div className="p-3 space-y-2">
               <h4 className="text-xs font-bold text-gray-800 font-exo2 uppercase">3. Verde Institucional</h4>
-              <p className="text-[10px] text-gray-500">Verde oficial #004d40 com o símbolo da casinha em alta definição.</p>
+              <p className="text-[10px] text-gray-500">Verde oficial #004d40 com o símbolo da Casinha Coagro em alta resolução e acento ouro.</p>
               <button
                 type="button"
-                onClick={() => handleDownloadWallpaper('Verde_Institucional_Casinha', '#004d40', '#ffffff')}
+                onClick={() => handleDownloadWallpaper('verde_institucional', 'Verde Safra Institucional')}
                 className="w-full py-1.5 bg-[#004d40] hover:bg-[#00382e] text-white rounded-lg text-xs font-bold font-exo2 flex items-center justify-center gap-1.5 transition cursor-pointer"
               >
                 <Download className="w-3.5 h-3.5 text-[#ffab00]" />
@@ -604,21 +801,30 @@ export const TeamDigitalTab: React.FC<TeamDigitalTabProps> = ({ scope, onShowNot
             </div>
           </div>
 
-          {/* Modelo 4: Azul Coagro Institucional */}
+          {/* Modelo 4: Sala Clean / Escritório Executivo (com Quadro Coagro) */}
           <div className="border border-gray-200 rounded-xl overflow-hidden bg-gray-50 flex flex-col justify-between">
-            <div className="h-28 bg-gradient-to-br from-[#001C71] via-[#0b2b8a] to-[#001247] p-3.5 flex flex-col justify-between relative">
-              <div className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center p-1">
-                <CoagroSimboloCasinhaBranca className="w-full h-full" />
+            <div className="h-28 bg-gradient-to-b from-slate-100 to-slate-200 p-3.5 flex flex-col justify-between relative overflow-hidden border-b-2 border-slate-300">
+              <span className="text-[9px] font-mono text-slate-500 z-10">FHD • 1920x1080</span>
+              <div className="z-10 self-center my-auto flex items-center justify-center">
+                {/* Quadro elegante na parede */}
+                <div className="bg-[#1e293b] p-1 rounded-sm shadow-md border border-slate-300">
+                  <div className="bg-white p-1 rounded-2xs flex flex-col items-center">
+                    <div className="bg-[#004d40] px-2.5 py-1 rounded-2xs flex items-center gap-1">
+                      <CoagroSimboloCasinha className="w-3.5 h-3.5" />
+                      <span className="font-exo2 font-black text-[8px] text-white">COAGRO</span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <span className="text-[9px] font-mono text-sky-200 self-end">Azul Titular Coagro</span>
+              <span className="text-[8px] font-mono text-slate-500 z-10 self-end">Sala Clean Corporativa</span>
             </div>
             <div className="p-3 space-y-2">
-              <h4 className="text-xs font-bold text-gray-800 font-exo2 uppercase">4. Azul Coagro</h4>
-              <p className="text-[10px] text-gray-500">Azul corporativo da marca com o símbolo branco monocromático.</p>
+              <h4 className="text-xs font-bold text-gray-800 font-exo2 uppercase">4. Sala Executiva Clean</h4>
+              <p className="text-[10px] text-gray-500">Ambiente executivo clean e iluminado com elegante quadro institucional da Coagro na parede.</p>
               <button
                 type="button"
-                onClick={() => handleDownloadWallpaper('Azul_Coagro_Oficial', '#001C71', '#4897D0', true)}
-                className="w-full py-1.5 bg-[#001C71] hover:bg-[#001452] text-white rounded-lg text-xs font-bold font-exo2 flex items-center justify-center gap-1.5 transition cursor-pointer"
+                onClick={() => handleDownloadWallpaper('sala_clean', 'Sala Executiva Clean')}
+                className="w-full py-1.5 bg-[#004d40] hover:bg-[#00382e] text-white rounded-lg text-xs font-bold font-exo2 flex items-center justify-center gap-1.5 transition cursor-pointer"
               >
                 <Download className="w-3.5 h-3.5 text-[#ffab00]" />
                 Baixar Fundo FHD
