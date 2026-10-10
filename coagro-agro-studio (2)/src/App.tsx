@@ -18,7 +18,8 @@ import { resolveDefaultTemplate } from './lib/layoutRules';
 import { CommunicationMode } from './lib/communicationMode';
 import { toPng, toJpeg } from 'html-to-image';
 import { jsPDF } from 'jspdf';
-import { Eye, Sparkles, Copy, Download, Columns2, Maximize2, Box, FileText, Printer } from 'lucide-react';
+import { Eye, Sparkles, Copy, Download, Columns2, Maximize2, Box, FileText, Printer, ShieldCheck } from 'lucide-react';
+import { BrandHubModule } from './components/brand-hub/BrandHubModule';
 
 export default function App() {
   // Estado inicial 100% zerado - sem nenhum produto ou texto pré-carregado
@@ -28,9 +29,9 @@ export default function App() {
   const [productImage, setProductImage] = useState<string>('');
   const [backgroundImage, setBackgroundImage] = useState<string | undefined>(undefined);
 
-  // App Module State: SOCIAL_MEDIA vs STORE_POSTERS
+  // App Module State: SOCIAL_MEDIA vs STORE_POSTERS vs BRAND_HUB
   const isElectron = navigator.userAgent.toLowerCase().includes('electron');
-  const [currentModule, setCurrentModule] = useState<'SOCIAL_MEDIA' | 'STORE_POSTERS'>(isElectron ? 'STORE_POSTERS' : 'SOCIAL_MEDIA');
+  const [currentModule, setCurrentModule] = useState<'SOCIAL_MEDIA' | 'STORE_POSTERS' | 'BRAND_HUB'>(isElectron ? 'STORE_POSTERS' : 'SOCIAL_MEDIA');
   const [posterMode, setPosterMode] = useState<'MANUAL' | 'BATCH' | 'REVIEW'>('MANUAL');
   const [posterTemplate, setPosterTemplate] = useState<PosterTemplateLayout>('promo-mono-a4');
   const [posterHeaderText, setPosterHeaderText] = useState<string>('OFERTA');
@@ -601,6 +602,17 @@ export default function App() {
                 <Box className="w-4 h-4" />
                 Cartazes de Loja (A4)
               </button>
+              <button
+                onClick={() => setCurrentModule('BRAND_HUB')}
+                className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors flex items-center gap-2 ${
+                  currentModule === 'BRAND_HUB'
+                    ? 'border-[#004d40] text-[#004d40] font-bold'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                <ShieldCheck className="w-4 h-4 text-[#ffab00]" />
+                Brand Hub & Documentos
+              </button>
             </nav>
           </div>
         </div>
@@ -845,7 +857,7 @@ export default function App() {
             </div>
           </div>
         </div>
-        ) : (
+        ) : currentModule === 'STORE_POSTERS' ? (
           /* STORE POSTERS MODULE */
           <div className="space-y-4">
             {/* Mode Switcher: Individual vs Lote vs Revisão */}
@@ -1006,6 +1018,9 @@ export default function App() {
               </div>
             )}
           </div>
+        ) : (
+          /* BRAND HUB & GOVERNANCE MODULE */
+          <BrandHubModule scope={appMode} onShowNotice={showNotice} />
         )}
       </main>
 
