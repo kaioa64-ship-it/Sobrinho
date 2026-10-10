@@ -42,16 +42,16 @@ TELEFONE/WHATSAPP: ${store.telefoneFormatado}`;
           <div>
             <h3 className="text-base sm:text-lg font-black text-gray-900 font-exo2 uppercase tracking-wide flex items-center gap-2">
               <Store className="w-5 h-5 text-[#004d40]" />
-              Diretório Oficial de Filiais e Unidades Físicas (12 Lojas)
+              Diretório Oficial de Unidades & Filiais Físicas (Grupo Coagro)
             </h3>
             <p className="text-xs text-gray-500 mt-0.5">
-              Relação completa de CNPJs filiais, endereços normalizados, contatos e links do Google Maps.
+              Relação completa de CNPJs centrais e filiais, endereços normalizados, contatos e links do Google Maps.
             </p>
           </div>
 
           <div className="flex items-center gap-2">
             <span className="text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full font-exo2">
-              {filteredStores.length} de {COAGRO_STORES.length} Filiais
+              {filteredStores.length} de {COAGRO_STORES.length} Unidades
             </span>
           </div>
         </div>

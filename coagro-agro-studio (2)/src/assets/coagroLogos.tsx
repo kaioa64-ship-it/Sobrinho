@@ -303,3 +303,86 @@ export const CoagroPetLogo: React.FC<{ className?: string; style?: React.CSSProp
     </g>
   </svg>
 );
+
+// --- Símbolo Oficial da CASINHA da Coagro (Favicon / Ícone de Marca) ---
+export const CoagroSimboloCasinha: React.FC<{ className?: string; style?: React.CSSProperties }> = ({ 
+  className = 'w-12 h-12',
+  style
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlnsXlink="http://www.w3.org/1999/xlink"
+    viewBox="525 0 235 210"
+    className={className}
+    style={style}
+    role="img"
+    aria-label="Símbolo Oficial Casinha Coagro"
+  >
+    <defs>
+      <linearGradient id="coagro-casinha-g0" gradientUnits="userSpaceOnUse" x1="10956.5" y1="15329.98" x2="10322.42" y2="13873.29">
+        <stop offset="0" stopColor="#F2B038"/>
+        <stop offset="0.01" stopColor="#F2B038"/>
+        <stop offset="0.17" stopColor="#F1A82A"/>
+        <stop offset="0.34" stopColor="#F0A01B"/>
+        <stop offset="0.66" stopColor="#ED9211"/>
+        <stop offset="1" stopColor="#EA8407"/>
+      </linearGradient>
+      <linearGradient id="coagro-casinha-g1" gradientUnits="userSpaceOnUse" x1="10027.58" y1="16075.93" x2="12626.18" y2="16075.93">
+        <stop offset="0" stopColor="#386A27"/>
+        <stop offset="0.05" stopColor="#386A27"/>
+        <stop offset="0.30" stopColor="#60A02E"/>
+        <stop offset="0.39" stopColor="#58972D"/>
+        <stop offset="0.49" stopColor="#508D2B"/>
+        <stop offset="0.71" stopColor="#386A27"/>
+        <stop offset="1" stopColor="#386A27"/>
+      </linearGradient>
+      <linearGradient id="coagro-casinha-g2" gradientUnits="userSpaceOnUse" xlinkHref="#coagro-casinha-g1" x1="8713.48" y1="15288.85" x2="10018.79" y2="14576.43"/>
+    </defs>
+    <g id="simbolo-casinha-coagro">
+      <path fill="url(#coagro-casinha-g2)" d="M661.66 81.01c-45.81,13.1 -59.02,56.87 -59.34,85.88 28.19,7.76 61.47,5.98 82.06,-5.22 46.07,-25.06 33.65,-70.29 33.65,-70.29 0,0 -14.18,-13.08 -37.65,-13.08 -5.71,0 -11.98,0.77 -18.72,2.7l0 0z"/>
+      <path fill="url(#coagro-casinha-g0)" d="M644.15 3.65l-108.78 69.55c-6.34,4.25 -3.52,14.05 4.04,14.05l25 0c4.31,0 8.53,-1.19 12.2,-3.44l71.66 -43.85c4.49,-2.91 10.21,-2.91 14.59,-0.01l69.35 43.12c-52.53,7.92 -107.56,41.6 -125.83,78.32 33.4,-30.47 81.65,-61.01 151.48,-65.42 5.08,-0.32 10.45,0.07 15.23,-1.31 9.14,-2.64 11.21,-14.73 3.47,-20.03l-108.69 -70.99c-3.53,-2.42 -7.64,-3.63 -11.77,-3.63 -4.14,0 -8.31,1.22 -11.94,3.65l0 0z"/>
+      <path fill="url(#coagro-casinha-g1)" d="M743.55 189.58l0 -76.98c0,-2.62 -2.11,-4.74 -4.72,-4.74 -2.28,0 -4.24,1.63 -4.64,3.88 -3.4,18.95 -14.21,42.16 -43.98,58.78 -26.43,14.76 -69.03,17.27 -105.07,7.3l0 0c0.37,-24.42 7.63,-56.88 28.46,-81.52 0.85,-1 0.14,-2.53 -1.17,-2.53l-0 0 -29.77 0c-7.2,0 -13.04,5.84 -13.04,13.05l0 82.75c0,7.21 5.84,13.05 13.04,13.05l147.87 0c7.21,0 13.04,-5.85 13.04,-13.05z"/>
+    </g>
+  </svg>
+);
+
+export const CoagroSimboloCasinhaBranca: React.FC<{ className?: string; style?: React.CSSProperties }> = ({ 
+  className = 'w-12 h-12',
+  style
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="525 0 235 210"
+    className={className}
+    style={style}
+    role="img"
+    aria-label="Símbolo Oficial Casinha Coagro Monocromático Branco"
+  >
+    <g id="simbolo-casinha-coagro-branca" fill="#FFFFFF">
+      <path d="M661.66 81.01c-45.81,13.1 -59.02,56.87 -59.34,85.88 28.19,7.76 61.47,5.98 82.06,-5.22 46.07,-25.06 33.65,-70.29 33.65,-70.29 0,0 -14.18,-13.08 -37.65,-13.08 -5.71,0 -11.98,0.77 -18.72,2.7l0 0z"/>
+      <path d="M644.15 3.65l-108.78 69.55c-6.34,4.25 -3.52,14.05 4.04,14.05l25 0c4.31,0 8.53,-1.19 12.2,-3.44l71.66 -43.85c4.49,-2.91 10.21,-2.91 14.59,-0.01l69.35 43.12c-52.53,7.92 -107.56,41.6 -125.83,78.32 33.4,-30.47 81.65,-61.01 151.48,-65.42 5.08,-0.32 10.45,0.07 15.23,-1.31 9.14,-2.64 11.21,-14.73 3.47,-20.03l-108.69 -70.99c-3.53,-2.42 -7.64,-3.63 -11.77,-3.63 -4.14,0 -8.31,1.22 -11.94,3.65l0 0z"/>
+      <path d="M743.55 189.58l0 -76.98c0,-2.62 -2.11,-4.74 -4.72,-4.74 -2.28,0 -4.24,1.63 -4.64,3.88 -3.4,18.95 -14.21,42.16 -43.98,58.78 -26.43,14.76 -69.03,17.27 -105.07,7.3l0 0c0.37,-24.42 7.63,-56.88 28.46,-81.52 0.85,-1 0.14,-2.53 -1.17,-2.53l-0 0 -29.77 0c-7.2,0 -13.04,5.84 -13.04,13.05l0 82.75c0,7.21 5.84,13.05 13.04,13.05l147.87 0c7.21,0 13.04,-5.85 13.04,-13.05z"/>
+    </g>
+  </svg>
+);
+
+export const CoagroSimboloCasinhaAzul: React.FC<{ className?: string; style?: React.CSSProperties }> = ({ 
+  className = 'w-12 h-12',
+  style
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="525 0 235 210"
+    className={className}
+    style={style}
+    role="img"
+    aria-label="Símbolo Oficial Casinha Coagro Azul"
+  >
+    <g id="simbolo-casinha-coagro-azul" fill="#4897D0">
+      <path d="M661.66 81.01c-45.81,13.1 -59.02,56.87 -59.34,85.88 28.19,7.76 61.47,5.98 82.06,-5.22 46.07,-25.06 33.65,-70.29 33.65,-70.29 0,0 -14.18,-13.08 -37.65,-13.08 -5.71,0 -11.98,0.77 -18.72,2.7l0 0z"/>
+      <path d="M644.15 3.65l-108.78 69.55c-6.34,4.25 -3.52,14.05 4.04,14.05l25 0c4.31,0 8.53,-1.19 12.2,-3.44l71.66 -43.85c4.49,-2.91 10.21,-2.91 14.59,-0.01l69.35 43.12c-52.53,7.92 -107.56,41.6 -125.83,78.32 33.4,-30.47 81.65,-61.01 151.48,-65.42 5.08,-0.32 10.45,0.07 15.23,-1.31 9.14,-2.64 11.21,-14.73 3.47,-20.03l-108.69 -70.99c-3.53,-2.42 -7.64,-3.63 -11.77,-3.63 -4.14,0 -8.31,1.22 -11.94,3.65l0 0z"/>
+      <path d="M743.55 189.58l0 -76.98c0,-2.62 -2.11,-4.74 -4.72,-4.74 -2.28,0 -4.24,1.63 -4.64,3.88 -3.4,18.95 -14.21,42.16 -43.98,58.78 -26.43,14.76 -69.03,17.27 -105.07,7.3l0 0c0.37,-24.42 7.63,-56.88 28.46,-81.52 0.85,-1 0.14,-2.53 -1.17,-2.53l-0 0 -29.77 0c-7.2,0 -13.04,5.84 -13.04,13.05l0 82.75c0,7.21 5.84,13.05 13.04,13.05l147.87 0c7.21,0 13.04,-5.85 13.04,-13.05z"/>
+    </g>
+  </svg>
+);
+

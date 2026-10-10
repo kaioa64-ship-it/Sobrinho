@@ -11,9 +11,70 @@ export interface CoagroStore {
   telefoneFormatado: string;
   mapUrl: string;
   gerente?: string;
+  tipo?: 'corporativo' | 'filial';
 }
 
+export const COAGRO_CORPORATE_INFO = {
+  website: 'www.grupocoagro.com.br',
+  websiteUrl: 'https://www.grupocoagro.com.br',
+  emailDomain: 'grupocoagro.com.br',
+  instagram: '@grupocoagro',
+  instagramUrl: 'https://instagram.com/grupocoagro',
+  sacWhatsapp: '(82) 98836-0271',
+  holdingName: 'Grupo Coagro',
+  razaoSocialMatriz: 'R B Dantas Ltda',
+  cnpjMatriz: '02.895.028/0001-60',
+};
+
 export const COAGRO_STORES: CoagroStore[] = [
+  // --- UNIDADES CORPORATIVAS & OPERACIONAIS CENTRAIS ---
+  {
+    id: 'matriz-adm',
+    nome: 'Coagro Matriz Administrativa',
+    razaoSocial: 'R B Dantas Ltda',
+    cidade: 'Arapiraca',
+    estado: 'AL',
+    endereco: 'Praça Manoel Lúcio Correia, 76 - Sala Diretoria - Centro',
+    cep: '57300-570',
+    cnpj: '02.895.028/0001-60',
+    telefone: '82988360271',
+    telefoneFormatado: '(82) 98836-0271',
+    mapUrl: 'https://goo.gl/maps/tFRvXvbHvk88wpdU9',
+    gerente: 'Diretoria Executiva',
+    tipo: 'corporativo',
+  },
+  {
+    id: 'cd-logistica',
+    nome: 'Coagro Centro de Distribuição & Logística',
+    razaoSocial: 'R B Dantas Ltda - Logística & CD',
+    cidade: 'Arapiraca',
+    estado: 'AL',
+    endereco: 'Rodovia AL-220, Km 04 - Polo Logístico Industrial',
+    cep: '57312-000',
+    cnpj: '02.895.028/0019-99',
+    telefone: '82988360466',
+    telefoneFormatado: '(82) 98836-0466',
+    mapUrl: 'https://maps.app.goo.gl/KuiQSoJLRvEeAvGx6',
+    gerente: 'Supervisão de Logística',
+    tipo: 'corporativo',
+  },
+  {
+    id: 'entrega-rapida',
+    nome: 'Coagro Entrega Rápida & Expedição',
+    razaoSocial: 'R B Dantas Ltda - Operações de Delivery',
+    cidade: 'Arapiraca',
+    estado: 'AL',
+    endereco: 'Rua Severino José da Silva, SN - Bananeira',
+    cep: '57318-450',
+    cnpj: '02.895.028/0002-40',
+    telefone: '82988360271',
+    telefoneFormatado: '(82) 98836-0271',
+    mapUrl: 'https://goo.gl/maps/tFRvXvbHvk88wpdU9',
+    gerente: 'Central de Despacho',
+    tipo: 'corporativo',
+  },
+
+  // --- AS 12 FILIAIS DE LOJA FÍSICA ---
   {
     id: 'catedral',
     nome: 'Coagro Catedral',
@@ -26,6 +87,7 @@ export const COAGRO_STORES: CoagroStore[] = [
     telefone: '82988360271',
     telefoneFormatado: '(82) 98836-0271',
     mapUrl: 'https://goo.gl/maps/tFRvXvbHvk88wpdU9',
+    tipo: 'filial',
   },
   {
     id: 'expedicionario',

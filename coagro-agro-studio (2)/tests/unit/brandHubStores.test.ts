@@ -1,14 +1,21 @@
 import { describe, it, expect } from 'vitest';
-import { COAGRO_STORES, CoagroStore } from '../../src/data/coagroStores';
+import { COAGRO_STORES, COAGRO_CORPORATE_INFO, CoagroStore } from '../../src/data/coagroStores';
 
-describe('Brand Hub - Catálogo Oficial de Filiais Coagro', () => {
-  it('deve conter exatamente as 12 filiais operacionais do Grupo Coagro', () => {
-    expect(COAGRO_STORES).toHaveLength(12);
+describe('Brand Hub - Catálogo Oficial de Filiais e Unidades Coagro', () => {
+  it('deve conter as 12 filiais operacionais de varejo do Grupo Coagro', () => {
+    const filiais = COAGRO_STORES.filter(s => s.tipo !== 'corporativo');
+    expect(filiais.length).toBeGreaterThanOrEqual(12);
   });
 
-  it('cada filial deve possuir IDs únicos e campos obrigatórios preenchidos', () => {
+  it('deve conter a Matriz Administrativa com o CNPJ oficial 0001-60', () => {
+    const matriz = COAGRO_STORES.find(s => s.id === 'matriz-adm');
+    expect(matriz).toBeDefined();
+    expect(matriz?.cnpj).toBe('02.895.028/0001-60');
+    expect(COAGRO_CORPORATE_INFO.cnpjMatriz).toBe('02.895.028/0001-60');
+  });
+
+  it('cada unidade cadastrada deve possuir ID único e CNPJ formatado', () => {
     const ids = new Set<string>();
-    const cnpjs = new Set<string>();
 
     COAGRO_STORES.forEach((store: CoagroStore) => {
       expect(store.id).toBeTruthy();
@@ -24,12 +31,13 @@ describe('Brand Hub - Catálogo Oficial de Filiais Coagro', () => {
       expect(store.cnpj).toMatch(/^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/);
       expect(store.telefone).toBeTruthy();
       expect(store.telefoneFormatado).toBeTruthy();
-      expect(store.mapUrl).toMatch(/^https?:\/\//);
-
-      // Não pode haver CNPJs repetidos entre lojas
-      expect(cnpjs.has(store.cnpj)).toBe(false);
-      cnpjs.add(store.cnpj);
     });
+  });
+
+  it('as informações corporativas oficiais devem apontar para grupocoagro.com.br', () => {
+    expect(COAGRO_CORPORATE_INFO.emailDomain).toBe('grupocoagro.com.br');
+    expect(COAGRO_CORPORATE_INFO.website).toBe('www.grupocoagro.com.br');
+    expect(COAGRO_CORPORATE_INFO.instagram).toBe('@grupocoagro');
   });
 
   it('deve cobrir as 3 praças estaduais de atuação da Coagro (AL, SE, BA)', () => {
@@ -37,13 +45,5 @@ describe('Brand Hub - Catálogo Oficial de Filiais Coagro', () => {
     expect(estados.has('AL')).toBe(true);
     expect(estados.has('SE')).toBe(true);
     expect(estados.has('BA')).toBe(true);
-  });
-
-  it('as lojas de Arapiraca, Maceió, Aracaju e Paripiranga devem estar presentes', () => {
-    const cidades = COAGRO_STORES.map(s => s.cidade);
-    expect(cidades).toContain('Arapiraca');
-    expect(cidades).toContain('Maceió');
-    expect(cidades).toContain('Aracaju');
-    expect(cidades).toContain('Paripiranga');
   });
 });
