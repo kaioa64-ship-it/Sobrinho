@@ -135,38 +135,43 @@ graph TD
 * Botão de Impressão Direta em 1 Clique (`window.print()`) no preview de cartazes A4.
 * Matriz de testes visuais E2E com 15 cenários reais aprovados.
 
-### 🟢 FASE 3: Cartazes de Gôndola, Brand Hub & Endomarketing (Médio Prazo)
+### 🟢 FASE 3: Cartazes de Gôndola, Brand Hub & Endomarketing (Ativa / Em Refinamento)
 1. **🏷️ Otimização de Cartazes de Gôndola e Prateleira:**
-   * **Cartaz Duplo (Meia-Folha A5 / 2 por folha A4 em Paisagem):** Folha A4 em formato deitado (297x210mm) dividida ao meio em dois cartazes verticais com linha guia de corte tracejada. Resolve o desperdício de papel em produtos de prateleira média sem achatar nem perder legibilidade do preço.
-   * **Card Quadrado para Grade 4 por Folha A4:** Novo layout com proporção quadrada dedicado para etiquetas de gôndola compacta, desenhado do zero para que o preço monumental e centavos não sumam ao reduzir o tamanho.
-   * **Encarte Promocional Multi-Produtos (Tabloide A4 com 4 a 8 itens):** *(Condicionado à maturação do banco de packshots por SKU)* Grade promocional de múltiplos produtos em folha A4/A3 para campanhas sazonais de alto impacto ("Sabadão Agro", "Fecha Mês", "Semana do Pet").
-   * **Cálculo Dinâmico & Importação de % de Desconto (`XX% OFF`):**
-     - *Modo Individual:* cálculo automático a partir dos campos DE e POR (`((de - por) / de) * 100`) gerando selo dinâmico de economia (ex: `25% OFF`).
-     - *Modo Lote (Excel):* leitura direta da coluna de percentual de desconto das planilhas macro de campanha.
-2. **Templates Exclusivos para Mascotes:** Criar de 2 a 3 layouts desenhados em torno do mascote (com balões de fala de ofertas, selos comemorativos e proporção ajustada), sem forçá-los nos grids genéricos de produto.
-3. **Módulo de RH e Endomarketing Automatizado:** *(Agendado para pós-integração ERP/RH)* Geração automática mensal de cartazes de aniversariantes do mês, funcionário destaque e metas batidas via dados do sistema.
-4. **📁 Módulo Brand Hub Corporativo (Central de Governança de Marca):**
+   * **Inicialização Padrão Pragmática:** Abertura direta no módulo de **Cartazes de Loja (A4)** com o template **Econômico Preto e Branco (Laser P&B)** pré-selecionado (atende à realidade das lojas com impressoras monocromáticas).
+   * **Tipografia Padronizada no Varejo:** Títulos em **Exo 2 Black 900** mais encorpada e aumentada nos 3 temas de cartazes (P&B, Agro e Pet).
+   * **Logo Oficial no Rodapé A4:** Logomarca vertical oficial da Coagro com a casinha no topo fixa em todos os cartazes físicos.
+   * **Cartaz Duplo (Meia-Folha A5 / 2 por folha A4 em Paisagem):** Folha A4 em formato deitado (297x210mm) dividida ao meio em dois cartazes verticais com linha guia de corte tracejada.
+   * **Card Quadrado para Grade 4 por Folha A4:** Novo layout com proporção quadrada dedicado para etiquetas de gôndola compacta.
+   * **Cálculo Dinâmico & Importação de % de Desconto (`XX% OFF`):** Selo dinâmico de economia (ex: `25% OFF`).
+
+2. **📁 Módulo Brand Hub Corporativo (Central de Governança de Marca — Entregue):**
    * **Papel Timbrado Oficial Adaptável às 12 Filiais:**
      - *Seletor Dinâmico de Filial:* Matriz ou filiais (Arapiraca/Bananeira, Maceió/Jatiúca, Aracaju, Lagarto, Delmiro, etc.) injeta automaticamente Razão Social, CNPJ, IE, Endereço e Telefone da unidade.
      - *Modo Web (PDF/Print):* Impressão de folhas timbradas em branco para a bandeja da loja ou geração de comunicado oficial rápido de 1 página.
-     - *Modo Word (.DOCX):* Download do modelo oficial do Microsoft Word com cabeçalho/rodapé travados e tipografia oficial para documentos longos e contratos.
-   * **Central de Downloads de Ativos Oficiais:** Logos Coagro e Coagro Pet em SVG (vetor) e PNG 300 DPI (alta resolução), em versões colorida, monocromática branca e preta.
-   * **Pacote de Tipografia & Paleta Rápida:** Download das fontes Exo 2 e Inter (.ttf/.woff2) e códigos de cores copiáveis (HEX, RGB, CMYK).
-   * **Fundos Corporativos para Videoconferência (Meet / Teams):** 4 modelos elegantes em 1920x1080 (Escritório Corporativo, Lavoura Tecnológica, Verde Institucional Profundo e Clean Minimalista) padronizados pela diretoria.
-   * **Gerador de Avatar / Foto de Perfil WhatsApp:** Enquadramento circular oficial com aro da marca, com modo Foto Pessoal do Consultor ou modo Ícone do Setor/Departamento (ex: "Coagro • Atendimento").
-   * **Gerador de Assinatura de E-mail:** Formulário rápido que gera a assinatura padronizada para colar no Outlook dos colaboradores com dados da filial.
-   * **Diretório Rápido das 12 Filiais:** Tabela para consulta e cópia instantânea de CNPJ, endereço e contatos das lojas para emissão de notas e cadastros.
-   * **Modelo de Apresentação Institucional (.PPTX):** Deck essencial de 4 lâminas (Capa, Slide de Conteúdo, Comparativo e Encerramento).
+     - *Modo Word (.DOCX):* Download do modelo oficial do Microsoft Word com cabeçalho/rodapé travados e tipografia oficial.
+   * **Central de Downloads de Ativos Oficiais:** Logos Coagro e Coagro Pet em SVG (vetor) e PNG 300 DPI, com hierarquia oficial de cores (Azul Coagro `#001C71` Primária Titular, Verde Safra `#004d40` Secundária, Ouro Safra `#ffab00` Acento, Azul Claro Pet `#4897D0` Apoio).
+   * **Download Direto de Tipografia:** Botões de download dos pacotes de fontes oficiais Exo 2 e Inter (.zip do Google Fonts).
+   * **Fundos Corporativos para Videoconferência (Meet / Teams 1920x1080):** 4 modelos oficiais padronizados:
+     1. *Azul Titular Coagro (#001C71):* Logomarca vertical completa com a casinha no topo.
+     2. *Campo Tecnológico (Agro Tech):* Identidade verde safra com linhas tecnológicas e acento ouro.
+     3. *Verde Safra Institucional:* Símbolo da Casinha Coagro em alta definição com halo dourado.
+     4. *Sala Executiva Clean:* Ambiente de reunião clean e contemporâneo com quadro institucional emoldurado na parede.
+   * **Gerador de Avatar / Foto de Perfil WhatsApp & CRM:** Enquadramento circular oficial com aro da marca, suportando foto de colaborador ou setor.
+   * **Upload Sincronizado de Foto:** Ao carregar a imagem do colaborador em qualquer campo, a foto é sincronizada instantaneamente entre a Assinatura de E-mail e o Avatar de WhatsApp.
+   * **Gerador de Assinatura de E-mail (Padrão Outlook):** Formulário corporativo com cópia em HTML em 1 clique e exportação em PNG.
+   * **Diretório Rápido das Filiais:** Consulta instantânea de CNPJ, endereço e contatos das lojas para emissão de notas e cadastros.
+   * **Template de Apresentação Institucional (.PPT):** Modelo estruturado para reuniões corporativas.
 
 ### 🔵 FASE 4: Modularização White-Label, IA de Catálogo & SaaS (Longo Prazo)
-1. **Core Desacoplado ("Sobrinho Studio"):** Motor genérico alimentado por arquivos de configuração de marca, permitindo uso pela Coagro ou por novas operações e empresas.
-2. **IA Generativa Vinculada a Catálogo ERP:** Reabilitação da IA apenas quando integrada a banco de packshots reais indexados por SKU, gerando artes sem alucinações.
+1. **Core Desacoplado ("Sobrinho Studio"):** Motor genérico alimentado por arquivos de configuração de marca.
+2. **IA Generativa Vinculada a Catálogo ERP:** Reabilitação da IA apenas quando integrada a banco de packshots reais indexados por SKU.
 3. **Plataforma Web SaaS:** Migração para modelo Web robusto com controle de filiais e cotas.
 4. **Multimídia & Vídeo Programático:** Geração de cartazes animados e carrosséis para Instagram via React Remotion.
-5. **TV Corporativa & Mídia Indoor (Digital Signage 16:9):** Modo de exibição full-screen em loop para Smart TVs nas lojas e balcões das filiais, alternando ofertas ativas, comunicados institucionais e cotações agrícolas em tempo real.
+5. **TV Corporativa & Mídia Indoor (Digital Signage 16:9):** Modo de exibição full-screen em loop para Smart TVs nas lojas.
 
 ---
 
 *Documento mantido pela equipe de Desenvolvimento & Operações do Grupo Coagro.*
-*Versão do Roadmap: 2.3.0 — Outubro/2026*
+*Versão do Roadmap: 2.4.0 — Outubro/2026*
+
 
