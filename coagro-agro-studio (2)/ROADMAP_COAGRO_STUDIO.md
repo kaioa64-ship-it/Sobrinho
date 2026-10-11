@@ -85,11 +85,12 @@ Para garantir estabilidade e focar no que agrega valor imediato à ponta, certos
 
 ## 🔨 5. O que Está no Meio do Desenvolvimento (WIP)
 
-1. **Operação Híbrida 100% Offline:**
-   * O Modo Manual já funciona sem internet para diagramação, mas os fluxos de build e dependências de fontes/assets externos ainda precisam de blindagem total para rodar mesmo se o sinal da loja cair completamente.
-2. **Correção de Bugs Críticos de Renderização (Prioridade Imediata):**
-   * **Persistência do Fundo Recortado:** Ao trocar repetidamente de template ou tema de cor, o canvas por vezes reexibe o fundo original não recortado.
-   * **Alternância de Escopo sem Template:** Ao alternar de Agro para Pet sem um template explicitamente marcado, o layout por vezes carrega vazio ou desalinhado.
+1. **Operação Híbrida 100% Offline (Blindada):**
+   * O Modo Manual funciona sem internet para diagramação e geração de cartazes. Bloqueio nativo de chamadas assíncronas do Google Drive quando offline (`navigator.onLine`) implementado para evitar loops infinitos.
+2. **Correção de Bugs Críticos de Renderização (✅ CONCLUÍDO):**
+   * **Persistência do Fundo Recortado (Resolvido):** Inclusão de `preserveProductBackground` nas dependências reativas do `SingleArtRenderer`, eliminando fantasmas de fundo não recortado ao alternar templates e temas.
+   * **Alternância de Escopo Agro ↔ Pet (Resolvido):** Caches temporários de recorte (`cachedRawCutout`, `cachedOriginalImage`) e presets agora são invalidados e resetados deterministicamente no `useArtworkForm` e `App.tsx` na troca de escopo.
+   * **Memory Leak Guard em Canvas/Blobs (Resolvido):** Criação de `releaseCanvas()` em `imageTransparency.ts` para desalocação explícita de buffers 2D e revogação pontual de `createObjectURL` em pré-processamentos e auto-trim.
 3. **Calibração de Layouts de Impressão:**
    * Ajuste fino das margens dos cartazes A4 para garantir que impressoras comuns de loja não cortem o cabeçalho nem o rodapé promocional.
 

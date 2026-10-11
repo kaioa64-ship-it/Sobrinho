@@ -89,11 +89,25 @@ export default function App() {
         ...prev,
         theme: prev.theme === 'campo-agro' ? 'clean-branco' : prev.theme
       }));
+      // Se o conteúdo atual for o inicial vazio, ajusta para o vazio de PET
+      setCurrentContent(prev => {
+        if (!prev.titulo && !prev.headline_principal) {
+          return EMPTY_PET_CONTENT;
+        }
+        return prev;
+      });
     } else {
       setCanvasTheme('campo-agro');
       setTemplateLayout(resolveDefaultTemplate(canvasFormat, 'AGRO'));
       setLogoVariant('h-branca');
       setPosterTemplate('promo-agro-a4');
+      // Se o conteúdo atual for o inicial vazio, ajusta para o vazio de AGRO
+      setCurrentContent(prev => {
+        if (!prev.titulo && !prev.headline_principal) {
+          return EMPTY_AGRO_CONTENT;
+        }
+        return prev;
+      });
     }
   }, [appMode]);
 
@@ -277,6 +291,10 @@ export default function App() {
 
   // Auto-save to Google Drive in background for internal comparison
   const triggerDriveAutoSave = async (contentToSave: AgroPostContent) => {
+    // Blindagem offline: não tenta upload em background se o navegador estiver sem conexão
+    if (typeof navigator !== 'undefined' && !navigator.onLine) {
+      return;
+    }
     try {
       const token = await getAccessToken();
       if (!token) return;

@@ -114,6 +114,22 @@ export function useArtworkForm(props: InputPanelProps) {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  // Blindagem de alternância de escopo (AGRO <-> PET):
+  // Limpa caches temporários de recorte para evitar vazamento visual entre marcas
+  const prevAppModeRef = useRef<'AGRO' | 'PET'>(appMode);
+  useEffect(() => {
+    if (prevAppModeRef.current !== appMode) {
+      prevAppModeRef.current = appMode;
+      setCachedRawCutout(null);
+      setCachedOriginalImage(null);
+      setMaskPreset('standard');
+      setIsProcessingBg(false);
+      setBgProcessingStage('');
+      setBgProgressPercent(0);
+      setImageUploadedAlert(false);
+    }
+  }, [appMode]);
+
   // Sincroniza campos de preço locais com o conteúdo gerado
   useEffect(() => {
     const preco = currentContent.modulo_preco || currentContent.textos_da_arte?.modulo_preco;

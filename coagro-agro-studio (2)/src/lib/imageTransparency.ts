@@ -15,6 +15,24 @@ export interface ProcessedCutoutResult {
 }
 
 /**
+ * Libera explicitamente os buffers gráficos de um Canvas para o Garbage Collector do navegador.
+ * Evita vazamento de memória em loops de recorte e troca frequente de imagens.
+ */
+export function releaseCanvas(canvas: HTMLCanvasElement | null | undefined): void {
+  if (!canvas) return;
+  try {
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    canvas.width = 0;
+    canvas.height = 0;
+  } catch {
+    // Falha silenciosa em navegadores antigos
+  }
+}
+
+/**
  * 1. Pré-processamento e Redimensionamento Rápido
  * Redimensiona proporcionalmente para um bounding box máximo de 900x900 px
  * e converte para Blob JPEG (qualidade 0.9) para reduzir RAM e acelerar o WASM em até 4x.
@@ -54,6 +72,7 @@ export async function preprocessImage(
 
         const ctx = canvas.getContext('2d', { willReadFrequently: true });
         if (!ctx) {
+          releaseCanvas(canvas);
           throw new Error('Não foi possível obter o contexto 2D do Canvas');
         }
 
@@ -67,6 +86,7 @@ export async function preprocessImage(
         canvas.toBlob(
           (blob) => {
             if (shouldRevoke) URL.revokeObjectURL(sourceUrl);
+            releaseCanvas(canvas);
             if (blob) {
               resolve({ blob, dataUrl, width: w, height: h });
             } else {
@@ -244,8 +264,15 @@ export async function refineCutoutWithPreset(
 
         // 2. Aplica Auto-Trim com padding simétrico
         const trimmed = autoTrimCanvas(canvas, 0.05);
+        const resultUrl = trimmed.toDataURL('image/png');
 
-        resolve(trimmed.toDataURL('image/png'));
+        // Limpeza ativa de buffers de memória
+        if (trimmed !== canvas) {
+          releaseCanvas(trimmed);
+        }
+        releaseCanvas(canvas);
+
+        resolve(resultUrl);
       } catch (err) {
         console.warn('Erro ao refinar preset:', err);
         resolve(rawCutoutUrl);
@@ -432,7 +459,15 @@ export async function removeWhiteBackground(
 
         ctx.putImageData(imgData, 0, 0);
         const trimmed = autoTrimCanvas(canvas, 0.05);
-        resolve(trimmed.toDataURL('image/png'));
+        const resultUrl = trimmed.toDataURL('image/png');
+
+        // Limpeza ativa de buffers de memória
+        if (trimmed !== canvas) {
+          releaseCanvas(trimmed);
+        }
+        releaseCanvas(canvas);
+
+        resolve(resultUrl);
       } catch (err) {
         console.warn('Fallback chroma-key error:', err);
         resolve(imageUrl);

@@ -234,7 +234,7 @@ export const SingleArtRenderer: React.FC<SingleArtRendererProps> = ({
     return () => {
       mounted = false;
     };
-  }, [sourceProduct]);
+  }, [sourceProduct, preserveProductBackground]);
 
   const aspectClass = format === 'a4-retrato'
     ? 'aspect-[210/297] max-w-[420px]'
