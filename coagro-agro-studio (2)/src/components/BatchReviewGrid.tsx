@@ -860,10 +860,10 @@ export const BatchReviewGrid: React.FC<BatchReviewGridProps> = ({ onStartExport,
                           onChange={(e) => setActiveTemplate(e.target.value as any)}
                           className="w-full px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-700"
                         >
-                          <option value="promo-mono-a4">Laser P&B (Econômico)</option>
+                          <option value="promo-mono-a4">Preto e Branco</option>
                           <option value="promo-agro-a4">Promocional Colorido</option>
                           <option value="promo-pet-a4">Promocional Pet</option>
-                          <option value="promo-text-only">Apenas Texto (Limpo)</option>
+                          <option value="promo-text-only">Tema Azul</option>
                         </select>
                       </div>
                     </div>
@@ -933,10 +933,10 @@ export const BatchReviewGrid: React.FC<BatchReviewGridProps> = ({ onStartExport,
                   onChange={(e) => setActiveTemplate(e.target.value as any)}
                   className="px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-xs font-bold text-slate-700"
                 >
-                  <option value="promo-mono-a4">Laser P&B (Econômico)</option>
+                  <option value="promo-mono-a4">Preto e Branco</option>
                   <option value="promo-agro-a4">Promocional Colorido</option>
                   <option value="promo-pet-a4">Promocional Pet</option>
-                  <option value="promo-text-only">Apenas Texto</option>
+                  <option value="promo-text-only">Tema Azul</option>
                 </select>
               </div>
 

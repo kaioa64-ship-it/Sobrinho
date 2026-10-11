@@ -272,6 +272,7 @@ export const SingleArtRenderer: React.FC<SingleArtRendererProps> = ({
             currentPrice={currentPrice}
             codigo={codigoProduto}
             headerText={badgeText}
+            discountBadge={discountBadge}
           />
         ) : activeTemplate === 'promo-agro-a4' ? (
           <PromoAgroA4 

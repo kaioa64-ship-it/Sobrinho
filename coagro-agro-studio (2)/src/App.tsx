@@ -218,6 +218,7 @@ export default function App() {
   const [batchExportFormat, setBatchExportFormat] = useState<'PNG' | 'PDF'>('PNG');
   const [batchTemplateToRender, setBatchTemplateToRender] = useState<PosterTemplateLayout>('promo-mono-a4');
   const [batchHeaderTextToRender, setBatchHeaderTextToRender] = useState<string>('OFERTA');
+  const [batchSelectedItems, setBatchSelectedItems] = useState<BatchItem[]>([]);
 
   const handleStartBatch = (items: BatchItem[], format: 'PNG' | 'PDF') => {
     setBatchExportFormat(format);
@@ -877,7 +878,7 @@ export default function App() {
                         className={`flex-1 py-2 text-xs sm:text-sm font-bold rounded-xl transition border flex items-center justify-center gap-1.5 ${posterTemplate === 'promo-mono-a4' ? 'bg-black text-white border-black' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'}`}
                       >
                         <div className="w-2.5 h-2.5 rounded-full bg-gray-400" />
-                        Econômico (P&B)
+                        Preto e Branco
                       </button>
                       {appMode === 'AGRO' && (
                         <button 
@@ -981,7 +982,10 @@ export default function App() {
                       <p className="text-gray-500 text-sm mb-6">
                         Importe a planilha e o sistema renderizará automaticamente todas as etiquetas para impressão.
                       </p>
-                      <ExcelBatchUploader onProcessBatch={(items, format) => handleStartBatch(items, format)} />
+                      <ExcelBatchUploader 
+                        onProcessBatch={(items, format) => handleStartBatch(items, format)} 
+                        onSelectedItemsChange={setBatchSelectedItems}
+                      />
                     </div>
                   ) : (
                     <PosterManualEditor 
@@ -1008,7 +1012,7 @@ export default function App() {
                   <div className="flex items-center justify-between w-full max-w-[420px] px-1">
                     <div className="text-xs font-bold text-gray-600 bg-gray-100 px-3 py-1 rounded-full uppercase tracking-wider font-exo2 flex items-center gap-1.5">
                       <Eye className="w-3.5 h-3.5 text-[#004d40]" />
-                      <span>Preview ({posterGridFormat === '2_PER_PAGE' ? 'A5 Duplo ✂️' : posterGridFormat === '4_PER_PAGE' ? 'Grade 2×2 ✂️' : 'A4 Cheio'})</span>
+                      <span>Preview ({posterGridFormat === '2_PER_PAGE' ? 'A5 Duplo' : posterGridFormat === '4_PER_PAGE' ? 'Grade 2×2' : 'A4 Cheio'})</span>
                     </div>
                     {(() => {
                       const discount = calculateDiscount(manualPosterData.valorDe, manualPosterData.valorPor);
@@ -1021,32 +1025,68 @@ export default function App() {
                   </div>
 
                   <PosterSheetContainer id="preview-poster-a4" grid={posterGridFormat}>
-                    <SingleArtRenderer
-                      content={{
-                        ...EMPTY_AGRO_CONTENT,
-                        linha: appMode,
-                        textos_hero: { titulo: manualPosterData.titulo, palavra_destaque_ouro: '', subtitulo: '' },
-                        modulo_preco: {
-                          ativo: true,
-                          valor_de: manualPosterData.valorDe,
-                          valor_por: manualPosterData.valorPor,
-                          condicoes_pagamento: ''
-                        },
-                        tipo_postagem: 'promocao'
-                      }}
-                      format="a4-retrato"
-                      theme="azul-coagro"
-                      templateLayout={posterTemplate}
-                      imageBoxFormat="rectangular"
-                      codigoProduto={manualPosterData.codigo}
-                      containerId="preview-poster-inner"
-                      badgeText={posterHeaderText}
-                      scopeOverride={appMode}
-                      discountBadge={(() => {
-                        const discount = calculateDiscount(manualPosterData.valorDe, manualPosterData.valorPor);
-                        return (manualPosterData.showDiscountBadge ?? true) && discount ? discount.badgeText : undefined;
-                      })()}
-                    />
+                    {posterMode === 'BATCH' && batchSelectedItems.length > 0 ? (
+                      (() => {
+                        const slotsCount = posterGridFormat === '4_PER_PAGE' ? 4 : posterGridFormat === '2_PER_PAGE' ? 2 : 1;
+                        const itemsToShow = batchSelectedItems.slice(0, slotsCount);
+                        return itemsToShow.map((item, idx) => (
+                          <SingleArtRenderer
+                            key={`${item.id}-${idx}`}
+                            content={{
+                              ...EMPTY_AGRO_CONTENT,
+                              linha: appMode,
+                              textos_hero: { titulo: item.titulo, palavra_destaque_ouro: '', subtitulo: '' },
+                              modulo_preco: {
+                                ativo: true,
+                                valor_de: item.valorDe,
+                                valor_por: item.valorPor,
+                                condicoes_pagamento: ''
+                              },
+                              tipo_postagem: 'promocao'
+                            }}
+                            format="a4-retrato"
+                            theme="azul-coagro"
+                            templateLayout={posterTemplate}
+                            imageBoxFormat="rectangular"
+                            codigoProduto={String(item.codigo)}
+                            containerId={`preview-batch-inner-${item.id}-${idx}`}
+                            badgeText={posterHeaderText}
+                            scopeOverride={appMode}
+                            discountBadge={(() => {
+                              const discount = calculateDiscount(item.valorDe, item.valorPor);
+                              return discount ? discount.badgeText : undefined;
+                            })()}
+                          />
+                        ));
+                      })()
+                    ) : (
+                      <SingleArtRenderer
+                        content={{
+                          ...EMPTY_AGRO_CONTENT,
+                          linha: appMode,
+                          textos_hero: { titulo: manualPosterData.titulo, palavra_destaque_ouro: '', subtitulo: '' },
+                          modulo_preco: {
+                            ativo: true,
+                            valor_de: manualPosterData.valorDe,
+                            valor_por: manualPosterData.valorPor,
+                            condicoes_pagamento: ''
+                          },
+                          tipo_postagem: 'promocao'
+                        }}
+                        format="a4-retrato"
+                        theme="azul-coagro"
+                        templateLayout={posterTemplate}
+                        imageBoxFormat="rectangular"
+                        codigoProduto={manualPosterData.codigo}
+                        containerId="preview-poster-inner"
+                        badgeText={posterHeaderText}
+                        scopeOverride={appMode}
+                        discountBadge={(() => {
+                          const discount = calculateDiscount(manualPosterData.valorDe, manualPosterData.valorPor);
+                          return (manualPosterData.showDiscountBadge ?? true) && discount ? discount.badgeText : undefined;
+                        })()}
+                      />
+                    )}
                   </PosterSheetContainer>
                   
                   <div className="flex w-full max-w-[420px] gap-2 mt-2">
@@ -1092,6 +1132,7 @@ export default function App() {
           exportFormat={batchExportFormat}
           templateLayout={batchTemplateToRender}
           headerText={batchHeaderTextToRender}
+          gridFormat={posterGridFormat}
           scope={appMode}
           onClose={() => setBatchItemsToRender(null)}
         />

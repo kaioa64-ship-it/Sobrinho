@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import * as xlsx from 'xlsx';
 import { Upload, Check, Trash2, Download, Search, Sparkles } from 'lucide-react';
 import { sanitizeErpTitle } from '../lib/erpSanitizer';
@@ -26,14 +26,19 @@ export interface BatchItem {
 
 interface ExcelBatchUploaderProps {
   onProcessBatch: (items: BatchItem[], format: 'PNG' | 'PDF') => void;
+  onSelectedItemsChange?: (items: BatchItem[]) => void;
 }
 
-export const ExcelBatchUploader: React.FC<ExcelBatchUploaderProps> = ({ onProcessBatch }) => {
+export const ExcelBatchUploader: React.FC<ExcelBatchUploaderProps> = ({ onProcessBatch, onSelectedItemsChange }) => {
   const [items, setItems] = useState<BatchItem[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [autoSanitizeErp, setAutoSanitizeErp] = useState(true);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    onSelectedItemsChange?.(items.filter(it => it.selected));
+  }, [items, onSelectedItemsChange]);
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
