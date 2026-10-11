@@ -32,7 +32,7 @@ Isso gerará o executável (`Coagro Studio Setup X.Y.Z.exe`) na pasta `dist_elec
 
 Antes de qualquer release ou commit na `main`, execute os gates de validação:
 
-* **Testes Unitários:** `npm test` (roda os 123 testes da suíte Vitest)
+* **Testes Unitários:** `npm test` (roda os 169 testes da suíte Vitest em 16 arquivos)
 * **Tipagem Estrita / Lint:** `npm run lint` (`tsc --noEmit` cobrindo cliente, servidor e testes)
 * **Build de Produção:** `npm run build` (compilação estrita com Vite)
 * **Bateria Visual E2E (Chrome Headless):** `node tests/e2e-visual/run-visual-tests.mjs` (testa 5 cenários com produtos reais via CDP)

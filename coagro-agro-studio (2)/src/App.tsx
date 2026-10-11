@@ -85,7 +85,8 @@ export default function App() {
       });
       // Se o conteúdo atual for o inicial vazio, ajusta para o vazio de PET
       setCurrentContent(prev => {
-        if (!prev.titulo && !prev.headline_principal) {
+        const isCurrentEmpty = !prev.textos_hero?.titulo && !prev.textos_da_arte?.titulo_impacto;
+        if (isCurrentEmpty) {
           return EMPTY_PET_CONTENT;
         }
         return prev;
@@ -103,7 +104,8 @@ export default function App() {
       });
       // Se o conteúdo atual for o inicial vazio, ajusta para o vazio de AGRO
       setCurrentContent(prev => {
-        if (!prev.titulo && !prev.headline_principal) {
+        const isCurrentEmpty = !prev.textos_hero?.titulo && !prev.textos_da_arte?.titulo_impacto;
+        if (isCurrentEmpty) {
           return EMPTY_AGRO_CONTENT;
         }
         return prev;

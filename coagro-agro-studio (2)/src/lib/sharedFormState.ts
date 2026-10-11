@@ -103,17 +103,20 @@ export function syncContentToSocialManualData(
   content: AgroPostContent,
   existing?: Partial<SocialManualData>
 ): SocialManualData {
+  const raw = content as unknown as Record<string, unknown>;
   const titulo =
     content.textos_da_arte?.titulo_impacto ||
     content.textos_hero?.titulo ||
-    content.headline_principal ||
-    content.titulo ||
+    content.caixa_titulo?.texto ||
+    (typeof raw.headline_principal === 'string' ? raw.headline_principal : '') ||
+    (typeof raw.titulo === 'string' ? raw.titulo : '') ||
     '';
 
   const subtitulo =
     content.textos_da_arte?.subtitulo ||
     content.textos_hero?.subtitulo ||
-    content.subtitulo ||
+    content.caixa_subtitulo?.texto ||
+    (typeof raw.subtitulo === 'string' ? raw.subtitulo : '') ||
     '';
 
   const preco = content.modulo_preco || content.textos_da_arte?.modulo_preco;

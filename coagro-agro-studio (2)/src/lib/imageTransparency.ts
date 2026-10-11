@@ -5,6 +5,7 @@
  */
 
 import { removeBackground } from '@imgly/background-removal';
+import { globalImageQueue } from './imageQueue';
 
 export type MaskPreset = 'standard' | 'aggressive' | 'details';
 
@@ -291,58 +292,76 @@ export async function refineCutoutWithPreset(
 export async function processProductImage(
   source: string | File | Blob,
   preset: MaskPreset = 'standard',
-  onProgress?: (stage: string, percent?: number) => void
+  onProgress?: (stage: string, percent?: number) => void,
+  signal?: AbortSignal
 ): Promise<ProcessedCutoutResult> {
-  // Etapa 1: Pré-processamento
-  onProgress?.('Otimizando imagem...', 15);
-  const preprocessed = await preprocessImage(source, 900);
+  const taskId = `cutout_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`;
 
-  let rawCutoutBlob: Blob | null = null;
+  return globalImageQueue.enqueue<ProcessedCutoutResult>({
+    id: taskId,
+    signal,
+    run: async (activeSignal) => {
+      if (activeSignal.aborted) throw new DOMException('Aborted', 'AbortError');
 
-  try {
-    // Etapa 2: Motor Neural WASM não bloqueante
-    onProgress?.('Recortando produto com IA...', 40);
+      // Etapa 1: Pré-processamento executado somente ao sair da fila
+      onProgress?.('Otimizando imagem...', 15);
+      const preprocessed = await preprocessImage(source, 900);
+      if (activeSignal.aborted) throw new DOMException('Aborted', 'AbortError');
 
-    rawCutoutBlob = await removeBackground(preprocessed.blob, {
-      publicPath: 'https://staticimgly.com/@imgly/background-removal-data/1.7.0/dist/',
-      model: 'isnet_fp16', // Modelo leve e super rápido (substitui o pesado isnet_fp16)
-      device: 'cpu',
-      proxyToWorker: true,
-      progress: (key, current, total) => {
-        if (total > 0) {
-          const ratio = Math.round((current / total) * 100);
-          onProgress?.(`Processando IA (${key}): ${ratio}%`, 40 + Math.round(ratio * 0.4));
-        }
-      },
-    });
-  } catch (wasmErr) {
-    console.warn('WASM @imgly indisponível ou bloqueado, utilizando fallback local chroma-key:', wasmErr);
-    // Fallback: Chroma-Key local para fundos claros/brancos
-    const fallbackDataUrl = await removeWhiteBackground(preprocessed.dataUrl);
-    return {
-      finalUrl: fallbackDataUrl,
-      rawCutoutUrl: fallbackDataUrl,
-      originalPreprocessedUrl: preprocessed.dataUrl,
-    };
-  }
+      let rawCutoutBlob: Blob | null = null;
 
-  // Etapa 3: Carrega o resultado bruto da rede neural
-  onProgress?.('Ajustando bordas e corte...', 85);
-  const rawCutoutUrl = await new Promise<string>((resolve) => {
-    const reader = new FileReader();
-    reader.onloadend = () => resolve(reader.result as string);
-    reader.readAsDataURL(rawCutoutBlob!);
+      try {
+        // Etapa 2: Motor Neural WASM não bloqueante
+        onProgress?.('Recortando produto com IA...', 40);
+
+        rawCutoutBlob = await removeBackground(preprocessed.blob, {
+          publicPath: 'https://staticimgly.com/@imgly/background-removal-data/1.7.0/dist/',
+          model: 'isnet_fp16',
+          device: 'cpu',
+          proxyToWorker: true,
+          progress: (key, current, total) => {
+            if (activeSignal.aborted) return;
+            if (total > 0) {
+              const ratio = Math.round((current / total) * 100);
+              onProgress?.(`Processando IA (${key}): ${ratio}%`, 40 + Math.round(ratio * 0.4));
+            }
+          },
+        });
+      } catch (wasmErr) {
+        if (activeSignal.aborted) throw wasmErr;
+        console.warn('WASM @imgly indisponível ou bloqueado, utilizando fallback local chroma-key:', wasmErr);
+        // Fallback: Chroma-Key local para fundos claros/brancos
+        const fallbackDataUrl = await removeWhiteBackground(preprocessed.dataUrl);
+        return {
+          finalUrl: fallbackDataUrl,
+          rawCutoutUrl: fallbackDataUrl,
+          originalPreprocessedUrl: preprocessed.dataUrl,
+        };
+      }
+
+      if (activeSignal.aborted) throw new DOMException('Aborted', 'AbortError');
+
+      // Etapa 3: Carrega o resultado bruto da rede neural
+      onProgress?.('Ajustando bordas e corte...', 85);
+      const rawCutoutUrl = await new Promise<string>((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result as string);
+        reader.readAsDataURL(rawCutoutBlob!);
+      });
+
+      if (activeSignal.aborted) throw new DOMException('Aborted', 'AbortError');
+
+      // Etapa 4: Aplica o preset de máscara e Auto-Trim
+      const finalUrl = await refineCutoutWithPreset(rawCutoutUrl, preset);
+      onProgress?.('Pronto!', 100);
+
+      return {
+        finalUrl,
+        rawCutoutUrl,
+        originalPreprocessedUrl: preprocessed.dataUrl,
+      };
+    },
   });
-
-  // Etapa 4: Aplica o preset de máscara e Auto-Trim
-  const finalUrl = await refineCutoutWithPreset(rawCutoutUrl, preset);
-  onProgress?.('Pronto!', 100);
-
-  return {
-    finalUrl,
-    rawCutoutUrl,
-    originalPreprocessedUrl: preprocessed.dataUrl,
-  };
 }
 
 /**

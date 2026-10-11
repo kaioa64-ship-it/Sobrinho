@@ -103,21 +103,16 @@
   - Arquivo: `src/lib/imageTransparency.ts`
   - Impacto: ✅ Desalocação ativa de buffers 2D e dimensões 0x0 para o GC do browser
 
-### **🟢 OTIMIZAÇÃO - Sprint 3**
-- [ ] **ImageProcessorWorker**: Pool de workers
-  - Arquivo: `src/workers/imageProcessorWorker.ts`
-  - Linhas: ~70
-  - Impacto: ✅ Melhorar performance
-
-- [ ] **CacheInstall**: Service Worker
-  - Arquivo: `src/sw/cacheInstall.ts`
-  - Linhas: ~50
-  - Impacto: ✅ Experiência offline
-
-- [ ] **ProductStorage**: Versionamento de cache
+### **🟢 OTIMIZAÇÃO - Sprint 3 (STATUS: ✅ 100% CONCLUÍDO)**
+- [x] **ImageProcessorWorker / Concurrency Limiter**: Fila com concorrência 1 e cancelamento com AbortController
+  - Arquivo: `src/lib/imageQueue.ts`
+  - Impacto: ✅ Previne congelamento de CPU/GPU e vazamentos em uploads consecutivos
+- [x] **CacheInstall / Service Worker**: Cache offline estático e fallback NetworkFirst
+  - Arquivos: `public/sw.js` e `src/lib/swRegister.ts`
+  - Impacto: ✅ Recarregamento SPA sem rede garantido
+- [x] **ProductStorage**: Versionamento de cache (schemaVersion: 2) e TTL híbrido de 60 dias
   - Arquivo: `src/lib/productStorage.ts`
-  - Linhas: +30
-  - Impacto: ✅ Cache confiável
+  - Impacto: ✅ Expurgos de registros antigos (prune) e métricas (stats) ativos
 
 ---
 
@@ -194,15 +189,17 @@
 **Fase 3:** ✅ AutoTrimCanvas (Limpeza determinística de buffers 2D e GC ativo)
 **Fase 4:** ✅ Testes unitários do Sprint 2 (`tests/unit/sharedFormState.test.ts` — 161/161 testes 100% verdes)
 
-### **Sprint 3 (Otimização Futura)**
-**Fase 1:** ImageProcessorWorker (Pool de workers dedicados)
-**Fase 2:** CacheInstall (Service Worker)
-**Fase 3:** ProductStorage com versionamento
+### **Sprint 3 (Concluído com Sucesso)**
+**Datas:** Conclusão Imediata (Outubro/2026)
+**Fase 1:** ✅ imageQueue.ts (Fila de concorrência única com AbortController e buffer de progresso)
+**Fase 2:** ✅ sw.js + swRegister.ts (Service Worker com CacheFirst/NetworkFirst e purge de versões antigas)
+**Fase 3:** ✅ productStorage.ts (schemaVersion: 2, TTL híbrido de 60 dias e métricas getStorageStats)
+**Fase 4:** ✅ Gates 100% verdes: lint exit 0, build exit 0 e 169/169 testes aprovados
 
 ---
 
-**📊 STATUS ATUAL:** Sprints 1 e 2 - 100% Implementados, Testados e Validados (161 testes passando sem falhas)
-**🛡️ BLINDAGEM ATIVA:** Escopo Agro/Pet isolado, formulários unificados sem duplicação de mapping, buffers Canvas desalocados automaticamente e guarda offline em background.
+**📊 STATUS ATUAL:** Sprints 1, 2 e 3 - 100% Implementados, Testados e Validados (169 testes passando sem falhas, lint e build 100% verdes)
+**🛡️ BLINDAGEM ATIVA:** Escopo Agro/Pet isolado, formulários unificados sem duplicação de mapping, buffers Canvas desalocados automaticamente, fila neural não bloqueante e PWA offline ativo.
 
 ---
 

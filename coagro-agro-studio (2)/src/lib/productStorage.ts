@@ -2,6 +2,8 @@ import { TemplateLayout } from '../types/agro';
 import { getInternalProductByCode } from '../data/productDatabase';
 import { sanitizeProductName } from './dataSanitizer';
 
+export const STORAGE_SCHEMA_VERSION = 2;
+
 export interface StoredProduct {
   codigo: string;
   nome: string;
@@ -15,6 +17,7 @@ export interface StoredProduct {
   templateLayout?: TemplateLayout;
   categoria?: 'AGRO' | 'PET';
   updatedAt: number;
+  schemaVersion?: number;
 }
 
 const DB_NAME = 'CoagroStudioDB';
@@ -72,6 +75,7 @@ export async function saveProductToStorage(product: StoredProduct): Promise<void
     ...product,
     codigo: sanitizedCode,
     updatedAt: Date.now(),
+    schemaVersion: STORAGE_SCHEMA_VERSION,
   };
 
   // Mantém controle de limite defensivo no Map de RAM
@@ -220,4 +224,75 @@ export async function findProductBySku(codigo: string | number): Promise<StoredP
   }
 
   return null;
+}
+
+export interface StorageStats {
+  totalCount: number;
+  memoryCount: number;
+  oldestUpdatedAt: number | null;
+  newestUpdatedAt: number | null;
+  schemaVersion: number;
+}
+
+/**
+ * Remove produtos obsoletos com base em TTL (em dias).
+ * Funciona de forma híbrida: limpa o memoryStore em RAM (usado em Node/Vitest)
+ * e o IndexedDB quando disponível no navegador.
+ * Retorna a quantidade total de registros expurgados.
+ */
+export async function pruneExpiredProducts(maxAgeDays = 60): Promise<number> {
+  const cutoffTime = Date.now() - maxAgeDays * 24 * 60 * 60 * 1000;
+  let deletedFromMemory = 0;
+
+  // 1. Limpeza garantida no memoryStore (RAM / Vitest)
+  for (const [code, item] of memoryStore.entries()) {
+    if ((item.updatedAt || 0) < cutoffTime) {
+      memoryStore.delete(code);
+      deletedFromMemory++;
+    }
+  }
+
+  // 2. Limpeza no IndexedDB do navegador
+  const idb = getIndexedDB();
+  if (!idb) {
+    return deletedFromMemory;
+  }
+
+  try {
+    const all = await getAllStoredProducts();
+    const toDelete = all.filter((item) => (item.updatedAt || 0) < cutoffTime);
+    if (toDelete.length > 0) {
+      const db = await openDatabase();
+      await new Promise<void>((resolve, reject) => {
+        const tx = db.transaction(STORE_NAME, 'readwrite');
+        const store = tx.objectStore(STORE_NAME);
+        for (const item of toDelete) {
+          store.delete(item.codigo);
+        }
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => reject(tx.error);
+      });
+      return toDelete.length;
+    }
+  } catch (err) {
+    console.warn('[productStorage] Erro durante prune no IndexedDB:', err);
+  }
+
+  return deletedFromMemory;
+}
+
+/**
+ * Retorna estatísticas consolidadas de uso e volumetria do cache de produtos.
+ */
+export async function getStorageStats(): Promise<StorageStats> {
+  const all = await getAllStoredProducts();
+  const timestamps = all.map((p) => p.updatedAt || 0).filter((t) => t > 0);
+
+  return {
+    totalCount: all.length,
+    memoryCount: memoryStore.size,
+    oldestUpdatedAt: timestamps.length > 0 ? Math.min(...timestamps) : null,
+    newestUpdatedAt: timestamps.length > 0 ? Math.max(...timestamps) : null,
+    schemaVersion: STORAGE_SCHEMA_VERSION,
+  };
 }
