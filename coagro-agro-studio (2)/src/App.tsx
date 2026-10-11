@@ -10,8 +10,10 @@ import { ExportToolbar } from './components/ExportToolbar';
 import { ExcelBatchUploader, BatchItem } from './components/ExcelBatchUploader';
 import { BatchReviewGrid } from './components/BatchReviewGrid';
 import { BatchRendererModal } from './components/BatchRendererModal';
-import { PosterManualEditor } from './components/PosterManualEditor';
+import { PosterManualEditor, PosterManualData } from './components/PosterManualEditor';
 import { SocialManualEditor, SocialManualData } from './components/SocialManualEditor';
+import { PosterSheetContainer, PosterSheetGrid } from './components/art-renderer/PosterSheetContainer';
+import { calculateDiscount } from './lib/priceCalculator';
 import { getAccessToken } from './lib/firebase';
 import { uploadToGoogleDrive } from './lib/googleDrive';
 import { resolveDefaultTemplate } from './lib/layoutRules';
@@ -34,11 +36,13 @@ export default function App() {
   const [posterMode, setPosterMode] = useState<'MANUAL' | 'BATCH' | 'REVIEW'>('MANUAL');
   const [posterTemplate, setPosterTemplate] = useState<PosterTemplateLayout>('promo-mono-a4');
   const [posterHeaderText, setPosterHeaderText] = useState<string>('OFERTA');
-  const [manualPosterData, setManualPosterData] = useState({
+  const [posterGridFormat, setPosterGridFormat] = useState<PosterSheetGrid>('1_PER_PAGE');
+  const [manualPosterData, setManualPosterData] = useState<PosterManualData>({
     codigo: '12345',
     titulo: 'RAÇÃO TUTTICANIS SELECT 10.1 KG',
     valorDe: '58,00',
-    valorPor: '44,00'
+    valorPor: '44,00',
+    showDiscountBadge: true,
   });
 
   // App Mode State: AGRO or PET agora lido do Zustand para manter compatibilidade com o resto do código
@@ -339,13 +343,18 @@ export default function App() {
       }
       showNotice('⏳ Preparando arquivo PDF...');
       const dataUrl = await toJpeg(el, { quality: 0.9, pixelRatio: 1.5 });
+      const isLandscape = currentModule === 'STORE_POSTERS' && posterGridFormat === '2_PER_PAGE';
       const pdf = new jsPDF({
-        orientation: 'portrait',
+        orientation: isLandscape ? 'landscape' : 'portrait',
         unit: 'mm',
         format: 'a4',
         compress: true
       });
-      pdf.addImage(dataUrl, 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
+      if (isLandscape) {
+        pdf.addImage(dataUrl, 'JPEG', 0, 0, 297, 210, undefined, 'FAST');
+      } else {
+        pdf.addImage(dataUrl, 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
+      }
       const prefix = appMode === 'PET' ? 'coagro-pet' : 'coagro-agro';
       const filename = `${prefix}-${suffix}-${Date.now()}.pdf`;
       pdf.save(filename);
@@ -364,6 +373,7 @@ export default function App() {
       }
       showNotice('🖨️ Abrindo diálogo de impressão...');
       const dataUrl = await toPng(el, { quality: 0.98, pixelRatio: 2 });
+      const isLandscape = currentModule === 'STORE_POSTERS' && posterGridFormat === '2_PER_PAGE';
       
       // Iframe invisível para disparar impressão nativa - 100% imune a bloqueador de pop-ups
       let iframe = document.getElementById('coagro-print-frame') as HTMLIFrameElement | null;
@@ -393,7 +403,7 @@ export default function App() {
             <title>Imprimir Cartaz - Grupo Coagro</title>
             <style>
               @page {
-                size: A4 portrait;
+                size: A4 ${isLandscape ? 'landscape' : 'portrait'};
                 margin: 0;
               }
               html, body {
@@ -928,6 +938,56 @@ export default function App() {
                     </div>
                   </div>
 
+                  {/* Seletor de Formato da Folha de Impressão (Fase 3: A4, A5 Duplo, Grade 2x2) */}
+                  <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 flex flex-col gap-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-gray-700 uppercase tracking-wide">
+                        Formato da Folha para Impressão
+                      </span>
+                      <span className="text-[10px] font-mono text-gray-400">Padrão A4 Loja</span>
+                    </div>
+                    <div className="grid grid-cols-3 gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setPosterGridFormat('1_PER_PAGE')}
+                        className={`py-2 px-2 text-xs font-bold rounded-xl transition border flex flex-col items-center justify-center gap-1 cursor-pointer ${
+                          posterGridFormat === '1_PER_PAGE'
+                            ? 'bg-[#004d40] text-white border-[#004d40] shadow-xs'
+                            : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
+                        }`}
+                      >
+                        <span className="font-exo2 uppercase text-[11px]">1 por Folha</span>
+                        <span className="text-[9px] opacity-75 font-normal">A4 Cheio (210×297)</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setPosterGridFormat('2_PER_PAGE')}
+                        className={`py-2 px-2 text-xs font-bold rounded-xl transition border flex flex-col items-center justify-center gap-1 cursor-pointer ${
+                          posterGridFormat === '2_PER_PAGE'
+                            ? 'bg-[#004d40] text-white border-[#004d40] shadow-xs'
+                            : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
+                        }`}
+                      >
+                        <span className="font-exo2 uppercase text-[11px] flex items-center gap-1">
+                          2 por Folha
+                        </span>
+                        <span className="text-[9px] opacity-75 font-normal">A5 Meia-Folha ✂️</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setPosterGridFormat('4_PER_PAGE')}
+                        className={`py-2 px-2 text-xs font-bold rounded-xl transition border flex flex-col items-center justify-center gap-1 cursor-pointer ${
+                          posterGridFormat === '4_PER_PAGE'
+                            ? 'bg-[#004d40] text-white border-[#004d40] shadow-xs'
+                            : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
+                        }`}
+                      >
+                        <span className="font-exo2 uppercase text-[11px]">4 por Folha</span>
+                        <span className="text-[9px] opacity-75 font-normal">Gôndola 2×2 ✂️</span>
+                      </button>
+                    </div>
+                  </div>
+
                   {/* Título Customizado (Palavra de Destaque) */}
                   <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 flex flex-col gap-2">
                     <span className="text-xs font-bold text-gray-700 uppercase tracking-wide">Título da Etiqueta</span>
@@ -958,48 +1018,81 @@ export default function App() {
                     <PosterManualEditor 
                       data={manualPosterData}
                       onChange={setManualPosterData}
+                      appMode={appMode}
+                      onSendToSocial={(poster) => {
+                        setSocialManualData(prev => ({
+                          ...prev,
+                          titulo: poster.titulo,
+                          valorDe: poster.valorDe,
+                          valorPor: poster.valorPor,
+                          codigo: poster.codigo,
+                          badge: posterHeaderText,
+                        }));
+                        setCurrentModule('SOCIAL_MEDIA');
+                        showNotice('✅ Dados do cartaz transferidos para Redes Sociais!');
+                      }}
                     />
                   )}
                 </div>
 
                 <div className="lg:col-span-5 flex flex-col items-center gap-3 w-full">
-                  <div className="text-xs font-bold text-gray-600 bg-gray-100 px-3 py-1 rounded-full uppercase tracking-wider font-exo2">
-                    Preview do Cartaz (A4)
+                  <div className="flex items-center justify-between w-full max-w-[420px] px-1">
+                    <div className="text-xs font-bold text-gray-600 bg-gray-100 px-3 py-1 rounded-full uppercase tracking-wider font-exo2 flex items-center gap-1.5">
+                      <Eye className="w-3.5 h-3.5 text-[#004d40]" />
+                      <span>Preview ({posterGridFormat === '2_PER_PAGE' ? 'A5 Duplo ✂️' : posterGridFormat === '4_PER_PAGE' ? 'Grade 2×2 ✂️' : 'A4 Cheio'})</span>
+                    </div>
+                    {(() => {
+                      const discount = calculateDiscount(manualPosterData.valorDe, manualPosterData.valorPor);
+                      return (manualPosterData.showDiscountBadge ?? true) && discount ? (
+                        <span className="text-[10px] font-black bg-[#ffab00] text-[#004d40] px-2 py-0.5 rounded-full uppercase font-exo2">
+                          {discount.badgeText}
+                        </span>
+                      ) : null;
+                    })()}
                   </div>
-                  <SingleArtRenderer
-                    content={{
-                      ...EMPTY_AGRO_CONTENT,
-                      linha: appMode,
-                      textos_hero: { titulo: manualPosterData.titulo, palavra_destaque_ouro: '', subtitulo: '' },
-                      modulo_preco: {
-                        ativo: true,
-                        valor_de: manualPosterData.valorDe,
-                        valor_por: manualPosterData.valorPor,
-                        condicoes_pagamento: ''
-                      },
-                      tipo_postagem: 'promocao'
-                    }}
-                    format="a4-retrato"
-                    theme="azul-coagro"
-                    templateLayout={posterTemplate}
-                    imageBoxFormat="rectangular"
-                    codigoProduto={manualPosterData.codigo}
-                    containerId="preview-poster-a4"
-                    badgeText={posterHeaderText}
-                    scopeOverride={appMode}
-                  />
+
+                  <PosterSheetContainer id="preview-poster-a4" grid={posterGridFormat}>
+                    <SingleArtRenderer
+                      content={{
+                        ...EMPTY_AGRO_CONTENT,
+                        linha: appMode,
+                        textos_hero: { titulo: manualPosterData.titulo, palavra_destaque_ouro: '', subtitulo: '' },
+                        modulo_preco: {
+                          ativo: true,
+                          valor_de: manualPosterData.valorDe,
+                          valor_por: manualPosterData.valorPor,
+                          condicoes_pagamento: ''
+                        },
+                        tipo_postagem: 'promocao'
+                      }}
+                      format="a4-retrato"
+                      theme="azul-coagro"
+                      templateLayout={posterTemplate}
+                      imageBoxFormat="rectangular"
+                      codigoProduto={manualPosterData.codigo}
+                      containerId="preview-poster-inner"
+                      badgeText={posterHeaderText}
+                      scopeOverride={appMode}
+                      discountBadge={(() => {
+                        const discount = calculateDiscount(manualPosterData.valorDe, manualPosterData.valorPor);
+                        return (manualPosterData.showDiscountBadge ?? true) && discount ? discount.badgeText : undefined;
+                      })()}
+                    />
+                  </PosterSheetContainer>
                   
                   <div className="flex w-full max-w-[420px] gap-2 mt-2">
                     <button
-                      onClick={() => handleDownloadCanvas('preview-poster-a4', 'cartaz-a4')}
+                      onClick={() => handleDownloadCanvas('preview-poster-a4', `cartaz-${posterGridFormat.toLowerCase()}`)}
                       className="flex-1 py-3 bg-[#d67022] hover:bg-[#b55b17] text-white rounded-xl text-xs sm:text-sm font-bold font-exo2 tracking-wide uppercase flex items-center justify-center gap-1 sm:gap-2 shadow-sm transition active:scale-95 cursor-pointer"
+                      title="Baixar imagem PNG da folha montada"
                     >
                       <Download className="w-4 h-4 sm:w-5 sm:h-5" />
-                      PNG
+                      PNG {posterGridFormat === '2_PER_PAGE' ? '(2x)' : posterGridFormat === '4_PER_PAGE' ? '(4x)' : ''}
                     </button>
                     <button
-                      onClick={() => handleDownloadPdf('preview-poster-a4', 'cartaz-a4')}
+                      onClick={() => handleDownloadPdf('preview-poster-a4', `cartaz-${posterGridFormat.toLowerCase()}`)}
                       className="flex-1 py-3 bg-[#004d40] hover:bg-[#00382e] text-white rounded-xl text-xs sm:text-sm font-bold font-exo2 tracking-wide uppercase flex items-center justify-center gap-1 sm:gap-2 shadow-sm transition active:scale-95 cursor-pointer"
+                      title="Baixar arquivo PDF no tamanho exato para impressão física"
                     >
                       <FileText className="w-4 h-4 sm:w-5 sm:h-5" />
                       PDF
@@ -1007,7 +1100,7 @@ export default function App() {
                     <button
                       onClick={() => handlePrintCanvas('preview-poster-a4')}
                       className="flex-1 py-3 bg-[#0284c7] hover:bg-[#0369a1] text-white rounded-xl text-xs sm:text-sm font-bold font-exo2 tracking-wide uppercase flex items-center justify-center gap-1 sm:gap-2 shadow-sm transition active:scale-95 cursor-pointer"
-                      title="Imprimir cartaz diretamente em folha A4"
+                      title="Imprimir diretamente na impressora da loja"
                     >
                       <Printer className="w-4 h-4 sm:w-5 sm:h-5" />
                       Imprimir

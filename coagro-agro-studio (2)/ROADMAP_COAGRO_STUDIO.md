@@ -136,13 +136,18 @@ graph TD
 * Matriz de testes visuais E2E com 15 cenários reais aprovados.
 
 ### 🟢 FASE 3: Cartazes de Gôndola, Brand Hub & Endomarketing (Ativa / Em Refinamento)
-1. **🏷️ Otimização de Cartazes de Gôndola e Prateleira:**
+1. **🏷️ Otimização de Cartazes de Gôndola e Prateleira (Entregue):**
    * **Inicialização Padrão Pragmática:** Abertura direta no módulo de **Cartazes de Loja (A4)** com o template **Econômico Preto e Branco (Laser P&B)** pré-selecionado (atende à realidade das lojas com impressoras monocromáticas).
    * **Tipografia Padronizada no Varejo:** Títulos em **Exo 2 Black 900** mais encorpada e aumentada nos 3 temas de cartazes (P&B, Agro e Pet).
    * **Logo Oficial no Rodapé A4:** Logomarca vertical oficial da Coagro com a casinha no topo fixa em todos os cartazes físicos.
-   * **Cartaz Duplo (Meia-Folha A5 / 2 por folha A4 em Paisagem):** Folha A4 em formato deitado (297x210mm) dividida ao meio em dois cartazes verticais com linha guia de corte tracejada.
-   * **Card Quadrado para Grade 4 por Folha A4:** Novo layout com proporção quadrada dedicado para etiquetas de gôndola compacta.
-   * **Cálculo Dinâmico & Importação de % de Desconto (`XX% OFF`):** Selo dinâmico de economia (ex: `25% OFF`).
+   * **Seletor de Grade da Folha de Impressão (`PosterSheetContainer`):**
+     - *1 por Folha:* A4 Retrato Cheio (210×297mm) para cartaz de entrada de loja.
+     - *2 por Folha:* A5 Meia-Folha em Paisagem (297×210mm) com linha tracejada central de corte (`✂️ CORTE AQUI`). Economia de 50% de papel e toner nas lojas.
+     - *4 por Folha:* Grade 2×2 Mini-Cartazes/Etiquetas de Gôndola (105×148mm) com guias de corte em cruz.
+     - *Exportação Inteligente:* PDF e impressão nativa com orientação automática (Paisagem para 2 por folha, Retrato para 1 e 4 por folha).
+   * **Cálculo Dinâmico & Selo de Desconto (`XX% OFF`):** Motor de cálculo (`priceCalculator.ts`) com cálculo em tempo real de percentual e economia em R$, e renderização opcional de selo de desconto no cartaz físico.
+   * **Atalhos de Demonstração Rápida:** Chips de preenchimento em 1 clique no editor com produtos reais Coagro (Tutticanis, Pulverizador XP16, Adubo NPK, Ivomec Gold).
+   * **Sincronização Cruzada Cartaz ↔ Redes Sociais:** Botão para transferir os dados do produto direto para o editor de Feed/Stories sem redigitação.
 
 2. **📁 Módulo Brand Hub Corporativo (Central de Governança de Marca — Entregue):**
    * **Papel Timbrado Oficial Adaptável às 12 Filiais:**

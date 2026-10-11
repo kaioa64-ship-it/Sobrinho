@@ -7,6 +7,7 @@ export interface PromoAgroA4Props {
   currentPrice: string;
   codigo?: string;
   headerText?: string;
+  discountBadge?: string;
 }
 
 /**
@@ -19,6 +20,7 @@ export const PromoAgroA4: React.FC<PromoAgroA4Props> = ({
   currentPrice,
   codigo,
   headerText = 'OFERTA',
+  discountBadge,
 }) => {
   const priceParts = currentPrice.replace('R$', '').trim().split(',');
   const mainPrice = priceParts[0] || '0';
@@ -88,6 +90,15 @@ export const PromoAgroA4: React.FC<PromoAgroA4Props> = ({
         
         {/* ZONA 3: ÁREA DO PREÇO */}
         <div className="w-full flex-1 flex flex-col items-center justify-center min-h-0">
+          {discountBadge && (
+            <div 
+              className="inline-flex items-center px-[3cqw] py-[0.7cqw] bg-[#ffab00] text-[#004d40] font-exo2 font-black rounded-full uppercase tracking-wider mb-[1.2cqw] shrink-0 shadow-sm"
+              style={{ fontSize: '4.2cqw' }}
+            >
+              <span>{discountBadge}</span>
+            </div>
+          )}
+
           {oldPrice && (
             <div className="flex items-center gap-[1.2cqw] font-exo2 font-bold uppercase relative text-emerald-100 shrink-0 mb-[0.1cqw]" style={{ fontSize: dePorFontSize }}>
               <span>DE</span>

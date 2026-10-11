@@ -51,6 +51,7 @@ interface SingleArtRendererProps {
   codigoProduto?: string;
   preserveProductBackground?: boolean;
   scopeOverride?: ScopeId; // Modo manual/tenant: força a marca (ver brand.config.ts)
+  discountBadge?: string; // Selo de desconto calculado (ex: "24% OFF")
 }
 
 export const SingleArtRenderer: React.FC<SingleArtRendererProps> = ({
@@ -67,6 +68,7 @@ export const SingleArtRenderer: React.FC<SingleArtRendererProps> = ({
   badgeText,
   preserveProductBackground,
   scopeOverride,
+  discountBadge,
 }) => {
   const isStory = format === 'story';
 
@@ -278,6 +280,7 @@ export const SingleArtRenderer: React.FC<SingleArtRendererProps> = ({
             currentPrice={currentPrice}
             codigo={codigoProduto}
             headerText={badgeText}
+            discountBadge={discountBadge}
           />
         ) : activeTemplate === 'promo-pet-a4' ? (
           <PromoPetA4 
@@ -286,6 +289,7 @@ export const SingleArtRenderer: React.FC<SingleArtRendererProps> = ({
             currentPrice={currentPrice}
             codigo={codigoProduto}
             headerText={badgeText}
+            discountBadge={discountBadge}
           />
         ) : activeTemplate === 'promo-mono-a4' ? (
           <PromoMonoA4 
@@ -294,6 +298,7 @@ export const SingleArtRenderer: React.FC<SingleArtRendererProps> = ({
             currentPrice={currentPrice}
             codigo={codigoProduto}
             headerText={badgeText}
+            discountBadge={discountBadge}
           />
         ) : activeTemplate === 'unified-central' ? (
           <UnifiedCentral
