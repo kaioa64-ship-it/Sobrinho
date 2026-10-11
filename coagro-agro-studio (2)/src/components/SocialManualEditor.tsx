@@ -120,11 +120,12 @@ export const SocialManualEditor: React.FC<SocialManualEditorProps> = ({
     }
 
     setIsProcessingBg(true);
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
     try {
       // Timeout defensivo de 10 segundos para não congelar computadores de loja
-      const timeoutPromise = new Promise<never>((_, reject) =>
-        setTimeout(() => reject(new Error('Tempo limite excedido no recorte neural local.')), 10000)
-      );
+      const timeoutPromise = new Promise<never>((_, reject) => {
+        timeoutId = setTimeout(() => reject(new Error('Tempo limite excedido no recorte neural local.')), 10000);
+      });
 
       const result = await Promise.race([
         processProductImage(src, 'standard'),
@@ -162,6 +163,7 @@ export const SocialManualEditor: React.FC<SocialManualEditorProps> = ({
         console.warn('Erro no fallback:', err);
       }
     } finally {
+      if (timeoutId) clearTimeout(timeoutId);
       setIsProcessingBg(false);
     }
   };

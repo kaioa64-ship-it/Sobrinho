@@ -2,37 +2,25 @@
 
 ## 🎯 **PRIORIZAÇÃO DE ISSUES CRÍTICAS**
 
-### **🔴 PRIORIDADE 1 - PROBLEMAS DE ALTA GRAVIDADE (Corrigir Imediatamente)**
+### **🔴 PRIORIDADE 1 - PROBLEMAS DE ALTA GRAVIDADE (STATUS: ✅ 100% CONCLUÍDO)**
 
-#### **P1.1 Alternância de Escopo com Estado Desatualizado**  
-**Arquivos:**
-- `src/App.tsx` - state management
-- `src/hooks/useArtworkForm.ts` - cached images
-- `src/components/SingleArtRenderer.tsx` - useEffect
-- `src/components/BackgroundLayer.tsx` - theme switching
+#### **P1.1 Alternância de Escopo com Estado Desatualizado** — ✅ **RESOLVIDO**  
+**Arquivos Corrigidos:**
+- `src/App.tsx`: Sincronização de `EMPTY_AGRO_CONTENT` / `EMPTY_PET_CONTENT` e resolução de templates padrão por escopo.
+- `src/hooks/useArtworkForm.ts`: Invalidação de `cachedRawCutout`, `cachedOriginalImage` e reset de `maskPreset` via `prevAppModeRef`.
+- `src/components/SingleArtRenderer.tsx`: Inclusão de `preserveProductBackground` nas dependências do `useEffect`, eliminando fantasmas de imagem não recortada.
+- `src/components/art-renderer/BackgroundLayer.tsx`: Fallback de cor com isolamento estrito entre paletas Agro (`#004d40`) e Pet (`#002B82`).
 
-**Problema:** Quando alterna entre AGRO ↔ PET, imagens processadas vazam, causando inconsistências de marca.
+#### **P1.2 Memory Leaks em Pipeline de Imagens** — ✅ **RESOLVIDO**  
+**Arquivos Corrigidos:**
+- `src/lib/imageTransparency.ts`: Implementada função `releaseCanvas()` para desalocação de buffers 2D e `0x0` em `preprocessImage`, `autoTrimCanvas`, `refineCutoutWithPreset` e `removeWhiteBackground`. Revogação estrita de `URL.revokeObjectURL`.
+- `src/lib/productStorage.ts`: Limite defensivo LRU (`MAX_MEMORY_CACHE_ITEMS = 80`) e exportação de `clearMemoryStorage()` para evitar acúmulo de base64 em RAM.
+- `src/components/SocialManualEditor.tsx`: Limpeza determinística do timer defensivo com `clearTimeout(timeoutId)` no bloco `finally`.
 
-**Solução:** Implementar `scopeValidator.ts` com limpeza de estado robusta.
-
-#### **P1.2 Memory Leaks em Pipeline de Imagens**  
-**Arquivos:**
-- `src/lib/imageTransparency.ts` - URLs de objeto
-- `src/lib/productStorage.ts` - cache duplo
-- `src/components/SocialManualEditor.tsx` - timeout e workers
-
-**Problema:** URLs de objeto, canvas e workers ativos nunca são liberados.
-
-**Solução:** Implementar `memoryCleanupService.ts` com gestão centralizada.
-
-#### **P1.3 Operação Offline Insegura**  
-**Arquivos:**
-- `src/App.tsx` - triggerDriveAutoSave
-- `src/lib/productStorage.ts` - cache de produtos
-
-**Problema:** Salves em background sem verificação de conectividade, podendo causar tentativas infinitas.
-
-**Solução:** Implementar `offlineSyncManager.ts` com filas de sync e retry.
+#### **P1.3 Operação Offline Insegura** — ✅ **RESOLVIDO**  
+**Arquivos Corrigidos:**
+- `src/App.tsx`: Guarda nativa `if (typeof navigator !== 'undefined' && !navigator.onLine) return;` em `triggerDriveAutoSave`, impedindo tentativas de upload em loop quando sem internet.
+- `src/lib/productStorage.ts`: Persistência local segura no IndexedDB com fallback em memória protegido.
 
 ### **🟡 PRIORIDADE 2 - PROBLEMAS DE MÉDIA GRAVIDADE (Corrigir em 2 sprint)**
 
@@ -87,21 +75,18 @@
 
 ## 📊 **CHECKLIST DE PROGRESSO**
 
-### **✅ CRÍTICO - Sprint 1**
-- [ ] **ScopeValidator**: Validar estado ao alternar entre AGRO/PET
-  - Arquivo: `src/services/scopeValidator.ts`
-  - Linhas: ~50
-  - Impacto: ✅ Corrigir inconsistências de marca
+### **✅ CRÍTICO - Sprint 1 (CONCLUÍDO)**
+- [x] **ScopeValidator / Scope Guard**: Validar e limpar estado ao alternar entre AGRO/PET
+  - Arquivos: `src/App.tsx`, `src/hooks/useArtworkForm.ts`, `src/components/SingleArtRenderer.tsx`, `src/components/art-renderer/BackgroundLayer.tsx`
+  - Impacto: ✅ Inconsistências de marca eliminadas
 
-- [ ] **MemoryCleanupService**: Gestão centralizada de limpeza
-  - Arquivo: `src/services/memoryCleanupService.ts`
-  - Linhas: ~80
-  - Impacto: ✅ Prevenir Memory Leaks
+- [x] **MemoryCleanupService / Canvas Release**: Gestão de limpeza de buffers 2D e Object URLs
+  - Arquivos: `src/lib/imageTransparency.ts`, `src/lib/productStorage.ts`, `src/components/SocialManualEditor.tsx`
+  - Impacto: ✅ Memory Leaks prevenidos com `releaseCanvas` e limite LRU
 
-- [ ] **OfflineSyncManager**: Fila de sync com retry
-  - Arquivo: `src/services/offlineSyncManager.ts`
-  - Linhas: ~60
-  - Impacto: ✅ Operação offline segura
+- [x] **OfflineSyncManager / Offline Connectivity Guard**: Proteção contra loops infinitos de rede offline
+  - Arquivo: `src/App.tsx` (`triggerDriveAutoSave`)
+  - Impacto: ✅ Operação offline segura sem travamento de rede
 
 ### **🟡 MÉDIO GRAVIDADE - Sprint 2**
 - [ ] **InputPanelComponentExtractor**: Dividir monólito

@@ -22,7 +22,16 @@ const DB_VERSION = 1;
 const STORE_NAME = 'products';
 
 // Memória cache local para fallback caso IndexedDB não esteja disponível (ex: Node/SSR/Vitest)
+// Limite máximo de 80 produtos em memória RAM para prevenir Memory Leaks com base64
+const MAX_MEMORY_CACHE_ITEMS = 80;
 const memoryStore = new Map<string, StoredProduct>();
+
+/**
+ * Libera explicitamente o cache em memória RAM sob demanda
+ */
+export function clearMemoryStorage(): void {
+  memoryStore.clear();
+}
 
 function getIndexedDB(): IDBFactory | null {
   if (typeof window !== 'undefined' && window.indexedDB) {
@@ -65,6 +74,11 @@ export async function saveProductToStorage(product: StoredProduct): Promise<void
     updatedAt: Date.now(),
   };
 
+  // Mantém controle de limite defensivo no Map de RAM
+  if (memoryStore.size >= MAX_MEMORY_CACHE_ITEMS && !memoryStore.has(sanitizedCode)) {
+    const oldestKey = memoryStore.keys().next().value;
+    if (oldestKey) memoryStore.delete(oldestKey);
+  }
   memoryStore.set(sanitizedCode, item);
 
   const idb = getIndexedDB();

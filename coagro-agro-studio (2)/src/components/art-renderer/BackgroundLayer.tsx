@@ -15,7 +15,7 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
   isBlue,
 }) => {
   if (!isPhoto || !activeBackground) {
-    let fallbackBg = 'bg-[#004d40]'; // default agro
+    let fallbackBg = isBlue ? 'bg-[#002B82]' : 'bg-[#004d40]'; // Isolamento estrito entre paletas Agro e Pet
     if (theme === 'azul-coagro') fallbackBg = 'bg-[#002B82]'; // pet
     if (theme === 'clean-branco') fallbackBg = 'bg-[#F5F5F5]'; // branco
 
