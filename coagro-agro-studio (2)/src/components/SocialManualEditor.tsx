@@ -3,6 +3,7 @@ import { Upload, X, Type, Tag, Palette, Wand2, Plus, Trash2, List, LayoutTemplat
 import { TemplateLayout, CanvasFormat } from '../types/agro';
 import { removeWhiteBackground, processProductImage } from '../lib/imageTransparency';
 import { sanitizeErpTitle } from '../lib/erpSanitizer';
+import { findProductBySku, saveProductToStorage } from '../lib/productStorage';
 
 import type { SocialManualData } from '../lib/sharedFormState';
 export type { SocialManualData };
@@ -34,6 +35,7 @@ export const SocialManualEditor: React.FC<SocialManualEditorProps> = ({
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const bgInputRef = useRef<HTMLInputElement>(null);
+  const lastSkuLookupRef = useRef('');
   const [isProcessingBg, setIsProcessingBg] = useState(false);
   const [originalImage, setOriginalImage] = useState<string | null>(null);
   const [cutoutImage, setCutoutImage] = useState<string | null>(null);
@@ -66,19 +68,17 @@ export const SocialManualEditor: React.FC<SocialManualEditorProps> = ({
             onChange({ ...data, preserveProductBackground: false });
 
             if (data.codigo) {
-              import('../lib/productStorage').then(({ saveProductToStorage }) => {
-                saveProductToStorage({
-                  codigo: data.codigo!,
-                  nome: data.titulo || 'Produto',
-                  imagemRecortada: quickCutout,
-                  imagemOriginal: base64,
-                  valorDe: data.valorDe,
-                  valorPor: data.valorPor,
-                  diferenciais: data.diferenciais,
-                  templateLayout,
-                  updatedAt: Date.now()
-                }).catch(console.warn);
-              });
+              saveProductToStorage({
+                codigo: data.codigo!,
+                nome: data.titulo || 'Produto',
+                imagemRecortada: quickCutout,
+                imagemOriginal: base64,
+                valorDe: data.valorDe,
+                valorPor: data.valorPor,
+                diferenciais: data.diferenciais,
+                templateLayout,
+                updatedAt: Date.now()
+              }).catch(console.warn);
             }
           } catch (err) {
             setCutoutImage(null);
@@ -124,19 +124,17 @@ export const SocialManualEditor: React.FC<SocialManualEditorProps> = ({
       onChange({ ...data, preserveProductBackground: false });
 
       if (data.codigo) {
-        import('../lib/productStorage').then(({ saveProductToStorage }) => {
-          saveProductToStorage({
-            codigo: data.codigo!,
-            nome: data.titulo || 'Produto',
-            imagemRecortada: result.finalUrl,
-            imagemOriginal: src,
-            valorDe: data.valorDe,
-            valorPor: data.valorPor,
-            diferenciais: data.diferenciais,
-            templateLayout,
-            updatedAt: Date.now()
-          }).catch(console.warn);
-        });
+        saveProductToStorage({
+          codigo: data.codigo!,
+          nome: data.titulo || 'Produto',
+          imagemRecortada: result.finalUrl,
+          imagemOriginal: src,
+          valorDe: data.valorDe,
+          valorPor: data.valorPor,
+          diferenciais: data.diferenciais,
+          templateLayout,
+          updatedAt: Date.now()
+        }).catch(console.warn);
       }
     } catch (e) {
       console.warn('Recorte neural WASM lento ou indisponível, aplicando Chroma-Key instantâneo:', e);
@@ -184,10 +182,10 @@ export const SocialManualEditor: React.FC<SocialManualEditorProps> = ({
     
     if (!codigoDigitado || codigoDigitado.trim().length === 0) return;
 
+    lastSkuLookupRef.current = codigoDigitado;
     try {
-      const { findProductBySku } = await import('../lib/productStorage');
       const product = await findProductBySku(codigoDigitado);
-      if (product) {
+      if (product && lastSkuLookupRef.current === codigoDigitado) {
         // Se o produto tiver categoria cadastrada (ex: Pet vs Agro), alinha a marca automaticamente
         if (product.categoria && product.categoria !== appMode) {
           onAppModeChange(product.categoria);

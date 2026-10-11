@@ -2,6 +2,17 @@ import React, { useState, useRef } from 'react';
 import * as xlsx from 'xlsx';
 import { Upload, Check, Trash2, Download, Search, Sparkles } from 'lucide-react';
 import { sanitizeErpTitle } from '../lib/erpSanitizer';
+import { parsePriceToFloat, normalizeAgroPrice } from '../lib/priceParser';
+
+function parseExcelPrice(val: unknown): string {
+  if (val === null || val === undefined || val === '') return '';
+  if (typeof val === 'number') {
+    return isNaN(val) ? '' : val.toFixed(2).replace('.', ',');
+  }
+  const str = String(val).trim();
+  const num = parsePriceToFloat(str);
+  return num > 0 ? num.toFixed(2).replace('.', ',') : normalizeAgroPrice(str);
+}
 
 export interface BatchItem {
   id: string;
@@ -76,8 +87,8 @@ export const ExcelBatchUploader: React.FC<ExcelBatchUploaderProps> = ({ onProces
             codigo: codigo,
             rawTitulo,
             titulo: autoSanitizeErp ? sanitizeErpTitle(rawTitulo) : rawTitulo,
-            valorDe: de ? Number(de).toFixed(2).replace('.', ',') : '',
-            valorPor: por ? Number(por).toFixed(2).replace('.', ',') : '',
+            valorDe: parseExcelPrice(de),
+            valorPor: parseExcelPrice(por),
             selected: true, // Auto-select all initially
           });
         }

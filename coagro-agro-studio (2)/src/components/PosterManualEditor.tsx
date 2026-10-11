@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Type, Tag, Sparkles, Flame, Share2, Zap } from 'lucide-react';
 import { sanitizeErpTitle } from '../lib/erpSanitizer';
 import { calculateDiscount } from '../lib/priceCalculator';
+import { findProductBySku } from '../lib/productStorage';
 
 export interface PosterManualData {
   codigo: string;
@@ -31,6 +32,7 @@ export const PosterManualEditor: React.FC<PosterManualEditorProps> = ({
   onSendToSocial,
   appMode = 'AGRO'
 }) => {
+  const lastSkuLookupRef = useRef('');
   const discount = calculateDiscount(data.valorDe, data.valorPor);
 
   return (
@@ -88,18 +90,17 @@ export const PosterManualEditor: React.FC<PosterManualEditorProps> = ({
               onChange({ ...data, codigo: novoCodigo });
               if (!novoCodigo || novoCodigo.trim().length === 0) return;
 
-              import('../lib/productStorage').then(({ findProductBySku }) => {
-                findProductBySku(novoCodigo).then(product => {
-                  if (product) {
-                    onChange({
-                      ...data,
-                      codigo: novoCodigo,
-                      titulo: product.nome,
-                      valorDe: product.valorDe || data.valorDe,
-                      valorPor: product.valorPor || data.valorPor,
-                    });
-                  }
-                });
+              lastSkuLookupRef.current = novoCodigo;
+              findProductBySku(novoCodigo).then(product => {
+                if (product && lastSkuLookupRef.current === novoCodigo) {
+                  onChange({
+                    ...data,
+                    codigo: novoCodigo,
+                    titulo: product.nome,
+                    valorDe: product.valorDe || data.valorDe,
+                    valorPor: product.valorPor || data.valorPor,
+                  });
+                }
               });
             }}
             placeholder="Ex: 12345 (ou digite 00/01 para demo)"
