@@ -111,5 +111,43 @@ describe('productStorage — Cache Local de Produtos por SKU', () => {
       const empty = await findProductBySku('   ');
       expect(empty).toBeNull();
     });
+
+    it('libera memória do cache em RAM ao chamar clearMemoryStorage', async () => {
+      await saveProductToStorage({
+        codigo: '999111',
+        nome: 'PRODUTO TESTE LIMPEZA',
+        updatedAt: Date.now(),
+      });
+
+      const { clearMemoryStorage } = await import('../../src/lib/productStorage');
+      expect(typeof clearMemoryStorage).toBe('function');
+      clearMemoryStorage();
+
+      // Após limpar o cache de memória em ambiente node (sem IndexedDB nativo), a chave foi limpa
+      const retrieved = await getProductFromStorage('999111');
+      expect(retrieved).toBeNull();
+    });
+
+    it('mantém limite defensivo de itens no cache em memória RAM (LRU guard)', async () => {
+      const { clearMemoryStorage } = await import('../../src/lib/productStorage');
+      clearMemoryStorage();
+
+      // Salva 85 itens no storage (limite é 80)
+      for (let i = 0; i < 85; i++) {
+        await saveProductToStorage({
+          codigo: `LRU_${i}`,
+          nome: `Produto LRU ${i}`,
+          updatedAt: Date.now(),
+        });
+      }
+
+      // Os itens mais antigos foram descartados para não estourar RAM
+      const oldest = await getProductFromStorage('LRU_0');
+      const newest = await getProductFromStorage('LRU_84');
+
+      expect(oldest).toBeNull();
+      expect(newest).not.toBeNull();
+      expect(newest?.codigo).toBe('LRU_84');
+    });
   });
 });
