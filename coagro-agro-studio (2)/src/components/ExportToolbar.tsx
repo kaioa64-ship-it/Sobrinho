@@ -68,8 +68,9 @@ export const ExportToolbar: React.FC<ExportToolbarProps> = ({
       }
 
       const dataUrl = await toPng(element, {
-        quality: 0.98,
-        pixelRatio: 1.5,
+        quality: 1,
+        pixelRatio: 2.5,
+        cacheBust: true,
       });
 
       const prefix = appMode === 'PET' ? 'coagro-pet' : 'coagro-agro';
@@ -106,8 +107,9 @@ export const ExportToolbar: React.FC<ExportToolbarProps> = ({
 
       // Generate PNG data url
       const dataUrl = await toPng(element, {
-        quality: 0.98,
-        pixelRatio: 1.5,
+        quality: 1,
+        pixelRatio: 2.5,
+        cacheBust: true,
       });
 
       const brandLabel = appMode === 'PET' ? 'Pet' : 'Agro';

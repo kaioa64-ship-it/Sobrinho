@@ -19,7 +19,7 @@ import { getAccessToken } from './lib/firebase';
 import { uploadToGoogleDrive } from './lib/googleDrive';
 import { resolveDefaultTemplate } from './lib/layoutRules';
 import { CommunicationMode } from './lib/communicationMode';
-import { toPng, toJpeg } from 'html-to-image';
+import { toPng } from 'html-to-image';
 import { jsPDF } from 'jspdf';
 import { Eye, Sparkles, Copy, Download, Columns2, Maximize2, Box, FileText, Printer, ShieldCheck } from 'lucide-react';
 import { BrandHubModule } from './components/brand-hub/BrandHubModule';
@@ -280,7 +280,7 @@ export default function App() {
         try {
           const el = document.getElementById('agro-single-art-canvas');
           if (!el) return;
-          const dataUrl = await toPng(el, { quality: 0.95, pixelRatio: 1.5 });
+          const dataUrl = await toPng(el, { quality: 1, pixelRatio: 2, cacheBust: true });
           const title =
             contentToSave.textos_da_arte?.titulo_impacto ||
             contentToSave.caixa_titulo?.texto ||
@@ -315,8 +315,15 @@ export default function App() {
         showNotice('⚠️ Elemento da arte não encontrado.');
         return;
       }
-      showNotice('⏳ Gerando imagem...');
-      const dataUrl = await toPng(el, { quality: 0.98, pixelRatio: 1.5 });
+      showNotice('⏳ Gerando imagem em alta resolução...');
+      const isLandscape = currentModule === 'STORE_POSTERS' && posterGridFormat === '2_PER_PAGE';
+      const isPoster = currentModule === 'STORE_POSTERS';
+      // 300 DPI em folha A4: 2480x3508px (Retrato) ou 3508x2480px (Paisagem)
+      const targetWidth = isLandscape ? 3508 : 2480;
+      const pixelRatio = isPoster
+        ? Math.max(3, Math.min(6, targetWidth / (el.clientWidth || 440)))
+        : 2.5;
+      const dataUrl = await toPng(el, { quality: 1, pixelRatio, cacheBust: true });
       const prefix = appMode === 'PET' ? 'coagro-pet' : 'coagro-agro';
       const filename = `${prefix}-${suffix}-${Date.now()}.png`;
       const link = document.createElement('a');
@@ -336,9 +343,15 @@ export default function App() {
         showNotice('⚠️ Elemento da arte não encontrado.');
         return;
       }
-      showNotice('⏳ Preparando arquivo PDF...');
-      const dataUrl = await toJpeg(el, { quality: 0.9, pixelRatio: 1.5 });
+      showNotice('⏳ Preparando arquivo PDF em 300 DPI...');
       const isLandscape = currentModule === 'STORE_POSTERS' && posterGridFormat === '2_PER_PAGE';
+      const isPoster = currentModule === 'STORE_POSTERS';
+      // 300 DPI em folha A4: 2480x3508px (Retrato) ou 3508x2480px (Paisagem)
+      const targetWidth = isLandscape ? 3508 : 2480;
+      const pixelRatio = isPoster
+        ? Math.max(3, Math.min(6, targetWidth / (el.clientWidth || 440)))
+        : 2.5;
+      const dataUrl = await toPng(el, { quality: 1, pixelRatio, cacheBust: true });
       const pdf = new jsPDF({
         orientation: isLandscape ? 'landscape' : 'portrait',
         unit: 'mm',
@@ -346,14 +359,14 @@ export default function App() {
         compress: true
       });
       if (isLandscape) {
-        pdf.addImage(dataUrl, 'JPEG', 0, 0, 297, 210, undefined, 'FAST');
+        pdf.addImage(dataUrl, 'PNG', 0, 0, 297, 210, undefined, 'FAST');
       } else {
-        pdf.addImage(dataUrl, 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
+        pdf.addImage(dataUrl, 'PNG', 0, 0, 210, 297, undefined, 'FAST');
       }
       const prefix = appMode === 'PET' ? 'coagro-pet' : 'coagro-agro';
       const filename = `${prefix}-${suffix}-${Date.now()}.pdf`;
       pdf.save(filename);
-      showNotice(`✅ PDF salvo em Downloads (${filename})! Para imprimir direto, use o botão "Imprimir".`);
+      showNotice(`✅ PDF 300 DPI salvo em Downloads (${filename})! Para imprimir direto, use o botão "Imprimir".`);
     } catch (err: any) {
       alert('Erro ao gerar PDF: ' + err.message);
     }
@@ -367,8 +380,13 @@ export default function App() {
         return;
       }
       showNotice('🖨️ Abrindo diálogo de impressão...');
-      const dataUrl = await toPng(el, { quality: 0.98, pixelRatio: 2 });
       const isLandscape = currentModule === 'STORE_POSTERS' && posterGridFormat === '2_PER_PAGE';
+      const isPoster = currentModule === 'STORE_POSTERS';
+      const targetWidth = isLandscape ? 3508 : 2480;
+      const pixelRatio = isPoster
+        ? Math.max(3, Math.min(6, targetWidth / (el.clientWidth || 440)))
+        : 2.5;
+      const dataUrl = await toPng(el, { quality: 1, pixelRatio, cacheBust: true });
       
       // Iframe invisível para disparar impressão nativa - 100% imune a bloqueador de pop-ups
       let iframe = document.getElementById('coagro-print-frame') as HTMLIFrameElement | null;

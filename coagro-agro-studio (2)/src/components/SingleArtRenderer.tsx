@@ -237,14 +237,14 @@ export const SingleArtRenderer: React.FC<SingleArtRendererProps> = ({
   }, [sourceProduct, preserveProductBackground]);
 
   const aspectClass = format === 'a4-retrato'
-    ? 'aspect-[210/297] max-w-[420px]'
+    ? 'aspect-[210/297] w-full h-full'
     : isStory
     ? 'aspect-[9/16] max-w-[390px]'
     : format === 'feed-retrato'
     ? 'aspect-[4/5] max-w-[440px]'
     : 'aspect-square max-w-[480px]';
 
-  const canvasClasses = `@container w-full ${aspectClass} relative overflow-hidden font-['Inter']`;
+  const canvasClasses = `@container w-full ${format === 'a4-retrato' ? 'h-full' : ''} ${aspectClass} relative overflow-hidden font-['Inter']`;
   const { titleColor, subtitleColor, highlightColor } = getPalette(scope, isLight);
 
   // A imagem final do produto usa o recorte justo dos pixels visíveis (tight crop) para ancoragem pela base
@@ -254,7 +254,7 @@ export const SingleArtRenderer: React.FC<SingleArtRendererProps> = ({
   const isArtEmpty = !sourceProduct && !title && benefits.length === 0;
 
   return (
-    <div className="flex justify-center items-center w-full select-none">
+    <div className={`flex justify-center items-center w-full ${format === 'a4-retrato' ? 'h-full' : ''} select-none`}>
       <div id={containerId} style={backgroundStyle} className={canvasClasses}>
         <BackgroundLayer
           theme={effectiveTheme}

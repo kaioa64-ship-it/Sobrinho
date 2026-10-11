@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { toPng, toJpeg } from 'html-to-image';
+import { toPng } from 'html-to-image';
 import { SingleArtRenderer } from './SingleArtRenderer';
 import { BatchItem } from './ExcelBatchUploader';
 import { PosterSheetContainer, PosterSheetGrid } from './art-renderer/PosterSheetContainer';
@@ -75,30 +75,30 @@ export const BatchRendererModal: React.FC<BatchRendererModalProps> = ({
       if (element) {
         try {
           if (exportFormat === 'PDF') {
-            // Usa JPEG com taxa de compressão eficiente para PDFs com centenas de páginas
-            const dataUrl = await toJpeg(element, { quality: 0.85, pixelRatio: 1.3 });
+            // Usa PNG de alta resolução gráfica (300 DPI) com compressão Deflate sem perdas
+            const dataUrl = await toPng(element, { quality: 1, pixelRatio: 3.125, cacheBust: true });
             
             if (currentPageIndex > 0 && pdfRef.current) {
               pdfRef.current.addPage();
             }
             if (pdfRef.current) {
               if (isLandscape) {
-                pdfRef.current.addImage(dataUrl, 'JPEG', 0, 0, 297, 210, undefined, 'FAST');
+                pdfRef.current.addImage(dataUrl, 'PNG', 0, 0, 297, 210, undefined, 'FAST');
               } else {
-                pdfRef.current.addImage(dataUrl, 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
+                pdfRef.current.addImage(dataUrl, 'PNG', 0, 0, 210, 297, undefined, 'FAST');
               }
             }
             const codesSummary = pageItems.map(p => p.codigo).join(', ');
-            setLogs((prev) => [`[Folha ${currentPageIndex + 1}/${totalPages}] Itens: ${codesSummary} adicionados ao PDF.`, ...prev]);
+            setLogs((prev) => [`[Folha ${currentPageIndex + 1}/${totalPages}] Itens: ${codesSummary} adicionados em 300 DPI.`, ...prev]);
           } else {
-            // PNG por folha montada
-            const dataUrl = await toPng(element, { quality: 0.95, pixelRatio: 1.5 });
+            // PNG por folha montada em alta resolução (300 DPI)
+            const dataUrl = await toPng(element, { quality: 1, pixelRatio: 3.125, cacheBust: true });
             const filename = `Coagro_Folha_${currentPageIndex + 1}_${Date.now()}.png`;
             const link = document.createElement('a');
             link.download = filename;
             link.href = dataUrl;
             link.click();
-            setLogs((prev) => [`[Folha ${currentPageIndex + 1}/${totalPages}] Gerada com sucesso!`, ...prev]);
+            setLogs((prev) => [`[Folha ${currentPageIndex + 1}/${totalPages}] Gerada em alta resolução!`, ...prev]);
           }
         } catch (error: any) {
           setLogs((prev) => [`[ERRO Folha ${currentPageIndex + 1}] Falha: ${error.message}`, ...prev]);
@@ -181,11 +181,11 @@ export const BatchRendererModal: React.FC<BatchRendererModalProps> = ({
           )}
         </div>
 
-        {/* Área Oculta para Renderização e Captura da Folha (com dimensões precisas para html-to-image) */}
-        <div className={`fixed top-0 left-0 ${isLandscape ? 'w-[620px]' : 'w-[440px]'} pointer-events-none z-[-10]`}>
+        {/* Área Oculta para Renderização e Captura da Folha (com dimensões precisas de A4 300 DPI) */}
+        <div className={`fixed top-0 left-0 ${isLandscape ? 'w-[1123px]' : 'w-[794px]'} pointer-events-none z-[-10]`}>
           {currentPageIndex < totalPages && (
             <div id="batch-page-render">
-              <PosterSheetContainer grid={gridFormat} id="batch-sheet-container">
+              <PosterSheetContainer grid={gridFormat} className="max-w-none w-full" id="batch-sheet-container">
                 {currentPageItems.map((item, idx) => (
                   <SingleArtRenderer
                     key={`${item.id}-${idx}`}

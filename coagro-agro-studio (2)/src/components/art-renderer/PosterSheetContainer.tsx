@@ -5,6 +5,7 @@ export type PosterSheetGrid = '1_PER_PAGE' | '2_PER_PAGE' | '4_PER_PAGE';
 interface PosterSheetContainerProps {
   id?: string;
   grid: PosterSheetGrid;
+  className?: string;
   children: React.ReactNode;
 }
 
@@ -20,6 +21,7 @@ interface PosterSheetContainerProps {
 export const PosterSheetContainer: React.FC<PosterSheetContainerProps> = ({
   id = 'preview-poster-sheet',
   grid,
+  className = '',
   children,
 }) => {
   const childArray = React.Children.toArray(children);
@@ -34,12 +36,12 @@ export const PosterSheetContainer: React.FC<PosterSheetContainerProps> = ({
     return (
       <div
         id={id}
-        className="w-full max-w-[620px] aspect-[297/210] bg-white border border-gray-300 shadow-xl relative overflow-hidden select-none box-border grid grid-cols-2 p-1.5"
+        className={`w-full ${className ? className : 'max-w-[620px]'} aspect-[297/210] bg-white border border-gray-300 shadow-xl relative overflow-hidden select-none box-border grid grid-cols-2 p-1.5`}
       >
         {/* Lado Esquerdo */}
         <div className="h-full w-full pr-1.5 flex items-center justify-center overflow-hidden">
           {item0 && (
-            <div className="h-full aspect-[210/297] w-auto">
+            <div className="w-full h-full flex items-center justify-center">
               {item0}
             </div>
           )}
@@ -51,7 +53,7 @@ export const PosterSheetContainer: React.FC<PosterSheetContainerProps> = ({
         {/* Lado Direito */}
         <div className="h-full w-full pl-1.5 flex items-center justify-center overflow-hidden">
           {item1 && (
-            <div className="h-full aspect-[210/297] w-auto">
+            <div className="w-full h-full flex items-center justify-center">
               {item1}
             </div>
           )}
@@ -65,7 +67,7 @@ export const PosterSheetContainer: React.FC<PosterSheetContainerProps> = ({
     return (
       <div
         id={id}
-        className="w-full max-w-[440px] aspect-[210/297] bg-white border border-gray-300 shadow-xl relative overflow-hidden select-none box-border grid grid-cols-2 grid-rows-2 p-1.5"
+        className={`w-full ${className ? className : 'max-w-[440px]'} aspect-[210/297] bg-white border border-gray-300 shadow-xl relative overflow-hidden select-none box-border grid grid-cols-2 grid-rows-2 p-1.5`}
       >
         {/* Linhas Tracejadas de Corte Limpas (Sem ícones de tesoura poluindo o centro) */}
         <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-0 border-l border-dashed border-gray-300 z-20 pointer-events-none" />
@@ -74,7 +76,7 @@ export const PosterSheetContainer: React.FC<PosterSheetContainerProps> = ({
         {/* Quadrante 1 (Topo Esquerdo) */}
         <div className="p-1 flex items-center justify-center overflow-hidden">
           {item0 && (
-            <div className="h-full aspect-[210/297] w-auto">
+            <div className="w-full h-full flex items-center justify-center">
               {item0}
             </div>
           )}
@@ -83,7 +85,7 @@ export const PosterSheetContainer: React.FC<PosterSheetContainerProps> = ({
         {/* Quadrante 2 (Topo Direito) */}
         <div className="p-1 flex items-center justify-center overflow-hidden">
           {item1 && (
-            <div className="h-full aspect-[210/297] w-auto">
+            <div className="w-full h-full flex items-center justify-center">
               {item1}
             </div>
           )}
@@ -92,7 +94,7 @@ export const PosterSheetContainer: React.FC<PosterSheetContainerProps> = ({
         {/* Quadrante 3 (Base Esquerda) */}
         <div className="p-1 flex items-center justify-center overflow-hidden">
           {item2 && (
-            <div className="h-full aspect-[210/297] w-auto">
+            <div className="w-full h-full flex items-center justify-center">
               {item2}
             </div>
           )}
@@ -101,7 +103,7 @@ export const PosterSheetContainer: React.FC<PosterSheetContainerProps> = ({
         {/* Quadrante 4 (Base Direita) */}
         <div className="p-1 flex items-center justify-center overflow-hidden">
           {item3 && (
-            <div className="h-full aspect-[210/297] w-auto">
+            <div className="w-full h-full flex items-center justify-center">
               {item3}
             </div>
           )}
@@ -114,7 +116,7 @@ export const PosterSheetContainer: React.FC<PosterSheetContainerProps> = ({
   return (
     <div
       id={id}
-      className="w-full max-w-[420px] aspect-[210/297] bg-white border border-gray-200 shadow-lg relative overflow-hidden select-none box-border flex items-center justify-center"
+      className={`w-full ${className ? className : 'max-w-[420px]'} aspect-[210/297] bg-white border border-gray-200 shadow-lg relative overflow-hidden select-none box-border flex items-center justify-center`}
     >
       <div className="w-full h-full">
         {item0 || children}
