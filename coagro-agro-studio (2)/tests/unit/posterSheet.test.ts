@@ -55,4 +55,20 @@ describe('PosterSheetGrid & PosterSheetContainer', () => {
     const el = tree as React.ReactElement<{ className: string }>;
     expect(el.props.className).toContain('bg-[#0047b3]');
   });
+
+  it('calcula pixelRatio correto para cada densidade gráfica (DPI)', async () => {
+    const { getPixelRatioForDpi, getDefaultDpi } = await import('../../src/components/BatchRendererModal');
+    
+    // Base 96 DPI CSS
+    expect(getPixelRatioForDpi(100)).toBeCloseTo(1.0417, 2);
+    expect(getPixelRatioForDpi(120)).toBe(1.25);
+    expect(getPixelRatioForDpi(150)).toBe(1.5625);
+    expect(getPixelRatioForDpi(300)).toBe(3.125);
+
+    // Auto-adaptação dinâmica por volume de folhas
+    expect(getDefaultDpi(700)).toBe(120); // Lotes gigantes (teste do Kaio: 700 páginas)
+    expect(getDefaultDpi(80)).toBe(120);  // Lotes grandes (> 50 páginas)
+    expect(getDefaultDpi(30)).toBe(150);  // Lotes médios (16 a 50 páginas)
+    expect(getDefaultDpi(5)).toBe(300);   // Lotes pequenos (<= 15 páginas)
+  });
 });
