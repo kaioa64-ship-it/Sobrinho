@@ -4,21 +4,8 @@ import { TemplateLayout, CanvasFormat } from '../types/agro';
 import { removeWhiteBackground, processProductImage } from '../lib/imageTransparency';
 import { sanitizeErpTitle } from '../lib/erpSanitizer';
 
-export interface SocialManualData {
-  codigo?: string;
-  titulo: string;
-  subtitulo: string;
-  valorDe: string;
-  valorPor: string;
-  diferenciais: string[];
-  backgroundImageUrl?: string;
-  backgroundColorHex?: string;
-  badge?: string;
-  theme?: string;
-  textBackground?: boolean;
-  cta?: string;
-  preserveProductBackground?: boolean;
-}
+import type { SocialManualData } from '../lib/sharedFormState';
+export type { SocialManualData };
 
 interface SocialManualEditorProps {
   appMode: 'AGRO' | 'PET';

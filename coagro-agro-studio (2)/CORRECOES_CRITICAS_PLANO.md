@@ -88,21 +88,20 @@
   - Arquivo: `src/App.tsx` (`triggerDriveAutoSave`)
   - Impacto: ✅ Operação offline segura sem travamento de rede
 
-### **🟡 MÉDIO GRAVIDADE - Sprint 2**
-- [ ] **InputPanelComponentExtractor**: Dividir monólito
+### **🟡 MÉDIO GRAVIDADE - Sprint 2 (STATUS: ✅ 100% CONCLUÍDO)**
+- [x] **InputPanelComponentExtractor**: Dividir monólito
   - Arquivo: `src/components/input-panel/`
-  - Subcomponentes: 6+ extraídos
-  - Impacto: ✅ Testabilidade melhorada
+  - Subcomponentes: 6 extraídos (`ProductPhotoSection`, `ProductDescriptionSection`, `TemplateMatrixSection`, `LivePriceSection`, `LiveTitleSection`, `LiveTextFieldsSection`) + barrel export
+  - Impacto: ✅ Monólito reduzido de 1.900 para ~220 linhas, manutenibilidade máxima
 
-- [ ] **SharedFormState**: Estado unificado
-  - Arquivo: `src/contexts/formStateContext.ts`
-  - Linhas: ~40
-  - Impacto: ✅ Consistência de estado
+- [x] **SharedFormState**: Estado unificado
+  - Arquivo: `src/lib/sharedFormState.ts`
+  - Linhas: ~140
+  - Impacto: ✅ Sincronização centralizada sem duplicação de mapeamento e isolamento estrito Agro/Pet
 
-- [ ] **AutoTrimCanvas**: Limpeza adequada
+- [x] **AutoTrimCanvas**: Limpeza adequada
   - Arquivo: `src/lib/imageTransparency.ts`
-  - Linhas: +20
-  - Impacto: ✅ Prevenir acúmulo de memória
+  - Impacto: ✅ Desalocação ativa de buffers 2D e dimensões 0x0 para o GC do browser
 
 ### **🟢 OTIMIZAÇÃO - Sprint 3**
 - [ ] **ImageProcessorWorker**: Pool de workers
@@ -188,21 +187,22 @@
 - ✅ **Testes unitários para blindagem de memória e escopo** (`tests/unit/memoryAndScopeGuard.test.ts` e `tests/unit/productStorage.test.ts`)
 - ✅ **Integração de serviços e build validado** (155/155 testes verdes)
 
-### **Sprint 2 (Próxima Etapa de Refatoração Arquitetural)**
-**Fase 1:** InputPanel Modularização (já preparado em `src/components/input-panel/`)
-**Fase 2:** SharedFormState (Unificação de contexto entre SocialManualEditor e form hook)
-**Fase 3:** AutoTrimCanvas (Limpeza de buffers já ativada em `refineCutoutWithPreset`)
-**Fase 4:** Testes de integração adicionais
+### **Sprint 2 (Concluído com Sucesso)**
+**Datas:** Conclusão Imediata (Outubro/2026)
+**Fase 1:** ✅ InputPanel Modularização (6 submódulos desacoplados + barrel export em `src/components/input-panel/`)
+**Fase 2:** ✅ SharedFormState (`src/lib/sharedFormState.ts` com unificação de estado e isolamento estrito Agro/Pet)
+**Fase 3:** ✅ AutoTrimCanvas (Limpeza determinística de buffers 2D e GC ativo)
+**Fase 4:** ✅ Testes unitários do Sprint 2 (`tests/unit/sharedFormState.test.ts` — 161/161 testes 100% verdes)
 
-### **Sprint 3 (Otimização)**
-**Fase 1:** ImageProcessorWorker
+### **Sprint 3 (Otimização Futura)**
+**Fase 1:** ImageProcessorWorker (Pool de workers dedicados)
 **Fase 2:** CacheInstall (Service Worker)
-**Fase 3:** ProductStorage com versão
+**Fase 3:** ProductStorage com versionamento
 
 ---
 
-**📊 STATUS ATUAL:** Sprint 1 - 100% Implementado, Testado e Validado (155 testes passando sem falhas)
-**🛡️ BLINDAGEM ATIVA:** Escopo Agro/Pet isolado, buffers Canvas desalocados automaticamente e guarda offline em background.
+**📊 STATUS ATUAL:** Sprints 1 e 2 - 100% Implementados, Testados e Validados (161 testes passando sem falhas)
+**🛡️ BLINDAGEM ATIVA:** Escopo Agro/Pet isolado, formulários unificados sem duplicação de mapping, buffers Canvas desalocados automaticamente e guarda offline em background.
 
 ---
 

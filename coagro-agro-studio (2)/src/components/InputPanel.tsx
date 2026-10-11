@@ -5,12 +5,14 @@ import type { InputPanelProps } from '../hooks/useArtworkForm';
 export type { InputPanelProps };
 
 import { RefreshCw, ChevronDown, ChevronUp, CheckCircle2 } from 'lucide-react';
-import { TemplateMatrixSection } from './input-panel/TemplateMatrixSection';
-import { ProductPhotoSection } from './input-panel/ProductPhotoSection';
-import { ProductDescriptionSection } from './input-panel/ProductDescriptionSection';
-import { LivePriceSection } from './input-panel/LivePriceSection';
-import { LiveTextFieldsSection } from './input-panel/LiveTextFieldsSection';
-import { LiveTitleSection } from './input-panel/LiveTitleSection';
+import {
+  TemplateMatrixSection,
+  ProductPhotoSection,
+  ProductDescriptionSection,
+  LivePriceSection,
+  LiveTextFieldsSection,
+  LiveTitleSection,
+} from './input-panel';
 
 /**
  * InputPanel — orquestrador de layout do painel de criação.

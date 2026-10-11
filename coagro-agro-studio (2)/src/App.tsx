@@ -12,6 +12,7 @@ import { BatchReviewGrid } from './components/BatchReviewGrid';
 import { BatchRendererModal } from './components/BatchRendererModal';
 import { PosterManualEditor, PosterManualData } from './components/PosterManualEditor';
 import { SocialManualEditor, SocialManualData } from './components/SocialManualEditor';
+import { getDefaultSocialManualData, syncSocialManualDataToContent } from './lib/sharedFormState';
 import { PosterSheetContainer, PosterSheetGrid } from './components/art-renderer/PosterSheetContainer';
 import { calculateDiscount } from './lib/priceCalculator';
 import { getAccessToken } from './lib/firebase';
@@ -53,21 +54,9 @@ export default function App() {
   };
   
   const [socialMode, setSocialMode] = useState<'MANUAL' | 'AI_BETA'>('MANUAL');
-  const [socialManualData, setSocialManualData] = useState<SocialManualData>({
-    codigo: undefined,
-    titulo: 'Ração Golden Special 15kg',
-    subtitulo: 'Aproveite a oferta imperdível',
-    valorDe: '159,90',
-    valorPor: '129,90',
-    diferenciais: ['15kg rende mais', 'Sem corantes artificiais'],
-    backgroundImageUrl: '',
-    backgroundColorHex: '',
-    theme: '',
-    textBackground: undefined,
-    badge: 'Sem Selo',
-    cta: 'Garanta já o seu!',
-    preserveProductBackground: undefined
-  });
+  const [socialManualData, setSocialManualData] = useState<SocialManualData>(() =>
+    getDefaultSocialManualData(appMode)
+  );
 
   // Canvas styling states
   const [canvasFormat, setCanvasFormat] = useState<CanvasFormat>('story');
@@ -85,10 +74,15 @@ export default function App() {
       // Cartaz físico: no escopo Pet o padrão sugerido é o template A4 dedicado,
       // que usa a paleta e a logo oficiais da Coagro Pet (nunca o verde Agro).
       setPosterTemplate('promo-pet-a4');
-      setSocialManualData(prev => ({
-        ...prev,
-        theme: prev.theme === 'campo-agro' ? 'clean-branco' : prev.theme
-      }));
+      setSocialManualData(prev => {
+        if (prev.titulo === 'Pulverizador Costal 16L' || !prev.titulo) {
+          return getDefaultSocialManualData('PET');
+        }
+        return {
+          ...prev,
+          theme: prev.theme === 'campo-agro' ? 'clean-branco' : prev.theme
+        };
+      });
       // Se o conteúdo atual for o inicial vazio, ajusta para o vazio de PET
       setCurrentContent(prev => {
         if (!prev.titulo && !prev.headline_principal) {
@@ -101,6 +95,12 @@ export default function App() {
       setTemplateLayout(resolveDefaultTemplate(canvasFormat, 'AGRO'));
       setLogoVariant('h-branca');
       setPosterTemplate('promo-agro-a4');
+      setSocialManualData(prev => {
+        if (prev.titulo === 'Ração Golden Special 15kg' || !prev.titulo) {
+          return getDefaultSocialManualData('AGRO');
+        }
+        return prev;
+      });
       // Se o conteúdo atual for o inicial vazio, ajusta para o vazio de AGRO
       setCurrentContent(prev => {
         if (!prev.titulo && !prev.headline_principal) {
@@ -136,33 +136,7 @@ export default function App() {
       setSocialManualData: (patch: Partial<SocialManualData>) => {
         const next = { ...socialManualData, ...patch };
         setSocialManualData(next);
-        setCurrentContent({
-          ...EMPTY_AGRO_CONTENT,
-          linha: appMode,
-          textos_hero: {
-            titulo: next.titulo,
-            subtitulo: next.subtitulo,
-            palavra_destaque_ouro: '',
-          },
-          textos_da_arte: {
-            titulo_impacto: next.titulo,
-            subtitulo: next.subtitulo,
-            palavra_destaque: '',
-            bullets_tecnicos: next.diferenciais,
-            cta: next.cta || '',
-          },
-          diferenciais_tecnicos: next.diferenciais,
-          modulo_preco: {
-            ativo: Boolean(next.valorPor),
-            valor_de: next.valorDe,
-            valor_por: next.valorPor,
-          },
-          fundo_imagem_url: next.backgroundImageUrl || '',
-          fundo_imagem: next.backgroundImageUrl || '',
-          fundo_cor_hex: next.backgroundColorHex || '',
-          tipo_postagem: next.valorPor ? 'promocao' : 'informativo',
-          fundo_texto: next.textBackground,
-        });
+        setCurrentContent(syncSocialManualDataToContent(next, appMode));
         if (next.theme) setCanvasTheme(next.theme as any);
       },
       setFullArtwork: (params: {
@@ -686,32 +660,7 @@ export default function App() {
                   if (newData.theme) {
                     setCanvasTheme(newData.theme as any);
                   }
-                  setCurrentContent({
-                    ...EMPTY_AGRO_CONTENT,
-                    textos_hero: {
-                      titulo: newData.titulo,
-                      subtitulo: newData.subtitulo,
-                      palavra_destaque_ouro: '',
-                    },
-                    textos_da_arte: {
-                      titulo_impacto: newData.titulo,
-                      subtitulo: newData.subtitulo,
-                      palavra_destaque: '',
-                      bullets_tecnicos: newData.diferenciais,
-                      cta: newData.cta || '',
-                    },
-                    diferenciais_tecnicos: newData.diferenciais,
-                    modulo_preco: {
-                      ativo: Boolean(newData.valorPor),
-                      valor_de: newData.valorDe,
-                      valor_por: newData.valorPor,
-                    },
-                    fundo_imagem_url: newData.backgroundImageUrl || '',
-                    fundo_imagem: newData.backgroundImageUrl || '',
-                    fundo_cor_hex: newData.backgroundColorHex || '',
-                    tipo_postagem: newData.valorPor ? 'promocao' : 'informativo',
-                    fundo_texto: newData.textBackground,
-                  });
+                  setCurrentContent(syncSocialManualDataToContent(newData, appMode));
                   if (newData.backgroundImageUrl) {
                     setBackgroundImage(newData.backgroundImageUrl);
                   } else {
