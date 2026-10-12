@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import React from 'react';
 import { PosterSheetContainer, PosterSheetGrid } from '../../src/components/art-renderer/PosterSheetContainer';
 import { PromoTextOnly } from '../../src/components/art-renderer/templates/PromoTextOnly';
+import { PromoPetOrangeA4 } from '../../src/components/art-renderer/templates/PromoPetOrangeA4';
 
 describe('PosterSheetGrid & PosterSheetContainer', () => {
   it('suporta as 3 variações oficiais da Fase 3 de impressão', () => {
@@ -53,7 +54,21 @@ describe('PosterSheetGrid & PosterSheetContainer', () => {
 
     expect(React.isValidElement(tree)).toBe(true);
     const el = tree as React.ReactElement<{ className: string }>;
-    expect(el.props.className).toContain('bg-[#0047b3]');
+    expect(el.props.className).toContain('bg-[#001C71]');
+  });
+
+  it('PromoPetOrangeA4 aceita discountBadge e herda cor laranja oficial Pet', () => {
+    const tree = PromoPetOrangeA4({
+      title: 'PETISCO PREMIUM',
+      currentPrice: '19,90',
+      oldPrice: '25,90',
+      codigo: '554433',
+      discountBadge: '-23% OFF'
+    });
+
+    expect(React.isValidElement(tree)).toBe(true);
+    const el = tree as React.ReactElement<{ className: string }>;
+    expect(el.props.className).toContain('bg-[#E96C2C]');
   });
 
   it('calcula pixelRatio correto para cada densidade gráfica (DPI)', async () => {

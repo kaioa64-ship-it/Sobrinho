@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Type, Tag, Sparkles, Flame, Share2, Zap } from 'lucide-react';
+import { Type, Tag, Sparkles, Flame, Share2 } from 'lucide-react';
 import { sanitizeErpTitle } from '../lib/erpSanitizer';
 import { calculateDiscount } from '../lib/priceCalculator';
 import { findProductBySku } from '../lib/productStorage';
@@ -18,13 +18,6 @@ interface PosterManualEditorProps {
   onSendToSocial?: (data: PosterManualData) => void;
   appMode?: 'AGRO' | 'PET';
 }
-
-const QUICK_DEMO_PRESETS = [
-  { label: '🐕 Tutticanis 10kg', codigo: '12345', titulo: 'RAÇÃO TUTTICANIS SELECT 10.1 KG', valorDe: '58,00', valorPor: '44,00' },
-  { label: '🌾 Pulverizador XP16', codigo: '01', titulo: 'PULVERIZADOR COSTAL XP16 JACTO 16L', valorDe: '289,00', valorPor: '229,00' },
-  { label: '🌱 Adubo NPK 10-10-10', codigo: '3301', titulo: 'ADUBO FERTILIZANTE NPK 10-10-10 1KG', valorDe: '18,50', valorPor: '13,90' },
-  { label: '🐄 Ivomec Gold 500ml', codigo: '8420', titulo: 'ANTIPARASITÁRIO IVOMEC GOLD 500ML', valorDe: '145,00', valorPor: '119,00' },
-];
 
 export const PosterManualEditor: React.FC<PosterManualEditorProps> = ({ 
   data, 
@@ -45,35 +38,8 @@ export const PosterManualEditor: React.FC<PosterManualEditorProps> = ({
           </div>
           <div>
             <h3 className="font-exo2 font-bold text-gray-800 text-lg">Informações do Cartaz</h3>
-            <p className="text-[11px] text-gray-500">Preencha os dados do encarte ou clique em um atalho de demonstração.</p>
+            <p className="text-[11px] text-gray-500">Preencha os dados do encarte com código, descrição e preços.</p>
           </div>
-        </div>
-      </div>
-
-      {/* Chips de Atalho de Demonstração Rápida */}
-      <div className="space-y-1.5">
-        <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 font-exo2 flex items-center gap-1">
-          <Zap className="w-3 h-3 text-[#ffab00]" />
-          Preenchimento Rápido (Demonstração Coagro)
-        </span>
-        <div className="flex flex-wrap gap-1.5">
-          {QUICK_DEMO_PRESETS.map((preset) => (
-            <button
-              key={preset.codigo}
-              type="button"
-              onClick={() => onChange({
-                ...data,
-                codigo: preset.codigo,
-                titulo: preset.titulo,
-                valorDe: preset.valorDe,
-                valorPor: preset.valorPor,
-                showDiscountBadge: true,
-              })}
-              className="text-[11px] font-semibold px-2.5 py-1 rounded-full border transition-all text-gray-700 bg-gray-50 border-gray-200 hover:bg-gray-100 hover:border-gray-300 active:scale-95 cursor-pointer"
-            >
-              {preset.label}
-            </button>
-          ))}
         </div>
       </div>
 

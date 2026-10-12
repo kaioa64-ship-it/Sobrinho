@@ -28,6 +28,7 @@ interface BatchRendererModalProps {
   templateLayout?: PosterTemplateLayout;
   headerText?: string;
   gridFormat?: PosterSheetGrid;
+  showDiscountBadge?: boolean;
   /** Escopo/marca do lote (vem do tenant ativo). Ver src/lib/brand.config.ts. */
   scope?: ScopeId;
   initialDpi?: BatchDpiPreset;
@@ -40,6 +41,7 @@ export const BatchRendererModal: React.FC<BatchRendererModalProps> = ({
   templateLayout = 'promo-mono-a4', 
   headerText = 'OFERTA', 
   gridFormat = '1_PER_PAGE',
+  showDiscountBadge = true,
   scope, 
   initialDpi,
   onClose 
@@ -302,6 +304,7 @@ export const BatchRendererModal: React.FC<BatchRendererModalProps> = ({
                     badgeText={headerText}
                     scopeOverride={scope}
                     discountBadge={(() => {
+                      if (!showDiscountBadge) return undefined;
                       const discount = calculateDiscount(item.valorDe, item.valorPor);
                       return discount ? discount.badgeText : undefined;
                     })()}

@@ -861,9 +861,10 @@ export const BatchReviewGrid: React.FC<BatchReviewGridProps> = ({ onStartExport,
                           className="w-full px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-700"
                         >
                           <option value="promo-mono-a4">Preto e Branco</option>
-                          <option value="promo-agro-a4">Promocional Colorido</option>
-                          <option value="promo-pet-a4">Promocional Pet</option>
-                          <option value="promo-text-only">Tema Azul</option>
+                          <option value="promo-agro-a4">Promocional Colorido (Verde)</option>
+                          <option value="promo-pet-a4">Promocional Pet (Azul)</option>
+                          <option value="promo-pet-orange-a4">Promocional Pet (Laranja)</option>
+                          <option value="promo-text-only">Tema Azul (Agro)</option>
                         </select>
                       </div>
                     </div>
@@ -934,9 +935,10 @@ export const BatchReviewGrid: React.FC<BatchReviewGridProps> = ({ onStartExport,
                   className="px-2.5 py-1 bg-white border border-slate-300 rounded-lg text-xs font-bold text-slate-700"
                 >
                   <option value="promo-mono-a4">Preto e Branco</option>
-                  <option value="promo-agro-a4">Promocional Colorido</option>
-                  <option value="promo-pet-a4">Promocional Pet</option>
-                  <option value="promo-text-only">Tema Azul</option>
+                  <option value="promo-agro-a4">Promocional Colorido (Verde)</option>
+                  <option value="promo-pet-a4">Promocional Pet (Azul)</option>
+                  <option value="promo-pet-orange-a4">Promocional Pet (Laranja)</option>
+                  <option value="promo-text-only">Tema Azul (Agro)</option>
                 </select>
               </div>
 

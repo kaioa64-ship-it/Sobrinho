@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useTenantStore } from './store/tenantStore';
 import { AgroPostContent, CanvasFormat, CanvasTheme, PresetProduct, TemplateLayout, PosterTemplateLayout, EMPTY_AGRO_CONTENT, EMPTY_PET_CONTENT } from './types/agro';
 import { LogoVariant } from './assets/coagroLogos';
@@ -38,6 +38,7 @@ export default function App() {
   const [posterTemplate, setPosterTemplate] = useState<PosterTemplateLayout>('promo-mono-a4');
   const [posterHeaderText, setPosterHeaderText] = useState<string>('OFERTA');
   const [posterGridFormat, setPosterGridFormat] = useState<PosterSheetGrid>('1_PER_PAGE');
+  const [showDiscountBadge, setShowDiscountBadge] = useState<boolean>(true);
   const [manualPosterData, setManualPosterData] = useState<PosterManualData>({
     codigo: '12345',
     titulo: 'RAÇÃO TUTTICANIS SELECT 10.1 KG',
@@ -66,14 +67,20 @@ export default function App() {
   const [logoVariant, setLogoVariant] = useState<LogoVariant>('h-branca');
   const [imageBoxFormat, setImageBoxFormat] = useState<'rectangular' | 'square'>('rectangular');
 
+  const isFirstMountRef = useRef(true);
+
   useEffect(() => {
+    if (isFirstMountRef.current) {
+      isFirstMountRef.current = false;
+      return;
+    }
+
     if (appMode === 'PET') {
       setCanvasTheme('clean-branco');
       setTemplateLayout(resolveDefaultTemplate(canvasFormat, 'PET'));
       setLogoVariant('h-azul');
-      // Cartaz físico: no escopo Pet o padrão sugerido é o template A4 dedicado,
-      // que usa a paleta e a logo oficiais da Coagro Pet (nunca o verde Agro).
-      setPosterTemplate('promo-pet-a4');
+      // Cartaz físico: mantém Preto e Branco se selecionado; senão migra para o azul Pet
+      setPosterTemplate(prev => (prev === 'promo-mono-a4' ? 'promo-mono-a4' : 'promo-pet-a4'));
       setSocialManualData(prev => {
         if (prev.titulo === 'Pulverizador Costal 16L' || !prev.titulo) {
           return getDefaultSocialManualData('PET');
@@ -95,7 +102,8 @@ export default function App() {
       setCanvasTheme('campo-agro');
       setTemplateLayout(resolveDefaultTemplate(canvasFormat, 'AGRO'));
       setLogoVariant('h-branca');
-      setPosterTemplate('promo-agro-a4');
+      // Cartaz físico: mantém Preto e Branco se selecionado; senão migra para o azul Agro
+      setPosterTemplate(prev => (prev === 'promo-mono-a4' ? 'promo-mono-a4' : 'promo-text-only'));
       setSocialManualData(prev => {
         if (prev.titulo === 'Ração Golden Special 15kg' || !prev.titulo) {
           return getDefaultSocialManualData('AGRO');
@@ -886,48 +894,138 @@ export default function App() {
               <BatchReviewGrid onStartExport={handleStartBatchFromGrid} scope={appMode} />
             ) : (
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                {/* Coluna da Esquerda (Configurações e Conteúdo - 7 cols) */}
                 <div className="lg:col-span-7 space-y-6">
-                  {/* Template Selector */}
+                  {/* 1. TÍTULO DA ETIQUETA (1º Lugar na Hierarquia Visual Solicitada) */}
                   <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 flex flex-col gap-2">
+                    <span className="text-xs font-bold text-gray-700 uppercase tracking-wide">Título da Etiqueta</span>
+                    <select
+                      value={posterHeaderText}
+                      onChange={(e) => setPosterHeaderText(e.target.value)}
+                      className="w-full p-2.5 border border-gray-300 rounded-xl text-sm font-bold text-gray-800 bg-gray-50 focus:ring-[#004d40] focus:border-[#004d40] transition cursor-pointer"
+                    >
+                      <option value="OFERTA">OFERTA</option>
+                      <option value="LIQUIDAÇÃO">LIQUIDAÇÃO</option>
+                      <option value="PROMOÇÃO">PROMOÇÃO</option>
+                      <option value="SUPER PREÇO">SUPER PREÇO</option>
+                      <option value="ESPECIAL">ESPECIAL</option>
+                      <option value="NOVIDADE">NOVIDADE</option>
+                      <option value="PREÇO BAIXO">PREÇO BAIXO</option>
+                    </select>
+                  </div>
+
+                  {/* 2. MODELO VISUAL (2º Lugar na Hierarquia com Inversão de Cores e Toggle de Selo de Desconto) */}
+                  <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 flex flex-col gap-3">
                     <span className="text-xs font-bold text-gray-700 uppercase tracking-wide">Modelo Visual</span>
                     <div className="flex flex-col sm:flex-row items-stretch gap-2">
                       <button 
+                        type="button"
                         onClick={() => setPosterTemplate('promo-mono-a4')}
-                        className={`flex-1 py-2 text-xs sm:text-sm font-bold rounded-xl transition border flex items-center justify-center gap-1.5 ${posterTemplate === 'promo-mono-a4' ? 'bg-black text-white border-black' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'}`}
+                        className={`flex-1 py-2 text-xs sm:text-sm font-bold rounded-xl transition border flex items-center justify-center gap-1.5 cursor-pointer ${posterTemplate === 'promo-mono-a4' ? 'bg-black text-white border-black shadow-xs' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'}`}
                       >
                         <div className="w-2.5 h-2.5 rounded-full bg-gray-400" />
                         Preto e Branco
                       </button>
-                      {appMode === 'AGRO' && (
-                        <button 
-                          onClick={() => setPosterTemplate('promo-agro-a4')}
-                          className={`flex-1 py-2 text-xs sm:text-sm font-bold rounded-xl transition border flex items-center justify-center gap-1.5 ${posterTemplate === 'promo-agro-a4' ? 'bg-[#004d40] text-white border-[#004d40]' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'}`}
-                        >
-                          <div className="w-2.5 h-2.5 rounded-full bg-[#ffab00]" />
-                          Tema Verde
-                        </button>
+
+                      {appMode === 'AGRO' ? (
+                        <>
+                          <button 
+                            type="button"
+                            onClick={() => setPosterTemplate('promo-text-only')}
+                            className={`flex-1 py-2 text-xs sm:text-sm font-bold rounded-xl transition border flex items-center justify-center gap-1.5 cursor-pointer ${posterTemplate === 'promo-text-only' ? 'bg-[#001C71] text-white border-[#001C71] shadow-xs' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'}`}
+                          >
+                            <div className="w-2.5 h-2.5 rounded-full bg-[#ffab00]" />
+                            Tema Azul
+                          </button>
+                          <button 
+                            type="button"
+                            onClick={() => setPosterTemplate('promo-agro-a4')}
+                            className={`flex-1 py-2 text-xs sm:text-sm font-bold rounded-xl transition border flex items-center justify-center gap-1.5 cursor-pointer ${posterTemplate === 'promo-agro-a4' ? 'bg-[#004d40] text-white border-[#004d40] shadow-xs' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'}`}
+                          >
+                            <div className="w-2.5 h-2.5 rounded-full bg-[#ffab00]" />
+                            Tema Verde
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <button 
+                            type="button"
+                            onClick={() => setPosterTemplate('promo-pet-a4')}
+                            className={`flex-1 py-2 text-xs sm:text-sm font-bold rounded-xl transition border flex items-center justify-center gap-1.5 cursor-pointer ${posterTemplate === 'promo-pet-a4' ? 'bg-[#0047b3] text-white border-[#0047b3] shadow-xs' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'}`}
+                          >
+                            <div className="w-2.5 h-2.5 rounded-full bg-[#E96C2C]" />
+                            Tema Azul Pet
+                          </button>
+                          <button 
+                            type="button"
+                            onClick={() => setPosterTemplate('promo-pet-orange-a4')}
+                            className={`flex-1 py-2 text-xs sm:text-sm font-bold rounded-xl transition border flex items-center justify-center gap-1.5 cursor-pointer ${posterTemplate === 'promo-pet-orange-a4' ? 'bg-[#E96C2C] text-white border-[#E96C2C] shadow-xs' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'}`}
+                          >
+                            <div className="w-2.5 h-2.5 rounded-full bg-[#001C71]" />
+                            Tema Laranja Pet
+                          </button>
+                        </>
                       )}
-                      {appMode === 'PET' && (
-                        <button 
-                          onClick={() => setPosterTemplate('promo-pet-a4')}
-                          className={`flex-1 py-2 text-xs sm:text-sm font-bold rounded-xl transition border flex items-center justify-center gap-1.5 ${posterTemplate === 'promo-pet-a4' ? 'bg-[#004b87] text-white border-[#004b87]' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'}`}
-                        >
-                          <div className="w-2.5 h-2.5 rounded-full bg-[#4897D0]" />
-                          Tema Pet
-                        </button>
-                      )}
-                      <button 
-                        onClick={() => setPosterTemplate('promo-text-only')}
-                        className={`flex-1 py-2 text-xs sm:text-sm font-bold rounded-xl transition border flex items-center justify-center gap-1.5 ${posterTemplate === 'promo-text-only' ? 'bg-[#0047b3] text-white border-[#0047b3]' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'}`}
-                      >
-                        <div className="w-2.5 h-2.5 rounded-full bg-[#d67022]" />
-                        Tema Azul
-                      </button>
                     </div>
+
+                    {/* Controle Unificado de Exibição do Selo de Desconto (válido para Individual e Lote Simples) */}
+                    <label className="flex items-center gap-2 mt-1 pt-2 border-t border-gray-100 text-xs font-semibold text-gray-700 cursor-pointer select-none">
+                      <input
+                        type="checkbox"
+                        checked={showDiscountBadge}
+                        onChange={(e) => {
+                          const val = e.target.checked;
+                          setShowDiscountBadge(val);
+                          setManualPosterData(prev => ({ ...prev, showDiscountBadge: val }));
+                        }}
+                        className="w-4 h-4 rounded text-[#004d40] focus:ring-[#004d40] cursor-pointer"
+                      />
+                      <span>Exibir selo de desconto percentual (calculado de/por)</span>
+                    </label>
                   </div>
 
-                  {/* Seletor de Formato da Folha de Impressão (Fase 3: A4, A5 Duplo, Grade 2x2) */}
-                  <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 flex flex-col gap-2">
+                  {/* 3. EDITOR DE CONTEÚDO (Individual Manual ou Lote Simples) */}
+                  {posterMode === 'BATCH' ? (
+                    <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8">
+                      <h2 className="text-2xl font-bold text-gray-800 font-exo2 mb-2">Cartazes Físicos (Lote)</h2>
+                      <p className="text-gray-500 text-sm mb-6">
+                        Importe a planilha e o sistema renderizará automaticamente todas as etiquetas para impressão.
+                      </p>
+                      <ExcelBatchUploader 
+                        onProcessBatch={(items, format) => handleStartBatch(items, format)} 
+                        onSelectedItemsChange={setBatchSelectedItems}
+                      />
+                    </div>
+                  ) : (
+                    <PosterManualEditor 
+                      data={{ ...manualPosterData, showDiscountBadge }}
+                      onChange={(newData) => {
+                        setManualPosterData(newData);
+                        if (newData.showDiscountBadge !== undefined && newData.showDiscountBadge !== showDiscountBadge) {
+                          setShowDiscountBadge(newData.showDiscountBadge);
+                        }
+                      }}
+                      appMode={appMode}
+                      onSendToSocial={(poster) => {
+                        setSocialManualData(prev => ({
+                          ...prev,
+                          titulo: poster.titulo,
+                          valorDe: poster.valorDe,
+                          valorPor: poster.valorPor,
+                          codigo: poster.codigo,
+                          badge: posterHeaderText,
+                        }));
+                        setCurrentModule('SOCIAL_MEDIA');
+                        showNotice('✅ Dados do cartaz transferidos para Redes Sociais!');
+                      }}
+                    />
+                  )}
+                </div>
+
+                {/* Coluna da Direita (Preview e Impressão - 5 cols) */}
+                <div className="lg:col-span-5 flex flex-col items-center gap-3 w-full">
+                  {/* Formato da Folha para Impressão (Posicionado Acima do Cartaz no Desktop) */}
+                  <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 flex flex-col gap-2 w-full max-w-[420px]">
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-bold text-gray-700 uppercase tracking-wide">
                         Formato da Folha para Impressão
@@ -976,57 +1074,7 @@ export default function App() {
                     </div>
                   </div>
 
-                  {/* Título Customizado (Palavra de Destaque) */}
-                  <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 flex flex-col gap-2">
-                    <span className="text-xs font-bold text-gray-700 uppercase tracking-wide">Título da Etiqueta</span>
-                    <select
-                      value={posterHeaderText}
-                      onChange={(e) => setPosterHeaderText(e.target.value)}
-                      className="w-full p-2.5 border border-gray-300 rounded-xl text-sm font-bold text-gray-800 bg-gray-50 focus:ring-[#004d40] focus:border-[#004d40] transition"
-                    >
-                      <option value="OFERTA">OFERTA</option>
-                      <option value="LIQUIDAÇÃO">LIQUIDAÇÃO</option>
-                      <option value="PROMOÇÃO">PROMOÇÃO</option>
-                      <option value="SUPER PREÇO">SUPER PREÇO</option>
-                      <option value="ESPECIAL">ESPECIAL</option>
-                      <option value="NOVIDADE">NOVIDADE</option>
-                      <option value="PREÇO BAIXO">PREÇO BAIXO</option>
-                    </select>
-                  </div>
-
-                  {posterMode === 'BATCH' ? (
-                    <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8">
-                      <h2 className="text-2xl font-bold text-gray-800 font-exo2 mb-2">Cartazes Físicos (Lote)</h2>
-                      <p className="text-gray-500 text-sm mb-6">
-                        Importe a planilha e o sistema renderizará automaticamente todas as etiquetas para impressão.
-                      </p>
-                      <ExcelBatchUploader 
-                        onProcessBatch={(items, format) => handleStartBatch(items, format)} 
-                        onSelectedItemsChange={setBatchSelectedItems}
-                      />
-                    </div>
-                  ) : (
-                    <PosterManualEditor 
-                      data={manualPosterData}
-                      onChange={setManualPosterData}
-                      appMode={appMode}
-                      onSendToSocial={(poster) => {
-                        setSocialManualData(prev => ({
-                          ...prev,
-                          titulo: poster.titulo,
-                          valorDe: poster.valorDe,
-                          valorPor: poster.valorPor,
-                          codigo: poster.codigo,
-                          badge: posterHeaderText,
-                        }));
-                        setCurrentModule('SOCIAL_MEDIA');
-                        showNotice('✅ Dados do cartaz transferidos para Redes Sociais!');
-                      }}
-                    />
-                  )}
-                </div>
-
-                <div className="lg:col-span-5 flex flex-col items-center gap-3 w-full">
+                  {/* Barra Superior do Preview */}
                   <div className="flex items-center justify-between w-full max-w-[420px] px-1">
                     <div className="text-xs font-bold text-gray-600 bg-gray-100 px-3 py-1 rounded-full uppercase tracking-wider font-exo2 flex items-center gap-1.5">
                       <Eye className="w-3.5 h-3.5 text-[#004d40]" />
@@ -1034,7 +1082,7 @@ export default function App() {
                     </div>
                     {(() => {
                       const discount = calculateDiscount(manualPosterData.valorDe, manualPosterData.valorPor);
-                      return (manualPosterData.showDiscountBadge ?? true) && discount ? (
+                      return showDiscountBadge && discount ? (
                         <span className="text-[10px] font-black bg-[#ffab00] text-[#004d40] px-2 py-0.5 rounded-full uppercase font-exo2">
                           {discount.badgeText}
                         </span>
@@ -1042,6 +1090,7 @@ export default function App() {
                     })()}
                   </div>
 
+                  {/* Preview da Folha (PosterSheetContainer) */}
                   <PosterSheetContainer id="preview-poster-a4" grid={posterGridFormat}>
                     {posterMode === 'BATCH' && batchSelectedItems.length > 0 ? (
                       (() => {
@@ -1071,6 +1120,7 @@ export default function App() {
                             badgeText={posterHeaderText}
                             scopeOverride={appMode}
                             discountBadge={(() => {
+                              if (!showDiscountBadge) return undefined;
                               const discount = calculateDiscount(item.valorDe, item.valorPor);
                               return discount ? discount.badgeText : undefined;
                             })()}
@@ -1100,13 +1150,15 @@ export default function App() {
                         badgeText={posterHeaderText}
                         scopeOverride={appMode}
                         discountBadge={(() => {
+                          if (!showDiscountBadge) return undefined;
                           const discount = calculateDiscount(manualPosterData.valorDe, manualPosterData.valorPor);
-                          return (manualPosterData.showDiscountBadge ?? true) && discount ? discount.badgeText : undefined;
+                          return discount ? discount.badgeText : undefined;
                         })()}
                       />
                     )}
                   </PosterSheetContainer>
                   
+                  {/* Botões de Ação Final (PNG, PDF, Imprimir) */}
                   <div className="flex w-full max-w-[420px] gap-2 mt-2">
                     <button
                       onClick={() => handleDownloadCanvas('preview-poster-a4', `cartaz-${posterGridFormat.toLowerCase()}`)}
@@ -1151,6 +1203,7 @@ export default function App() {
           templateLayout={batchTemplateToRender}
           headerText={batchHeaderTextToRender}
           gridFormat={posterGridFormat}
+          showDiscountBadge={showDiscountBadge}
           scope={appMode}
           onClose={() => setBatchItemsToRender(null)}
         />

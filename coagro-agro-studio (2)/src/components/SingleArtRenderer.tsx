@@ -24,6 +24,7 @@ import { CanvasEmptyState } from './art-renderer/CanvasEmptyState';
 import { PromoTextOnly } from './art-renderer/templates/PromoTextOnly';
 import { PromoAgroA4 } from './art-renderer/templates/PromoAgroA4';
 import { PromoPetA4 } from './art-renderer/templates/PromoPetA4';
+import { PromoPetOrangeA4 } from './art-renderer/templates/PromoPetOrangeA4';
 import { PromoMonoA4 } from './art-renderer/templates/PromoMonoA4';
 import { UnifiedCentral } from './art-renderer/templates/UnifiedCentral';
 import { UnifiedSplit } from './art-renderer/templates/UnifiedSplit';
@@ -263,7 +264,7 @@ export const SingleArtRenderer: React.FC<SingleArtRendererProps> = ({
           isBlue={isBlue}
         />
 
-        {isArtEmpty && !['promo-text-only', 'promo-agro-a4', 'promo-mono-a4', 'promo-pet-a4'].includes(activeTemplate) ? (
+        {isArtEmpty && !['promo-text-only', 'promo-agro-a4', 'promo-mono-a4', 'promo-pet-a4', 'promo-pet-orange-a4'].includes(activeTemplate) ? (
           <CanvasEmptyState logoVariant={logo} isStory={isStory} scope={scope} isLight={isLight} />
         ) : activeTemplate === 'promo-text-only' ? (
           <PromoTextOnly 
@@ -285,6 +286,15 @@ export const SingleArtRenderer: React.FC<SingleArtRendererProps> = ({
           />
         ) : activeTemplate === 'promo-pet-a4' ? (
           <PromoPetA4 
+            title={title || subtitle}
+            oldPrice={oldPrice}
+            currentPrice={currentPrice}
+            codigo={codigoProduto}
+            headerText={badgeText}
+            discountBadge={discountBadge}
+          />
+        ) : activeTemplate === 'promo-pet-orange-a4' ? (
+          <PromoPetOrangeA4 
             title={title || subtitle}
             oldPrice={oldPrice}
             currentPrice={currentPrice}
@@ -498,7 +508,7 @@ export const SingleArtRenderer: React.FC<SingleArtRendererProps> = ({
         )}
 
         {/* Selo Promocional Flutuante (Injetado via SingleArtRenderer) */}
-        {badgeText && !['promo-text-only', 'promo-agro-a4', 'promo-mono-a4', 'promo-pet-a4'].includes(activeTemplate) && (
+        {badgeText && !['promo-text-only', 'promo-agro-a4', 'promo-mono-a4', 'promo-pet-a4', 'promo-pet-orange-a4'].includes(activeTemplate) && (
           <div className="absolute top-5 right-5 z-50 bg-[#ffab00] text-[#004d40] px-3 py-1 rounded-tl-xl rounded-br-xl font-exo2 font-black uppercase text-[13px] sm:text-[15px] shadow-lg border border-[#004d40]/20 transform rotate-3">
             {badgeText}
           </div>

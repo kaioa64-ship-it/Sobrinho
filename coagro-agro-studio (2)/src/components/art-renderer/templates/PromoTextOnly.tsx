@@ -59,11 +59,11 @@ export const PromoTextOnly: React.FC<PromoTextOnlyProps> = ({
   }
 
   return (
-    <div className="relative w-full h-full flex flex-col items-center select-none font-['Inter'] bg-[#0047b3] text-white border-[0.8cqw] border-[#00388f] box-border overflow-hidden">
+    <div className="relative w-full h-full flex flex-col items-center select-none font-['Inter'] bg-[#001C71] text-white border-[0.8cqw] border-[#001452] box-border overflow-hidden">
       
       {/* ZONA 1: CABEÇALHO FIXO NO TOPO (23cqw - mais presença visual) */}
       <div 
-        className="w-full h-[23cqw] bg-[#d67022] text-white flex flex-col items-center justify-center pt-[1.5cqw] pb-[4cqw] relative z-10 shrink-0"
+        className="w-full h-[23cqw] bg-[#ffab00] text-[#001C71] flex flex-col items-center justify-center pt-[1.5cqw] pb-[4cqw] relative z-10 shrink-0"
         style={{
           clipPath: 'polygon(0 0, 100% 0, 100% 75%, 50% 100%, 0 75%)',
         }}
@@ -102,8 +102,8 @@ export const PromoTextOnly: React.FC<PromoTextOnlyProps> = ({
               <span>DE</span>
               <span className="relative inline-block font-black">
                 {oldPrice}
-                {/* Linha de corte diagonal laranja grossa */}
-                <span className="absolute w-[120%] h-[0.7cqw] bg-[#d67022] -rotate-[10deg] top-1/2 left-[-10%] z-10 transform -translate-y-1/2 shadow-sm"></span>
+                {/* Linha de corte diagonal ouro grossa */}
+                <span className="absolute w-[120%] h-[0.7cqw] bg-[#ffab00] -rotate-[10deg] top-1/2 left-[-10%] z-10 transform -translate-y-1/2 shadow-sm"></span>
               </span>
             </div>
           )}
@@ -122,7 +122,7 @@ export const PromoTextOnly: React.FC<PromoTextOnlyProps> = ({
       </div>
 
       {/* ZONA 4: RODAPÉ COM LOGO COAGRO VERTICAL BRANCA */}
-      <div className="w-full h-[14cqw] flex items-center justify-between border-t-[0.6cqw] border-white/30 px-[5cqw] shrink-0 bg-[#0047b3] z-10">
+      <div className="w-full h-[14cqw] flex items-center justify-between border-t-[0.6cqw] border-white/30 px-[5cqw] shrink-0 bg-[#001C71] z-10">
         <div className="flex flex-col text-left">
           <p className="font-exo2 font-black uppercase tracking-wider text-white" style={{ fontSize: '3.6cqw' }}>
             APROVEITE! ÚLTIMAS UNIDADES!

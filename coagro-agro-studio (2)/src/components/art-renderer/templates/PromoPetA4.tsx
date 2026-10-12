@@ -76,11 +76,11 @@ export const PromoPetA4: React.FC<PromoPetA4Props> = ({
   }
 
   return (
-    <div className="relative w-full h-full flex flex-col items-center select-none font-['Inter'] bg-[#004b87] text-white border-[0.7cqw] border-[#00335e] box-border overflow-hidden">
+    <div className="relative w-full h-full flex flex-col items-center select-none font-['Inter'] bg-[#0047b3] text-white border-[0.7cqw] border-[#00388f] box-border overflow-hidden">
 
       {/* ZONA 1: CABEÇALHO FIXO NO TOPO (23cqw - mais presença visual) */}
       <div
-        className="w-full h-[23cqw] bg-[#ffab00] text-[#004b87] flex flex-col items-center justify-center pt-[1.5cqw] pb-[4cqw] relative z-10 shrink-0"
+        className="w-full h-[23cqw] bg-[#E96C2C] text-white flex flex-col items-center justify-center pt-[1.5cqw] pb-[4cqw] relative z-10 shrink-0"
         style={{
           clipPath: 'polygon(0 0, 100% 0, 100% 75%, 50% 100%, 0 75%)',
         }}
@@ -107,7 +107,7 @@ export const PromoPetA4: React.FC<PromoPetA4Props> = ({
         <div className="w-full flex-1 flex flex-col items-center justify-center min-h-0">
           {discountBadge && (
             <div 
-              className="inline-flex items-center px-[3cqw] py-[0.7cqw] bg-[#ffab00] text-[#004b87] font-exo2 font-black rounded-full uppercase tracking-wider mb-[1.2cqw] shrink-0 shadow-sm"
+              className="inline-flex items-center px-[3cqw] py-[0.7cqw] bg-[#ffab00] text-[#001C71] font-exo2 font-black rounded-full uppercase tracking-wider mb-[1.2cqw] shrink-0 shadow-sm"
               style={{ fontSize: '4.2cqw' }}
             >
               <span>{discountBadge}</span>
@@ -119,8 +119,8 @@ export const PromoPetA4: React.FC<PromoPetA4Props> = ({
               <span>DE</span>
               <span className="relative inline-block">
                 {oldPrice}
-                {/* Linha de corte diagonal Ouro grossa */}
-                <span className="absolute w-[120%] h-[0.6cqw] bg-[#ffab00] -rotate-[10deg] top-1/2 left-[-10%] z-10 transform -translate-y-1/2 shadow-sm"></span>
+                {/* Linha de corte diagonal Laranja grossa */}
+                <span className="absolute w-[120%] h-[0.6cqw] bg-[#E96C2C] -rotate-[10deg] top-1/2 left-[-10%] z-10 transform -translate-y-1/2 shadow-sm"></span>
               </span>
             </div>
           )}
@@ -129,9 +129,9 @@ export const PromoPetA4: React.FC<PromoPetA4Props> = ({
             POR
           </div>
 
-          {/* Preço de Destaque GIGANTESCO OURO */}
-          <div className="flex items-baseline justify-center font-exo2 font-black leading-none text-[#ffab00] shrink-0 tracking-tighter mt-[0.2cqw]" style={{ fontSize: mainFontSize }}>
-            <span className="font-extrabold mr-[0.8cqw] tracking-tighter" style={{ fontSize: subFontSize }}>R$</span>
+          {/* Preço de Destaque GIGANTESCO */}
+          <div className="flex items-baseline justify-center font-exo2 font-black leading-none text-white shrink-0 tracking-tighter mt-[0.2cqw]" style={{ fontSize: mainFontSize }}>
+            <span className="font-extrabold text-[#ffab00] mr-[0.8cqw] tracking-tighter" style={{ fontSize: subFontSize }}>R$</span>
             <span>{mainPrice}</span>
             <span className="font-extrabold tracking-tighter" style={{ fontSize: subFontSize }}>{cents}</span>
           </div>
@@ -139,9 +139,9 @@ export const PromoPetA4: React.FC<PromoPetA4Props> = ({
       </div>
 
       {/* ZONA 4: RODAPÉ FIXO NA BASE (logo oficial + chamada + código) */}
-      <div className="w-full h-[13cqw] flex items-center justify-center gap-[3cqw] border-t-[0.6cqw] border-[#ffab00]/40 px-[4cqw] shrink-0 bg-[#004b87] z-10">
+      <div className="w-full h-[13cqw] flex items-center justify-center gap-[3cqw] border-t-[0.6cqw] border-[#E96C2C]/40 px-[4cqw] shrink-0 bg-[#0047b3] z-10">
         {/* Logo oficial Coagro Pet */}
-        <CoagroPetLogo className="w-[16cqw] h-auto shrink-0" />
+        <CoagroPetLogo className="w-[16cqw] h-auto shrink-0 bg-white/95 rounded-lg px-2 py-0.5" />
         <div className="flex flex-col items-center min-w-0">
           <p className="font-exo2 font-black uppercase tracking-wider text-center text-white" style={{ fontSize: '3.6cqw' }}>
             APROVEITE! ÚLTIMAS UNIDADES!

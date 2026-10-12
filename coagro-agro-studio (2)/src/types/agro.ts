@@ -52,6 +52,7 @@ export type PosterTemplateLayout =
   | 'promo-mono-a4'
   | 'promo-agro-a4'
   | 'promo-pet-a4'
+  | 'promo-pet-orange-a4'
   | 'promo-text-only';
 
 /**
