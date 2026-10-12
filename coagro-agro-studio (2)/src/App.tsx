@@ -998,13 +998,8 @@ export default function App() {
                     </div>
                   ) : (
                     <PosterManualEditor 
-                      data={{ ...manualPosterData, showDiscountBadge }}
-                      onChange={(newData) => {
-                        setManualPosterData(newData);
-                        if (newData.showDiscountBadge !== undefined && newData.showDiscountBadge !== showDiscountBadge) {
-                          setShowDiscountBadge(newData.showDiscountBadge);
-                        }
-                      }}
+                      data={manualPosterData}
+                      onChange={setManualPosterData}
                       appMode={appMode}
                       onSendToSocial={(poster) => {
                         setSocialManualData(prev => ({

@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
-import { Type, Tag, Sparkles, Flame, Share2 } from 'lucide-react';
+import { Type, Tag, Sparkles, Share2 } from 'lucide-react';
 import { sanitizeErpTitle } from '../lib/erpSanitizer';
-import { calculateDiscount } from '../lib/priceCalculator';
 import { findProductBySku } from '../lib/productStorage';
 
 export interface PosterManualData {
@@ -26,7 +25,6 @@ export const PosterManualEditor: React.FC<PosterManualEditorProps> = ({
   appMode = 'AGRO'
 }) => {
   const lastSkuLookupRef = useRef('');
-  const discount = calculateDiscount(data.valorDe, data.valorPor);
 
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-5 sm:p-6 space-y-6">
@@ -125,35 +123,6 @@ export const PosterManualEditor: React.FC<PosterManualEditorProps> = ({
             />
           </div>
         </div>
-
-        {/* Card Dinâmico de Desconto Calculado & Economia */}
-        {discount && (
-          <div className="p-3.5 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl flex items-center justify-between gap-3 animate-fade-in">
-            <div className="flex items-center gap-2">
-              <span className="p-1 rounded-md bg-[#ffab00] text-[#004d40]">
-                <Flame className="w-3.5 h-3.5" />
-              </span>
-              <div>
-                <div className="text-xs font-black text-gray-900 font-exo2 flex items-center gap-1.5">
-                  <span className="text-[#004d40] bg-[#ffab00] px-1.5 py-0.2 rounded font-black text-[11px]">
-                    {discount.badgeText}
-                  </span>
-                  <span>Economia de R$ {discount.savingsBrl}</span>
-                </div>
-                <span className="text-[10px] text-gray-500">Cálculo dinâmico baseado nos preços informados</span>
-              </div>
-            </div>
-            <label className="flex items-center gap-1.5 text-xs font-bold text-gray-700 cursor-pointer select-none">
-              <input
-                type="checkbox"
-                checked={data.showDiscountBadge ?? true}
-                onChange={(e) => onChange({ ...data, showDiscountBadge: e.target.checked })}
-                className="w-4 h-4 rounded text-[#004d40] focus:ring-[#004d40] cursor-pointer"
-              />
-              <span className="hidden sm:inline">Exibir selo</span>
-            </label>
-          </div>
-        )}
 
         {/* Integração Cruzada: Enviar Dados para Redes Sociais */}
         {onSendToSocial && (
